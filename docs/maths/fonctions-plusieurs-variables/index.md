@@ -34,17 +34,9 @@ sommets et cols).
 
     ---
 
-    Fiches de révision synthétiques pour les partiels.
+    La fiche interactive du contrôle (domaines, simulateur de limites) et une fiche par chapitre.
 
     [:octicons-arrow-right-24: Fiches](fiches/index.md)
-
--   :material-gesture-tap:{ .lg .middle } **Entraînement**
-
-    ---
-
-    Visualiseur de domaines, simulateur de limites et exercices corrigés.
-
-    [:octicons-arrow-right-24: S'entraîner](entrainement/index.md)
 
 </div>
 

@@ -1,5 +1,8 @@
 # Fiches de révision
 
+!!! tip "La fiche interactive"
+    [**Fiche FDPV — chapitres 1 à 3**](fiche-fdpv.md) : la fiche du contrôle, avec le visualiseur de domaines, le simulateur de limites et l'entraînement.
+
 | Fiche | À savoir refaire les yeux fermés |
 |-------|----------------------------------|
 | [Domaines et courbes de niveau](fiche-domaines-niveaux.md) | Conditions, courbes types, discussion selon $k$ |

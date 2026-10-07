@@ -1,6 +1,7 @@
 title: Fiches
 nav:
   - index.md
+  - fiche-fdpv.md
   - fiche-domaines-niveaux.md
   - fiche-limites-continuite.md
   - fiche-derivees.md
