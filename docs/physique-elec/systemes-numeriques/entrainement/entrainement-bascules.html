@@ -552,7 +552,7 @@ svg .anum{fill:var(--warn);font-weight:600}
     if(s.async) o+=slotHeader(s.steps,cols,'F');
     var tblRows=s.inputs.slice(); if(s.async) tblRows=tblRows.concat(['~PR','~CLR']);
     if($('opt-table').checked) tblRows.forEach(function(n){
-      o+='<div class="grow tbl" style="grid-template-columns:'+cols+'"><div class="h">'+n+(s.type==='RS'?'':' au front')+'</div>';
+      o+='<div class="grow tbl" style="grid-template-columns:'+cols+'"><div class="h">'+n+(s.type==='RS'||n.charAt(0)==='~'?'':' au front')+'</div>';
       for(i=0;i<L;i++){ var v=s.steps[i].inp[n]; if(v===undefined) v='—'; var z=(n.charAt(0)==='~'&&v===0); o+='<div class="c'+(z?' z':'')+'">'+v+'</div>'; }
       o+='</div>';
     });
@@ -1044,7 +1044,7 @@ svg .anum{fill:var(--warn);font-weight:600}
         o+='</div>';
       });
       if(s.clr){
-        o+='<div class="grow tbl" style="grid-template-columns:'+cols+'"><div class="h">~CLR au front</div>';
+        o+='<div class="grow tbl" style="grid-template-columns:'+cols+'"><div class="h">~CLR</div>';
         for(i=0;i<s.N;i++){ var z=s.steps[i].kind==='as'&&s.steps[i].as==='CLR'; o+='<div class="c'+(z?' z':'')+'">'+(z?0:1)+'</div>'; }
         o+='</div>';
       }
