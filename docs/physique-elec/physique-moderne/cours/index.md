@@ -1,5 +1,8 @@
 # Notes de cours
 
+Chaque chapitre a deux onglets : **Version simplifiée** (mes notes) et
+**Version papier** (les diapos du prof, à agrandir d'un clic).
+
 | Chapitre | Contenu | CE |
 |----------|---------|:--:|
 | [0. Rappels](chapitre-0-rappels.md) | Unités, Newton, équations horaires, chocs, ondes | |
