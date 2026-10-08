@@ -1,5 +1,9 @@
 # Notes de cours
 
+Chaque chapitre a deux onglets : **Version simplifiée** (mes notes) et
+**Version papier** (les pages du poly, à agrandir d'un clic), avec l'annexe du chapitre
+et les corrigés des exemples quand ils existent.
+
 | Chapitre | Contenu |
 |----------|---------|
 | [1. Fonctions de plusieurs variables](chapitre-1-fonctions.md) | Domaine de définition, graphe, courbes de niveau, surfaces usuelles |
@@ -9,4 +13,3 @@
 | [5. Convexité](chapitre-5-convexite.md) | Jensen, matrices SDP, hessienne |
 | [6. Extrema](chapitre-6-extrema.md) | Points critiques, test de la hessienne, convexité, contraintes |
 
-Supports officiels (Elie Chahine) : `pdf/sm302/` (local, non publié).
