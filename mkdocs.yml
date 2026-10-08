@@ -16,17 +16,19 @@ exclude_docs: |
 
 theme:
   name: material
+  # Surcharges du thème (voir overrides/main.html : suivi du thème système).
+  custom_dir: overrides
   language: fr
   icon:
     repo: fontawesome/brands/github
   font:
     text: Inter
     code: JetBrains Mono
+  # L'ordre compte : les palettes qui portent un `scheme` doivent venir en
+  # premier, sinon aucun thème n'est appliqué au chargement. L'entrée sans
+  # `scheme` ne sert qu'à créer le bouton « suivre le système ».
   palette:
-    - media: "(prefers-color-scheme)"
-      toggle:
-        icon: material/brightness-auto
-        name: Passer en mode clair
+    # 1. Système en clair → thème clair
     - media: "(prefers-color-scheme: light)"
       scheme: default
       primary: custom
@@ -34,12 +36,18 @@ theme:
       toggle:
         icon: material/weather-sunny
         name: Passer en mode sombre
+    # 2. Système en sombre → thème sombre
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
       primary: custom
       accent: custom
       toggle:
         icon: material/weather-night
+        name: Passer en mode clair
+    # 3. Bouton de retour au thème du système
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/brightness-auto
         name: Suivre le thème du système
   features:
     - navigation.instant

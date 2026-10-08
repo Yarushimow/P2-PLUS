@@ -86,16 +86,20 @@
 
   function carteEvaluation(s) {
     const lien = lienMatiere(s.module);
-    const titre = lien ? `<a href="${lien}">${echapper(s.titre)}</a>` : echapper(s.titre);
     const supports = s.supports ? `<span class="agenda-supports">${echapper(s.supports)}</span>` : "";
-    return `<div class="agenda-carte">
+    const contenu = `
       <div class="agenda-type agenda-${s.type}">${s.type}</div>
       <div class="agenda-infos">
-        <strong>${titre}</strong>
+        <strong>${echapper(s.titre)}</strong>
         <span>${formatDate.format(s.t0)}</span>${supports}
       </div>
-      <div class="agenda-reste">${horloge(s)}</div>
-    </div>`;
+      <div class="agenda-reste">${horloge(s)}</div>`;
+
+    // Toute la carte est cliquable quand la matière a une page : on enveloppe
+    // le contenu dans un <a> plutôt que de ne rendre que le titre cliquable.
+    return lien
+      ? `<a class="agenda-carte" href="${lien}">${contenu}</a>`
+      : `<div class="agenda-carte">${contenu}</div>`;
   }
 
   function rendreEvaluations(el, maintenant) {

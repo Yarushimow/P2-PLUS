@@ -63,7 +63,7 @@
   .md-typeset .grid.cards > ul > li:hover > p:last-child svg { transform: translateX(4px); }
 
   /* ---------- Liens : soulignement qui se dessine ---------- */
-  .md-typeset a:not(.md-button):not(.headerlink):not([class*="md-"]) {
+  .md-typeset a:not(.md-button):not(.headerlink):not([class*="md-"]):not(.agenda-carte) {
     text-decoration: none;
     background-image: linear-gradient(currentColor, currentColor);
     background-size: 0% 1px;
@@ -71,7 +71,7 @@
     background-repeat: no-repeat;
     transition: background-size 0.25s ease, color 0.15s ease;
   }
-  .md-typeset a:not(.md-button):not(.headerlink):not([class*="md-"]):hover { background-size: 100% 1px; }
+  .md-typeset a:not(.md-button):not(.headerlink):not([class*="md-"]):not(.agenda-carte):hover { background-size: 100% 1px; }
   .md-typeset .grid.cards a { background-image: none; }
 
   /* ---------- Boutons ---------- */

@@ -217,7 +217,7 @@
   letter-spacing: 0.04em;
 }
 .agenda-carte .agenda-type.agenda-DE { background: #7c3aed; }
-.agenda-infos a { font-weight: 650; }
+.agenda-infos strong { font-weight: 650; }
 .agenda-carte.bientot .agenda-reste { color: #f59e0b; }
 .agenda-carte.urgent .agenda-reste { color: #ef4444; }
 

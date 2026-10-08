@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{#
+  Suit le thème du système par défaut.
+
+  Material restaure le thème mémorisé (localStorage `__palette`) via un script
+  inline placé dans le <head>. Un fichier de `extra_javascript` arrive trop
+  tard : il est chargé en fin de <body>, après ce script.
+
+  On injecte donc la purge ici, dans le <head>, avant le bloc `scripts` du
+  thème. La clé n'est retirée qu'une fois par session de navigation : si le
+  visiteur choisit explicitement un thème, son choix tient jusqu'à la
+  fermeture de l'onglet, puis on repart du système.
+#}
+{% block extrahead %}
+  {{ super() }}
+  <script>
+    (() => {
+      try {
+        if (sessionStorage.getItem("theme-systeme") !== "1") {
+          localStorage.removeItem("__palette");
+          sessionStorage.setItem("theme-systeme", "1");
+        }
+      } catch (e) {
+        /* stockage indisponible : on laisse Material décider */
+      }
+    })();
+  </script>
+{% endblock %}
