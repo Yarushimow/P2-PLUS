@@ -1,5 +1,8 @@
 # Travaux dirigés
 
+Chaque TD (1 à 4) a deux onglets : **Version simplifiée** (méthode et corrections) et
+**Version papier** (les vraies pages des énoncés, à agrandir d'un clic).
+
 | TD | Contenu |
 |----|---------|
 | [TD 1 — Rappels sur les listes](td-1-listes.md) | Schémas mémoire, recherche (itérative, pointeur, récursive), `swapParity`, `deleteVal`, liste triée |

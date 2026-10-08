@@ -1,5 +1,8 @@
 # Notes de cours
 
+Chaque chapitre a deux onglets : **Version simplifiée** (mes notes) et
+**Version papier** (les diapos du prof, à agrandir d'un clic).
+
 | Chapitre | Contenu |
 |----------|---------|
 | [1. Listes chaînées simples](chapitre-1-listes-simples.md) | Encapsulation `t_list`, règle de modification, parcours, récursivité, libération |
