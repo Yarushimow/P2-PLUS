@@ -1,1 +1,9 @@
 title: Cours
+nav:
+  - index.md
+  - lecture-preliminaire.md
+  - tp1-premieres-commandes.md
+  - tp2-fichiers-permissions.md
+  - tp3-environnement-compilation.md
+  - tp4-redirections-processus-signaux.md
+  - tp4-filtres-texte.md

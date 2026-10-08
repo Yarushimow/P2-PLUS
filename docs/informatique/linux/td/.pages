@@ -1,1 +1,9 @@
-title: TD
+title: TP corrigés
+nav:
+  - index.md
+  - tp1-corrige.md
+  - tp2-corrige.md
+  - tp3-corrige.md
+  - tp4-corrige.md
+  - tp4-filtres-corrige.md
+  - annale-cc1-2023.md
