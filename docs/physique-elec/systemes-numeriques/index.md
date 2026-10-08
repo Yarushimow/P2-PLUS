@@ -41,7 +41,7 @@ chronogramme.
 
     ---
 
-    Exercices aléatoires corrigés : chronogrammes, table de transition, table des états.
+    Exercices aléatoires corrigés : chronogrammes, transitions, table des états, compteurs asynchrones, registres.
 
     [:octicons-arrow-right-24: S'entraîner](entrainement/index.md)
 
