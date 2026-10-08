@@ -266,211 +266,211 @@ title: "Ch. 3 — Piles et files"
 
 === "Version papier"
 
-    Les diapos du CM 3 de N. Flasque (support 2023-2024), diapos 1 à 69. Les énoncés d'exercices sont dans la [version papier du TD 3](../td/td-3-piles-files.md).
+    CM 3 du support 2023-2024 (N. Flasque). Différences avec 2026-2027 : l'exemple de file stocke des `t_customer`, le buffer circulaire était laissé au TD, et la partie complexité (tri à bulles, O(N²)…) est à la fin de ce CM.
 
-    [![CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 1 : Page de titre](papier/ch3/p01.jpg){ loading=lazy .papier }](papier/ch3/p01.jpg)
-    <p class="papier-legende">Page de titre · CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 1</p>
+    [![CM 3 — Piles et files, diapo 1 : Page de titre](papier/ch3/p01.jpg){ loading=lazy .papier }](papier/ch3/p01.jpg)
+    <p class="papier-legende">Page de titre · CM 3 — Piles et files, diapo 1</p>
 
-    [![CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 2 : Prérequis, objectifs](papier/ch3/p02.jpg){ loading=lazy .papier }](papier/ch3/p02.jpg)
-    <p class="papier-legende">Prérequis, objectifs · CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 2</p>
+    [![CM 3 — Piles et files, diapo 2 : Prérequis et objectifs](papier/ch3/p02.jpg){ loading=lazy .papier }](papier/ch3/p02.jpg)
+    <p class="papier-legende">Prérequis et objectifs · CM 3 — Piles et files, diapo 2</p>
 
-    [![CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 3 : Piles : présentation](papier/ch3/p03.jpg){ loading=lazy .papier }](papier/ch3/p03.jpg)
-    <p class="papier-legende">Piles : présentation · CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 3</p>
+    [![CM 3 — Piles et files, diapo 3 : Piles : présentation](papier/ch3/p03.jpg){ loading=lazy .papier }](papier/ch3/p03.jpg)
+    <p class="papier-legende">Piles : présentation · CM 3 — Piles et files, diapo 3</p>
 
-    [![CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 4 : Files : présentation](papier/ch3/p04.jpg){ loading=lazy .papier }](papier/ch3/p04.jpg)
-    <p class="papier-legende">Files : présentation · CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 4</p>
+    [![CM 3 — Piles et files, diapo 4 : Files : présentation](papier/ch3/p04.jpg){ loading=lazy .papier }](papier/ch3/p04.jpg)
+    <p class="papier-legende">Files : présentation · CM 3 — Piles et files, diapo 4</p>
 
-    [![CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 5 : Piles et files : types abstraits](papier/ch3/p05.jpg){ loading=lazy .papier }](papier/ch3/p05.jpg)
-    <p class="papier-legende">Piles et files : types abstraits · CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 5</p>
+    [![CM 3 — Piles et files, diapo 5 : Piles et files : types abstraits](papier/ch3/p05.jpg){ loading=lazy .papier }](papier/ch3/p05.jpg)
+    <p class="papier-legende">Piles et files : types abstraits · CM 3 — Piles et files, diapo 5</p>
 
-    [![CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 6 : Exemple pour une pile : comportements](papier/ch3/p06.jpg){ loading=lazy .papier }](papier/ch3/p06.jpg)
-    <p class="papier-legende">Exemple pour une pile : comportements · CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 6</p>
+    [![CM 3 — Piles et files, diapo 6 : Exemple pour une pile : comportements](papier/ch3/p06.jpg){ loading=lazy .papier }](papier/ch3/p06.jpg)
+    <p class="papier-legende">Exemple pour une pile : comportements · CM 3 — Piles et files, diapo 6</p>
 
-    [![CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 7 : Étape suivante : comportements -> prototypes de fonction](papier/ch3/p07.jpg){ loading=lazy .papier }](papier/ch3/p07.jpg)
-    <p class="papier-legende">Étape suivante : comportements -> prototypes de fonction · CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 7</p>
+    [![CM 3 — Piles et files, diapo 7 : Étape suivante : des comportements aux prototypes](papier/ch3/p07.jpg){ loading=lazy .papier }](papier/ch3/p07.jpg)
+    <p class="papier-legende">Étape suivante : des comportements aux prototypes · CM 3 — Piles et files, diapo 7</p>
 
-    [![CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 8 : Un prototype en algo, puis en C](papier/ch3/p08.jpg){ loading=lazy .papier }](papier/ch3/p08.jpg)
-    <p class="papier-legende">Un prototype en algo, puis en C · CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 8</p>
+    [![CM 3 — Piles et files, diapo 8 : Un prototype en algo, puis en C](papier/ch3/p08.jpg){ loading=lazy .papier }](papier/ch3/p08.jpg)
+    <p class="papier-legende">Un prototype en algo, puis en C · CM 3 — Piles et files, diapo 8</p>
 
-    [![CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 9 : Pour aller plus loin : choisissons un type](papier/ch3/p09.jpg){ loading=lazy .papier }](papier/ch3/p09.jpg)
-    <p class="papier-legende">Pour aller plus loin : choisissons un type · CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 9</p>
+    [![CM 3 — Piles et files, diapo 9 : Pour aller plus loin : choisissons un type](papier/ch3/p09.jpg){ loading=lazy .papier }](papier/ch3/p09.jpg)
+    <p class="papier-legende">Pour aller plus loin : choisissons un type · CM 3 — Piles et files, diapo 9</p>
 
-    [![CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 10 : Pour aller plus loin : choisissons un type (unstack)](papier/ch3/p10.jpg){ loading=lazy .papier }](papier/ch3/p10.jpg)
-    <p class="papier-legende">Pour aller plus loin : choisissons un type (unstack) · CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 10</p>
+    [![CM 3 — Piles et files, diapo 10 : Pour aller plus loin : choisissons un type (2)](papier/ch3/p10.jpg){ loading=lazy .papier }](papier/ch3/p10.jpg)
+    <p class="papier-legende">Pour aller plus loin : choisissons un type (2) · CM 3 — Piles et files, diapo 10</p>
 
-    [![CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 11 : Piles : rappel](papier/ch3/p11.jpg){ loading=lazy .papier }](papier/ch3/p11.jpg)
-    <p class="papier-legende">Piles : rappel · CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 11</p>
+    [![CM 3 — Piles et files, diapo 11 : Piles : rappel](papier/ch3/p11.jpg){ loading=lazy .papier }](papier/ch3/p11.jpg)
+    <p class="papier-legende">Piles : rappel · CM 3 — Piles et files, diapo 11</p>
 
-    [![CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 12 : Piles : travail à partir du schéma (au début)](papier/ch3/p12.jpg){ loading=lazy .papier }](papier/ch3/p12.jpg)
-    <p class="papier-legende">Piles : travail à partir du schéma (au début) · CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 12</p>
+    [![CM 3 — Piles et files, diapo 12 : Piles : travail à partir du schéma](papier/ch3/p12.jpg){ loading=lazy .papier }](papier/ch3/p12.jpg)
+    <p class="papier-legende">Piles : travail à partir du schéma · CM 3 — Piles et files, diapo 12</p>
 
-    [![CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 13 : Piles : travail à partir du schéma (à la fin)](papier/ch3/p13.jpg){ loading=lazy .papier }](papier/ch3/p13.jpg)
-    <p class="papier-legende">Piles : travail à partir du schéma (à la fin) · CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 13</p>
+    [![CM 3 — Piles et files, diapo 13 : Piles : travail à partir du schéma (2)](papier/ch3/p13.jpg){ loading=lazy .papier }](papier/ch3/p13.jpg)
+    <p class="papier-legende">Piles : travail à partir du schéma (2) · CM 3 — Piles et files, diapo 13</p>
 
-    [![CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 14 : Pile : rappel](papier/ch3/p14.jpg){ loading=lazy .papier }](papier/ch3/p14.jpg)
-    <p class="papier-legende">Pile : rappel · CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 14</p>
+    [![CM 3 — Piles et files, diapo 14 : Pile : rappel](papier/ch3/p14.jpg){ loading=lazy .papier }](papier/ch3/p14.jpg)
+    <p class="papier-legende">Pile : rappel · CM 3 — Piles et files, diapo 14</p>
 
-    [![CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 15 : Pile et listes](papier/ch3/p15.jpg){ loading=lazy .papier }](papier/ch3/p15.jpg)
-    <p class="papier-legende">Pile et listes · CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 15</p>
+    [![CM 3 — Piles et files, diapo 15 : Pile et listes](papier/ch3/p15.jpg){ loading=lazy .papier }](papier/ch3/p15.jpg)
+    <p class="papier-legende">Pile et listes · CM 3 — Piles et files, diapo 15</p>
 
-    [![CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 16 : Piles et listes (t_stacklist)](papier/ch3/p16.jpg){ loading=lazy .papier }](papier/ch3/p16.jpg)
-    <p class="papier-legende">Piles et listes (t_stacklist) · CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 16</p>
+    [![CM 3 — Piles et files, diapo 16 : Piles et listes](papier/ch3/p16.jpg){ loading=lazy .papier }](papier/ch3/p16.jpg)
+    <p class="papier-legende">Piles et listes · CM 3 — Piles et files, diapo 16</p>
 
-    [![CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 17 : Piles et listes (opérations)](papier/ch3/p17.jpg){ loading=lazy .papier }](papier/ch3/p17.jpg)
-    <p class="papier-legende">Piles et listes (opérations) · CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 17</p>
+    [![CM 3 — Piles et files, diapo 17 : Piles et listes (2)](papier/ch3/p17.jpg){ loading=lazy .papier }](papier/ch3/p17.jpg)
+    <p class="papier-legende">Piles et listes (2) · CM 3 — Piles et files, diapo 17</p>
 
-    [![CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 18 : Pile et tableaux](papier/ch3/p18.jpg){ loading=lazy .papier }](papier/ch3/p18.jpg)
-    <p class="papier-legende">Pile et tableaux · CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 18</p>
+    [![CM 3 — Piles et files, diapo 18 : Pile et tableaux](papier/ch3/p18.jpg){ loading=lazy .papier }](papier/ch3/p18.jpg)
+    <p class="papier-legende">Pile et tableaux · CM 3 — Piles et files, diapo 18</p>
 
-    [![CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 19 : Pile et tableaux : illustration](papier/ch3/p19.jpg){ loading=lazy .papier }](papier/ch3/p19.jpg)
-    <p class="papier-legende">Pile et tableaux : illustration · CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 19</p>
+    [![CM 3 — Piles et files, diapo 19 : Pile et tableaux : illustration](papier/ch3/p19.jpg){ loading=lazy .papier }](papier/ch3/p19.jpg)
+    <p class="papier-legende">Pile et tableaux : illustration · CM 3 — Piles et files, diapo 19</p>
 
-    [![CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 20 : Pile et tableaux : illustration (taille logique)](papier/ch3/p20.jpg){ loading=lazy .papier }](papier/ch3/p20.jpg)
-    <p class="papier-legende">Pile et tableaux : illustration (taille logique) · CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 20</p>
+    [![CM 3 — Piles et files, diapo 20 : Pile et tableaux : illustration (2)](papier/ch3/p20.jpg){ loading=lazy .papier }](papier/ch3/p20.jpg)
+    <p class="papier-legende">Pile et tableaux : illustration (2) · CM 3 — Piles et files, diapo 20</p>
 
-    [![CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 21 : Pile et tableaux : illustration (empiler)](papier/ch3/p21.jpg){ loading=lazy .papier }](papier/ch3/p21.jpg)
-    <p class="papier-legende">Pile et tableaux : illustration (empiler) · CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 21</p>
+    [![CM 3 — Piles et files, diapo 21 : Pile et tableaux : illustration (3)](papier/ch3/p21.jpg){ loading=lazy .papier }](papier/ch3/p21.jpg)
+    <p class="papier-legende">Pile et tableaux : illustration (3) · CM 3 — Piles et files, diapo 21</p>
 
-    [![CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 22 : Pile et tableaux : illustration (dépiler)](papier/ch3/p22.jpg){ loading=lazy .papier }](papier/ch3/p22.jpg)
-    <p class="papier-legende">Pile et tableaux : illustration (dépiler) · CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 22</p>
+    [![CM 3 — Piles et files, diapo 22 : Pile et tableaux : illustration (4)](papier/ch3/p22.jpg){ loading=lazy .papier }](papier/ch3/p22.jpg)
+    <p class="papier-legende">Pile et tableaux : illustration (4) · CM 3 — Piles et files, diapo 22</p>
 
-    [![CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 23 : Pile : résumé](papier/ch3/p23.jpg){ loading=lazy .papier }](papier/ch3/p23.jpg)
-    <p class="papier-legende">Pile : résumé · CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 23</p>
+    [![CM 3 — Piles et files, diapo 23 : Pile : résumé](papier/ch3/p23.jpg){ loading=lazy .papier }](papier/ch3/p23.jpg)
+    <p class="papier-legende">Pile : résumé · CM 3 — Piles et files, diapo 23</p>
 
-    [![CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 24 : Pile et tableau : éléments d'implémentation](papier/ch3/p24.jpg){ loading=lazy .papier }](papier/ch3/p24.jpg)
-    <p class="papier-legende">Pile et tableau : éléments d'implémentation · CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 24</p>
+    [![CM 3 — Piles et files, diapo 24 : Pile et tableau : éléments d'implémentation](papier/ch3/p24.jpg){ loading=lazy .papier }](papier/ch3/p24.jpg)
+    <p class="papier-legende">Pile et tableau : éléments d'implémentation · CM 3 — Piles et files, diapo 24</p>
 
-    [![CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 25 : Pile et tableau : représentation du type](papier/ch3/p25.jpg){ loading=lazy .papier }](papier/ch3/p25.jpg)
-    <p class="papier-legende">Pile et tableau : représentation du type · CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 25</p>
+    [![CM 3 — Piles et files, diapo 25 : Pile et tableau : représentation du type](papier/ch3/p25.jpg){ loading=lazy .papier }](papier/ch3/p25.jpg)
+    <p class="papier-legende">Pile et tableau : représentation du type · CM 3 — Piles et files, diapo 25</p>
 
-    [![CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 26 : isEmptyStack() et isFullStack()](papier/ch3/p26.jpg){ loading=lazy .papier }](papier/ch3/p26.jpg)
-    <p class="papier-legende">isEmptyStack() et isFullStack() · CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 26</p>
+    [![CM 3 — Piles et files, diapo 26 : isEmptyStack() et isFullStack()](papier/ch3/p26.jpg){ loading=lazy .papier }](papier/ch3/p26.jpg)
+    <p class="papier-legende">isEmptyStack() et isFullStack() · CM 3 — Piles et files, diapo 26</p>
 
-    [![CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 27 : Fonction isEmptyStack()](papier/ch3/p27.jpg){ loading=lazy .papier }](papier/ch3/p27.jpg)
-    <p class="papier-legende">Fonction isEmptyStack() · CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 27</p>
+    [![CM 3 — Piles et files, diapo 27 : Fonction isEmptyStack()](papier/ch3/p27.jpg){ loading=lazy .papier }](papier/ch3/p27.jpg)
+    <p class="papier-legende">Fonction isEmptyStack() · CM 3 — Piles et files, diapo 27</p>
 
-    [![CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 28 : Fonction isEmptyStack() (définition)](papier/ch3/p28.jpg){ loading=lazy .papier }](papier/ch3/p28.jpg)
-    <p class="papier-legende">Fonction isEmptyStack() (définition) · CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 28</p>
+    [![CM 3 — Piles et files, diapo 28 : Fonction isEmptyStack() (2)](papier/ch3/p28.jpg){ loading=lazy .papier }](papier/ch3/p28.jpg)
+    <p class="papier-legende">Fonction isEmptyStack() (2) · CM 3 — Piles et files, diapo 28</p>
 
-    [![CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 29 : Fonction Dépiler – unstack()](papier/ch3/p29.jpg){ loading=lazy .papier }](papier/ch3/p29.jpg)
-    <p class="papier-legende">Fonction Dépiler – unstack() · CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 29</p>
+    [![CM 3 — Piles et files, diapo 29 : Fonction Dépiler – unstack()](papier/ch3/p29.jpg){ loading=lazy .papier }](papier/ch3/p29.jpg)
+    <p class="papier-legende">Fonction Dépiler – unstack() · CM 3 — Piles et files, diapo 29</p>
 
-    [![CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 30 : Fonction Dépiler – unstack() – illustration](papier/ch3/p30.jpg){ loading=lazy .papier }](papier/ch3/p30.jpg)
-    <p class="papier-legende">Fonction Dépiler – unstack() – illustration · CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 30</p>
+    [![CM 3 — Piles et files, diapo 30 : Fonction Dépiler – unstack() - illustration](papier/ch3/p30.jpg){ loading=lazy .papier }](papier/ch3/p30.jpg)
+    <p class="papier-legende">Fonction Dépiler – unstack() - illustration · CM 3 — Piles et files, diapo 30</p>
 
-    [![CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 31 : Fonction unstack()](papier/ch3/p31.jpg){ loading=lazy .papier }](papier/ch3/p31.jpg)
-    <p class="papier-legende">Fonction unstack() · CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 31</p>
+    [![CM 3 — Piles et files, diapo 31 : Fonction unstack()](papier/ch3/p31.jpg){ loading=lazy .papier }](papier/ch3/p31.jpg)
+    <p class="papier-legende">Fonction unstack() · CM 3 — Piles et files, diapo 31</p>
 
-    [![CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 32 : Fonction unstack() (prototype)](papier/ch3/p32.jpg){ loading=lazy .papier }](papier/ch3/p32.jpg)
-    <p class="papier-legende">Fonction unstack() (prototype) · CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 32</p>
+    [![CM 3 — Piles et files, diapo 32 : Fonction unstack() (2)](papier/ch3/p32.jpg){ loading=lazy .papier }](papier/ch3/p32.jpg)
+    <p class="papier-legende">Fonction unstack() (2) · CM 3 — Piles et files, diapo 32</p>
 
-    [![CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 33 : Implémentation](papier/ch3/p33.jpg){ loading=lazy .papier }](papier/ch3/p33.jpg)
-    <p class="papier-legende">Implémentation · CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 33</p>
+    [![CM 3 — Piles et files, diapo 33 : Implémentation](papier/ch3/p33.jpg){ loading=lazy .papier }](papier/ch3/p33.jpg)
+    <p class="papier-legende">Implémentation · CM 3 — Piles et files, diapo 33</p>
 
-    [![CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 34 : A traiter en TD / TP](papier/ch3/p34.jpg){ loading=lazy .papier }](papier/ch3/p34.jpg)
-    <p class="papier-legende">A traiter en TD / TP · CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 34</p>
+    [![CM 3 — Piles et files, diapo 34 : A traiter en TD / TP](papier/ch3/p34.jpg){ loading=lazy .papier }](papier/ch3/p34.jpg)
+    <p class="papier-legende">A traiter en TD / TP · CM 3 — Piles et files, diapo 34</p>
 
-    [![CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 35 : Files : rappel](papier/ch3/p35.jpg){ loading=lazy .papier }](papier/ch3/p35.jpg)
-    <p class="papier-legende">Files : rappel · CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 35</p>
+    [![CM 3 — Piles et files, diapo 35 : Files : rappel](papier/ch3/p35.jpg){ loading=lazy .papier }](papier/ch3/p35.jpg)
+    <p class="papier-legende">Files : rappel · CM 3 — Piles et files, diapo 35</p>
 
-    [![CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 36 : Files](papier/ch3/p36.jpg){ loading=lazy .papier }](papier/ch3/p36.jpg)
-    <p class="papier-legende">Files · CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 36</p>
+    [![CM 3 — Piles et files, diapo 36 : Files](papier/ch3/p36.jpg){ loading=lazy .papier }](papier/ch3/p36.jpg)
+    <p class="papier-legende">Files · CM 3 — Piles et files, diapo 36</p>
 
-    [![CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 37 : Exemple : file d'attente dans un magasin](papier/ch3/p37.jpg){ loading=lazy .papier }](papier/ch3/p37.jpg)
-    <p class="papier-legende">Exemple : file d'attente dans un magasin · CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 37</p>
+    [![CM 3 — Piles et files, diapo 37 : Exemple : file d'attente dans un magasin](papier/ch3/p37.jpg){ loading=lazy .papier }](papier/ch3/p37.jpg)
+    <p class="papier-legende">Exemple : file d'attente dans un magasin · CM 3 — Piles et files, diapo 37</p>
 
-    [![CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 38 : Définition du type t_customer](papier/ch3/p38.jpg){ loading=lazy .papier }](papier/ch3/p38.jpg)
-    <p class="papier-legende">Définition du type t_customer · CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 38</p>
+    [![CM 3 — Piles et files, diapo 38 : Définition du type t_customer](papier/ch3/p38.jpg){ loading=lazy .papier }](papier/ch3/p38.jpg)
+    <p class="papier-legende">Définition du type t_customer · CM 3 — Piles et files, diapo 38</p>
 
-    [![CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 39 : Représentation](papier/ch3/p39.jpg){ loading=lazy .papier }](papier/ch3/p39.jpg)
-    <p class="papier-legende">Représentation · CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 39</p>
+    [![CM 3 — Piles et files, diapo 39 : Représentation](papier/ch3/p39.jpg){ loading=lazy .papier }](papier/ch3/p39.jpg)
+    <p class="papier-legende">Représentation · CM 3 — Piles et files, diapo 39</p>
 
-    [![CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 40 : Type t_cell](papier/ch3/p40.jpg){ loading=lazy .papier }](papier/ch3/p40.jpg)
-    <p class="papier-legende">Type t_cell · CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 40</p>
+    [![CM 3 — Piles et files, diapo 40 : Type t_cell](papier/ch3/p40.jpg){ loading=lazy .papier }](papier/ch3/p40.jpg)
+    <p class="papier-legende">Type t_cell · CM 3 — Piles et files, diapo 40</p>
 
-    [![CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 41 : Type t_cell_cust](papier/ch3/p41.jpg){ loading=lazy .papier }](papier/ch3/p41.jpg)
-    <p class="papier-legende">Type t_cell_cust · CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 41</p>
+    [![CM 3 — Piles et files, diapo 41 : Type t_cell_cust](papier/ch3/p41.jpg){ loading=lazy .papier }](papier/ch3/p41.jpg)
+    <p class="papier-legende">Type t_cell_cust · CM 3 — Piles et files, diapo 41</p>
 
-    [![CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 42 : Listes stockant des t_customer](papier/ch3/p42.jpg){ loading=lazy .papier }](papier/ch3/p42.jpg)
-    <p class="papier-legende">Listes stockant des t_customer · CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 42</p>
+    [![CM 3 — Piles et files, diapo 42 : Listes stockant des t_customer](papier/ch3/p42.jpg){ loading=lazy .papier }](papier/ch3/p42.jpg)
+    <p class="papier-legende">Listes stockant des t_customer · CM 3 — Piles et files, diapo 42</p>
 
-    [![CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 43 : File stockant des t_customer](papier/ch3/p43.jpg){ loading=lazy .papier }](papier/ch3/p43.jpg)
-    <p class="papier-legende">File stockant des t_customer · CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 43</p>
+    [![CM 3 — Piles et files, diapo 43 : File stockant des t_customer](papier/ch3/p43.jpg){ loading=lazy .papier }](papier/ch3/p43.jpg)
+    <p class="papier-legende">File stockant des t_customer · CM 3 — Piles et files, diapo 43</p>
 
-    [![CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 44 : Retour sur les t_ht_list](papier/ch3/p44.jpg){ loading=lazy .papier }](papier/ch3/p44.jpg)
-    <p class="papier-legende">Retour sur les t_ht_list · CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 44</p>
+    [![CM 3 — Piles et files, diapo 44 : Retour sur les t_ht_list](papier/ch3/p44.jpg){ loading=lazy .papier }](papier/ch3/p44.jpg)
+    <p class="papier-legende">Retour sur les t_ht_list · CM 3 — Piles et files, diapo 44</p>
 
-    [![CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 45 : Option 1 : j'ajoute au début (head), je retire à la fin (tail)](papier/ch3/p45.jpg){ loading=lazy .papier }](papier/ch3/p45.jpg)
-    <p class="papier-legende">Option 1 : j'ajoute au début (head), je retire à la fin (tail) · CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 45</p>
+    [![CM 3 — Piles et files, diapo 45 : Option 1 : j'ajoute au début (head), je retire à la fin (tail)](papier/ch3/p45.jpg){ loading=lazy .papier }](papier/ch3/p45.jpg)
+    <p class="papier-legende">Option 1 : j'ajoute au début (head), je retire à la fin (tail) · CM 3 — Piles et files, diapo 45</p>
 
-    [![CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 46 : Option 2 : j'ajoute à la fin (tail), je retire au début (head)](papier/ch3/p46.jpg){ loading=lazy .papier }](papier/ch3/p46.jpg)
-    <p class="papier-legende">Option 2 : j'ajoute à la fin (tail), je retire au début (head) · CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 46</p>
+    [![CM 3 — Piles et files, diapo 46 : Option 2 : j'ajoute à la fin (tail), je retire au début (head)](papier/ch3/p46.jpg){ loading=lazy .papier }](papier/ch3/p46.jpg)
+    <p class="papier-legende">Option 2 : j'ajoute à la fin (tail), je retire au début (head) · CM 3 — Piles et files, diapo 46</p>
 
-    [![CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 47 : Files et listes](papier/ch3/p47.jpg){ loading=lazy .papier }](papier/ch3/p47.jpg)
-    <p class="papier-legende">Files et listes · CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 47</p>
+    [![CM 3 — Piles et files, diapo 47 : Files et listes](papier/ch3/p47.jpg){ loading=lazy .papier }](papier/ch3/p47.jpg)
+    <p class="papier-legende">Files et listes · CM 3 — Piles et files, diapo 47</p>
 
-    [![CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 48 : Tableau stockant des t_customer](papier/ch3/p48.jpg){ loading=lazy .papier }](papier/ch3/p48.jpg)
-    <p class="papier-legende">Tableau stockant des t_customer · CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 48</p>
+    [![CM 3 — Piles et files, diapo 48 : Tableau stockant des t_customer](papier/ch3/p48.jpg){ loading=lazy .papier }](papier/ch3/p48.jpg)
+    <p class="papier-legende">Tableau stockant des t_customer · CM 3 — Piles et files, diapo 48</p>
 
-    [![CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 49 : Pile stockant des t_customer](papier/ch3/p49.jpg){ loading=lazy .papier }](papier/ch3/p49.jpg)
-    <p class="papier-legende">Pile stockant des t_customer · CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 49</p>
+    [![CM 3 — Piles et files, diapo 49 : Pile stockant des t_customer](papier/ch3/p49.jpg){ loading=lazy .papier }](papier/ch3/p49.jpg)
+    <p class="papier-legende">Pile stockant des t_customer · CM 3 — Piles et files, diapo 49</p>
 
-    [![CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 50 : File et tableau : représentation du type](papier/ch3/p50.jpg){ loading=lazy .papier }](papier/ch3/p50.jpg)
-    <p class="papier-legende">File et tableau : représentation du type · CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 50</p>
+    [![CM 3 — Piles et files, diapo 50 : File et tableau : représentation du type](papier/ch3/p50.jpg){ loading=lazy .papier }](papier/ch3/p50.jpg)
+    <p class="papier-legende">File et tableau : représentation du type · CM 3 — Piles et files, diapo 50</p>
 
-    [![CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 51 : Créer une file vide](papier/ch3/p51.jpg){ loading=lazy .papier }](papier/ch3/p51.jpg)
-    <p class="papier-legende">Créer une file vide · CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 51</p>
+    [![CM 3 — Piles et files, diapo 51 : Créer une file vide](papier/ch3/p51.jpg){ loading=lazy .papier }](papier/ch3/p51.jpg)
+    <p class="papier-legende">Créer une file vide · CM 3 — Piles et files, diapo 51</p>
 
-    [![CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 52 : Enfiler (ajouter) le premier élément](papier/ch3/p52.jpg){ loading=lazy .papier }](papier/ch3/p52.jpg)
-    <p class="papier-legende">Enfiler (ajouter) le premier élément · CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 52</p>
+    [![CM 3 — Piles et files, diapo 52 : Enfiler (ajouter) le premier élément](papier/ch3/p52.jpg){ loading=lazy .papier }](papier/ch3/p52.jpg)
+    <p class="papier-legende">Enfiler (ajouter) le premier élément · CM 3 — Piles et files, diapo 52</p>
 
-    [![CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 53 : Illustration](papier/ch3/p53.jpg){ loading=lazy .papier }](papier/ch3/p53.jpg)
-    <p class="papier-legende">Illustration · CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 53</p>
+    [![CM 3 — Piles et files, diapo 53 : Illustration : enfilage](papier/ch3/p53.jpg){ loading=lazy .papier }](papier/ch3/p53.jpg)
+    <p class="papier-legende">Illustration : enfilage · CM 3 — Piles et files, diapo 53</p>
 
-    [![CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 54 : Défiler (enlever l'élément mis en premier)](papier/ch3/p54.jpg){ loading=lazy .papier }](papier/ch3/p54.jpg)
-    <p class="papier-legende">Défiler (enlever l'élément mis en premier) · CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 54</p>
+    [![CM 3 — Piles et files, diapo 54 : Défiler (enlever l'élément mis en premier)](papier/ch3/p54.jpg){ loading=lazy .papier }](papier/ch3/p54.jpg)
+    <p class="papier-legende">Défiler (enlever l'élément mis en premier) · CM 3 — Piles et files, diapo 54</p>
 
-    [![CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 55 : Avant / après défilage](papier/ch3/p55.jpg){ loading=lazy .papier }](papier/ch3/p55.jpg)
-    <p class="papier-legende">Avant / après défilage · CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 55</p>
+    [![CM 3 — Piles et files, diapo 55 : Illustration : défilage](papier/ch3/p55.jpg){ loading=lazy .papier }](papier/ch3/p55.jpg)
+    <p class="papier-legende">Illustration : défilage · CM 3 — Piles et files, diapo 55</p>
 
-    [![CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 56 : Constat](papier/ch3/p56.jpg){ loading=lazy .papier }](papier/ch3/p56.jpg)
-    <p class="papier-legende">Constat · CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 56</p>
+    [![CM 3 — Piles et files, diapo 56 : Constat](papier/ch3/p56.jpg){ loading=lazy .papier }](papier/ch3/p56.jpg)
+    <p class="papier-legende">Constat · CM 3 — Piles et files, diapo 56</p>
 
-    [![CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 57 : Pile vide avec un tableau](papier/ch3/p57.jpg){ loading=lazy .papier }](papier/ch3/p57.jpg)
-    <p class="papier-legende">Pile vide avec un tableau · CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 57</p>
+    [![CM 3 — Piles et files, diapo 57 : Pile vide avec un tableau](papier/ch3/p57.jpg){ loading=lazy .papier }](papier/ch3/p57.jpg)
+    <p class="papier-legende">Pile vide avec un tableau · CM 3 — Piles et files, diapo 57</p>
 
-    [![CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 58 : Visualisation](papier/ch3/p58.jpg){ loading=lazy .papier }](papier/ch3/p58.jpg)
-    <p class="papier-legende">Visualisation · CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 58</p>
+    [![CM 3 — Piles et files, diapo 58 : Visualisation](papier/ch3/p58.jpg){ loading=lazy .papier }](papier/ch3/p58.jpg)
+    <p class="papier-legende">Visualisation · CM 3 — Piles et files, diapo 58</p>
 
-    [![CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 59 : Un paradoxe apparent](papier/ch3/p59.jpg){ loading=lazy .papier }](papier/ch3/p59.jpg)
-    <p class="papier-legende">Un paradoxe apparent · CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 59</p>
+    [![CM 3 — Piles et files, diapo 59 : Un paradoxe apparent](papier/ch3/p59.jpg){ loading=lazy .papier }](papier/ch3/p59.jpg)
+    <p class="papier-legende">Un paradoxe apparent · CM 3 — Piles et files, diapo 59</p>
 
-    [![CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 60 : Comment lever ce paradoxe ?](papier/ch3/p60.jpg){ loading=lazy .papier }](papier/ch3/p60.jpg)
-    <p class="papier-legende">Comment lever ce paradoxe ? · CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 60</p>
+    [![CM 3 — Piles et files, diapo 60 : Comment lever ce paradoxe ?](papier/ch3/p60.jpg){ loading=lazy .papier }](papier/ch3/p60.jpg)
+    <p class="papier-legende">Comment lever ce paradoxe ? · CM 3 — Piles et files, diapo 60</p>
 
-    [![CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 61 : Complexité des opérations](papier/ch3/p61.jpg){ loading=lazy .papier }](papier/ch3/p61.jpg)
-    <p class="papier-legende">Complexité des opérations · CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 61</p>
+    [![CM 3 — Piles et files, diapo 61 : Complexité des opérations](papier/ch3/p61.jpg){ loading=lazy .papier }](papier/ch3/p61.jpg)
+    <p class="papier-legende">Complexité des opérations · CM 3 — Piles et files, diapo 61</p>
 
-    [![CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 62 : Complexité des opérations : suite](papier/ch3/p62.jpg){ loading=lazy .papier }](papier/ch3/p62.jpg)
-    <p class="papier-legende">Complexité des opérations : suite · CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 62</p>
+    [![CM 3 — Piles et files, diapo 62 : Complexité des opérations : suite](papier/ch3/p62.jpg){ loading=lazy .papier }](papier/ch3/p62.jpg)
+    <p class="papier-legende">Complexité des opérations : suite · CM 3 — Piles et files, diapo 62</p>
 
-    [![CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 63 : Complexité des opérations de tri](papier/ch3/p63.jpg){ loading=lazy .papier }](papier/ch3/p63.jpg)
-    <p class="papier-legende">Complexité des opérations de tri · CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 63</p>
+    [![CM 3 — Piles et files, diapo 63 : Complexité des opérations de tri](papier/ch3/p63.jpg){ loading=lazy .papier }](papier/ch3/p63.jpg)
+    <p class="papier-legende">Complexité des opérations de tri · CM 3 — Piles et files, diapo 63</p>
 
-    [![CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 64 : Tri à bulles : suite](papier/ch3/p64.jpg){ loading=lazy .papier }](papier/ch3/p64.jpg)
-    <p class="papier-legende">Tri à bulles : suite · CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 64</p>
+    [![CM 3 — Piles et files, diapo 64 : Tri à bulles : suite](papier/ch3/p64.jpg){ loading=lazy .papier }](papier/ch3/p64.jpg)
+    <p class="papier-legende">Tri à bulles : suite · CM 3 — Piles et files, diapo 64</p>
 
-    [![CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 65 : Complexité du tri à bulles](papier/ch3/p65.jpg){ loading=lazy .papier }](papier/ch3/p65.jpg)
-    <p class="papier-legende">Complexité du tri à bulles · CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 65</p>
+    [![CM 3 — Piles et files, diapo 65 : Complexité du tri à bulles](papier/ch3/p65.jpg){ loading=lazy .papier }](papier/ch3/p65.jpg)
+    <p class="papier-legende">Complexité du tri à bulles · CM 3 — Piles et files, diapo 65</p>
 
-    [![CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 66 : Complexités usuelles](papier/ch3/p66.jpg){ loading=lazy .papier }](papier/ch3/p66.jpg)
-    <p class="papier-legende">Complexités usuelles · CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 66</p>
+    [![CM 3 — Piles et files, diapo 66 : Complexités usuelles](papier/ch3/p66.jpg){ loading=lazy .papier }](papier/ch3/p66.jpg)
+    <p class="papier-legende">Complexités usuelles · CM 3 — Piles et files, diapo 66</p>
 
-    [![CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 67 : Complexités usuelles (suite)](papier/ch3/p67.jpg){ loading=lazy .papier }](papier/ch3/p67.jpg)
-    <p class="papier-legende">Complexités usuelles (suite) · CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 67</p>
+    [![CM 3 — Piles et files, diapo 67 : Complexités usuelles (2)](papier/ch3/p67.jpg){ loading=lazy .papier }](papier/ch3/p67.jpg)
+    <p class="papier-legende">Complexités usuelles (2) · CM 3 — Piles et files, diapo 67</p>
 
-    [![CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 68 : Optimisation des algorithmes](papier/ch3/p68.jpg){ loading=lazy .papier }](papier/ch3/p68.jpg)
-    <p class="papier-legende">Optimisation des algorithmes · CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 68</p>
+    [![CM 3 — Piles et files, diapo 68 : Optimisation des algorithmes](papier/ch3/p68.jpg){ loading=lazy .papier }](papier/ch3/p68.jpg)
+    <p class="papier-legende">Optimisation des algorithmes · CM 3 — Piles et files, diapo 68</p>
 
-    [![CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 69 : Implémentation : tableaux vs LSC](papier/ch3/p69.jpg){ loading=lazy .papier }](papier/ch3/p69.jpg)
-    <p class="papier-legende">Implémentation : tableaux vs LSC · CM 3 — Piles et files (N. Flasque, 2023-2024), diapo 69</p>
+    [![CM 3 — Piles et files, diapo 69 : Implémentation : tableaux vs LSC](papier/ch3/p69.jpg){ loading=lazy .papier }](papier/ch3/p69.jpg)
+    <p class="papier-legende">Implémentation : tableaux vs LSC · CM 3 — Piles et files, diapo 69</p>

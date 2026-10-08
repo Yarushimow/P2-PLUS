@@ -324,196 +324,199 @@ title: "Ch. 4 — Arbres binaires"
 
 === "Version papier"
 
-    Les diapos du CM 4 de N. Flasque (support 2023-2024), diapos 1 à 64. La dernière diapo (65, problèmes de complexité des BST) ouvre le [chapitre 5](chapitre-5-abr-avl.md). Les énoncés d'exercices sont dans la [version papier du TD 4](../td/td-4-arbres-binaires.md).
+    CM 4 « Arbres binaires » (N. Flasque, version 2023-2024).
 
-    [![CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 1 : Page de titre](papier/ch4/p01.jpg){ loading=lazy .papier }](papier/ch4/p01.jpg)
-    <p class="papier-legende">Page de titre · CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 1</p>
+    [![CM 4 — Arbres binaires, diapo 1 : Page de titre](papier/ch4/p01.jpg){ loading=lazy .papier }](papier/ch4/p01.jpg)
+    <p class="papier-legende">Page de titre · CM 4 — Arbres binaires, diapo 1</p>
 
-    [![CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 2 : Prérequis, objectifs](papier/ch4/p02.jpg){ loading=lazy .papier }](papier/ch4/p02.jpg)
-    <p class="papier-legende">Prérequis, objectifs · CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 2</p>
+    [![CM 4 — Arbres binaires, diapo 2 : Prérequis et objectifs](papier/ch4/p02.jpg){ loading=lazy .papier }](papier/ch4/p02.jpg)
+    <p class="papier-legende">Prérequis et objectifs · CM 4 — Arbres binaires, diapo 2</p>
 
-    [![CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 3 : Les structures d'arbres](papier/ch4/p03.jpg){ loading=lazy .papier }](papier/ch4/p03.jpg)
-    <p class="papier-legende">Les structures d'arbres · CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 3</p>
+    [![CM 4 — Arbres binaires, diapo 3 : Les structures d’arbres](papier/ch4/p03.jpg){ loading=lazy .papier }](papier/ch4/p03.jpg)
+    <p class="papier-legende">Les structures d’arbres · CM 4 — Arbres binaires, diapo 3</p>
 
-    [![CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 4 : Le type t_node](papier/ch4/p04.jpg){ loading=lazy .papier }](papier/ch4/p04.jpg)
-    <p class="papier-legende">Le type t_node · CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 4</p>
+    [![CM 4 — Arbres binaires, diapo 4 : Le type t_node](papier/ch4/p04.jpg){ loading=lazy .papier }](papier/ch4/p04.jpg)
+    <p class="papier-legende">Le type t_node · CM 4 — Arbres binaires, diapo 4</p>
 
-    [![CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 5 : Représentation d'un nœud](papier/ch4/p05.jpg){ loading=lazy .papier }](papier/ch4/p05.jpg)
-    <p class="papier-legende">Représentation d'un nœud · CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 5</p>
+    [![CM 4 — Arbres binaires, diapo 5 : Représentation d'un nœud](papier/ch4/p05.jpg){ loading=lazy .papier }](papier/ch4/p05.jpg)
+    <p class="papier-legende">Représentation d'un nœud · CM 4 — Arbres binaires, diapo 5</p>
 
-    [![CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 6 : Similarités avec les cellules d'une liste](papier/ch4/p06.jpg){ loading=lazy .papier }](papier/ch4/p06.jpg)
-    <p class="papier-legende">Similarités avec les cellules d'une liste · CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 6</p>
+    [![CM 4 — Arbres binaires, diapo 6 : Similarités avec les cellules d’une liste](papier/ch4/p06.jpg){ loading=lazy .papier }](papier/ch4/p06.jpg)
+    <p class="papier-legende">Similarités avec les cellules d’une liste · CM 4 — Arbres binaires, diapo 6</p>
 
-    [![CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 7 : Visualisation de la création d'un t_node – stockant des 'int'](papier/ch4/p07.jpg){ loading=lazy .papier }](papier/ch4/p07.jpg)
-    <p class="papier-legende">Visualisation de la création d'un t_node – stockant des 'int' · CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 7</p>
+    [![CM 4 — Arbres binaires, diapo 7 : Visualisation de la création d'un t_node stockant des 'int'](papier/ch4/p07.jpg){ loading=lazy .papier }](papier/ch4/p07.jpg)
+    <p class="papier-legende">Visualisation de la création d'un t_node stockant des 'int' · CM 4 — Arbres binaires, diapo 7</p>
 
-    [![CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 8 : Le type t_tree](papier/ch4/p08.jpg){ loading=lazy .papier }](papier/ch4/p08.jpg)
-    <p class="papier-legende">Le type t_tree · CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 8</p>
+    [![CM 4 — Arbres binaires, diapo 8 : Le type t_tree](papier/ch4/p08.jpg){ loading=lazy .papier }](papier/ch4/p08.jpg)
+    <p class="papier-legende">Le type t_tree · CM 4 — Arbres binaires, diapo 8</p>
 
-    [![CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 9 : Représentation](papier/ch4/p09.jpg){ loading=lazy .papier }](papier/ch4/p09.jpg)
-    <p class="papier-legende">Représentation · CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 9</p>
+    [![CM 4 — Arbres binaires, diapo 9 : Représentation](papier/ch4/p09.jpg){ loading=lazy .papier }](papier/ch4/p09.jpg)
+    <p class="papier-legende">Représentation · CM 4 — Arbres binaires, diapo 9</p>
 
-    [![CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 10 : Représentation des arbres non vides](papier/ch4/p10.jpg){ loading=lazy .papier }](papier/ch4/p10.jpg)
-    <p class="papier-legende">Représentation des arbres non vides · CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 10</p>
+    [![CM 4 — Arbres binaires, diapo 10 : Représentation des arbres non vides](papier/ch4/p10.jpg){ loading=lazy .papier }](papier/ch4/p10.jpg)
+    <p class="papier-legende">Représentation des arbres non vides · CM 4 — Arbres binaires, diapo 10</p>
 
-    [![CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 11 : Représentation alternative](papier/ch4/p11.jpg){ loading=lazy .papier }](papier/ch4/p11.jpg)
-    <p class="papier-legende">Représentation alternative · CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 11</p>
+    [![CM 4 — Arbres binaires, diapo 11 : Représentation alternative](papier/ch4/p11.jpg){ loading=lazy .papier }](papier/ch4/p11.jpg)
+    <p class="papier-legende">Représentation alternative · CM 4 — Arbres binaires, diapo 11</p>
 
-    [![CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 12 : Représentation utilisée dans les TPs](papier/ch4/p12.jpg){ loading=lazy .papier }](papier/ch4/p12.jpg)
-    <p class="papier-legende">Représentation utilisée dans les TPs · CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 12</p>
+    [![CM 4 — Arbres binaires, diapo 12 : Représentation utilisée dans les TPs](papier/ch4/p12.jpg){ loading=lazy .papier }](papier/ch4/p12.jpg)
+    <p class="papier-legende">Représentation utilisée dans les TPs · CM 4 — Arbres binaires, diapo 12</p>
 
-    [![CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 13 : Définitions standards (profondeur)](papier/ch4/p13.jpg){ loading=lazy .papier }](papier/ch4/p13.jpg)
-    <p class="papier-legende">Définitions standards (profondeur) · CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 13</p>
+    [![CM 4 — Arbres binaires, diapo 13 : Définitions standard : profondeur](papier/ch4/p13.jpg){ loading=lazy .papier }](papier/ch4/p13.jpg)
+    <p class="papier-legende">Définitions standard : profondeur · CM 4 — Arbres binaires, diapo 13</p>
 
-    [![CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 14 : Définitions standard (hauteur)](papier/ch4/p14.jpg){ loading=lazy .papier }](papier/ch4/p14.jpg)
-    <p class="papier-legende">Définitions standard (hauteur) · CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 14</p>
+    [![CM 4 — Arbres binaires, diapo 14 : Définitions standard : hauteur](papier/ch4/p14.jpg){ loading=lazy .papier }](papier/ch4/p14.jpg)
+    <p class="papier-legende">Définitions standard : hauteur · CM 4 — Arbres binaires, diapo 14</p>
 
-    [![CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 15 : Récursivité et arbres](papier/ch4/p15.jpg){ loading=lazy .papier }](papier/ch4/p15.jpg)
-    <p class="papier-legende">Récursivité et arbres · CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 15</p>
+    [![CM 4 — Arbres binaires, diapo 15 : Récursivité et arbres](papier/ch4/p15.jpg){ loading=lazy .papier }](papier/ch4/p15.jpg)
+    <p class="papier-legende">Récursivité et arbres · CM 4 — Arbres binaires, diapo 15</p>
 
-    [![CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 16 : Définition récursive d'un arbre – sous-arbres](papier/ch4/p16.jpg){ loading=lazy .papier }](papier/ch4/p16.jpg)
-    <p class="papier-legende">Définition récursive d'un arbre – sous-arbres · CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 16</p>
+    [![CM 4 — Arbres binaires, diapo 16 : Définition récursive d'un arbre - sous-arbres](papier/ch4/p16.jpg){ loading=lazy .papier }](papier/ch4/p16.jpg)
+    <p class="papier-legende">Définition récursive d'un arbre - sous-arbres · CM 4 — Arbres binaires, diapo 16</p>
 
-    [![CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 17 : Définition récursive d'un arbre – sous-arbres (suite)](papier/ch4/p17.jpg){ loading=lazy .papier }](papier/ch4/p17.jpg)
-    <p class="papier-legende">Définition récursive d'un arbre – sous-arbres (suite) · CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 17</p>
+    [![CM 4 — Arbres binaires, diapo 17 : Définition récursive d'un arbre - sous-arbres (2)](papier/ch4/p17.jpg){ loading=lazy .papier }](papier/ch4/p17.jpg)
+    <p class="papier-legende">Définition récursive d'un arbre - sous-arbres (2) · CM 4 — Arbres binaires, diapo 17</p>
 
-    [![CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 18 : Un exemple : la fonction height()](papier/ch4/p18.jpg){ loading=lazy .papier }](papier/ch4/p18.jpg)
-    <p class="papier-legende">Un exemple : la fonction height() · CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 18</p>
+    [![CM 4 — Arbres binaires, diapo 18 : Un exemple : la fonction height()](papier/ch4/p18.jpg){ loading=lazy .papier }](papier/ch4/p18.jpg)
+    <p class="papier-legende">Un exemple : la fonction height() · CM 4 — Arbres binaires, diapo 18</p>
 
-    [![CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 19 : Exemples](papier/ch4/p19.jpg){ loading=lazy .papier }](papier/ch4/p19.jpg)
-    <p class="papier-legende">Exemples · CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 19</p>
+    [![CM 4 — Arbres binaires, diapo 19 : Exemples](papier/ch4/p19.jpg){ loading=lazy .papier }](papier/ch4/p19.jpg)
+    <p class="papier-legende">Exemples · CM 4 — Arbres binaires, diapo 19</p>
 
-    [![CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 20 : Exemples (suite)](papier/ch4/p20.jpg){ loading=lazy .papier }](papier/ch4/p20.jpg)
-    <p class="papier-legende">Exemples (suite) · CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 20</p>
+    [![CM 4 — Arbres binaires, diapo 20 : Exemples (2)](papier/ch4/p20.jpg){ loading=lazy .papier }](papier/ch4/p20.jpg)
+    <p class="papier-legende">Exemples (2) · CM 4 — Arbres binaires, diapo 20</p>
 
-    [![CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 21 : Exemples (fin)](papier/ch4/p21.jpg){ loading=lazy .papier }](papier/ch4/p21.jpg)
-    <p class="papier-legende">Exemples (fin) · CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 21</p>
+    [![CM 4 — Arbres binaires, diapo 21 : Exemples (3)](papier/ch4/p21.jpg){ loading=lazy .papier }](papier/ch4/p21.jpg)
+    <p class="papier-legende">Exemples (3) · CM 4 — Arbres binaires, diapo 21</p>
 
-    [![CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 22 : Fonction récursive height()](papier/ch4/p22.jpg){ loading=lazy .papier }](papier/ch4/p22.jpg)
-    <p class="papier-legende">Fonction récursive height() · CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 22</p>
+    [![CM 4 — Arbres binaires, diapo 22 : Fonction récursive height()](papier/ch4/p22.jpg){ loading=lazy .papier }](papier/ch4/p22.jpg)
+    <p class="papier-legende">Fonction récursive height() · CM 4 — Arbres binaires, diapo 22</p>
 
-    [![CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 23 : Fonction récursive Height() : prototype](papier/ch4/p23.jpg){ loading=lazy .papier }](papier/ch4/p23.jpg)
-    <p class="papier-legende">Fonction récursive Height() : prototype · CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 23</p>
+    [![CM 4 — Arbres binaires, diapo 23 : Fonction récursive Height() : prototype](papier/ch4/p23.jpg){ loading=lazy .papier }](papier/ch4/p23.jpg)
+    <p class="papier-legende">Fonction récursive Height() : prototype · CM 4 — Arbres binaires, diapo 23</p>
 
-    [![CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 24 : La suite](papier/ch4/p24.jpg){ loading=lazy .papier }](papier/ch4/p24.jpg)
-    <p class="papier-legende">La suite · CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 24</p>
+    [![CM 4 — Arbres binaires, diapo 24 : La suite](papier/ch4/p24.jpg){ loading=lazy .papier }](papier/ch4/p24.jpg)
+    <p class="papier-legende">La suite · CM 4 — Arbres binaires, diapo 24</p>
 
-    [![CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 25 : Compter le nombre de nœuds dans un arbre binaire ?](papier/ch4/p25.jpg){ loading=lazy .papier }](papier/ch4/p25.jpg)
-    <p class="papier-legende">Compter le nombre de nœuds dans un arbre binaire ? · CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 25</p>
+    [![CM 4 — Arbres binaires, diapo 25 : Compter le nombre de nœuds dans un arbre binaire ?](papier/ch4/p25.jpg){ loading=lazy .papier }](papier/ch4/p25.jpg)
+    <p class="papier-legende">Compter le nombre de nœuds dans un arbre binaire ? · CM 4 — Arbres binaires, diapo 25</p>
 
-    [![CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 26 : Créer un arbre binaire aléatoire](papier/ch4/p26.jpg){ loading=lazy .papier }](papier/ch4/p26.jpg)
-    <p class="papier-legende">Créer un arbre binaire aléatoire · CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 26</p>
+    [![CM 4 — Arbres binaires, diapo 26 : Créer un arbre binaire aléatoire](papier/ch4/p26.jpg){ loading=lazy .papier }](papier/ch4/p26.jpg)
+    <p class="papier-legende">Créer un arbre binaire aléatoire · CM 4 — Arbres binaires, diapo 26</p>
 
-    [![CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 27 : Créer un arbre binaire aléatoire (principe)](papier/ch4/p27.jpg){ loading=lazy .papier }](papier/ch4/p27.jpg)
-    <p class="papier-legende">Créer un arbre binaire aléatoire (principe) · CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 27</p>
+    [![CM 4 — Arbres binaires, diapo 27 : Créer un arbre binaire aléatoire (2)](papier/ch4/p27.jpg){ loading=lazy .papier }](papier/ch4/p27.jpg)
+    <p class="papier-legende">Créer un arbre binaire aléatoire (2) · CM 4 — Arbres binaires, diapo 27</p>
 
-    [![CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 28 : La fonction addRandomNode()](papier/ch4/p28.jpg){ loading=lazy .papier }](papier/ch4/p28.jpg)
-    <p class="papier-legende">La fonction addRandomNode() · CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 28</p>
+    [![CM 4 — Arbres binaires, diapo 28 : La fonction addRandomNode()](papier/ch4/p28.jpg){ loading=lazy .papier }](papier/ch4/p28.jpg)
+    <p class="papier-legende">La fonction addRandomNode() · CM 4 — Arbres binaires, diapo 28</p>
 
-    [![CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 29 : Visualisation](papier/ch4/p29.jpg){ loading=lazy .papier }](papier/ch4/p29.jpg)
-    <p class="papier-legende">Visualisation · CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 29</p>
+    [![CM 4 — Arbres binaires, diapo 29 : Visualisation](papier/ch4/p29.jpg){ loading=lazy .papier }](papier/ch4/p29.jpg)
+    <p class="papier-legende">Visualisation · CM 4 — Arbres binaires, diapo 29</p>
 
-    [![CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 30 : Si l'arbre n'est pas vide](papier/ch4/p30.jpg){ loading=lazy .papier }](papier/ch4/p30.jpg)
-    <p class="papier-legende">Si l'arbre n'est pas vide · CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 30</p>
+    [![CM 4 — Arbres binaires, diapo 30 : Si l’arbre n’est pas vide](papier/ch4/p30.jpg){ loading=lazy .papier }](papier/ch4/p30.jpg)
+    <p class="papier-legende">Si l’arbre n’est pas vide · CM 4 — Arbres binaires, diapo 30</p>
 
-    [![CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 31 : Allons à droite](papier/ch4/p31.jpg){ loading=lazy .papier }](papier/ch4/p31.jpg)
-    <p class="papier-legende">Allons à droite · CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 31</p>
+    [![CM 4 — Arbres binaires, diapo 31 : addRandomNode() : allons à droite](papier/ch4/p31.jpg){ loading=lazy .papier }](papier/ch4/p31.jpg)
+    <p class="papier-legende">addRandomNode() : allons à droite · CM 4 — Arbres binaires, diapo 31</p>
 
-    [![CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 32 : Suite](papier/ch4/p32.jpg){ loading=lazy .papier }](papier/ch4/p32.jpg)
-    <p class="papier-legende">Suite · CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 32</p>
+    [![CM 4 — Arbres binaires, diapo 32 : addRandomNode() : suite](papier/ch4/p32.jpg){ loading=lazy .papier }](papier/ch4/p32.jpg)
+    <p class="papier-legende">addRandomNode() : suite · CM 4 — Arbres binaires, diapo 32</p>
 
-    [![CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 33 : Dernière étape](papier/ch4/p33.jpg){ loading=lazy .papier }](papier/ch4/p33.jpg)
-    <p class="papier-legende">Dernière étape · CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 33</p>
+    [![CM 4 — Arbres binaires, diapo 33 : addRandomNode() : dernière étape](papier/ch4/p33.jpg){ loading=lazy .papier }](papier/ch4/p33.jpg)
+    <p class="papier-legende">addRandomNode() : dernière étape · CM 4 — Arbres binaires, diapo 33</p>
 
-    [![CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 34 : addRandomNode()](papier/ch4/p34.jpg){ loading=lazy .papier }](papier/ch4/p34.jpg)
-    <p class="papier-legende">addRandomNode() · CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 34</p>
+    [![CM 4 — Arbres binaires, diapo 34 : addRandomNode() : la suite en TD/TP](papier/ch4/p34.jpg){ loading=lazy .papier }](papier/ch4/p34.jpg)
+    <p class="papier-legende">addRandomNode() : la suite en TD/TP · CM 4 — Arbres binaires, diapo 34</p>
 
-    [![CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 35 : Parcourir un arbre (comparé aux listes)](papier/ch4/p35.jpg){ loading=lazy .papier }](papier/ch4/p35.jpg)
-    <p class="papier-legende">Parcourir un arbre (comparé aux listes) · CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 35</p>
+    [![CM 4 — Arbres binaires, diapo 35 : Parcourir un arbre (comparé aux listes)](papier/ch4/p35.jpg){ loading=lazy .papier }](papier/ch4/p35.jpg)
+    <p class="papier-legende">Parcourir un arbre (comparé aux listes) · CM 4 — Arbres binaires, diapo 35</p>
 
-    [![CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 36 : Schéma général de récursivité](papier/ch4/p36.jpg){ loading=lazy .papier }](papier/ch4/p36.jpg)
-    <p class="papier-legende">Schéma général de récursivité · CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 36</p>
+    [![CM 4 — Arbres binaires, diapo 36 : Schéma général de récursivité](papier/ch4/p36.jpg){ loading=lazy .papier }](papier/ch4/p36.jpg)
+    <p class="papier-legende">Schéma général de récursivité · CM 4 — Arbres binaires, diapo 36</p>
 
-    [![CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 37 : Parcours en profondeur](papier/ch4/p37.jpg){ loading=lazy .papier }](papier/ch4/p37.jpg)
-    <p class="papier-legende">Parcours en profondeur · CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 37</p>
+    [![CM 4 — Arbres binaires, diapo 37 : Parcours en profondeur](papier/ch4/p37.jpg){ loading=lazy .papier }](papier/ch4/p37.jpg)
+    <p class="papier-legende">Parcours en profondeur · CM 4 — Arbres binaires, diapo 37</p>
 
-    [![CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 38 : Illustration](papier/ch4/p38.jpg){ loading=lazy .papier }](papier/ch4/p38.jpg)
-    <p class="papier-legende">Illustration · CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 38</p>
+    [![CM 4 — Arbres binaires, diapo 38 : Illustration](papier/ch4/p38.jpg){ loading=lazy .papier }](papier/ch4/p38.jpg)
+    <p class="papier-legende">Illustration · CM 4 — Arbres binaires, diapo 38</p>
 
-    [![CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 39 : Parcours préfixe](papier/ch4/p39.jpg){ loading=lazy .papier }](papier/ch4/p39.jpg)
-    <p class="papier-legende">Parcours préfixe · CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 39</p>
+    [![CM 4 — Arbres binaires, diapo 39 : Parcours préfixe](papier/ch4/p39.jpg){ loading=lazy .papier }](papier/ch4/p39.jpg)
+    <p class="papier-legende">Parcours préfixe · CM 4 — Arbres binaires, diapo 39</p>
 
-    [![CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 40 : Parcours préfixe (sorties)](papier/ch4/p40.jpg){ loading=lazy .papier }](papier/ch4/p40.jpg)
-    <p class="papier-legende">Parcours préfixe (sorties) · CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 40</p>
+    [![CM 4 — Arbres binaires, diapo 40 : Parcours préfixe : déroulé](papier/ch4/p40.jpg){ loading=lazy .papier }](papier/ch4/p40.jpg)
+    <p class="papier-legende">Parcours préfixe : déroulé · CM 4 — Arbres binaires, diapo 40</p>
 
-    [![CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 41 : Parcours préfixe (notation polonaise)](papier/ch4/p41.jpg){ loading=lazy .papier }](papier/ch4/p41.jpg)
-    <p class="papier-legende">Parcours préfixe (notation polonaise) · CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 41</p>
+    [![CM 4 — Arbres binaires, diapo 41 : Parcours préfixe et notation polonaise](papier/ch4/p41.jpg){ loading=lazy .papier }](papier/ch4/p41.jpg)
+    <p class="papier-legende">Parcours préfixe et notation polonaise · CM 4 — Arbres binaires, diapo 41</p>
 
-    [![CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 42 : Parcours postfixe](papier/ch4/p42.jpg){ loading=lazy .papier }](papier/ch4/p42.jpg)
-    <p class="papier-legende">Parcours postfixe · CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 42</p>
+    [![CM 4 — Arbres binaires, diapo 42 : Parcours postfixe](papier/ch4/p42.jpg){ loading=lazy .papier }](papier/ch4/p42.jpg)
+    <p class="papier-legende">Parcours postfixe · CM 4 — Arbres binaires, diapo 42</p>
 
-    [![CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 43 : Parcours postfixe (sorties)](papier/ch4/p43.jpg){ loading=lazy .papier }](papier/ch4/p43.jpg)
-    <p class="papier-legende">Parcours postfixe (sorties) · CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 43</p>
+    [![CM 4 — Arbres binaires, diapo 43 : Parcours postfixe (2)](papier/ch4/p43.jpg){ loading=lazy .papier }](papier/ch4/p43.jpg)
+    <p class="papier-legende">Parcours postfixe (2) · CM 4 — Arbres binaires, diapo 43</p>
 
-    [![CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 44 : Parcours infixe](papier/ch4/p44.jpg){ loading=lazy .papier }](papier/ch4/p44.jpg)
-    <p class="papier-legende">Parcours infixe · CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 44</p>
+    [![CM 4 — Arbres binaires, diapo 44 : Parcours infixe](papier/ch4/p44.jpg){ loading=lazy .papier }](papier/ch4/p44.jpg)
+    <p class="papier-legende">Parcours infixe · CM 4 — Arbres binaires, diapo 44</p>
 
-    [![CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 45 : Parcours d'infixes (sorties)](papier/ch4/p45.jpg){ loading=lazy .papier }](papier/ch4/p45.jpg)
-    <p class="papier-legende">Parcours d'infixes (sorties) · CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 45</p>
+    [![CM 4 — Arbres binaires, diapo 45 : Parcours infixe (2)](papier/ch4/p45.jpg){ loading=lazy .papier }](papier/ch4/p45.jpg)
+    <p class="papier-legende">Parcours infixe (2) · CM 4 — Arbres binaires, diapo 45</p>
 
-    [![CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 46 : Catégories d'arbres binaires](papier/ch4/p46.jpg){ loading=lazy .papier }](papier/ch4/p46.jpg)
-    <p class="papier-legende">Catégories d'arbres binaires · CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 46</p>
+    [![CM 4 — Arbres binaires, diapo 46 : Catégories d'arbres binaires](papier/ch4/p46.jpg){ loading=lazy .papier }](papier/ch4/p46.jpg)
+    <p class="papier-legende">Catégories d'arbres binaires · CM 4 — Arbres binaires, diapo 46</p>
 
-    [![CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 47 : Illustrations](papier/ch4/p47.jpg){ loading=lazy .papier }](papier/ch4/p47.jpg)
-    <p class="papier-legende">Illustrations · CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 47</p>
+    [![CM 4 — Arbres binaires, diapo 47 : Illustrations](papier/ch4/p47.jpg){ loading=lazy .papier }](papier/ch4/p47.jpg)
+    <p class="papier-legende">Illustrations · CM 4 — Arbres binaires, diapo 47</p>
 
-    [![CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 48 : Illustrations (2)](papier/ch4/p48.jpg){ loading=lazy .papier }](papier/ch4/p48.jpg)
-    <p class="papier-legende">Illustrations (2) · CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 48</p>
+    [![CM 4 — Arbres binaires, diapo 48 : Illustrations (2)](papier/ch4/p48.jpg){ loading=lazy .papier }](papier/ch4/p48.jpg)
+    <p class="papier-legende">Illustrations (2) · CM 4 — Arbres binaires, diapo 48</p>
 
-    [![CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 49 : Illustrations (3)](papier/ch4/p49.jpg){ loading=lazy .papier }](papier/ch4/p49.jpg)
-    <p class="papier-legende">Illustrations (3) · CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 49</p>
+    [![CM 4 — Arbres binaires, diapo 49 : Illustrations (3)](papier/ch4/p49.jpg){ loading=lazy .papier }](papier/ch4/p49.jpg)
+    <p class="papier-legende">Illustrations (3) · CM 4 — Arbres binaires, diapo 49</p>
 
-    [![CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 50 : Illustrations (4)](papier/ch4/p50.jpg){ loading=lazy .papier }](papier/ch4/p50.jpg)
-    <p class="papier-legende">Illustrations (4) · CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 50</p>
+    [![CM 4 — Arbres binaires, diapo 50 : Illustrations (4)](papier/ch4/p50.jpg){ loading=lazy .papier }](papier/ch4/p50.jpg)
+    <p class="papier-legende">Illustrations (4) · CM 4 — Arbres binaires, diapo 50</p>
 
-    [![CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 51 : Parcours en largeur](papier/ch4/p51.jpg){ loading=lazy .papier }](papier/ch4/p51.jpg)
-    <p class="papier-legende">Parcours en largeur · CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 51</p>
+    [![CM 4 — Arbres binaires, diapo 51 : Parcours en largeur](papier/ch4/p51.jpg){ loading=lazy .papier }](papier/ch4/p51.jpg)
+    <p class="papier-legende">Parcours en largeur · CM 4 — Arbres binaires, diapo 51</p>
 
-    [![CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 52 : Parcours en largeur (principe)](papier/ch4/p52.jpg){ loading=lazy .papier }](papier/ch4/p52.jpg)
-    <p class="papier-legende">Parcours en largeur (principe) · CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 52</p>
+    [![CM 4 — Arbres binaires, diapo 52 : Parcours en largeur (2)](papier/ch4/p52.jpg){ loading=lazy .papier }](papier/ch4/p52.jpg)
+    <p class="papier-legende">Parcours en largeur (2) · CM 4 — Arbres binaires, diapo 52</p>
 
-    [![CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 53 : Parcours en largeur (numérotation)](papier/ch4/p53.jpg){ loading=lazy .papier }](papier/ch4/p53.jpg)
-    <p class="papier-legende">Parcours en largeur (numérotation) · CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 53</p>
+    [![CM 4 — Arbres binaires, diapo 53 : Parcours en largeur (3)](papier/ch4/p53.jpg){ loading=lazy .papier }](papier/ch4/p53.jpg)
+    <p class="papier-legende">Parcours en largeur (3) · CM 4 — Arbres binaires, diapo 53</p>
 
-    [![CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 54 : Comment les nœuds sont stockés ?](papier/ch4/p54.jpg){ loading=lazy .papier }](papier/ch4/p54.jpg)
-    <p class="papier-legende">Comment les nœuds sont stockés ? · CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 54</p>
+    [![CM 4 — Arbres binaires, diapo 54 : Comment les nœuds sont stockés ?](papier/ch4/p54.jpg){ loading=lazy .papier }](papier/ch4/p54.jpg)
+    <p class="papier-legende">Comment les nœuds sont stockés ? · CM 4 — Arbres binaires, diapo 54</p>
 
-    [![CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 55 : Parcours en largeur (algorithme)](papier/ch4/p55.jpg){ loading=lazy .papier }](papier/ch4/p55.jpg)
-    <p class="papier-legende">Parcours en largeur (algorithme) · CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 55</p>
+    [![CM 4 — Arbres binaires, diapo 55 : Parcours en largeur (4)](papier/ch4/p55.jpg){ loading=lazy .papier }](papier/ch4/p55.jpg)
+    <p class="papier-legende">Parcours en largeur (4) · CM 4 — Arbres binaires, diapo 55</p>
 
-    [![CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 56 : Arbres binaires de recherche (BST)](papier/ch4/p56.jpg){ loading=lazy .papier }](papier/ch4/p56.jpg)
-    <p class="papier-legende">Arbres binaires de recherche (BST) · CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 56</p>
+    [![CM 4 — Arbres binaires, diapo 56 : Arbres binaires de recherche (BST)](papier/ch4/p56.jpg){ loading=lazy .papier }](papier/ch4/p56.jpg)
+    <p class="papier-legende">Arbres binaires de recherche (BST) · CM 4 — Arbres binaires, diapo 56</p>
 
-    [![CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 57 : Arbres de recherche binaires (BST) : exercice](papier/ch4/p57.jpg){ loading=lazy .papier }](papier/ch4/p57.jpg)
-    <p class="papier-legende">Arbres de recherche binaires (BST) : exercice · CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 57</p>
+    [![CM 4 — Arbres binaires, diapo 57 : Arbres de recherche binaires (BST)](papier/ch4/p57.jpg){ loading=lazy .papier }](papier/ch4/p57.jpg)
+    <p class="papier-legende">Arbres de recherche binaires (BST) · CM 4 — Arbres binaires, diapo 57</p>
 
-    [![CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 58 : Insertion d'une nouvelle valeur dans une BST](papier/ch4/p58.jpg){ loading=lazy .papier }](papier/ch4/p58.jpg)
-    <p class="papier-legende">Insertion d'une nouvelle valeur dans une BST · CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 58</p>
+    [![CM 4 — Arbres binaires, diapo 58 : Insertion d'une nouvelle valeur dans une BST](papier/ch4/p58.jpg){ loading=lazy .papier }](papier/ch4/p58.jpg)
+    <p class="papier-legende">Insertion d'une nouvelle valeur dans une BST · CM 4 — Arbres binaires, diapo 58</p>
 
-    [![CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 59 : BST vs ordre d'insertion / équilibrage d'un arbre](papier/ch4/p59.jpg){ loading=lazy .papier }](papier/ch4/p59.jpg)
-    <p class="papier-legende">BST vs ordre d'insertion / équilibrage d'un arbre · CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 59</p>
+    [![CM 4 — Arbres binaires, diapo 59 : BST vs ordre d'insertion / équilibrage d’un arbre](papier/ch4/p59.jpg){ loading=lazy .papier }](papier/ch4/p59.jpg)
+    <p class="papier-legende">BST vs ordre d'insertion / équilibrage d’un arbre · CM 4 — Arbres binaires, diapo 59</p>
 
-    [![CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 60 : Algorithme d'insertion de la BST](papier/ch4/p60.jpg){ loading=lazy .papier }](papier/ch4/p60.jpg)
-    <p class="papier-legende">Algorithme d'insertion de la BST · CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 60</p>
+    [![CM 4 — Arbres binaires, diapo 60 : Algorithme d'insertion de la BST](papier/ch4/p60.jpg){ loading=lazy .papier }](papier/ch4/p60.jpg)
+    <p class="papier-legende">Algorithme d'insertion de la BST · CM 4 — Arbres binaires, diapo 60</p>
 
-    [![CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 61 : Exemples de programmes](papier/ch4/p61.jpg){ loading=lazy .papier }](papier/ch4/p61.jpg)
-    <p class="papier-legende">Exemples de programmes · CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 61</p>
+    [![CM 4 — Arbres binaires, diapo 61 : Exemples de programmes](papier/ch4/p61.jpg){ loading=lazy .papier }](papier/ch4/p61.jpg)
+    <p class="papier-legende">Exemples de programmes · CM 4 — Arbres binaires, diapo 61</p>
 
-    [![CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 62 : Mêmes valeurs mais…](papier/ch4/p62.jpg){ loading=lazy .papier }](papier/ch4/p62.jpg)
-    <p class="papier-legende">Mêmes valeurs mais… · CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 62</p>
+    [![CM 4 — Arbres binaires, diapo 62 : Mêmes valeurs, arbres différents](papier/ch4/p62.jpg){ loading=lazy .papier }](papier/ch4/p62.jpg)
+    <p class="papier-legende">Mêmes valeurs, arbres différents · CM 4 — Arbres binaires, diapo 62</p>
 
-    [![CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 63 : Meilleur cas, en insérant 9 (à partir du premier exemple)](papier/ch4/p63.jpg){ loading=lazy .papier }](papier/ch4/p63.jpg)
-    <p class="papier-legende">Meilleur cas, en insérant 9 (à partir du premier exemple) · CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 63</p>
+    [![CM 4 — Arbres binaires, diapo 63 : Meilleur cas, en insérant 9](papier/ch4/p63.jpg){ loading=lazy .papier }](papier/ch4/p63.jpg)
+    <p class="papier-legende">Meilleur cas, en insérant 9 · CM 4 — Arbres binaires, diapo 63</p>
 
-    [![CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 64 : Le pire des cas…](papier/ch4/p64.jpg){ loading=lazy .papier }](papier/ch4/p64.jpg)
-    <p class="papier-legende">Le pire des cas… · CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 64</p>
+    [![CM 4 — Arbres binaires, diapo 64 : Le pire des cas...](papier/ch4/p64.jpg){ loading=lazy .papier }](papier/ch4/p64.jpg)
+    <p class="papier-legende">Le pire des cas... · CM 4 — Arbres binaires, diapo 64</p>
+
+    [![CM 4 — Arbres binaires, diapo 65 : Problèmes de complexité des BST](papier/ch4/p65.jpg){ loading=lazy .papier }](papier/ch4/p65.jpg)
+    <p class="papier-legende">Problèmes de complexité des BST · CM 4 — Arbres binaires, diapo 65</p>

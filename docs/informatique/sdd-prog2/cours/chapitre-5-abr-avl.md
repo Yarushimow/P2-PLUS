@@ -219,124 +219,121 @@ title: "Ch. 5 — Complexité des ABR et arbres AVL"
 
 === "Version papier"
 
-    La dernière diapo du CM 4 (diapo 65, suite de la partie ABR du [chapitre 4](chapitre-4-arbres-binaires.md)), puis le support « AVL et équilibrage » de N. Flasque, diapos 1 à 39 (il n'a pas de page de titre).
+    Support « Équilibrage AVL » (2023-2024) : complexité des BST, rotations, facteur d'équilibre et exemple de rééquilibrage.
 
-    [![CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 65 : Problèmes de complexité des BST](papier/ch5/cm4-p65.jpg){ loading=lazy .papier }](papier/ch5/cm4-p65.jpg)
-    <p class="papier-legende">Problèmes de complexité des BST · CM 4 — Arbres binaires (N. Flasque, 2023-2024), diapo 65</p>
+    [![Complexité des BST et AVL, diapo 1 : Sur la complexité des BST](papier/ch5/p01.jpg){ loading=lazy .papier }](papier/ch5/p01.jpg)
+    <p class="papier-legende">Sur la complexité des BST · Complexité des BST et AVL, diapo 1</p>
 
-    [![Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 1 : Sur la complexité des BST](papier/ch5/avl-p01.jpg){ loading=lazy .papier }](papier/ch5/avl-p01.jpg)
-    <p class="papier-legende">Sur la complexité des BST · Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 1</p>
+    [![Complexité des BST et AVL, diapo 2 : Sur la complexité des BST (2)](papier/ch5/p02.jpg){ loading=lazy .papier }](papier/ch5/p02.jpg)
+    <p class="papier-legende">Sur la complexité des BST (2) · Complexité des BST et AVL, diapo 2</p>
 
-    [![Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 2 : Sur la complexité des BST (insertion)](papier/ch5/avl-p02.jpg){ loading=lazy .papier }](papier/ch5/avl-p02.jpg)
-    <p class="papier-legende">Sur la complexité des BST (insertion) · Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 2</p>
+    [![Complexité des BST et AVL, diapo 3 : Arbre dégénéré (listes)](papier/ch5/p03.jpg){ loading=lazy .papier }](papier/ch5/p03.jpg)
+    <p class="papier-legende">Arbre dégénéré (listes) · Complexité des BST et AVL, diapo 3</p>
 
-    [![Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 3 : Arbre dégénéré (listes)](papier/ch5/avl-p03.jpg){ loading=lazy .papier }](papier/ch5/avl-p03.jpg)
-    <p class="papier-legende">Arbre dégénéré (listes) · Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 3</p>
+    [![Complexité des BST et AVL, diapo 4 : Arbre parfait](papier/ch5/p04.jpg){ loading=lazy .papier }](papier/ch5/p04.jpg)
+    <p class="papier-legende">Arbre parfait · Complexité des BST et AVL, diapo 4</p>
 
-    [![Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 4 : Arbre parfait](papier/ch5/avl-p04.jpg){ loading=lazy .papier }](papier/ch5/avl-p04.jpg)
-    <p class="papier-legende">Arbre parfait · Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 4</p>
+    [![Complexité des BST et AVL, diapo 5 : Arbre complet](papier/ch5/p05.jpg){ loading=lazy .papier }](papier/ch5/p05.jpg)
+    <p class="papier-legende">Arbre complet · Complexité des BST et AVL, diapo 5</p>
 
-    [![Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 5 : Arbre complet (le dernier niveau peut ne pas être rempli)](papier/ch5/avl-p05.jpg){ loading=lazy .papier }](papier/ch5/avl-p05.jpg)
-    <p class="papier-legende">Arbre complet (le dernier niveau peut ne pas être rempli) · Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 5</p>
+    [![Complexité des BST et AVL, diapo 6 : Recherche de valeur dans une BST](papier/ch5/p06.jpg){ loading=lazy .papier }](papier/ch5/p06.jpg)
+    <p class="papier-legende">Recherche de valeur dans une BST · Complexité des BST et AVL, diapo 6</p>
 
-    [![Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 6 : Recherche de valeur dans une BST](papier/ch5/avl-p06.jpg){ loading=lazy .papier }](papier/ch5/avl-p06.jpg)
-    <p class="papier-legende">Recherche de valeur dans une BST · Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 6</p>
+    [![Complexité des BST et AVL, diapo 7 : Équilibrer un BST](papier/ch5/p07.jpg){ loading=lazy .papier }](papier/ch5/p07.jpg)
+    <p class="papier-legende">Équilibrer un BST · Complexité des BST et AVL, diapo 7</p>
 
-    [![Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 7 : Équilibrer un BST](papier/ch5/avl-p07.jpg){ loading=lazy .papier }](papier/ch5/avl-p07.jpg)
-    <p class="papier-legende">Équilibrer un BST · Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 7</p>
+    [![Complexité des BST et AVL, diapo 8 : Conservation de la propriété des Arbres AVL](papier/ch5/p08.jpg){ loading=lazy .papier }](papier/ch5/p08.jpg)
+    <p class="papier-legende">Conservation de la propriété des Arbres AVL · Complexité des BST et AVL, diapo 8</p>
 
-    [![Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 8 : Conservation de la propriété des Arbres AVL](papier/ch5/avl-p08.jpg){ loading=lazy .papier }](papier/ch5/avl-p08.jpg)
-    <p class="papier-legende">Conservation de la propriété des Arbres AVL · Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 8</p>
+    [![Complexité des BST et AVL, diapo 9 : Illustration](papier/ch5/p09.jpg){ loading=lazy .papier }](papier/ch5/p09.jpg)
+    <p class="papier-legende">Illustration · Complexité des BST et AVL, diapo 9</p>
 
-    [![Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 9 : Illustration](papier/ch5/avl-p09.jpg){ loading=lazy .papier }](papier/ch5/avl-p09.jpg)
-    <p class="papier-legende">Illustration · Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 9</p>
+    [![Complexité des BST et AVL, diapo 10 : Illustration (2)](papier/ch5/p10.jpg){ loading=lazy .papier }](papier/ch5/p10.jpg)
+    <p class="papier-legende">Illustration (2) · Complexité des BST et AVL, diapo 10</p>
 
-    [![Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 10 : Illustration (2)](papier/ch5/avl-p10.jpg){ loading=lazy .papier }](papier/ch5/avl-p10.jpg)
-    <p class="papier-legende">Illustration (2) · Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 10</p>
+    [![Complexité des BST et AVL, diapo 11 : Rotation d’arbres BST](papier/ch5/p11.jpg){ loading=lazy .papier }](papier/ch5/p11.jpg)
+    <p class="papier-legende">Rotation d’arbres BST · Complexité des BST et AVL, diapo 11</p>
 
-    [![Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 11 : Rotation d'arbres BST](papier/ch5/avl-p11.jpg){ loading=lazy .papier }](papier/ch5/avl-p11.jpg)
-    <p class="papier-legende">Rotation d'arbres BST · Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 11</p>
+    [![Complexité des BST et AVL, diapo 12 : Quel sous-arbres faut-il déplacer ?](papier/ch5/p12.jpg){ loading=lazy .papier }](papier/ch5/p12.jpg)
+    <p class="papier-legende">Quel sous-arbres faut-il déplacer ? · Complexité des BST et AVL, diapo 12</p>
 
-    [![Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 12 : Quel sous-arbres faut-il déplacer ?](papier/ch5/avl-p12.jpg){ loading=lazy .papier }](papier/ch5/avl-p12.jpg)
-    <p class="papier-legende">Quel sous-arbres faut-il déplacer ? · Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 12</p>
+    [![Complexité des BST et AVL, diapo 13 : Où attacher B ?](papier/ch5/p13.jpg){ loading=lazy .papier }](papier/ch5/p13.jpg)
+    <p class="papier-legende">Où attacher B ? · Complexité des BST et AVL, diapo 13</p>
 
-    [![Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 13 : Où attacher B ?](papier/ch5/avl-p13.jpg){ loading=lazy .papier }](papier/ch5/avl-p13.jpg)
-    <p class="papier-legende">Où attacher B ? · Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 13</p>
+    [![Complexité des BST et AVL, diapo 14 : Où attacher B ? (2)](papier/ch5/p14.jpg){ loading=lazy .papier }](papier/ch5/p14.jpg)
+    <p class="papier-legende">Où attacher B ? (2) · Complexité des BST et AVL, diapo 14</p>
 
-    [![Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 14 : Où attacher B ? (A < P < B < Q < C)](papier/ch5/avl-p14.jpg){ loading=lazy .papier }](papier/ch5/avl-p14.jpg)
-    <p class="papier-legende">Où attacher B ? (A < P < B < Q < C) · Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 14</p>
+    [![Complexité des BST et AVL, diapo 15 : Instructions correspondantes](papier/ch5/p15.jpg){ loading=lazy .papier }](papier/ch5/p15.jpg)
+    <p class="papier-legende">Instructions correspondantes · Complexité des BST et AVL, diapo 15</p>
 
-    [![Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 15 : Instructions correspondantes](papier/ch5/avl-p15.jpg){ loading=lazy .papier }](papier/ch5/avl-p15.jpg)
-    <p class="papier-legende">Instructions correspondantes · Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 15</p>
+    [![Complexité des BST et AVL, diapo 16 : Illustration de la rotation droite](papier/ch5/p16.jpg){ loading=lazy .papier }](papier/ch5/p16.jpg)
+    <p class="papier-legende">Illustration de la rotation droite · Complexité des BST et AVL, diapo 16</p>
 
-    [![Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 16 : Illustration](papier/ch5/avl-p16.jpg){ loading=lazy .papier }](papier/ch5/avl-p16.jpg)
-    <p class="papier-legende">Illustration · Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 16</p>
+    [![Complexité des BST et AVL, diapo 17 : Quand appliquer les rotations ?](papier/ch5/p17.jpg){ loading=lazy .papier }](papier/ch5/p17.jpg)
+    <p class="papier-legende">Quand appliquer les rotations ? · Complexité des BST et AVL, diapo 17</p>
 
-    [![Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 17 : Quand appliquer les rotations ?](papier/ch5/avl-p17.jpg){ loading=lazy .papier }](papier/ch5/avl-p17.jpg)
-    <p class="papier-legende">Quand appliquer les rotations ? · Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 17</p>
+    [![Complexité des BST et AVL, diapo 18 : Facteur d'équilibre d’un nœud](papier/ch5/p18.jpg){ loading=lazy .papier }](papier/ch5/p18.jpg)
+    <p class="papier-legende">Facteur d'équilibre d’un nœud · Complexité des BST et AVL, diapo 18</p>
 
-    [![Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 18 : Facteur d'équilibre d'un nœud](papier/ch5/avl-p18.jpg){ loading=lazy .papier }](papier/ch5/avl-p18.jpg)
-    <p class="papier-legende">Facteur d'équilibre d'un nœud · Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 18</p>
+    [![Complexité des BST et AVL, diapo 19 : Exemples](papier/ch5/p19.jpg){ loading=lazy .papier }](papier/ch5/p19.jpg)
+    <p class="papier-legende">Exemples · Complexité des BST et AVL, diapo 19</p>
 
-    [![Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 19 : Exemples](papier/ch5/avl-p19.jpg){ loading=lazy .papier }](papier/ch5/avl-p19.jpg)
-    <p class="papier-legende">Exemples · Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 19</p>
+    [![Complexité des BST et AVL, diapo 20 : Exemples (2)](papier/ch5/p20.jpg){ loading=lazy .papier }](papier/ch5/p20.jpg)
+    <p class="papier-legende">Exemples (2) · Complexité des BST et AVL, diapo 20</p>
 
-    [![Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 20 : Exemples (2)](papier/ch5/avl-p20.jpg){ loading=lazy .papier }](papier/ch5/avl-p20.jpg)
-    <p class="papier-legende">Exemples (2) · Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 20</p>
+    [![Complexité des BST et AVL, diapo 21 : Exemples (3)](papier/ch5/p21.jpg){ loading=lazy .papier }](papier/ch5/p21.jpg)
+    <p class="papier-legende">Exemples (3) · Complexité des BST et AVL, diapo 21</p>
 
-    [![Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 21 : Exemples (3)](papier/ch5/avl-p21.jpg){ loading=lazy .papier }](papier/ch5/avl-p21.jpg)
-    <p class="papier-legende">Exemples (3) · Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 21</p>
+    [![Complexité des BST et AVL, diapo 22 : Comment équilibrer un arbre ?](papier/ch5/p22.jpg){ loading=lazy .papier }](papier/ch5/p22.jpg)
+    <p class="papier-legende">Comment équilibrer un arbre ? · Complexité des BST et AVL, diapo 22</p>
 
-    [![Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 22 : Comment équilibrer un arbre ?](papier/ch5/avl-p22.jpg){ loading=lazy .papier }](papier/ch5/avl-p22.jpg)
-    <p class="papier-legende">Comment équilibrer un arbre ? · Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 22</p>
+    [![Complexité des BST et AVL, diapo 23 : Essayons avec le premier exemple](papier/ch5/p23.jpg){ loading=lazy .papier }](papier/ch5/p23.jpg)
+    <p class="papier-legende">Essayons avec le premier exemple · Complexité des BST et AVL, diapo 23</p>
 
-    [![Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 23 : Essayons avec le premier exemple](papier/ch5/avl-p23.jpg){ loading=lazy .papier }](papier/ch5/avl-p23.jpg)
-    <p class="papier-legende">Essayons avec le premier exemple · Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 23</p>
+    [![Complexité des BST et AVL, diapo 24 : Illustration pas à pas de la rotation à gauche sur P](papier/ch5/p24.jpg){ loading=lazy .papier }](papier/ch5/p24.jpg)
+    <p class="papier-legende">Illustration pas à pas de la rotation à gauche sur P · Complexité des BST et AVL, diapo 24</p>
 
-    [![Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 24 : Illustration pas à pas de la rotation à gauche sur P (étape 1)](papier/ch5/avl-p24.jpg){ loading=lazy .papier }](papier/ch5/avl-p24.jpg)
-    <p class="papier-legende">Illustration pas à pas de la rotation à gauche sur P (étape 1) · Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 24</p>
+    [![Complexité des BST et AVL, diapo 25 : Illustration pas à pas de la rotation à gauche sur P (2)](papier/ch5/p25.jpg){ loading=lazy .papier }](papier/ch5/p25.jpg)
+    <p class="papier-legende">Illustration pas à pas de la rotation à gauche sur P (2) · Complexité des BST et AVL, diapo 25</p>
 
-    [![Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 25 : Illustration pas à pas de la rotation à gauche sur P (étape 2)](papier/ch5/avl-p25.jpg){ loading=lazy .papier }](papier/ch5/avl-p25.jpg)
-    <p class="papier-legende">Illustration pas à pas de la rotation à gauche sur P (étape 2) · Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 25</p>
+    [![Complexité des BST et AVL, diapo 26 : Illustration pas à pas de la rotation à gauche sur P (3)](papier/ch5/p26.jpg){ loading=lazy .papier }](papier/ch5/p26.jpg)
+    <p class="papier-legende">Illustration pas à pas de la rotation à gauche sur P (3) · Complexité des BST et AVL, diapo 26</p>
 
-    [![Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 26 : Illustration pas à pas de la rotation à gauche sur P (fin)](papier/ch5/avl-p26.jpg){ loading=lazy .papier }](papier/ch5/avl-p26.jpg)
-    <p class="papier-legende">Illustration pas à pas de la rotation à gauche sur P (fin) · Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 26</p>
+    [![Complexité des BST et AVL, diapo 27 : Essayons avec le deuxième exemple](papier/ch5/p27.jpg){ loading=lazy .papier }](papier/ch5/p27.jpg)
+    <p class="papier-legende">Essayons avec le deuxième exemple · Complexité des BST et AVL, diapo 27</p>
 
-    [![Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 27 : Essayons avec le deuxième exemple](papier/ch5/avl-p27.jpg){ loading=lazy .papier }](papier/ch5/avl-p27.jpg)
-    <p class="papier-legende">Essayons avec le deuxième exemple · Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 27</p>
+    [![Complexité des BST et AVL, diapo 28 : Illustration pas à pas : rotation à droite sur Q](papier/ch5/p28.jpg){ loading=lazy .papier }](papier/ch5/p28.jpg)
+    <p class="papier-legende">Illustration pas à pas : rotation à droite sur Q · Complexité des BST et AVL, diapo 28</p>
 
-    [![Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 28 : Illustration pas à pas : rotation à droite sur Q](papier/ch5/avl-p28.jpg){ loading=lazy .papier }](papier/ch5/avl-p28.jpg)
-    <p class="papier-legende">Illustration pas à pas : rotation à droite sur Q · Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 28</p>
+    [![Complexité des BST et AVL, diapo 29 : Illustration étape par étape : remplacement dans l'arbre entier](papier/ch5/p29.jpg){ loading=lazy .papier }](papier/ch5/p29.jpg)
+    <p class="papier-legende">Illustration étape par étape : remplacement dans l'arbre entier · Complexité des BST et AVL, diapo 29</p>
 
-    [![Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 29 : Illustration étape par étape : remplacement dans l'arbre entier](papier/ch5/avl-p29.jpg){ loading=lazy .papier }](papier/ch5/avl-p29.jpg)
-    <p class="papier-legende">Illustration étape par étape : remplacement dans l'arbre entier · Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 29</p>
+    [![Complexité des BST et AVL, diapo 30 : Rotation finale à gauche sur P](papier/ch5/p30.jpg){ loading=lazy .papier }](papier/ch5/p30.jpg)
+    <p class="papier-legende">Rotation finale à gauche sur P · Complexité des BST et AVL, diapo 30</p>
 
-    [![Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 30 : Rotation finale à gauche sur P](papier/ch5/avl-p30.jpg){ loading=lazy .papier }](papier/ch5/avl-p30.jpg)
-    <p class="papier-legende">Rotation finale à gauche sur P · Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 30</p>
+    [![Complexité des BST et AVL, diapo 31 : Transformations symétriques](papier/ch5/p31.jpg){ loading=lazy .papier }](papier/ch5/p31.jpg)
+    <p class="papier-legende">Transformations symétriques · Complexité des BST et AVL, diapo 31</p>
 
-    [![Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 31 : Transformations symétriques](papier/ch5/avl-p31.jpg){ loading=lazy .papier }](papier/ch5/avl-p31.jpg)
-    <p class="papier-legende">Transformations symétriques · Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 31</p>
+    [![Complexité des BST et AVL, diapo 32 : Étapes d’insertion dans un BST](papier/ch5/p32.jpg){ loading=lazy .papier }](papier/ch5/p32.jpg)
+    <p class="papier-legende">Étapes d’insertion dans un BST · Complexité des BST et AVL, diapo 32</p>
 
-    [![Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 32 : Étapes d'insertion dans un BST](papier/ch5/avl-p32.jpg){ loading=lazy .papier }](papier/ch5/avl-p32.jpg)
-    <p class="papier-legende">Étapes d'insertion dans un BST · Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 32</p>
+    [![Complexité des BST et AVL, diapo 33 : Un exemple (à traiter comme un exercice)](papier/ch5/p33.jpg){ loading=lazy .papier }](papier/ch5/p33.jpg)
+    <p class="papier-legende">Un exemple (à traiter comme un exercice) · Complexité des BST et AVL, diapo 33</p>
 
-    [![Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 33 : Un exemple (à traiter comme un exercice)](papier/ch5/avl-p33.jpg){ loading=lazy .papier }](papier/ch5/avl-p33.jpg)
-    <p class="papier-legende">Un exemple (à traiter comme un exercice) · Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 33</p>
+    [![Complexité des BST et AVL, diapo 34 : Exemple de rééquilibrage (1/6)](papier/ch5/p34.jpg){ loading=lazy .papier }](papier/ch5/p34.jpg)
+    <p class="papier-legende">Exemple de rééquilibrage (1/6) · Complexité des BST et AVL, diapo 34</p>
 
-    [![Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 34 : Exemple de rééquilibrage](papier/ch5/avl-p34.jpg){ loading=lazy .papier }](papier/ch5/avl-p34.jpg)
-    <p class="papier-legende">Exemple de rééquilibrage · Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 34</p>
+    [![Complexité des BST et AVL, diapo 35 : Exemple de rééquilibrage (2/6)](papier/ch5/p35.jpg){ loading=lazy .papier }](papier/ch5/p35.jpg)
+    <p class="papier-legende">Exemple de rééquilibrage (2/6) · Complexité des BST et AVL, diapo 35</p>
 
-    [![Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 35 : Exemple de rééquilibrage (1)](papier/ch5/avl-p35.jpg){ loading=lazy .papier }](papier/ch5/avl-p35.jpg)
-    <p class="papier-legende">Exemple de rééquilibrage (1) · Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 35</p>
+    [![Complexité des BST et AVL, diapo 36 : Exemple de rééquilibrage (3/6)](papier/ch5/p36.jpg){ loading=lazy .papier }](papier/ch5/p36.jpg)
+    <p class="papier-legende">Exemple de rééquilibrage (3/6) · Complexité des BST et AVL, diapo 36</p>
 
-    [![Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 36 : Exemple de rééquilibrage (2)](papier/ch5/avl-p36.jpg){ loading=lazy .papier }](papier/ch5/avl-p36.jpg)
-    <p class="papier-legende">Exemple de rééquilibrage (2) · Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 36</p>
+    [![Complexité des BST et AVL, diapo 37 : Exemple de rééquilibrage (4/6)](papier/ch5/p37.jpg){ loading=lazy .papier }](papier/ch5/p37.jpg)
+    <p class="papier-legende">Exemple de rééquilibrage (4/6) · Complexité des BST et AVL, diapo 37</p>
 
-    [![Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 37 : Exemple de rééquilibrage (second déséquilibre)](papier/ch5/avl-p37.jpg){ loading=lazy .papier }](papier/ch5/avl-p37.jpg)
-    <p class="papier-legende">Exemple de rééquilibrage (second déséquilibre) · Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 37</p>
+    [![Complexité des BST et AVL, diapo 38 : Exemple de rééquilibrage (5/6)](papier/ch5/p38.jpg){ loading=lazy .papier }](papier/ch5/p38.jpg)
+    <p class="papier-legende">Exemple de rééquilibrage (5/6) · Complexité des BST et AVL, diapo 38</p>
 
-    [![Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 38 : Exemple de rééquilibrage (rotation à droite sur pn->droite)](papier/ch5/avl-p38.jpg){ loading=lazy .papier }](papier/ch5/avl-p38.jpg)
-    <p class="papier-legende">Exemple de rééquilibrage (rotation à droite sur pn->droite) · Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 38</p>
-
-    [![Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 39 : Exemple de rééquilibrage (terminé)](papier/ch5/avl-p39.jpg){ loading=lazy .papier }](papier/ch5/avl-p39.jpg)
-    <p class="papier-legende">Exemple de rééquilibrage (terminé) · Support AVL et équilibrage (N. Flasque, 2023-2024), diapo 39</p>
+    [![Complexité des BST et AVL, diapo 39 : Exemple de rééquilibrage (6/6)](papier/ch5/p39.jpg){ loading=lazy .papier }](papier/ch5/p39.jpg)
+    <p class="papier-legende">Exemple de rééquilibrage (6/6) · Complexité des BST et AVL, diapo 39</p>

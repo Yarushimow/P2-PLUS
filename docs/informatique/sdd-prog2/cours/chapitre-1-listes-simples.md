@@ -277,154 +277,160 @@ title: "Ch. 1 — Listes chaînées simples"
 
 === "Version papier"
 
-    Les diapos du CM 1 de N. Flasque (support 2023-2024) : diapo 1 puis diapos 4 à 52 (les diapos 2-3, présentation administrative du module, sont omises). Dans ce support, la liste s'appelle encore `t_std_list`. Les énoncés d'exercices sont dans la [version papier du TD 1](../td/td-1-listes.md).
+    CM 1 du support 2023-2024 (N. Flasque). La version 2026-2027 (CM 1 « Introduction, rappels, outils ») suit le même plan, avec l'encapsulation `t_list` présentée dès le début.
 
-    [![CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 1 : Page de titre](papier/ch1/p01.jpg){ loading=lazy .papier }](papier/ch1/p01.jpg)
-    <p class="papier-legende">Page de titre · CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 1</p>
+    [![CM 1 — Présentation et rappels, diapo 1 : Page de titre](papier/ch1/p01.jpg){ loading=lazy .papier }](papier/ch1/p01.jpg)
+    <p class="papier-legende">Page de titre · CM 1 — Présentation et rappels, diapo 1</p>
 
-    [![CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 4 : Cours 1 : contenu](papier/ch1/p04.jpg){ loading=lazy .papier }](papier/ch1/p04.jpg)
-    <p class="papier-legende">Cours 1 : contenu · CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 4</p>
+    [![CM 1 — Présentation et rappels, diapo 2 : Présentation du module](papier/ch1/p02.jpg){ loading=lazy .papier }](papier/ch1/p02.jpg)
+    <p class="papier-legende">Présentation du module · CM 1 — Présentation et rappels, diapo 2</p>
 
-    [![CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 5 : Rappel : structures](papier/ch1/p05.jpg){ loading=lazy .papier }](papier/ch1/p05.jpg)
-    <p class="papier-legende">Rappel : structures · CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 5</p>
+    [![CM 1 — Présentation et rappels, diapo 3 : Présentation du module (2)](papier/ch1/p03.jpg){ loading=lazy .papier }](papier/ch1/p03.jpg)
+    <p class="papier-legende">Présentation du module (2) · CM 1 — Présentation et rappels, diapo 3</p>
 
-    [![CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 6 : Structures : suite](papier/ch1/p06.jpg){ loading=lazy .papier }](papier/ch1/p06.jpg)
-    <p class="papier-legende">Structures : suite · CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 6</p>
+    [![CM 1 — Présentation et rappels, diapo 4 : Cours 1](papier/ch1/p04.jpg){ loading=lazy .papier }](papier/ch1/p04.jpg)
+    <p class="papier-legende">Cours 1 · CM 1 — Présentation et rappels, diapo 4</p>
 
-    [![CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 7 : Autre exemple](papier/ch1/p07.jpg){ loading=lazy .papier }](papier/ch1/p07.jpg)
-    <p class="papier-legende">Autre exemple · CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 7</p>
+    [![CM 1 — Présentation et rappels, diapo 5 : Rappel : structures](papier/ch1/p05.jpg){ loading=lazy .papier }](papier/ch1/p05.jpg)
+    <p class="papier-legende">Rappel : structures · CM 1 — Présentation et rappels, diapo 5</p>
 
-    [![CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 8 : Variables de type structure](papier/ch1/p08.jpg){ loading=lazy .papier }](papier/ch1/p08.jpg)
-    <p class="papier-legende">Variables de type structure · CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 8</p>
+    [![CM 1 — Présentation et rappels, diapo 6 : Structures : suite](papier/ch1/p06.jpg){ loading=lazy .papier }](papier/ch1/p06.jpg)
+    <p class="papier-legende">Structures : suite · CM 1 — Présentation et rappels, diapo 6</p>
 
-    [![CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 9 : Conclusion](papier/ch1/p09.jpg){ loading=lazy .papier }](papier/ch1/p09.jpg)
-    <p class="papier-legende">Conclusion · CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 9</p>
+    [![CM 1 — Présentation et rappels, diapo 7 : Autre exemple](papier/ch1/p07.jpg){ loading=lazy .papier }](papier/ch1/p07.jpg)
+    <p class="papier-legende">Autre exemple · CM 1 — Présentation et rappels, diapo 7</p>
 
-    [![CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 10 : Rappels : pointeurs](papier/ch1/p10.jpg){ loading=lazy .papier }](papier/ch1/p10.jpg)
-    <p class="papier-legende">Rappels : pointeurs · CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 10</p>
+    [![CM 1 — Présentation et rappels, diapo 8 : Variables de type structure](papier/ch1/p08.jpg){ loading=lazy .papier }](papier/ch1/p08.jpg)
+    <p class="papier-legende">Variables de type structure · CM 1 — Présentation et rappels, diapo 8</p>
 
-    [![CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 11 : Exemples](papier/ch1/p11.jpg){ loading=lazy .papier }](papier/ch1/p11.jpg)
-    <p class="papier-legende">Exemples · CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 11</p>
+    [![CM 1 — Présentation et rappels, diapo 9 : Conclusion](papier/ch1/p09.jpg){ loading=lazy .papier }](papier/ch1/p09.jpg)
+    <p class="papier-legende">Conclusion · CM 1 — Présentation et rappels, diapo 9</p>
 
-    [![CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 12 : Utilisation des pointeurs](papier/ch1/p12.jpg){ loading=lazy .papier }](papier/ch1/p12.jpg)
-    <p class="papier-legende">Utilisation des pointeurs · CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 12</p>
+    [![CM 1 — Présentation et rappels, diapo 10 : Rappels : pointeurs](papier/ch1/p10.jpg){ loading=lazy .papier }](papier/ch1/p10.jpg)
+    <p class="papier-legende">Rappels : pointeurs · CM 1 — Présentation et rappels, diapo 10</p>
 
-    [![CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 13 : Rappels : listes simplement chaînée – maillon](papier/ch1/p13.jpg){ loading=lazy .papier }](papier/ch1/p13.jpg)
-    <p class="papier-legende">Rappels : listes simplement chaînée – maillon · CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 13</p>
+    [![CM 1 — Présentation et rappels, diapo 11 : Exemples](papier/ch1/p11.jpg){ loading=lazy .papier }](papier/ch1/p11.jpg)
+    <p class="papier-legende">Exemples · CM 1 — Présentation et rappels, diapo 11</p>
 
-    [![CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 14 : Type p_cell et création de cellule](papier/ch1/p14.jpg){ loading=lazy .papier }](papier/ch1/p14.jpg)
-    <p class="papier-legende">Type p_cell et création de cellule · CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 14</p>
+    [![CM 1 — Présentation et rappels, diapo 12 : Utilisation des pointeurs](papier/ch1/p12.jpg){ loading=lazy .papier }](papier/ch1/p12.jpg)
+    <p class="papier-legende">Utilisation des pointeurs · CM 1 — Présentation et rappels, diapo 12</p>
 
-    [![CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 15 : Type t_std_list et encapsulation](papier/ch1/p15.jpg){ loading=lazy .papier }](papier/ch1/p15.jpg)
-    <p class="papier-legende">Type t_std_list et encapsulation · CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 15</p>
+    [![CM 1 — Présentation et rappels, diapo 13 : Rappels : listes simplement chaînée - maillon](papier/ch1/p13.jpg){ loading=lazy .papier }](papier/ch1/p13.jpg)
+    <p class="papier-legende">Rappels : listes simplement chaînée - maillon · CM 1 — Présentation et rappels, diapo 13</p>
 
-    [![CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 16 : Création de variable et visualisation](papier/ch1/p16.jpg){ loading=lazy .papier }](papier/ch1/p16.jpg)
-    <p class="papier-legende">Création de variable et visualisation · CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 16</p>
+    [![CM 1 — Présentation et rappels, diapo 14 : Type p_cell et création de cellule](papier/ch1/p14.jpg){ loading=lazy .papier }](papier/ch1/p14.jpg)
+    <p class="papier-legende">Type p_cell et création de cellule · CM 1 — Présentation et rappels, diapo 14</p>
 
-    [![CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 17 : Rappel : chaînage en tête de liste](papier/ch1/p17.jpg){ loading=lazy .papier }](papier/ch1/p17.jpg)
-    <p class="papier-legende">Rappel : chaînage en tête de liste · CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 17</p>
+    [![CM 1 — Présentation et rappels, diapo 15 : Type t_std_list et encapsulation](papier/ch1/p15.jpg){ loading=lazy .papier }](papier/ch1/p15.jpg)
+    <p class="papier-legende">Type t_std_list et encapsulation · CM 1 — Présentation et rappels, diapo 15</p>
 
-    [![CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 18 : Rappel : chaînage en tête de liste – Code du programme](papier/ch1/p18.jpg){ loading=lazy .papier }](papier/ch1/p18.jpg)
-    <p class="papier-legende">Rappel : chaînage en tête de liste – Code du programme · CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 18</p>
+    [![CM 1 — Présentation et rappels, diapo 16 : Création de variable et visualisation](papier/ch1/p16.jpg){ loading=lazy .papier }](papier/ch1/p16.jpg)
+    <p class="papier-legende">Création de variable et visualisation · CM 1 — Présentation et rappels, diapo 16</p>
 
-    [![CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 19 : Rappel : chaînage en tête de liste – Code du programme (suite)](papier/ch1/p19.jpg){ loading=lazy .papier }](papier/ch1/p19.jpg)
-    <p class="papier-legende">Rappel : chaînage en tête de liste – Code du programme (suite) · CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 19</p>
+    [![CM 1 — Présentation et rappels, diapo 17 : Rappel : chaînage en tête de liste](papier/ch1/p17.jpg){ loading=lazy .papier }](papier/ch1/p17.jpg)
+    <p class="papier-legende">Rappel : chaînage en tête de liste · CM 1 — Présentation et rappels, diapo 17</p>
 
-    [![CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 20 : Une fonction pour le chaînage en tête de liste](papier/ch1/p20.jpg){ loading=lazy .papier }](papier/ch1/p20.jpg)
-    <p class="papier-legende">Une fonction pour le chaînage en tête de liste · CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 20</p>
+    [![CM 1 — Présentation et rappels, diapo 18 : Rappel : chaînage en tête de liste - code du programme](papier/ch1/p18.jpg){ loading=lazy .papier }](papier/ch1/p18.jpg)
+    <p class="papier-legende">Rappel : chaînage en tête de liste - code du programme · CM 1 — Présentation et rappels, diapo 18</p>
 
-    [![CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 21 : ATTENTION : qu'est-ce 'modifier une liste ?'](papier/ch1/p21.jpg){ loading=lazy .papier }](papier/ch1/p21.jpg)
-    <p class="papier-legende">ATTENTION : qu'est-ce 'modifier une liste ?' · CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 21</p>
+    [![CM 1 — Présentation et rappels, diapo 19 : Rappel : chaînage en tête de liste - code du programme (2)](papier/ch1/p19.jpg){ loading=lazy .papier }](papier/ch1/p19.jpg)
+    <p class="papier-legende">Rappel : chaînage en tête de liste - code du programme (2) · CM 1 — Présentation et rappels, diapo 19</p>
 
-    [![CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 22 : Illustration](papier/ch1/p22.jpg){ loading=lazy .papier }](papier/ch1/p22.jpg)
-    <p class="papier-legende">Illustration · CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 22</p>
+    [![CM 1 — Présentation et rappels, diapo 20 : Une fonction pour le chaînage en tête de liste](papier/ch1/p20.jpg){ loading=lazy .papier }](papier/ch1/p20.jpg)
+    <p class="papier-legende">Une fonction pour le chaînage en tête de liste · CM 1 — Présentation et rappels, diapo 20</p>
 
-    [![CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 23 : Implication pour les fonctions](papier/ch1/p23.jpg){ loading=lazy .papier }](papier/ch1/p23.jpg)
-    <p class="papier-legende">Implication pour les fonctions · CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 23</p>
+    [![CM 1 — Présentation et rappels, diapo 21 : ATTENTION : qu'est-ce 'modifier une liste ?'](papier/ch1/p21.jpg){ loading=lazy .papier }](papier/ch1/p21.jpg)
+    <p class="papier-legende">ATTENTION : qu'est-ce 'modifier une liste ?' · CM 1 — Présentation et rappels, diapo 21</p>
 
-    [![CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 24 : Implication pour les fonctions (liste modifiée)](papier/ch1/p24.jpg){ loading=lazy .papier }](papier/ch1/p24.jpg)
-    <p class="papier-legende">Implication pour les fonctions (liste modifiée) · CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 24</p>
+    [![CM 1 — Présentation et rappels, diapo 22 : Illustration](papier/ch1/p22.jpg){ loading=lazy .papier }](papier/ch1/p22.jpg)
+    <p class="papier-legende">Illustration · CM 1 — Présentation et rappels, diapo 22</p>
 
-    [![CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 25 : Une fonction pour le chaînage en tête de liste](papier/ch1/p25.jpg){ loading=lazy .papier }](papier/ch1/p25.jpg)
-    <p class="papier-legende">Une fonction pour le chaînage en tête de liste · CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 25</p>
+    [![CM 1 — Présentation et rappels, diapo 23 : Implication pour les fonctions](papier/ch1/p23.jpg){ loading=lazy .papier }](papier/ch1/p23.jpg)
+    <p class="papier-legende">Implication pour les fonctions · CM 1 — Présentation et rappels, diapo 23</p>
 
-    [![CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 26 : Une fonction pour le chaînage en tête de liste (code)](papier/ch1/p26.jpg){ loading=lazy .papier }](papier/ch1/p26.jpg)
-    <p class="papier-legende">Une fonction pour le chaînage en tête de liste (code) · CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 26</p>
+    [![CM 1 — Présentation et rappels, diapo 24 : Implication pour les fonctions (2)](papier/ch1/p24.jpg){ loading=lazy .papier }](papier/ch1/p24.jpg)
+    <p class="papier-legende">Implication pour les fonctions (2) · CM 1 — Présentation et rappels, diapo 24</p>
 
-    [![CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 27 : Parcours d'une liste pour affichage – itératif](papier/ch1/p27.jpg){ loading=lazy .papier }](papier/ch1/p27.jpg)
-    <p class="papier-legende">Parcours d'une liste pour affichage – itératif · CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 27</p>
+    [![CM 1 — Présentation et rappels, diapo 25 : Une fonction pour le chaînage en tête de liste (2)](papier/ch1/p25.jpg){ loading=lazy .papier }](papier/ch1/p25.jpg)
+    <p class="papier-legende">Une fonction pour le chaînage en tête de liste (2) · CM 1 — Présentation et rappels, diapo 25</p>
 
-    [![CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 28 : Implémentation sans fonction – Danger !!](papier/ch1/p28.jpg){ loading=lazy .papier }](papier/ch1/p28.jpg)
-    <p class="papier-legende">Implémentation sans fonction – Danger !! · CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 28</p>
+    [![CM 1 — Présentation et rappels, diapo 26 : Une fonction pour le chaînage en tête de liste (3)](papier/ch1/p26.jpg){ loading=lazy .papier }](papier/ch1/p26.jpg)
+    <p class="papier-legende">Une fonction pour le chaînage en tête de liste (3) · CM 1 — Présentation et rappels, diapo 26</p>
 
-    [![CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 29 : Comment éviter ce phénomène ?](papier/ch1/p29.jpg){ loading=lazy .papier }](papier/ch1/p29.jpg)
-    <p class="papier-legende">Comment éviter ce phénomène ? · CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 29</p>
+    [![CM 1 — Présentation et rappels, diapo 27 : Parcours d’une liste pour affichage – itératif](papier/ch1/p27.jpg){ loading=lazy .papier }](papier/ch1/p27.jpg)
+    <p class="papier-legende">Parcours d’une liste pour affichage – itératif · CM 1 — Présentation et rappels, diapo 27</p>
 
-    [![CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 30 : Technique numéro 1 – copie](papier/ch1/p30.jpg){ loading=lazy .papier }](papier/ch1/p30.jpg)
-    <p class="papier-legende">Technique numéro 1 – copie · CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 30</p>
+    [![CM 1 — Présentation et rappels, diapo 28 : Implémentation sans fonction – Danger !!](papier/ch1/p28.jpg){ loading=lazy .papier }](papier/ch1/p28.jpg)
+    <p class="papier-legende">Implémentation sans fonction – Danger !! · CM 1 — Présentation et rappels, diapo 28</p>
 
-    [![CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 31 : Technique numéro 2 – fonction](papier/ch1/p31.jpg){ loading=lazy .papier }](papier/ch1/p31.jpg)
-    <p class="papier-legende">Technique numéro 2 – fonction · CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 31</p>
+    [![CM 1 — Présentation et rappels, diapo 29 : Comment éviter ce phénomène ?](papier/ch1/p29.jpg){ loading=lazy .papier }](papier/ch1/p29.jpg)
+    <p class="papier-legende">Comment éviter ce phénomène ? · CM 1 — Présentation et rappels, diapo 29</p>
 
-    [![CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 32 : Technique numéro 3](papier/ch1/p32.jpg){ loading=lazy .papier }](papier/ch1/p32.jpg)
-    <p class="papier-legende">Technique numéro 3 · CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 32</p>
+    [![CM 1 — Présentation et rappels, diapo 30 : Technique numéro 1 - copie](papier/ch1/p30.jpg){ loading=lazy .papier }](papier/ch1/p30.jpg)
+    <p class="papier-legende">Technique numéro 1 - copie · CM 1 — Présentation et rappels, diapo 30</p>
 
-    [![CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 33 : Rappel sur les fonctions](papier/ch1/p33.jpg){ loading=lazy .papier }](papier/ch1/p33.jpg)
-    <p class="papier-legende">Rappel sur les fonctions · CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 33</p>
+    [![CM 1 — Présentation et rappels, diapo 31 : Technique numéro 2 - fonction](papier/ch1/p31.jpg){ loading=lazy .papier }](papier/ch1/p31.jpg)
+    <p class="papier-legende">Technique numéro 2 - fonction · CM 1 — Présentation et rappels, diapo 31</p>
 
-    [![CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 34 : Rappel : supprimer une cellule d'une liste](papier/ch1/p34.jpg){ loading=lazy .papier }](papier/ch1/p34.jpg)
-    <p class="papier-legende">Rappel : supprimer une cellule d'une liste · CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 34</p>
+    [![CM 1 — Présentation et rappels, diapo 32 : Technique numéro 3](papier/ch1/p32.jpg){ loading=lazy .papier }](papier/ch1/p32.jpg)
+    <p class="papier-legende">Technique numéro 3 · CM 1 — Présentation et rappels, diapo 32</p>
 
-    [![CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 35 : Pour faire au plus simple](papier/ch1/p35.jpg){ loading=lazy .papier }](papier/ch1/p35.jpg)
-    <p class="papier-legende">Pour faire au plus simple · CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 35</p>
+    [![CM 1 — Présentation et rappels, diapo 33 : Rappel sur les fonctions](papier/ch1/p33.jpg){ loading=lazy .papier }](papier/ch1/p33.jpg)
+    <p class="papier-legende">Rappel sur les fonctions · CM 1 — Présentation et rappels, diapo 33</p>
 
-    [![CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 36 : Fonction de recherche de valeur dans une liste](papier/ch1/p36.jpg){ loading=lazy .papier }](papier/ch1/p36.jpg)
-    <p class="papier-legende">Fonction de recherche de valeur dans une liste · CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 36</p>
+    [![CM 1 — Présentation et rappels, diapo 34 : Rappel : supprimer une cellule d'une liste](papier/ch1/p34.jpg){ loading=lazy .papier }](papier/ch1/p34.jpg)
+    <p class="papier-legende">Rappel : supprimer une cellule d'une liste · CM 1 — Présentation et rappels, diapo 34</p>
 
-    [![CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 37 : Implémentation](papier/ch1/p37.jpg){ loading=lazy .papier }](papier/ch1/p37.jpg)
-    <p class="papier-legende">Implémentation · CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 37</p>
+    [![CM 1 — Présentation et rappels, diapo 35 : Pour faire au plus simple](papier/ch1/p35.jpg){ loading=lazy .papier }](papier/ch1/p35.jpg)
+    <p class="papier-legende">Pour faire au plus simple · CM 1 — Présentation et rappels, diapo 35</p>
 
-    [![CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 38 : Suppression de cellule dont on connaît l'adresse](papier/ch1/p38.jpg){ loading=lazy .papier }](papier/ch1/p38.jpg)
-    <p class="papier-legende">Suppression de cellule dont on connaît l'adresse · CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 38</p>
+    [![CM 1 — Présentation et rappels, diapo 36 : Fonction de recherche de valeur dans une liste](papier/ch1/p36.jpg){ loading=lazy .papier }](papier/ch1/p36.jpg)
+    <p class="papier-legende">Fonction de recherche de valeur dans une liste · CM 1 — Présentation et rappels, diapo 36</p>
 
-    [![CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 39 : La fonction suppressCell()](papier/ch1/p39.jpg){ loading=lazy .papier }](papier/ch1/p39.jpg)
-    <p class="papier-legende">La fonction suppressCell() · CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 39</p>
+    [![CM 1 — Présentation et rappels, diapo 37 : Implémentation](papier/ch1/p37.jpg){ loading=lazy .papier }](papier/ch1/p37.jpg)
+    <p class="papier-legende">Implémentation · CM 1 — Présentation et rappels, diapo 37</p>
 
-    [![CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 40 : Implémentation de suppressCell()](papier/ch1/p40.jpg){ loading=lazy .papier }](papier/ch1/p40.jpg)
-    <p class="papier-legende">Implémentation de suppressCell() · CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 40</p>
+    [![CM 1 — Présentation et rappels, diapo 38 : Suppression de cellule dont on connaît l'adresse](papier/ch1/p38.jpg){ loading=lazy .papier }](papier/ch1/p38.jpg)
+    <p class="papier-legende">Suppression de cellule dont on connaît l'adresse · CM 1 — Présentation et rappels, diapo 38</p>
 
-    [![CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 41 : Récursivité et listes](papier/ch1/p41.jpg){ loading=lazy .papier }](papier/ch1/p41.jpg)
-    <p class="papier-legende">Récursivité et listes · CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 41</p>
+    [![CM 1 — Présentation et rappels, diapo 39 : La fonction suppressCell()](papier/ch1/p39.jpg){ loading=lazy .papier }](papier/ch1/p39.jpg)
+    <p class="papier-legende">La fonction suppressCell() · CM 1 — Présentation et rappels, diapo 39</p>
 
-    [![CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 42 : Illustration – visualisation](papier/ch1/p42.jpg){ loading=lazy .papier }](papier/ch1/p42.jpg)
-    <p class="papier-legende">Illustration – visualisation · CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 42</p>
+    [![CM 1 — Présentation et rappels, diapo 40 : Implémentation de suppressCell()](papier/ch1/p40.jpg){ loading=lazy .papier }](papier/ch1/p40.jpg)
+    <p class="papier-legende">Implémentation de suppressCell() · CM 1 — Présentation et rappels, diapo 40</p>
 
-    [![CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 43 : DONC ATTENTION](papier/ch1/p43.jpg){ loading=lazy .papier }](papier/ch1/p43.jpg)
-    <p class="papier-legende">DONC ATTENTION · CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 43</p>
+    [![CM 1 — Présentation et rappels, diapo 41 : Récursivité et listes](papier/ch1/p41.jpg){ loading=lazy .papier }](papier/ch1/p41.jpg)
+    <p class="papier-legende">Récursivité et listes · CM 1 — Présentation et rappels, diapo 41</p>
 
-    [![CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 44 : Rappel : structure cellule](papier/ch1/p44.jpg){ loading=lazy .papier }](papier/ch1/p44.jpg)
-    <p class="papier-legende">Rappel : structure cellule · CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 44</p>
+    [![CM 1 — Présentation et rappels, diapo 42 : Illustration – visualisation](papier/ch1/p42.jpg){ loading=lazy .papier }](papier/ch1/p42.jpg)
+    <p class="papier-legende">Illustration – visualisation · CM 1 — Présentation et rappels, diapo 42</p>
 
-    [![CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 45 : Application à l'affichage récursif](papier/ch1/p45.jpg){ loading=lazy .papier }](papier/ch1/p45.jpg)
-    <p class="papier-legende">Application à l'affichage récursif · CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 45</p>
+    [![CM 1 — Présentation et rappels, diapo 43 : DONC ATTENTION](papier/ch1/p43.jpg){ loading=lazy .papier }](papier/ch1/p43.jpg)
+    <p class="papier-legende">DONC ATTENTION · CM 1 — Présentation et rappels, diapo 43</p>
 
-    [![CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 46 : Application à l'affichage récursif (2)](papier/ch1/p46.jpg){ loading=lazy .papier }](papier/ch1/p46.jpg)
-    <p class="papier-legende">Application à l'affichage récursif (2) · CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 46</p>
+    [![CM 1 — Présentation et rappels, diapo 44 : Rappel : structure cellule](papier/ch1/p44.jpg){ loading=lazy .papier }](papier/ch1/p44.jpg)
+    <p class="papier-legende">Rappel : structure cellule · CM 1 — Présentation et rappels, diapo 44</p>
 
-    [![CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 47 : Particularité de la récursivité : rappel](papier/ch1/p47.jpg){ loading=lazy .papier }](papier/ch1/p47.jpg)
-    <p class="papier-legende">Particularité de la récursivité : rappel · CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 47</p>
+    [![CM 1 — Présentation et rappels, diapo 45 : Application à l'affichage récursif](papier/ch1/p45.jpg){ loading=lazy .papier }](papier/ch1/p45.jpg)
+    <p class="papier-legende">Application à l'affichage récursif · CM 1 — Présentation et rappels, diapo 45</p>
 
-    [![CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 48 : Particularité de la récursivité : rappel (affichage inversé)](papier/ch1/p48.jpg){ loading=lazy .papier }](papier/ch1/p48.jpg)
-    <p class="papier-legende">Particularité de la récursivité : rappel (affichage inversé) · CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 48</p>
+    [![CM 1 — Présentation et rappels, diapo 46 : Application à l'affichage récursif (2)](papier/ch1/p46.jpg){ loading=lazy .papier }](papier/ch1/p46.jpg)
+    <p class="papier-legende">Application à l'affichage récursif (2) · CM 1 — Présentation et rappels, diapo 46</p>
 
-    [![CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 49 : Particularité de la récursivité : rappel (affichage dans les deux sens)](papier/ch1/p49.jpg){ loading=lazy .papier }](papier/ch1/p49.jpg)
-    <p class="papier-legende">Particularité de la récursivité : rappel (affichage dans les deux sens) · CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 49</p>
+    [![CM 1 — Présentation et rappels, diapo 47 : Particularité de la récursivité : rappel](papier/ch1/p47.jpg){ loading=lazy .papier }](papier/ch1/p47.jpg)
+    <p class="papier-legende">Particularité de la récursivité : rappel · CM 1 — Présentation et rappels, diapo 47</p>
 
-    [![CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 50 : Détruire une liste](papier/ch1/p50.jpg){ loading=lazy .papier }](papier/ch1/p50.jpg)
-    <p class="papier-legende">Détruire une liste · CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 50</p>
+    [![CM 1 — Présentation et rappels, diapo 48 : Particularité de la récursivité : rappel (2)](papier/ch1/p48.jpg){ loading=lazy .papier }](papier/ch1/p48.jpg)
+    <p class="papier-legende">Particularité de la récursivité : rappel (2) · CM 1 — Présentation et rappels, diapo 48</p>
 
-    [![CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 51 : Détruire une liste (2)](papier/ch1/p51.jpg){ loading=lazy .papier }](papier/ch1/p51.jpg)
-    <p class="papier-legende">Détruire une liste (2) · CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 51</p>
+    [![CM 1 — Présentation et rappels, diapo 49 : Particularité de la récursivité : rappel (3)](papier/ch1/p49.jpg){ loading=lazy .papier }](papier/ch1/p49.jpg)
+    <p class="papier-legende">Particularité de la récursivité : rappel (3) · CM 1 — Présentation et rappels, diapo 49</p>
 
-    [![CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 52 : Utilisation](papier/ch1/p52.jpg){ loading=lazy .papier }](papier/ch1/p52.jpg)
-    <p class="papier-legende">Utilisation · CM 1 — Présentation, rappels (N. Flasque, 2023-2024), diapo 52</p>
+    [![CM 1 — Présentation et rappels, diapo 50 : Détruire une liste](papier/ch1/p50.jpg){ loading=lazy .papier }](papier/ch1/p50.jpg)
+    <p class="papier-legende">Détruire une liste · CM 1 — Présentation et rappels, diapo 50</p>
+
+    [![CM 1 — Présentation et rappels, diapo 51 : Détruire une liste (2)](papier/ch1/p51.jpg){ loading=lazy .papier }](papier/ch1/p51.jpg)
+    <p class="papier-legende">Détruire une liste (2) · CM 1 — Présentation et rappels, diapo 51</p>
+
+    [![CM 1 — Présentation et rappels, diapo 52 : Utilisation](papier/ch1/p52.jpg){ loading=lazy .papier }](papier/ch1/p52.jpg)
+    <p class="papier-legende">Utilisation · CM 1 — Présentation et rappels, diapo 52</p>

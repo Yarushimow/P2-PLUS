@@ -212,16 +212,16 @@ title: "TD 4 — Arbres binaires"
 
 === "Version papier"
 
-    L'énoncé papier du TD 4 (livret 2023-2024, pages 1 à 4). Sa numérotation des exercices ne suit pas forcément celle de la version simplifiée. Les diapos de cours sont dans la [version papier du chapitre 4](../cours/chapitre-4-arbres-binaires.md).
+    Énoncé du TD 4 (version 2023-2024, PDF).
 
-    [![TD 4 — énoncé 2023-2024, page 1 : Page de titre — TD4 : Arbres binaires](papier/td4/td4-p01.jpg){ loading=lazy .papier }](papier/td4/td4-p01.jpg)
-    <p class="papier-legende">Page de titre — TD4 : Arbres binaires · TD 4 — énoncé 2023-2024, p. 1</p>
+    [![TD 4, page 1 : Consignes générales](papier/td4/td4-p01.jpg){ loading=lazy .papier }](papier/td4/td4-p01.jpg)
+    <p class="papier-legende">Consignes générales · TD 4, p. 1</p>
 
-    [![TD 4 — énoncé 2023-2024, page 2 : Partie 1 — Visualiser et créer des arbres : exercice 1](papier/td4/td4-p02.jpg){ loading=lazy .papier }](papier/td4/td4-p02.jpg)
-    <p class="papier-legende">Partie 1 — Visualiser et créer des arbres : exercice 1 · TD 4 — énoncé 2023-2024, p. 2</p>
+    [![TD 4, page 2 : Partie 1 — exercice 1 : questions de cours](papier/td4/td4-p02.jpg){ loading=lazy .papier }](papier/td4/td4-p02.jpg)
+    <p class="papier-legende">Partie 1 — exercice 1 : questions de cours · TD 4, p. 2</p>
 
-    [![TD 4 — énoncé 2023-2024, page 3 : Exercice 1 (suite), exercice 2 ; Partie 2 — exercice 3 (compter les nœuds)](papier/td4/td4-p03.jpg){ loading=lazy .papier }](papier/td4/td4-p03.jpg)
-    <p class="papier-legende">Exercice 1 (suite), exercice 2 ; Partie 2 — exercice 3 (compter les nœuds) · TD 4 — énoncé 2023-2024, p. 3</p>
+    [![TD 4, page 3 : Exercice 2 : sous-arbres ; partie 2 — exercice 3 : compter les nœuds](papier/td4/td4-p03.jpg){ loading=lazy .papier }](papier/td4/td4-p03.jpg)
+    <p class="papier-legende">Exercice 2 : sous-arbres ; partie 2 — exercice 3 : compter les nœuds · TD 4, p. 3</p>
 
-    [![TD 4 — énoncé 2023-2024, page 4 : Exercice 3 (suite), exercice 4 (rechercher une valeur), exercice 5](papier/td4/td4-p04.jpg){ loading=lazy .papier }](papier/td4/td4-p04.jpg)
-    <p class="papier-legende">Exercice 3 (suite), exercice 4 (rechercher une valeur), exercice 5 · TD 4 — énoncé 2023-2024, p. 4</p>
+    [![TD 4, page 4 : Exercice 4 : rechercher une valeur ; exercice 5 : afficher](papier/td4/td4-p04.jpg){ loading=lazy .papier }](papier/td4/td4-p04.jpg)
+    <p class="papier-legende">Exercice 4 : rechercher une valeur ; exercice 5 : afficher · TD 4, p. 4</p>

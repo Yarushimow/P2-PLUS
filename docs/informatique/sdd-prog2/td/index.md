@@ -1,7 +1,7 @@
 # Travaux dirigés
 
-Chaque TD (1 à 4) a deux onglets : **Version simplifiée** (méthode et corrections) et
-**Version papier** (les vraies pages des énoncés, à agrandir d'un clic).
+Le TD 4 et les annales ont deux onglets : **Version simplifiée** (méthode et
+corrections) et **Version papier** (les vraies pages des énoncés, à agrandir d'un clic).
 
 | TD | Contenu |
 |----|---------|

@@ -1,6 +1,6 @@
 # Notes de cours
 
-Chaque chapitre a deux onglets : **Version simplifiée** (mes notes) et
+Les chapitres 1 à 5 ont deux onglets : **Version simplifiée** (mes notes) et
 **Version papier** (les diapos du prof, à agrandir d'un clic).
 
 | Chapitre | Contenu |

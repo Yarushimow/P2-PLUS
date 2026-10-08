@@ -280,139 +280,139 @@ title: "Ch. 2 — Listes avancées"
 
 === "Version papier"
 
-    Les diapos du CM 2 de N. Flasque (support 2023-2024), diapos 1 à 45. Les énoncés d'exercices sont dans la [version papier du TD 2](../td/td-2-listes-avancees.md).
+    CM 2 du support 2023-2024 (N. Flasque). Le contenu 2026-2027 est le même (listes ht, circulaires, doublement chaînées).
 
-    [![CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 1 : Page de titre](papier/ch2/p01.jpg){ loading=lazy .papier }](papier/ch2/p01.jpg)
-    <p class="papier-legende">Page de titre · CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 1</p>
+    [![CM 2 — Listes avancées, diapo 1 : Page de titre](papier/ch2/p01.jpg){ loading=lazy .papier }](papier/ch2/p01.jpg)
+    <p class="papier-legende">Page de titre · CM 2 — Listes avancées, diapo 1</p>
 
-    [![CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 2 : Objectifs](papier/ch2/p02.jpg){ loading=lazy .papier }](papier/ch2/p02.jpg)
-    <p class="papier-legende">Objectifs · CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 2</p>
+    [![CM 2 — Listes avancées, diapo 2 : Objectifs](papier/ch2/p02.jpg){ loading=lazy .papier }](papier/ch2/p02.jpg)
+    <p class="papier-legende">Objectifs · CM 2 — Listes avancées, diapo 2</p>
 
-    [![CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 3 : Autres types de liste](papier/ch2/p03.jpg){ loading=lazy .papier }](papier/ch2/p03.jpg)
-    <p class="papier-legende">Autres types de liste · CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 3</p>
+    [![CM 2 — Listes avancées, diapo 3 : Autres types de liste](papier/ch2/p03.jpg){ loading=lazy .papier }](papier/ch2/p03.jpg)
+    <p class="papier-legende">Autres types de liste · CM 2 — Listes avancées, diapo 3</p>
 
-    [![CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 4 : Liste avec un pointeur repérant la première et la dernière cellule](papier/ch2/p04.jpg){ loading=lazy .papier }](papier/ch2/p04.jpg)
-    <p class="papier-legende">Liste avec un pointeur repérant la première et la dernière cellule · CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 4</p>
+    [![CM 2 — Listes avancées, diapo 4 : Liste avec un pointeur repérant la première et la dernière cellule](papier/ch2/p04.jpg){ loading=lazy .papier }](papier/ch2/p04.jpg)
+    <p class="papier-legende">Liste avec un pointeur repérant la première et la dernière cellule · CM 2 — Listes avancées, diapo 4</p>
 
-    [![CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 5 : Visualisation et initialisation](papier/ch2/p05.jpg){ loading=lazy .papier }](papier/ch2/p05.jpg)
-    <p class="papier-legende">Visualisation et initialisation · CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 5</p>
+    [![CM 2 — Listes avancées, diapo 5 : Visualisation et initialisation](papier/ch2/p05.jpg){ loading=lazy .papier }](papier/ch2/p05.jpg)
+    <p class="papier-legende">Visualisation et initialisation · CM 2 — Listes avancées, diapo 5</p>
 
-    [![CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 6 : Parcours, chaînage, insertion, suppression](papier/ch2/p06.jpg){ loading=lazy .papier }](papier/ch2/p06.jpg)
-    <p class="papier-legende">Parcours, chaînage, insertion, suppression · CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 6</p>
+    [![CM 2 — Listes avancées, diapo 6 : Parcours, chaînage, insertion, suppression](papier/ch2/p06.jpg){ loading=lazy .papier }](papier/ch2/p06.jpg)
+    <p class="papier-legende">Parcours, chaînage, insertion, suppression · CM 2 — Listes avancées, diapo 6</p>
 
-    [![CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 7 : Insertion dans une t_ht_list](papier/ch2/p07.jpg){ loading=lazy .papier }](papier/ch2/p07.jpg)
-    <p class="papier-legende">Insertion dans une t_ht_list · CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 7</p>
+    [![CM 2 — Listes avancées, diapo 7 : Insertion dans une t_ht_list](papier/ch2/p07.jpg){ loading=lazy .papier }](papier/ch2/p07.jpg)
+    <p class="papier-legende">Insertion dans une t_ht_list · CM 2 — Listes avancées, diapo 7</p>
 
-    [![CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 8 : Insertion dans une t_ht_list (suite)](papier/ch2/p08.jpg){ loading=lazy .papier }](papier/ch2/p08.jpg)
-    <p class="papier-legende">Insertion dans une t_ht_list (suite) · CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 8</p>
+    [![CM 2 — Listes avancées, diapo 8 : Insertion dans une t_ht_list (2)](papier/ch2/p08.jpg){ loading=lazy .papier }](papier/ch2/p08.jpg)
+    <p class="papier-legende">Insertion dans une t_ht_list (2) · CM 2 — Listes avancées, diapo 8</p>
 
-    [![CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 9 : Illustration](papier/ch2/p09.jpg){ loading=lazy .papier }](papier/ch2/p09.jpg)
-    <p class="papier-legende">Illustration · CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 9</p>
+    [![CM 2 — Listes avancées, diapo 9 : Illustration](papier/ch2/p09.jpg){ loading=lazy .papier }](papier/ch2/p09.jpg)
+    <p class="papier-legende">Illustration · CM 2 — Listes avancées, diapo 9</p>
 
-    [![CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 10 : Illustration – 2](papier/ch2/p10.jpg){ loading=lazy .papier }](papier/ch2/p10.jpg)
-    <p class="papier-legende">Illustration – 2 · CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 10</p>
+    [![CM 2 — Listes avancées, diapo 10 : Illustration - 2](papier/ch2/p10.jpg){ loading=lazy .papier }](papier/ch2/p10.jpg)
+    <p class="papier-legende">Illustration - 2 · CM 2 — Listes avancées, diapo 10</p>
 
-    [![CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 11 : Illustration – 3](papier/ch2/p11.jpg){ loading=lazy .papier }](papier/ch2/p11.jpg)
-    <p class="papier-legende">Illustration – 3 · CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 11</p>
+    [![CM 2 — Listes avancées, diapo 11 : Illustration - 3](papier/ch2/p11.jpg){ loading=lazy .papier }](papier/ch2/p11.jpg)
+    <p class="papier-legende">Illustration - 3 · CM 2 — Listes avancées, diapo 11</p>
 
-    [![CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 12 : Illustration – 4](papier/ch2/p12.jpg){ loading=lazy .papier }](papier/ch2/p12.jpg)
-    <p class="papier-legende">Illustration – 4 · CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 12</p>
+    [![CM 2 — Listes avancées, diapo 12 : Illustration - 4](papier/ch2/p12.jpg){ loading=lazy .papier }](papier/ch2/p12.jpg)
+    <p class="papier-legende">Illustration - 4 · CM 2 — Listes avancées, diapo 12</p>
 
-    [![CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 13 : Synthèse dans une fonction](papier/ch2/p13.jpg){ loading=lazy .papier }](papier/ch2/p13.jpg)
-    <p class="papier-legende">Synthèse dans une fonction · CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 13</p>
+    [![CM 2 — Listes avancées, diapo 13 : Synthèse dans une fonction](papier/ch2/p13.jpg){ loading=lazy .papier }](papier/ch2/p13.jpg)
+    <p class="papier-legende">Synthèse dans une fonction · CM 2 — Listes avancées, diapo 13</p>
 
-    [![CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 14 : Synthèse dans une fonction (2)](papier/ch2/p14.jpg){ loading=lazy .papier }](papier/ch2/p14.jpg)
-    <p class="papier-legende">Synthèse dans une fonction (2) · CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 14</p>
+    [![CM 2 — Listes avancées, diapo 14 : Synthèse dans une fonction (2)](papier/ch2/p14.jpg){ loading=lazy .papier }](papier/ch2/p14.jpg)
+    <p class="papier-legende">Synthèse dans une fonction (2) · CM 2 — Listes avancées, diapo 14</p>
 
-    [![CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 15 : Synthèse dans une fonction (3)](papier/ch2/p15.jpg){ loading=lazy .papier }](papier/ch2/p15.jpg)
-    <p class="papier-legende">Synthèse dans une fonction (3) · CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 15</p>
+    [![CM 2 — Listes avancées, diapo 15 : Synthèse dans une fonction (3)](papier/ch2/p15.jpg){ loading=lazy .papier }](papier/ch2/p15.jpg)
+    <p class="papier-legende">Synthèse dans une fonction (3) · CM 2 — Listes avancées, diapo 15</p>
 
-    [![CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 16 : Synthèse dans une fonction (4)](papier/ch2/p16.jpg){ loading=lazy .papier }](papier/ch2/p16.jpg)
-    <p class="papier-legende">Synthèse dans une fonction (4) · CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 16</p>
+    [![CM 2 — Listes avancées, diapo 16 : Synthèse dans une fonction (4)](papier/ch2/p16.jpg){ loading=lazy .papier }](papier/ch2/p16.jpg)
+    <p class="papier-legende">Synthèse dans une fonction (4) · CM 2 — Listes avancées, diapo 16</p>
 
-    [![CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 17 : Synthèse dans une fonction (5)](papier/ch2/p17.jpg){ loading=lazy .papier }](papier/ch2/p17.jpg)
-    <p class="papier-legende">Synthèse dans une fonction (5) · CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 17</p>
+    [![CM 2 — Listes avancées, diapo 17 : Synthèse dans une fonction (5)](papier/ch2/p17.jpg){ loading=lazy .papier }](papier/ch2/p17.jpg)
+    <p class="papier-legende">Synthèse dans une fonction (5) · CM 2 — Listes avancées, diapo 17</p>
 
-    [![CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 18 : Visualisation avec C Tutor](papier/ch2/p18.jpg){ loading=lazy .papier }](papier/ch2/p18.jpg)
-    <p class="papier-legende">Visualisation avec C Tutor · CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 18</p>
+    [![CM 2 — Listes avancées, diapo 18 : Visualisation avec C Tutor](papier/ch2/p18.jpg){ loading=lazy .papier }](papier/ch2/p18.jpg)
+    <p class="papier-legende">Visualisation avec C Tutor · CM 2 — Listes avancées, diapo 18</p>
 
-    [![CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 19 : Les listes chaînées circulaires](papier/ch2/p19.jpg){ loading=lazy .papier }](papier/ch2/p19.jpg)
-    <p class="papier-legende">Les listes chaînées circulaires · CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 19</p>
+    [![CM 2 — Listes avancées, diapo 19 : Les listes chaînées circulaires](papier/ch2/p19.jpg){ loading=lazy .papier }](papier/ch2/p19.jpg)
+    <p class="papier-legende">Les listes chaînées circulaires · CM 2 — Listes avancées, diapo 19</p>
 
-    [![CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 20 : Définition de la structure](papier/ch2/p20.jpg){ loading=lazy .papier }](papier/ch2/p20.jpg)
-    <p class="papier-legende">Définition de la structure · CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 20</p>
+    [![CM 2 — Listes avancées, diapo 20 : Définition de la structure](papier/ch2/p20.jpg){ loading=lazy .papier }](papier/ch2/p20.jpg)
+    <p class="papier-legende">Définition de la structure · CM 2 — Listes avancées, diapo 20</p>
 
-    [![CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 21 : Une liste simple ne suffirait pas ?](papier/ch2/p21.jpg){ loading=lazy .papier }](papier/ch2/p21.jpg)
-    <p class="papier-legende">Une liste simple ne suffirait pas ? · CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 21</p>
+    [![CM 2 — Listes avancées, diapo 21 : Une liste simple ne suffirait pas ?](papier/ch2/p21.jpg){ loading=lazy .papier }](papier/ch2/p21.jpg)
+    <p class="papier-legende">Une liste simple ne suffirait pas ? · CM 2 — Listes avancées, diapo 21</p>
 
-    [![CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 22 : Illustration](papier/ch2/p22.jpg){ loading=lazy .papier }](papier/ch2/p22.jpg)
-    <p class="papier-legende">Illustration · CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 22</p>
+    [![CM 2 — Listes avancées, diapo 22 : Illustration (2)](papier/ch2/p22.jpg){ loading=lazy .papier }](papier/ch2/p22.jpg)
+    <p class="papier-legende">Illustration (2) · CM 2 — Listes avancées, diapo 22</p>
 
-    [![CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 23 : Illustration (suite)](papier/ch2/p23.jpg){ loading=lazy .papier }](papier/ch2/p23.jpg)
-    <p class="papier-legende">Illustration (suite) · CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 23</p>
+    [![CM 2 — Listes avancées, diapo 23 : Illustration (3)](papier/ch2/p23.jpg){ loading=lazy .papier }](papier/ch2/p23.jpg)
+    <p class="papier-legende">Illustration (3) · CM 2 — Listes avancées, diapo 23</p>
 
-    [![CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 24 : Chaînage en tête](papier/ch2/p24.jpg){ loading=lazy .papier }](papier/ch2/p24.jpg)
-    <p class="papier-legende">Chaînage en tête · CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 24</p>
+    [![CM 2 — Listes avancées, diapo 24 : Chaînage en tête](papier/ch2/p24.jpg){ loading=lazy .papier }](papier/ch2/p24.jpg)
+    <p class="papier-legende">Chaînage en tête · CM 2 — Listes avancées, diapo 24</p>
 
-    [![CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 25 : Cas d'une liste non vide](papier/ch2/p25.jpg){ loading=lazy .papier }](papier/ch2/p25.jpg)
-    <p class="papier-legende">Cas d'une liste non vide · CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 25</p>
+    [![CM 2 — Listes avancées, diapo 25 : Cas d'une liste non vide](papier/ch2/p25.jpg){ loading=lazy .papier }](papier/ch2/p25.jpg)
+    <p class="papier-legende">Cas d'une liste non vide · CM 2 — Listes avancées, diapo 25</p>
 
-    [![CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 26 : Cas d'une liste vide](papier/ch2/p26.jpg){ loading=lazy .papier }](papier/ch2/p26.jpg)
-    <p class="papier-legende">Cas d'une liste vide · CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 26</p>
+    [![CM 2 — Listes avancées, diapo 26 : Cas d'une liste vide](papier/ch2/p26.jpg){ loading=lazy .papier }](papier/ch2/p26.jpg)
+    <p class="papier-legende">Cas d'une liste vide · CM 2 — Listes avancées, diapo 26</p>
 
-    [![CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 27 : Chaînage en queue](papier/ch2/p27.jpg){ loading=lazy .papier }](papier/ch2/p27.jpg)
-    <p class="papier-legende">Chaînage en queue · CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 27</p>
+    [![CM 2 — Listes avancées, diapo 27 : Chaînage en queue](papier/ch2/p27.jpg){ loading=lazy .papier }](papier/ch2/p27.jpg)
+    <p class="papier-legende">Chaînage en queue · CM 2 — Listes avancées, diapo 27</p>
 
-    [![CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 28 : Supprimer une cellule dans une liste circulaire](papier/ch2/p28.jpg){ loading=lazy .papier }](papier/ch2/p28.jpg)
-    <p class="papier-legende">Supprimer une cellule dans une liste circulaire · CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 28</p>
+    [![CM 2 — Listes avancées, diapo 28 : Supprimer une cellule dans une liste circulaire](papier/ch2/p28.jpg){ loading=lazy .papier }](papier/ch2/p28.jpg)
+    <p class="papier-legende">Supprimer une cellule dans une liste circulaire · CM 2 — Listes avancées, diapo 28</p>
 
-    [![CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 29 : Supprimer une cellule dans une liste circulaire (cas n° 1)](papier/ch2/p29.jpg){ loading=lazy .papier }](papier/ch2/p29.jpg)
-    <p class="papier-legende">Supprimer une cellule dans une liste circulaire (cas n° 1) · CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 29</p>
+    [![CM 2 — Listes avancées, diapo 29 : Supprimer une cellule dans une liste circulaire (2)](papier/ch2/p29.jpg){ loading=lazy .papier }](papier/ch2/p29.jpg)
+    <p class="papier-legende">Supprimer une cellule dans une liste circulaire (2) · CM 2 — Listes avancées, diapo 29</p>
 
-    [![CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 30 : Supprimer une cellule dans une liste circulaire (une seule cellule ?)](papier/ch2/p30.jpg){ loading=lazy .papier }](papier/ch2/p30.jpg)
-    <p class="papier-legende">Supprimer une cellule dans une liste circulaire (une seule cellule ?) · CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 30</p>
+    [![CM 2 — Listes avancées, diapo 30 : Supprimer une cellule dans une liste circulaire (3)](papier/ch2/p30.jpg){ loading=lazy .papier }](papier/ch2/p30.jpg)
+    <p class="papier-legende">Supprimer une cellule dans une liste circulaire (3) · CM 2 — Listes avancées, diapo 30</p>
 
-    [![CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 31 : Supprimer l'unique cellule d'une liste circulaire](papier/ch2/p31.jpg){ loading=lazy .papier }](papier/ch2/p31.jpg)
-    <p class="papier-legende">Supprimer l'unique cellule d'une liste circulaire · CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 31</p>
+    [![CM 2 — Listes avancées, diapo 31 : Supprimer l'unique cellule d'une liste circulaire](papier/ch2/p31.jpg){ loading=lazy .papier }](papier/ch2/p31.jpg)
+    <p class="papier-legende">Supprimer l'unique cellule d'une liste circulaire · CM 2 — Listes avancées, diapo 31</p>
 
-    [![CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 32 : Supprimer une autre cellule de la liste](papier/ch2/p32.jpg){ loading=lazy .papier }](papier/ch2/p32.jpg)
-    <p class="papier-legende">Supprimer une autre cellule de la liste · CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 32</p>
+    [![CM 2 — Listes avancées, diapo 32 : Supprimer une autre cellule de la liste](papier/ch2/p32.jpg){ loading=lazy .papier }](papier/ch2/p32.jpg)
+    <p class="papier-legende">Supprimer une autre cellule de la liste · CM 2 — Listes avancées, diapo 32</p>
 
-    [![CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 33 : Supprimer la dernière cellule](papier/ch2/p33.jpg){ loading=lazy .papier }](papier/ch2/p33.jpg)
-    <p class="papier-legende">Supprimer la dernière cellule · CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 33</p>
+    [![CM 2 — Listes avancées, diapo 33 : Supprimer la dernière cellule](papier/ch2/p33.jpg){ loading=lazy .papier }](papier/ch2/p33.jpg)
+    <p class="papier-legende">Supprimer la dernière cellule · CM 2 — Listes avancées, diapo 33</p>
 
-    [![CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 34 : Les listes doublement chaînées](papier/ch2/p34.jpg){ loading=lazy .papier }](papier/ch2/p34.jpg)
-    <p class="papier-legende">Les listes doublement chaînées · CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 34</p>
+    [![CM 2 — Listes avancées, diapo 34 : Les listes doublement chaînées](papier/ch2/p34.jpg){ loading=lazy .papier }](papier/ch2/p34.jpg)
+    <p class="papier-legende">Les listes doublement chaînées · CM 2 — Listes avancées, diapo 34</p>
 
-    [![CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 35 : La structure de liste associée](papier/ch2/p35.jpg){ loading=lazy .papier }](papier/ch2/p35.jpg)
-    <p class="papier-legende">La structure de liste associée · CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 35</p>
+    [![CM 2 — Listes avancées, diapo 35 : La structure de liste associée](papier/ch2/p35.jpg){ loading=lazy .papier }](papier/ch2/p35.jpg)
+    <p class="papier-legende">La structure de liste associée · CM 2 — Listes avancées, diapo 35</p>
 
-    [![CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 36 : Création d'une cellule 'double'](papier/ch2/p36.jpg){ loading=lazy .papier }](papier/ch2/p36.jpg)
-    <p class="papier-legende">Création d'une cellule 'double' · CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 36</p>
+    [![CM 2 — Listes avancées, diapo 36 : Création d'une cellule 'double'](papier/ch2/p36.jpg){ loading=lazy .papier }](papier/ch2/p36.jpg)
+    <p class="papier-legende">Création d'une cellule 'double' · CM 2 — Listes avancées, diapo 36</p>
 
-    [![CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 37 : Insertion d'une cellule double en tête de liste](papier/ch2/p37.jpg){ loading=lazy .papier }](papier/ch2/p37.jpg)
-    <p class="papier-legende">Insertion d'une cellule double en tête de liste · CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 37</p>
+    [![CM 2 — Listes avancées, diapo 37 : Insertion d'une cellule double en tête de liste](papier/ch2/p37.jpg){ loading=lazy .papier }](papier/ch2/p37.jpg)
+    <p class="papier-legende">Insertion d'une cellule double en tête de liste · CM 2 — Listes avancées, diapo 37</p>
 
-    [![CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 38 : Suite](papier/ch2/p38.jpg){ loading=lazy .papier }](papier/ch2/p38.jpg)
-    <p class="papier-legende">Suite · CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 38</p>
+    [![CM 2 — Listes avancées, diapo 38 : Suite](papier/ch2/p38.jpg){ loading=lazy .papier }](papier/ch2/p38.jpg)
+    <p class="papier-legende">Suite · CM 2 — Listes avancées, diapo 38</p>
 
-    [![CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 39 : Insertion et suppression dans une liste double](papier/ch2/p39.jpg){ loading=lazy .papier }](papier/ch2/p39.jpg)
-    <p class="papier-legende">Insertion et suppression dans une liste double · CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 39</p>
+    [![CM 2 — Listes avancées, diapo 39 : Insertion et suppression dans une liste double](papier/ch2/p39.jpg){ loading=lazy .papier }](papier/ch2/p39.jpg)
+    <p class="papier-legende">Insertion et suppression dans une liste double · CM 2 — Listes avancées, diapo 39</p>
 
-    [![CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 40 : Schéma : cas général de suppression](papier/ch2/p40.jpg){ loading=lazy .papier }](papier/ch2/p40.jpg)
-    <p class="papier-legende">Schéma : cas général de suppression · CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 40</p>
+    [![CM 2 — Listes avancées, diapo 40 : Schéma : cas général de suppression](papier/ch2/p40.jpg){ loading=lazy .papier }](papier/ch2/p40.jpg)
+    <p class="papier-legende">Schéma : cas général de suppression · CM 2 — Listes avancées, diapo 40</p>
 
-    [![CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 41 : Suppression en tête et en queue](papier/ch2/p41.jpg){ loading=lazy .papier }](papier/ch2/p41.jpg)
-    <p class="papier-legende">Suppression en tête et en queue · CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 41</p>
+    [![CM 2 — Listes avancées, diapo 41 : Suppression en tête et en queue](papier/ch2/p41.jpg){ loading=lazy .papier }](papier/ch2/p41.jpg)
+    <p class="papier-legende">Suppression en tête et en queue · CM 2 — Listes avancées, diapo 41</p>
 
-    [![CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 42 : Schéma : cas général d'insertion](papier/ch2/p42.jpg){ loading=lazy .papier }](papier/ch2/p42.jpg)
-    <p class="papier-legende">Schéma : cas général d'insertion · CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 42</p>
+    [![CM 2 — Listes avancées, diapo 42 : Schéma : cas général d'insertion](papier/ch2/p42.jpg){ loading=lazy .papier }](papier/ch2/p42.jpg)
+    <p class="papier-legende">Schéma : cas général d'insertion · CM 2 — Listes avancées, diapo 42</p>
 
-    [![CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 43 : Insertion (2)](papier/ch2/p43.jpg){ loading=lazy .papier }](papier/ch2/p43.jpg)
-    <p class="papier-legende">Insertion (2) · CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 43</p>
+    [![CM 2 — Listes avancées, diapo 43 : Insertion (2)](papier/ch2/p43.jpg){ loading=lazy .papier }](papier/ch2/p43.jpg)
+    <p class="papier-legende">Insertion (2) · CM 2 — Listes avancées, diapo 43</p>
 
-    [![CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 44 : Insertion (3)](papier/ch2/p44.jpg){ loading=lazy .papier }](papier/ch2/p44.jpg)
-    <p class="papier-legende">Insertion (3) · CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 44</p>
+    [![CM 2 — Listes avancées, diapo 44 : Insertion (3)](papier/ch2/p44.jpg){ loading=lazy .papier }](papier/ch2/p44.jpg)
+    <p class="papier-legende">Insertion (3) · CM 2 — Listes avancées, diapo 44</p>
 
-    [![CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 45 : Insertion en tête et en queue](papier/ch2/p45.jpg){ loading=lazy .papier }](papier/ch2/p45.jpg)
-    <p class="papier-legende">Insertion en tête et en queue · CM 2 — Listes avancées (N. Flasque, 2023-2024), diapo 45</p>
+    [![CM 2 — Listes avancées, diapo 45 : Insertion en tête et en queue](papier/ch2/p45.jpg){ loading=lazy .papier }](papier/ch2/p45.jpg)
+    <p class="papier-legende">Insertion en tête et en queue · CM 2 — Listes avancées, diapo 45</p>
