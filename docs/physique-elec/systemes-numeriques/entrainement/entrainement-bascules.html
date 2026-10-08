@@ -163,6 +163,23 @@ details.help summary{cursor:pointer;padding:12px 0;font-weight:700}
 .grow.ev .c.z{color:var(--warn)}
 svg .amark{stroke:var(--warn);stroke-dasharray:2 3}
 svg .anum{fill:var(--warn);font-weight:600}
+/* QCM */
+.qz{border:1px solid var(--line);border-radius:8px;padding:10px 12px;margin:10px 16px 0;background:var(--card)}
+.qz.ok{border-color:var(--ok)}
+.qz.err{border-color:var(--warn)}
+.qzh{display:flex;gap:8px;align-items:center;font-size:13px}
+.qzr{margin-left:auto;font-family:var(--f-mono);font-size:12.5px}
+.qz.ok .qzr{color:var(--ok)} .qz.err .qzr{color:var(--warn)}
+.qzq{margin:6px 0 8px;font-weight:700}
+.qzo{display:grid;gap:4px}
+.opt{display:flex;gap:8px;align-items:flex-start;padding:6px 8px;border-radius:6px;cursor:pointer;font-size:15px}
+.opt:hover{background:var(--grid)}
+.opt input{margin-top:4px;accent-color:var(--accent);flex:0 0 auto}
+.opt input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.opt.good{background:var(--ok-soft)}
+.opt.bad{background:var(--warn-soft)}
+.opt.sol{outline:2px solid var(--ok);outline-offset:-2px}
+.qze{margin:8px 0 0;font-size:14.5px;color:var(--muted)}
 </style>
 </head>
 <body>
@@ -170,7 +187,7 @@ svg .anum{fill:var(--warn);font-weight:600}
 <header>
   <div class="eyebrow">TE302 · Bascules · entraînement CE</div>
   <h1>Entraînement aux bascules</h1>
-  <p class="lead">Un exercice tiré au hasard à chaque fois : chronogrammes, table de transition, table des états, compteurs asynchrones et registres.</p>
+  <p class="lead">Un exercice tiré au hasard à chaque fois : chronogrammes, table de transition, table des états, compteurs asynchrones, registres et QCM.</p>
 </header>
 
 <div class="modes" role="tablist" aria-label="Type d'exercice">
@@ -179,6 +196,7 @@ svg .anum{fill:var(--warn);font-weight:600}
   <button role="tab" id="m-et" aria-selected="false" data-mode="et">Table des états</button>
   <button role="tab" id="m-ca" aria-selected="false" data-mode="ca">Compteurs async</button>
   <button role="tab" id="m-rg" aria-selected="false" data-mode="rg">Registres</button>
+  <button role="tab" id="m-qcm" aria-selected="false" data-mode="qcm">QCM</button>
 </div>
 
 <div class="controls" role="group" aria-label="Réglages">
@@ -230,6 +248,15 @@ svg .anum{fill:var(--warn);font-weight:600}
     </div>
     <label class="ctl" for="rg-bits">Bascules <select id="rg-bits"><option value="rand" selected>Aléatoire</option><option value="3">3</option><option value="4">4</option></select></label>
     <label class="ctl" for="rg-n">Fronts <select id="rg-n"><option>6</option><option selected>8</option><option>10</option></select></label>
+  </div>
+  <div class="grp" data-for="qcm" hidden>
+    <div class="seg" role="radiogroup" aria-label="Thème">
+      <input type="radio" name="type-qz" id="tqz-all" value="all" checked><label for="tqz-all">Tout le CE</label>
+      <input type="radio" name="type-qz" id="tqz-b" value="B"><label for="tqz-b">Bascules</label>
+      <input type="radio" name="type-qz" id="tqz-r" value="R"><label for="tqz-r">Registres</label>
+      <input type="radio" name="type-qz" id="tqz-c" value="C"><label for="tqz-c">Compteurs async</label>
+    </div>
+    <label class="ctl" for="qz-n">Questions <select id="qz-n"><option>10</option><option selected>15</option><option>20</option><option value="all">Toutes</option></select></label>
   </div>
   <label class="ctl prio" for="opt-async"><input type="checkbox" id="opt-async"> Entrées prioritaires ~PR / ~CLR</label>
 </div>
@@ -336,6 +363,23 @@ svg .anum{fill:var(--warn);font-weight:600}
   </div>
   <div class="feedback" id="rg-feedback" hidden><div class="score" id="rg-score"></div><ol class="expl" id="rg-expl"></ol></div>
   <div class="feedback"><div class="tally" id="rg-tally">Exercices vérifiés : 0 · sans faute : 0</div></div>
+</section>
+
+<!-- ============ MODE QCM ============ -->
+<section id="sec-qcm" class="sheet" hidden>
+  <div class="statement">
+    <h2 id="qz-title">QCM</h2>
+    <p class="how">Une seule bonne réponse par question, comme au CE. Les questions et l'ordre des réponses changent à chaque tirage.</p>
+  </div>
+  <div id="qz-list"></div>
+  <div class="actions">
+    <button class="btn main" id="qz-check" type="button">Vérifier</button>
+    <button class="btn" id="qz-retry" type="button" hidden>Corriger mes erreurs</button>
+    <button class="btn" id="qz-sol" type="button">Voir la solution</button>
+    <button class="btn" id="qz-new" type="button">Nouveau QCM</button>
+  </div>
+  <div class="feedback" id="qz-feedback" hidden><div class="score" id="qz-score"></div><ol class="expl" id="qz-expl"></ol></div>
+  <div class="feedback"><div class="tally" id="qz-tally">Exercices vérifiés : 0 · sans faute : 0</div></div>
 </section>
 
 <details class="help">
@@ -1261,6 +1305,52 @@ svg .anum{fill:var(--warn);font-weight:600}
   }
   var CA=seqMode('ca',caGenerate), RG=seqMode('rg',rgGenerate);
 
+  var QB=[{"t": "B", "q": "Un circuit séquentiel se distingue d'un circuit combinatoire parce que…", "o": ["ses sorties dépendent aussi de l'état précédent (mémoire)", "ses sorties ne dépendent que des entrées actuelles", "il n'utilise que des portes NAND", "il ne possède jamais d'horloge"], "e": "Séquentiel = sorties fonction des entrées ET de l'état précédent, grâce à un rebouclage. Combinatoire = sorties fonction des entrées seules."}, {"t": "B", "q": "Bascule RS à portes NOR avec S = 1 et R = 1 :", "o": ["état non utilisé (Q = Q̄ = 0)", "mémoire", "set (Q = 1)", "toggle"], "e": "En NOR, les entrées sont actives à 1. S = R = 1 donne Q = Q̄ = 0, ce qui contredit la définition : état interdit."}, {"t": "B", "q": "Bascule RS à portes NAND (entrées actives à 0) avec ~S = 1 et ~R = 1 :", "o": ["mémoire", "set", "reset", "état non utilisé"], "e": "En NAND, les entrées sont actives à 0. Les deux à 1 : aucune n'agit, la bascule garde son état."}, {"t": "B", "q": "Bascule JK avec J = 1 et K = 1, au front actif :", "o": ["Q s'inverse (toggle)", "Q passe à 1", "Q passe à 0", "Q garde sa valeur"], "e": "JK : 00 mémoire, 01 reset, 10 set, 11 toggle."}, {"t": "B", "q": "Bascule JK avec J = 0 et K = 1, au front actif :", "o": ["Q passe à 0 (reset)", "Q passe à 1 (set)", "Q s'inverse", "Q garde sa valeur"], "e": "K comme « kill » : J = 0, K = 1 remet Q à 0."}, {"t": "B", "q": "Différence entre une D-latch et une D flip-flop :", "o": ["la latch recopie D tant que l'horloge est au niveau actif, la flip-flop seulement au front", "la latch réagit au front, la flip-flop au niveau", "la latch n'a pas d'entrée D", "aucune, ce sont deux noms du même composant"], "e": "Latch = synchrone sur niveau (transparente tant que clk est actif). Flip-flop = synchrone sur front."}, {"t": "B", "q": "Sur le symbole d'une bascule, l'entrée CLK porte un triangle précédé d'un rond. La bascule est déclenchée :", "o": ["sur front descendant", "sur front montant", "sur niveau haut", "sur niveau bas"], "e": "Le triangle signale un déclenchement sur front ; le rond inverse : front descendant."}, {"t": "B", "q": "Le temps de pré-positionnement tpp (setup) est :", "o": ["la durée minimale pendant laquelle D doit être stable avant le front actif", "la durée minimale pendant laquelle D doit rester stable après le front", "le retard entre le front et la sortie valide", "la période minimale de l'horloge"], "e": "tpp = avant le front. tm (hold) = après le front. tp = retard de la sortie."}, {"t": "B", "q": "Le temps de maintien tm (hold) est :", "o": ["la durée minimale pendant laquelle D doit rester stable après le front actif", "la durée minimale pendant laquelle D doit être stable avant le front", "le retard entre le front et la sortie valide", "la durée d'une impulsion de ~CLR"], "e": "Hold = après le front actif."}, {"t": "B", "q": "Le temps de propagation tp d'une bascule synchrone est :", "o": ["le retard entre le front actif de l'horloge et le moment où Q est valide", "la durée pendant laquelle D doit être stable avant le front", "la durée d'un état parasite", "la période de l'horloge"], "e": "Définition à savoir réciter au CE."}, {"t": "B", "q": "Les entrées ~PR (preset) et ~CLR (clear) d'une bascule sont :", "o": ["prioritaires, indépendantes de l'horloge et de D, actives au niveau bas", "actives au niveau haut", "prises en compte seulement au front d'horloge", "dépendantes de l'entrée D"], "e": "Annale 2023 : elles agissent tout de suite, sans attendre le front, et passent avant D, J, K. Au repos, on les relie à 1."}, {"t": "B", "q": "Une bascule D a ~CLR = 0 et ~PR = 1. Sa sortie Q :", "o": ["passe à 0 tout de suite, sans attendre le front", "passe à 0 au prochain front", "recopie D au prochain front", "passe à 1"], "e": "~CLR actif (à 0) force Q à 0 immédiatement, quel que soit D ou l'horloge."}, {"t": "B", "q": "Une bascule D active sur front montant est câblée avec D = Q̄. Sa sortie Q :", "o": ["s'inverse à chaque front montant : elle divise la fréquence par 2", "reste bloquée à 0", "recopie l'horloge", "s'inverse à chaque front descendant"], "e": "D = Q̄ : mode toggle, diviseur de fréquence par 2 (annale 2023, QCM 1)."}, {"t": "B", "q": "Table de transition d'une JK : pour faire passer Q de 0 à 1, il faut :", "o": ["J = 1, K = X", "J = X, K = 0", "J = 0, K = X", "J = X, K = 1"], "e": "0 → 1 : set (J=1, K=0) ou toggle (J=1, K=1). K est indifférent."}, {"t": "B", "q": "Table de transition d'une JK : pour garder Q à 1, il faut :", "o": ["J = X, K = 0", "J = 1, K = X", "J = 0, K = X", "J = X, K = 1"], "e": "1 → 1 : mémoire (J=0, K=0) ou set (J=1, K=0). J est indifférent."}, {"t": "B", "q": "Une bascule a un temps de propagation de 10 ns. L'ordre de grandeur de sa fréquence d'horloge maximale est :", "o": ["100 MHz", "10 MHz", "1 GHz", "10 kHz"], "e": "f max ≈ 1 / tp = 1 / 10 ns = 100 MHz."}, {"t": "B", "q": "Bascule D sur front montant : D change pendant que l'horloge reste à 1, sans nouveau front. Q :", "o": ["ne change pas", "recopie D tout de suite", "s'inverse", "passe à 0"], "e": "Une flip-flop ne regarde D qu'au front actif. Entre deux fronts : mémoire."}, {"t": "R", "q": "Un registre de longueur N est constitué de :", "o": ["N bascules D synchronisées sur la même horloge", "N bascules en cascade, chacune pilotée par la précédente", "N portes NAND", "2<sup>N</sup> bascules"], "e": "Définition du cours : N bascules D, même horloge, pour mémoriser un mot de N bits."}, {"t": "R", "q": "Dans un registre à décalage à droite, chaque entrée vérifie :", "o": ["Di = Qi−1 (et D0 = entrée série)", "Di = Qi+1", "Di = Q̄i", "Di = EPi"], "e": "Décalage à droite : chaque bascule reçoit sa voisine de gauche, la donnée entre par Q0."}, {"t": "R", "q": "Une rotation se distingue d'un décalage parce que :", "o": ["la sortie série est rebouclée sur l'entrée série", "elle utilise des bascules JK", "elle charge tous les bits en un seul front", "elle n'a pas d'horloge"], "e": "Rotation = rebouclage : aucun bit n'est perdu, ils tournent."}, {"t": "R", "q": "Combien de fronts d'horloge faut-il pour charger un mot de 8 bits en série ?", "o": ["8", "1", "4", "16"], "e": "Chargement série : un bit par front."}, {"t": "R", "q": "Un registre 4 bits dont chaque entrée ei arrive directement sur une bascule D :", "o": ["copie ses entrées sur ses sorties au même front d'horloge", "copie ses entrées après 4 fronts", "est un registre entrée série – sortie parallèle", "est un registre entrée parallèle – sortie série"], "e": "Annale 2023, QCM 4 : chargement parallèle, un seul front."}, {"t": "R", "q": "Compteur Johnson à 4 bascules (D0 = Q̄3) : nombre d'états du cycle ?", "o": ["8", "4", "16", "5"], "e": "Johnson : 2n états. Les 1 entrent un par un, puis les 0."}, {"t": "R", "q": "Compteur en anneau à n bascules (un seul 1 qui circule) : nombre d'états ?", "o": ["n", "2n", "2<sup>n</sup>", "n + 1"], "e": "Le 1 occupe chaque bascule tour à tour : n états (annale 2023 : 1, 2, 4)."}, {"t": "R", "q": "Registre bidirectionnel 4 bits avec sortie série (TP2) : combien de multiplexeurs 2→1 ?", "o": ["5", "4", "8", "2"], "e": "Un par entrée D (4) plus un pour la sortie série, qui change selon le sens."}, {"t": "R", "q": "L'équation d'un multiplexeur 2→1 d'adresse a est :", "o": ["s = ā·e0 + a·e1", "s = a·e0 + ā·e1", "s = e0·e1", "s = a ⊕ e0"], "e": "a = 0 → s = e0 ; a = 1 → s = e1."}, {"t": "R", "q": "Dans un registre série/parallèle, à quoi sert le multiplexeur placé devant chaque D ?", "o": ["choisir entre la donnée parallèle EPi et la sortie de la voisine Qi−1", "inverser la sortie", "remettre le registre à zéro", "diviser la fréquence"], "e": "C'est l'aiguillage commandé par S/P (ou L au TP2)."}, {"t": "R", "q": "74HC194 : S1 S0 = 1 1 au front d'horloge :", "o": ["chargement parallèle", "maintien", "décalage à droite", "décalage à gauche"], "e": "S1S0 : 00 maintien, 01 décalage à droite, 10 décalage à gauche, 11 chargement parallèle."}, {"t": "R", "q": "74HC164 : la donnée série chargée vaut DS = A·B. Si A = 0 :", "o": ["des 0 entrent quel que soit B", "B entre dans le registre", "le registre se bloque", "des 1 entrent"], "e": "A sert de validation : A·B = 0 dès que A = 0."}, {"t": "R", "q": "ATmega328P : R18 = 10110110. Après LSL R18 :", "o": ["R18 = 01101100 et C = 1", "R18 = 01011011 et C = 0", "R18 = 11011011 et C = 0", "R18 = 01101101 et C = 1"], "e": "LSL décale à gauche, un 0 entre à droite, le bit 7 (1) part dans C."}, {"t": "R", "q": "Différence entre LSR et ASR :", "o": ["ASR conserve le bit de signe (bit 7), LSR fait entrer un 0", "LSR conserve le bit 7, ASR fait entrer un 0", "ASR décale à gauche", "aucune"], "e": "ASR = décalage arithmétique : divise par 2 un nombre signé."}, {"t": "R", "q": "ROL et ROR font une rotation :", "o": ["sur 9 bits, à travers le bit C (Carry)", "circulaire classique sur 8 bits", "sur 16 bits", "sans toucher au bit C"], "e": "Le bit C fait partie de la boucle : ce n'est pas une rotation circulaire sur 8 bits."}, {"t": "R", "q": "Dans une liaison UART, le registre à décalage sert à :", "o": ["convertir parallèle → série à l'émission et série → parallèle à la réception", "compter les bits reçus", "générer l'horloge", "stocker toute la trame en mémoire"], "e": "Objectif : transmettre N bits sur un seul fil."}, {"t": "C", "q": "Un compteur à N bascules possède au plus :", "o": ["2<sup>N</sup> états", "N états", "2N états", "N² états"], "e": "Cycle complet : 0 à 2<sup>N</sup> − 1."}, {"t": "C", "q": "Un compteur ayant la séquence [3, 4, 5, 9] nécessite :", "o": ["4 bascules", "3 bascules", "5 bascules", "9 bascules"], "e": "Annale 2023 : c'est la plus grande valeur (9 = 1001) qui compte, pas le nombre d'états."}, {"t": "C", "q": "Un compteur est dit asynchrone quand :", "o": ["seule la première bascule reçoit l'horloge, les autres sont déclenchées par la bascule précédente", "toutes les bascules reçoivent la même horloge", "il n'a pas d'horloge du tout", "il utilise des bascules RS"], "e": "Les changements se propagent en cascade : on parle aussi de compteur série ou à propagation."}, {"t": "C", "q": "Bascules actives sur front descendant, en toggle, avec CLKi = Qi−1. Le circuit est :", "o": ["un compteur", "un décompteur", "un registre à décalage", "un compteur synchrone"], "e": "La bascule i bascule quand Qi−1 passe de 1 à 0 : c'est la retenue, on compte."}, {"t": "C", "q": "Bascules D actives sur front montant, D = Q̄, CLKi = Qi−1, CI 000. Le circuit est :", "o": ["un décompteur (0, 7, 6, 5…)", "un compteur (0, 1, 2, 3…)", "un compteur Johnson", "un registre"], "e": "Au premier front, Q0 monte : front montant pour Q1, qui monte, puis Q2. On passe de 0 à 7."}, {"t": "C", "q": "Compteur asynchrone 3 bits, tp = 8 ns par bascule. Retard maximal après un front d'horloge :", "o": ["24 ns", "8 ns", "16 ns", "64 ns"], "e": "Pire cas (7 → 0) : les 3 bascules basculent l'une après l'autre, 3 × 8 = 24 ns."}, {"t": "C", "q": "Compteur asynchrone 4 bits, tp = 10 ns. Fréquence d'horloge maximale :", "o": ["25 MHz", "100 MHz", "40 MHz", "10 MHz"], "e": "Retard max 4 × 10 = 40 ns, donc f max = 1 / 40 ns = 25 MHz."}, {"t": "C", "q": "Horloge à 1 MHz. Dans un compteur asynchrone, la fréquence de Q2 vaut :", "o": ["125 kHz", "250 kHz", "333 kHz", "500 kHz"], "e": "Chaque bascule divise par 2 : f(Q2) = f / 2<sup>3</sup> = 125 kHz."}, {"t": "C", "q": "Compteur asynchrone modulo 5 par remise à zéro : on relie aux ~CLR de toutes les bascules :", "o": ["NAND(Q2, Q0)", "NAND(Q2, Q1)", "NAND(Q1, Q0)", "NOR(Q2, Q0)"], "e": "5 = 101 : on prend les bits à 1 de 5 dans une NAND (sortie active à 0, comme ~CLR)."}, {"t": "C", "q": "Compteur asynchrone modulo 10 par remise à zéro : entrées de la NAND ?", "o": ["Q3 et Q1", "Q3 et Q0", "Q3, Q2 et Q1", "Q1 et Q0"], "e": "10 = 1010. Avec Q3 et Q0 on détecterait 9, ce qui ferait un modulo 9."}, {"t": "C", "q": "Dans un compteur modulo 5 par RAZ, l'état 5 dure théoriquement :", "o": ["0 (quelques ns en pratique : un état parasite)", "une période d'horloge", "deux périodes d'horloge", "jusqu'au front suivant"], "e": "Dès que 5 apparaît, la NAND passe à 0 et ~CLR remet tout à 0 : 5 n'existe que le temps de la propagation."}, {"t": "C", "q": "Pour un compteur modulo M par remise à zéro, on détecte l'état M et non M − 1 parce que :", "o": ["la remise à zéro par ~CLR est asynchrone : elle agit dès que M apparaît", "l'état M dure une période complète", "la NAND est lente", "on compte à partir de 1"], "e": "Si on détectait M − 1, cet état disparaîtrait aussitôt : on compterait modulo M − 1."}, {"t": "C", "q": "Compteur asynchrone qui passe de 3 (011) à 4 (100), en tenant compte de tp. Les états transitoires sont :", "o": ["2 puis 0", "5 puis 7", "1 puis 0", "il n'y en a pas"], "e": "Q0 tombe d'abord (010 = 2), puis Q1 (000 = 0), puis Q2 monte (100 = 4)."}, {"t": "C", "q": "Principal inconvénient d'un compteur asynchrone :", "o": ["le cumul des temps de propagation, qui crée des états parasites et limite la fréquence", "il demande plus de bascules qu'un compteur synchrone", "il ne peut pas compter à rebours", "il ne fonctionne qu'avec des bascules JK"], "e": "Plus il y a de bascules, plus les retards s'additionnent."}, {"t": "C", "q": "Décompteur asynchrone 3 bits, CI 000. Après le premier front :", "o": ["7 (111)", "1 (001)", "0 (000)", "4 (100)"], "e": "Un décompteur passe de 0 à 2<sup>n</sup> − 1."}];
+  /* =================================================================== */
+  /* MODE 6 : QCM                                                        */
+  /* =================================================================== */
+  var QZ={st:null,tally:{done:0,perfect:0}}, THEMES={B:'Bascules',R:'Registres',C:'Compteurs async'};
+  function qzNew(){
+    var th=radio('type-qz'), n=$('qz-n').value;
+    var pool=shuffle(QB.filter(function(x){return th==='all'||x.t===th}).slice());
+    if(n!=='all') pool=pool.slice(0,+n);
+    var qs=pool.map(function(x){ var idx=shuffle(x.o.map(function(_,i){return i})); return {src:x,opts:idx.map(function(i){return x.o[i]}),correct:idx.indexOf(0)}; });
+    QZ.st={qs:qs,ans:qs.map(function(){return null}),checked:false,revealed:false};
+    $('qz-title').textContent='QCM — '+qs.length+' questions'+(th==='all'?'':' · '+THEMES[th]);
+    qzRender();
+  }
+  function qzScore(s){ var g=0; s.qs.forEach(function(q,i){ if(s.ans[i]===q.correct) g++; }); return g; }
+  function qzRender(){
+    var s=QZ.st, g=qzScore(s), n=s.qs.length, pf=g===n, show=s.checked&&(s.revealed||pf);
+    $('qz-list').innerHTML=s.qs.map(function(q,i){
+      var a=s.ans[i], st=s.checked?(a===q.correct?' ok':' err'):'';
+      var o='<div class="qz'+st+'" role="group" aria-labelledby="qzq'+i+'"><div class="qzh"><b>'+(i+1)+'.</b><span class="fact">'+THEMES[q.src.t]+'</span>'+(s.checked?'<span class="qzr">'+(a===q.correct?'✓':(a===null?'✗ sans réponse':'✗'))+'</span>':'')+'</div><p class="qzq" id="qzq'+i+'">'+q.src.q+'</p><div class="qzo">';
+      q.opts.forEach(function(t,k){
+        var sel=a===k, cls='opt'+(sel?' sel':'');
+        if(s.checked&&sel) cls+= k===q.correct?' good':' bad';
+        if(show&&k===q.correct) cls+=' sol';
+        o+='<label class="'+cls+'"><input type="radio" name="qz'+i+'" data-i="'+i+'" data-k="'+k+'"'+(sel?' checked':'')+(s.checked?' disabled':'')+'><span>'+String.fromCharCode(97+k)+'. '+t+'</span></label>';
+      });
+      o+='</div>';
+      if(show) o+='<p class="qze">'+q.src.e+'</p>';
+      return o+'</div>';
+    }).join('');
+    $('qz-check').hidden=s.checked;
+    $('qz-retry').hidden=!s.checked||s.revealed||pf;
+    $('qz-sol').hidden=s.checked&&(s.revealed||pf);
+    if(!s.checked){ $('qz-feedback').hidden=true; return; }
+    $('qz-feedback').hidden=false;
+    var el=$('qz-score');
+    el.className='score'+(pf&&!s.revealed?' perfect':'');
+    el.textContent=s.revealed?'Solution affichée · tu avais '+g+'/'+n:(pf?'Sans faute, '+n+'/'+n+' !':'Bonnes réponses : '+g+'/'+n);
+    $('qz-expl').innerHTML=(s.revealed||pf)?'':hintHTML(n-g);
+  }
+  $('qz-list').addEventListener('change',function(e){ var t=e.target; if(t.type!=='radio'||QZ.st.checked) return; QZ.st.ans[+t.getAttribute('data-i')]=+t.getAttribute('data-k'); });
+  $('qz-check').addEventListener('click',function(){ var s=QZ.st; s.checked=true; QZ.tally.done++; if(qzScore(s)===s.qs.length) QZ.tally.perfect++; setTally('qz-tally',QZ.tally); qzRender(); $('qz-feedback').scrollIntoView({block:'nearest'}); });
+  $('qz-retry').addEventListener('click',function(){ var s=QZ.st; s.qs.forEach(function(q,i){ if(s.ans[i]!==q.correct) s.ans[i]=null; }); s.checked=false; qzRender(); });
+  $('qz-sol').addEventListener('click',function(){ var s=QZ.st; s.checked=true; s.revealed=true; qzRender(); });
+  $('qz-new').addEventListener('click',qzNew);
+
   /* =================================================================== */
   /* Rappel, modes, réglages                                             */
   /* =================================================================== */
@@ -1274,12 +1364,13 @@ svg .anum{fill:var(--warn);font-weight:600}
     '<div><h4>Registres</h4><table><tr><th>Fonction</th><th>Câblage</th></tr><tr><td>Décalage droite</td><td>Di = Qi−1, D0 = E</td></tr><tr><td>Décalage gauche</td><td>Di = Qi+1, Dn−1 = E</td></tr><tr><td>Rotation droite</td><td>D0 = Qn−1</td></tr><tr><td>Johnson</td><td>D0 = Q̄n−1 (2n états)</td></tr><tr><td>Anneau</td><td>un seul 1 (n états)</td></tr></table></div>'+
     '<p>~PR = 0 force Q à 1 et ~CLR = 0 force Q à 0, tout de suite, sans attendre le front et avant D, J, K. Au repos, on les laisse à 1. Pour une D, au front actif c\'est toujours une copie, même si Q ne change pas.</p>';
 
-  var MODES={chrono:chNew,tr:trNew,et:etNew,ca:CA.fresh,rg:RG.fresh}, cur='chrono';
+  var MODES={chrono:chNew,tr:trNew,et:etNew,ca:CA.fresh,rg:RG.fresh,qcm:qzNew}, cur='chrono';
   function setMode(m){
     cur=m;
     Array.prototype.forEach.call(document.querySelectorAll('.modes button'),function(b){ b.setAttribute('aria-selected',String(b.getAttribute('data-mode')===m)); });
     Array.prototype.forEach.call(document.querySelectorAll('.controls .grp'),function(g){ g.hidden=g.getAttribute('data-for')!==m; });
-    ['chrono','tr','et','ca','rg'].forEach(function(k){ $('sec-'+k).hidden=k!==m; });
+    ['chrono','tr','et','ca','rg','qcm'].forEach(function(k){ $('sec-'+k).hidden=k!==m; });
+    $('opt-async').parentNode.hidden = m==='qcm';
     try{ localStorage.setItem('te302-mode',m); }catch(e){}
   }
   Array.prototype.forEach.call(document.querySelectorAll('.modes button'),function(b){ b.addEventListener('click',function(){ setMode(b.getAttribute('data-mode')); }); });
@@ -1298,7 +1389,9 @@ svg .anum{fill:var(--warn);font-weight:600}
   $('ca-bits').addEventListener('change',CA.fresh); $('ca-n').addEventListener('change',CA.fresh);
   $('rg-bits').addEventListener('change',RG.fresh); $('rg-n').addEventListener('change',RG.fresh);
 
-  chNew(); trNew(); etNew(); CA.fresh(); RG.fresh();
+  chNew(); trNew(); etNew(); CA.fresh(); RG.fresh(); qzNew();
+  Array.prototype.forEach.call(document.querySelectorAll('input[name="type-qz"]'),function(r){r.addEventListener('change',qzNew)});
+  $('qz-n').addEventListener('change',qzNew);
   var start='chrono';
   var h=(location.hash||'').replace('#','');
   if(MODES[h]) start=h; else { try{ var sv=localStorage.getItem('te302-mode'); if(MODES[sv]) start=sv; }catch(e){} }
