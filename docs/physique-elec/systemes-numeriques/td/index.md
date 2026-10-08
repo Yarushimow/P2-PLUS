@@ -1,5 +1,8 @@
 # Travaux dirigés
 
+Chaque TD a deux onglets : **Version simplifiée** (méthode et corrections) et
+**Version papier** (les vraies pages des énoncés, à agrandir d'un clic).
+
 | TD | Contenu |
 |----|---------|
 | [TD 1 — Bascules](td-1-bascules.md) | RS en NOR, chronogrammes JK, PRE/CLR, TP 1 |
