@@ -1,5 +1,8 @@
 # Travaux dirigés
 
+Chaque TD et chaque annale a deux onglets : **Version simplifiée** (les corrections)
+et **Version papier** (l'énoncé officiel ; pour les annales, le sujet et le corrigé du prof quand il existe).
+
 | TD | Contenu |
 |----|---------|
 | [TD 1 — Fonctions](td-1-fonctions.md) | Domaines, surfaces, courbes de niveau |

@@ -65,4 +65,4 @@ sommets et cols).
 - **Code** : `SM302P` — enseignant : Elie Chahine.
 - **Évaluation** : un DE de 1 h 50 en décembre, une note de contrôle TD (interros en classe), deux CC.
 - **DE** : 5 à 6 exercices ; on y retrouve presque toujours une étude de continuité, une intégrale double en polaires, une intégrale triple, une recherche d'extrema et une EDP.
-- **Ressources officielles** : dans `pdf/sm302/` (local, non publié). La *Fiche Méthodes SM302* (D. Denis) est un bon complément.
+- **Ressources officielles** : pages du poly, des TD et des annales dans les onglets **Version papier**. La *Fiche Méthodes SM302* (D. Denis) est un bon complément.
