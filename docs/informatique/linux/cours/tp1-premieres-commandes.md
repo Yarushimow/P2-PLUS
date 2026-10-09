@@ -7,6 +7,9 @@ title: "TP1 — Premières commandes"
 Anatomie d'une commande, navigation dans l'arborescence, gestion des fichiers,
 types de commandes et aide, jokers. Exercices corrigés : [TP1 corrigé](../td/tp1-corrige.md).
 
+[:material-file-document: Énoncé](https://yvanguifo.github.io/introduction-linux-fr/contenus/tp1/){ .md-button }
+[:material-card-text: Résumé](../fiches/resume-tp1.md){ .md-button }
+
 !!! abstract "À retenir"
     - Une commande = **nom** + **options** + **arguments**, séparés par des espaces.
     - Chemin **absolu** : commence par `/` (ou `~`, remplacé par le home). Sinon **relatif**.

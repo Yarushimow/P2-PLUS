@@ -9,6 +9,9 @@ Un **filtre** lit son entrée standard (ou les fichiers donnés en argument) et
 permet de répondre à des questions précises en une ligne.
 Exercices corrigés : [TP4+ corrigé](../td/tp4-filtres-corrige.md).
 
+[:material-file-document: Énoncé](https://yvanguifo.github.io/introduction-linux-fr/contenus/tp4-exo/){ .md-button }
+[:material-card-text: Résumé](../fiches/resume-tp4-filtres.md){ .md-button }
+
 !!! abstract "À retenir"
     - `head` / `tail -n N` : premières / dernières lignes (10 par défaut).
     - `grep motif` : lignes qui contiennent le motif (`-v` inverse, `-i` ignore la casse, `-r` récursif, `-l` noms de fichiers).

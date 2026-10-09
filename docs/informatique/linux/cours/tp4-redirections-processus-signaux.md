@@ -8,6 +8,9 @@ Rediriger les trois canaux, enchaîner avec des tubes, observer et piloter les
 processus, envoyer des signaux, puis `signal()`, `fork()`, `wait()` et `execvp()` en C.
 Exercices corrigés : [TP4 corrigé](../td/tp4-corrige.md).
 
+[:material-file-document: Énoncé](https://yvanguifo.github.io/introduction-linux-fr/contenus/tp4/){ .md-button }
+[:material-card-text: Résumé](../fiches/resume-tp4.md){ .md-button }
+
 !!! abstract "À retenir"
     - `>` écrase, `>>` ajoute, `2>` redirige les erreurs, `<` lit un fichier sur stdin.
     - `>` ≡ `1>`, `>>` ≡ `1>>`, `<` ≡ `0<`.

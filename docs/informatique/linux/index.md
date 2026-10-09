@@ -32,7 +32,7 @@ processus et les signaux, jusqu'à la programmation système (`fork`, `exec`, `d
 
     ---
 
-    La fiche interactive du DE (calculateur `chmod`, simulateur `cd`, 5 séries de QCM) et la fiche des pièges.
+    Un résumé par TP, la fiche interactive du DE (calculateur `chmod`, simulateur `cd`, 5 séries de QCM) et la fiche des pièges.
 
     [:octicons-arrow-right-24: Fiches](fiches/index.md)
 
@@ -40,15 +40,15 @@ processus et les signaux, jusqu'à la programmation système (`fork`, `exec`, `d
 
 ## Plan du cours
 
-| Chapitre | Cours | Corrigé | Fiche |
-|----------|:-----:|:-------:|:-----:|
-| Lecture préliminaire (UNIX, GNU/Linux, shell) | [:material-book-open-variant:](cours/lecture-preliminaire.md) | | |
-| TP1. Premières commandes | [:material-book-open-variant:](cours/tp1-premieres-commandes.md) | [TP1](td/tp1-corrige.md) | [:material-card-text:](fiches/fiche-de.md) |
-| TP2. Système de fichiers et permissions | [:material-book-open-variant:](cours/tp2-fichiers-permissions.md) | [TP2](td/tp2-corrige.md) | [:material-card-text:](fiches/fiche-de.md) |
-| TP3. Environnement et compilateur C | [:material-book-open-variant:](cours/tp3-environnement-compilation.md) | [TP3](td/tp3-corrige.md) | [:material-card-text:](fiches/fiche-de.md) |
-| TP4. Redirections, processus, signaux | [:material-book-open-variant:](cours/tp4-redirections-processus-signaux.md) | [TP4](td/tp4-corrige.md) | [:material-card-text:](fiches/fiche-de.md) |
-| TP4+. Filtres de texte | [:material-book-open-variant:](cours/tp4-filtres-texte.md) | [TP4+](td/tp4-filtres-corrige.md) | [:material-card-text:](fiches/fiche-de.md) |
-| Annales | | [CC1 2023](td/annale-cc1-2023.md) | [Pièges](fiches/fiche-pieges.md) |
+| Chapitre | Énoncé | Cours | Corrigé | Résumé |
+|----------|:------:|:-----:|:-------:|:------:|
+| Lecture préliminaire (UNIX, GNU/Linux, shell) | [:material-open-in-new:](https://yvanguifo.github.io/introduction-linux-fr/contenus/preliminary-reading/) | [:material-book-open-variant:](cours/lecture-preliminaire.md) | | |
+| TP1. Premières commandes | [:material-open-in-new:](https://yvanguifo.github.io/introduction-linux-fr/contenus/tp1/) | [:material-book-open-variant:](cours/tp1-premieres-commandes.md) | [TP1](td/tp1-corrige.md) | [:material-card-text:](fiches/resume-tp1.md) |
+| TP2. Système de fichiers et permissions | [:material-open-in-new:](https://yvanguifo.github.io/introduction-linux-fr/contenus/tp2/) | [:material-book-open-variant:](cours/tp2-fichiers-permissions.md) | [TP2](td/tp2-corrige.md) | [:material-card-text:](fiches/resume-tp2.md) |
+| TP3. Environnement et compilateur C | [:material-open-in-new:](https://yvanguifo.github.io/introduction-linux-fr/contenus/tp3/) | [:material-book-open-variant:](cours/tp3-environnement-compilation.md) | [TP3](td/tp3-corrige.md) | [:material-card-text:](fiches/resume-tp3.md) |
+| TP4. Redirections, processus, signaux | [:material-open-in-new:](https://yvanguifo.github.io/introduction-linux-fr/contenus/tp4/) | [:material-book-open-variant:](cours/tp4-redirections-processus-signaux.md) | [TP4](td/tp4-corrige.md) | [:material-card-text:](fiches/resume-tp4.md) |
+| TP4+. Filtres de texte | [:material-open-in-new:](https://yvanguifo.github.io/introduction-linux-fr/contenus/tp4-exo/) | [:material-book-open-variant:](cours/tp4-filtres-texte.md) | [TP4+](td/tp4-filtres-corrige.md) | [:material-card-text:](fiches/resume-tp4-filtres.md) |
+| Annales | | | [CC1 2023](td/annale-cc1-2023.md) | [Pièges](fiches/fiche-pieges.md) |
 
 ## Infos pratiques
 

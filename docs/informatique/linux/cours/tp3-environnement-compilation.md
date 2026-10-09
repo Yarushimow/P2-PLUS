@@ -8,6 +8,9 @@ Variables du shell, caractères spéciaux et inhibition, expansion d'accolades,
 substitution de commande, compilation avec `gcc`, puis programmation système
 (descripteurs, `read`, `write`, `dup`, `dup2`). Exercices corrigés : [TP3 corrigé](../td/tp3-corrige.md).
 
+[:material-file-document: Énoncé](https://yvanguifo.github.io/introduction-linux-fr/contenus/tp3/){ .md-button }
+[:material-card-text: Résumé](../fiches/resume-tp3.md){ .md-button }
+
 !!! abstract "À retenir"
     - `nom=valeur` **sans espace** ; `$nom` ou `${nom}` pour la valeur ; variable inconnue → **vide**.
     - `\` inhibe un caractère, `'…'` inhibe **tout**, `"…"` laisse actifs `$`, `` ` `` et `\`.

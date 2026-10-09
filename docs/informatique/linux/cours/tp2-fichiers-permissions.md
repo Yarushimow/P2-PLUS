@@ -7,6 +7,9 @@ title: "TP2 — Système de fichiers et permissions"
 Hiérarchie des répertoires, utilisateurs, lecture et modification des droits,
 droits sur les répertoires, `PATH`. Exercices corrigés : [TP2 corrigé](../td/tp2-corrige.md).
 
+[:material-file-document: Énoncé](https://yvanguifo.github.io/introduction-linux-fr/contenus/tp2/){ .md-button }
+[:material-card-text: Résumé](../fiches/resume-tp2.md){ .md-button }
+
 !!! abstract "À retenir"
     - `ls -l` : 1 caractère de **type** + 9 bits `rwx` pour **u**ser / **g**roup / **o**thers.
     - Poids : **r = 4, w = 2, x = 1** → `rwxr-xr--` = 754.
