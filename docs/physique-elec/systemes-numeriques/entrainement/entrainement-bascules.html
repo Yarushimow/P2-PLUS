@@ -163,6 +163,9 @@ details.help summary{cursor:pointer;padding:12px 0;font-weight:700}
 .grow.ev .c.z{color:var(--warn)}
 svg .amark{stroke:var(--warn);stroke-dasharray:2 3}
 svg .anum{fill:var(--warn);font-weight:600}
+svg .imark{stroke-dasharray:1 4;opacity:.7}
+svg .inum{opacity:.6}
+.grow.ev .c.ia{opacity:.7}
 /* QCM */
 .qz{border:1px solid var(--line);border-radius:8px;padding:10px 12px;margin:10px 16px 0;background:var(--card)}
 .qz.ok{border-color:var(--ok)}
@@ -428,10 +431,10 @@ svg .anum{fill:var(--warn);font-weight:600}
   }
   /* Colonnes « événement » : un front d'horloge, ou une impulsion ~PR / ~CLR placée ENTRE deux fronts */
   function clockRowSlots(edge,steps,base,xEnd){
-    var up=edge==='up', ev=[[LABEL,up?0:1]], o='', i;
-    steps.forEach(function(st,i){ if(st.kind==='as') return; ev.push([fx(i),up?1:0]); ev.push([fx(i)+COL/2,up?0:1]); });
+    var up=edge==='up', ev=[[LABEL,up?0:1]], o='', i, every=steps.some(function(x){return x.kind==='inact'});
+    steps.forEach(function(st,i){ if(st.kind==='as') return; if(every) ev.push([fx(i), st.kind==='inact'?(up?0:1):(up?1:0)]); else { ev.push([fx(i),up?1:0]); ev.push([fx(i)+COL/2,up?0:1]); } });
     o+='<path class="clk" d="'+path(ev,base,xEnd)+'"/>';
-    steps.forEach(function(st,i){ if(st.kind==='as') return; var cx=fx(i), cy=base+16; o+= up ? '<path class="arrow" d="M'+(cx-4)+','+(cy+3)+' L'+cx+','+(cy-4)+' L'+(cx+4)+','+(cy+3)+'Z"/>' : '<path class="arrow" d="M'+(cx-4)+','+(cy-3)+' L'+cx+','+(cy+4)+' L'+(cx+4)+','+(cy-3)+'Z"/>'; });
+    steps.forEach(function(st,i){ if(st.kind==='as'||st.kind==='inact') return; var cx=fx(i), cy=base+16; o+= up ? '<path class="arrow" d="M'+(cx-4)+','+(cy+3)+' L'+cx+','+(cy-4)+' L'+(cx+4)+','+(cy+3)+'Z"/>' : '<path class="arrow" d="M'+(cx-4)+','+(cy-3)+' L'+cx+','+(cy+4)+' L'+(cx+4)+','+(cy-3)+'Z"/>'; });
     return o;
   }
   var ASX=.22, ASW=.5;
@@ -443,21 +446,22 @@ svg .anum{fill:var(--warn);font-weight:600}
   function chgX(st,i){ return st.kind==='as' ? fx(i)+COL*ASX : fx(i); }
   function slotLabel(steps,i,pre){
     if(steps[i].kind==='as') return steps[i].as==='PRE'?'~PR':'~CLR';
-    var n=0; for(var j=0;j<=i;j++) if(steps[j].kind!=='as') n++;
+    if(steps[i].kind==='inact') return steps[i].lab;
+    var n=0; for(var j=0;j<=i;j++) if(steps[j].kind!=='as'&&steps[j].kind!=='inact') n++;
     return (pre==null?'F':pre)+n;
   }
   function slotMarks(steps,H){
     var o='';
     steps.forEach(function(st,i){
-      var x=chgX(st,i), as=st.kind==='as';
-      o+='<line class="mark'+(as?' amark':'')+'" x1="'+x+'" y1="'+(TOP-6)+'" x2="'+x+'" y2="'+(H-2)+'"/>';
-      o+='<text class="num'+(as?' anum':'')+'" x="'+(as?fx(i)+COL/2:x)+'" y="'+(TOP-9)+'" text-anchor="middle">'+(as?(st.as==='PRE'?'~PR':'~CLR'):slotLabel(steps,i,''))+'</text>';
+      var x=chgX(st,i), as=st.kind==='as', ia=st.kind==='inact';
+      o+='<line class="mark'+(as?' amark':'')+(ia?' imark':'')+'" x1="'+x+'" y1="'+(TOP-6)+'" x2="'+x+'" y2="'+(H-2)+'"/>';
+      o+='<text class="num'+(as?' anum':'')+(ia?' inum':'')+'" x="'+(as?fx(i)+COL/2:x)+'" y="'+(TOP-9)+'" text-anchor="middle">'+(as?(st.as==='PRE'?'~PR':'~CLR'):slotLabel(steps,i,''))+'</text>';
     });
     return o;
   }
   function slotHeader(steps,cols,pre){
     var o='<div class="grow ev" style="grid-template-columns:'+cols+'"><div class="h">Événement</div>';
-    steps.forEach(function(st,i){ o+='<div class="c'+(st.kind==='as'?' z':'')+'">'+(st.kind==='as'?(st.as==='PRE'?'~PR = 0':'~CLR = 0'):slotLabel(steps,i,pre))+'</div>'; });
+    steps.forEach(function(st,i){ o+='<div class="c'+(st.kind==='as'?' z':'')+(st.kind==='inact'?' ia':'')+'">'+(st.kind==='as'?(st.as==='PRE'?'~PR = 0':'~CLR = 0'):st.kind==='inact'?st.lab+' inactif':slotLabel(steps,i,pre)+(st.lab?' '+st.lab:''))+'</div>'; });
     return o+'</div>';
   }
   /* table de transition : Q(t) -> Q(t+1) => entrées */
@@ -484,7 +488,7 @@ svg .anum{fill:var(--warn);font-weight:600}
   var CH={st:null,tally:{done:0,perfect:0}};
 
   function fnOptions(s){
-    var o = s.type==='RS' ? ['M','S','R','NU'] : s.type==='D' ? ['M','C','T'] : ['M','S','R','T'];
+    var o = s.type==='RS' ? ['M','S','R','NU'] : s.type==='D' ? ['M','C'] : ['M','S','R','T'];
     if(s.async) o=o.concat(['PRE','CLR']);
     return o;
   }
@@ -511,13 +515,18 @@ svg .anum{fill:var(--warn);font-weight:600}
           q = f==='S'?1 : f==='R'?0 : f==='NU'?(s.nand?1:0) : q;
           stp.fn=f;
         } else if(type==='D'){
-          var d=rnd(2); stp.inp.D=d; q=d; stp.fn='C';
+          var d=rnd(2); stp.inp.D=d; q=d; stp.fn='C'; stp.lab=s.edge==='up'?'↑':'↓';
         } else {
           var j=rnd(2),k=rnd(2); stp.inp.J=j; stp.inp.K=k;
           stp.fn = j===0&&k===0?'M' : j===0?'R' : k===0?'S' : 'T'; q = stp.fn==='M'?q : stp.fn==='R'?0 : stp.fn==='S'?1 : 1-q;
         }
         if(async){ stp.inp['~PR']=1; stp.inp['~CLR']=1; }
         stp.q=q; prevFn=stp.fn; steps.push(stp);
+        if(type==='D'){
+          var ia={kind:'inact',lab:s.edge==='up'?'↓':'↑',inp:{D:rnd(2)},prev:q,q:q,fn:'M'};
+          if(async){ ia.inp['~PR']=1; ia.inp['~CLR']=1; }
+          steps.push(ia);
+        }
         if(after[i]){
           var a={kind:'as',as:after[i],inp:{'~PR':after[i]==='PRE'?0:1,'~CLR':after[i]==='CLR'?0:1},prev:q,fn:after[i]};
           q=after[i]==='PRE'?1:0; a.q=q; steps.push(a); prevFn=a.fn;
@@ -528,6 +537,7 @@ svg .anum{fill:var(--warn);font-weight:600}
       var ok = changes>=Math.ceil(N/3);
       if(type==='JK') ok = ok && ['M','S','R','T'].filter(function(f){return fns[f]}).length>=3 && fns.T;
       if(type==='RS') ok = ok && fns.S && fns.R && fns.M;
+      if(type==='D') ok = ok && steps.some(function(x){return x.kind==='inact' && x.inp.D!==x.q}) && steps.some(function(x){return x.kind==='front' && x.q===x.prev});
       if(async) ok = ok && steps.some(function(x){return x.kind==='as' && x.q!==x.prev});
       if(ok){ s.ci=ci; s.steps=steps; break; }
     }
@@ -593,7 +603,7 @@ svg .anum{fill:var(--warn);font-weight:600}
 
   function chGrid(s){
     var L=s.steps.length, cols=(LABEL+COL/2)+'px repeat('+L+','+COL+'px)', o='', i;
-    if(s.async) o+=slotHeader(s.steps,cols,'F');
+    if(s.async||s.type==='D') o+=slotHeader(s.steps,cols,'F');
     var tblRows=s.inputs.slice(); if(s.async) tblRows=tblRows.concat(['~PR','~CLR']);
     if($('opt-table').checked) tblRows.forEach(function(n){
       o+='<div class="grow tbl" style="grid-template-columns:'+cols+'"><div class="h">'+n+(s.type==='RS'||n.charAt(0)==='~'?'':' au front')+'</div>';
@@ -632,14 +642,15 @@ svg .anum{fill:var(--warn);font-weight:600}
     $('st-facts').innerHTML=f.map(function(x){return '<span class="fact '+x[0]+'">'+x[1]+'</span>'}).join('');
     $('st-how').textContent = s.type==='RS'
       ? 'Pas d\'horloge : à chaque instant t, Q réagit tout de suite aux nouvelles entrées. Clique en haut (1) ou en bas (0) dans la ligne Q, ou utilise les boutons, puis choisis la fonction.'
-      : 'Pour chaque front actif (trait pointillé), regarde les entrées juste avant le front. Clique en haut (1) ou en bas (0) dans la ligne Q, ou utilise les boutons, puis choisis la fonction.'+(s.async?' Les impulsions ~PR / ~CLR arrivent entre deux fronts : elles ont leur propre colonne (en rouge), car elles agissent tout de suite, sans attendre l\'horloge.':'');
+      : 'Pour chaque front actif (trait pointillé), regarde les entrées juste avant le front. Clique en haut (1) ou en bas (0) dans la ligne Q, ou utilise les boutons, puis choisis la fonction.'+(s.type==='D'?' Pour la D, chaque colonne est un front d\'horloge, actif (numéroté) ou inactif (flèche grise) : C au front actif, M au front inactif, comme au TP1.':'')+(s.async?' Les impulsions ~PR / ~CLR arrivent entre deux fronts : elles ont leur propre colonne (en rouge), car elles agissent tout de suite, sans attendre l\'horloge.':'');
     $('st-legend').textContent=fnOptions(s).map(function(k){return k+' = '+FN[k]}).join(' · ');
   }
 
   function chExplain(s,i){
     var x=s.steps[i], p=x.prev, q=x.q, e;
     if(x.kind==='as') return (x.as==='CLR'?'~CLR passe à 0 entre deux fronts : Q est forcé à 0 tout de suite':'~PR passe à 0 entre deux fronts : Q est forcé à 1 tout de suite')+', sans attendre l\'horloge (entrée asynchrone prioritaire). '+(p===q?'Q valait déjà '+q+'. ':'')+'L\'entrée revient à 1 avant le front suivant, qui fonctionne normalement.';
-    if(s.type==='D') return 'D = '+x.inp.D+' → Copie : Q prend '+q+(p===q?' (Q ne change pas, mais c\'est bien une copie).':'.');
+    if(x.kind==='inact') return 'Front '+(s.edge==='up'?'descendant':'montant')+', inactif pour cette bascule (active sur front '+(s.edge==='up'?'montant':'descendant')+') : pas de copie, Q garde sa valeur '+q+' → Mémoire'+(x.inp.D!==q?', même si D = '+x.inp.D+'.':'.');
+    if(s.type==='D') return 'Front actif, D = '+x.inp.D+' → Copie : Q prend '+q+(p===q?' (Q ne change pas, mais c\'est bien une copie).':'.');
     var ins=s.inputs.map(function(n){return n+' = '+x.inp[n]}).join(', ');
     if(x.fn==='M') e='Mémoire : Q reste à '+q;
     else if(x.fn==='S') e='Set : Q '+(p===1?'reste':'passe')+' à 1';
