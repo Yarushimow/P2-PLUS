@@ -48,7 +48,7 @@ processus et les signaux, jusqu'à la programmation système (`fork`, `exec`, `d
 | TP3. Environnement et compilateur C | [:material-open-in-new:](https://yvanguifo.github.io/introduction-linux-fr/contenus/tp3/) | [:material-book-open-variant:](cours/tp3-environnement-compilation.md) | [TP3](td/tp3-corrige.md) | [:material-card-text:](fiches/resume-tp3.md) |
 | TP4. Redirections, processus, signaux | [:material-open-in-new:](https://yvanguifo.github.io/introduction-linux-fr/contenus/tp4/) | [:material-book-open-variant:](cours/tp4-redirections-processus-signaux.md) | [TP4](td/tp4-corrige.md) | [:material-card-text:](fiches/resume-tp4.md) |
 | TP4+. Filtres de texte | [:material-open-in-new:](https://yvanguifo.github.io/introduction-linux-fr/contenus/tp4-exo/) | [:material-book-open-variant:](cours/tp4-filtres-texte.md) | [TP4+](td/tp4-filtres-corrige.md) | [:material-card-text:](fiches/resume-tp4-filtres.md) |
-| Annales | | | [CC1 2023](td/annale-cc1-2023.md) | [Pièges](fiches/fiche-pieges.md) |
+| Annales | | | [CC1 2023](td/annale-cc1-2023.md) | [Pièges](fiches/fiche-pieges.md) · [Fiche du prof](fiches/fiche-prof.md) |
 
 ## Infos pratiques
 
@@ -60,7 +60,8 @@ processus et les signaux, jusqu'à la programmation système (`fork`, `exec`, `d
     |:---------------:|:---------------:|
     | 40 % | 60 % |
 
-- **CE** et **DE** : 55 min chacun, QCM. DE le **samedi 10 octobre 2026**.
+- **CE** : 55 min, QCM. **DE** : QCM d'1 h, le **samedi 10 octobre 2026**.
+- **Fiche officielle du prof** : [Fiche du prof — examen final](fiches/fiche-prof.md).
 - **Environnement** : Debian 12 (VM), session MarioNum ou Codespace.
 - **Ressources officielles** : [le site du cours](https://yvanguifo.github.io/introduction-linux-fr/)
   (énoncés, mémo des commandes, glossaire, FAQ).

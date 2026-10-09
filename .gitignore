@@ -1,6 +1,8 @@
 # PDF officiels des profs : gardés en local, jamais publiés
 pdf/
 *.pdf
+# Exceptions : fiches partagées avec la classe, publiées
+!docs/informatique/linux/fiches/fiche-prof-ti307.pdf
 
 # Site généré par `mkdocs build`
 site/

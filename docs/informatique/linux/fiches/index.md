@@ -2,6 +2,7 @@
 
 | Fiche | À savoir refaire les yeux fermés |
 |-------|----------------------------------|
+| [**Fiche du prof — examen final**](fiche-prof.md) | La fiche officielle de Dr. Guifo : grilles, pièges ▶, checklist des 20 items, conseils QCM |
 | [**DE du 10 octobre — tout le module**](fiche-de.md) | Jokers, droits fichier vs dossier, `chmod` (`=` vs `+`/`-`), `umask`, quoting, `$(…)` vs `${…}`, `gcc`, redirections, `kill`, filtres, QCM corrigés |
 | [Pièges du CC1 et du CE](fiche-pieges.md) | Les questions qui font perdre des points, en une page |
 

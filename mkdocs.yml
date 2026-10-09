@@ -13,6 +13,7 @@ exclude_docs: |
   _*.md
   pdf/
   *.pdf
+  !informatique/linux/fiches/fiche-prof-ti307.pdf
 
 theme:
   name: material

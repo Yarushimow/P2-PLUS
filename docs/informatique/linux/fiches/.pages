@@ -1,6 +1,7 @@
 title: Fiches
 nav:
   - index.md
+  - fiche-prof.md
   - fiche-de.md
   - fiche-pieges.md
   - resume-tp1.md
