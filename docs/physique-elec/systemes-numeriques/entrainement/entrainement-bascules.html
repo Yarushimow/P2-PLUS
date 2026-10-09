@@ -190,11 +190,12 @@ svg .inum{opacity:.6}
 <header>
   <div class="eyebrow">TE302 · Bascules · entraînement CE</div>
   <h1>Entraînement aux bascules</h1>
-  <p class="lead">Un exercice tiré au hasard à chaque fois : chronogrammes, table de transition, table des états, compteurs asynchrones, registres et QCM.</p>
+  <p class="lead">Un exercice tiré au hasard à chaque fois : chronogrammes, tables de vérité, table de transition, table des états, compteurs asynchrones, registres et QCM.</p>
 </header>
 
 <div class="modes" role="tablist" aria-label="Type d'exercice">
   <button role="tab" id="m-chrono" aria-selected="true" data-mode="chrono">Chronogramme</button>
+  <button role="tab" id="m-tv" aria-selected="false" data-mode="tv">Tables de vérité</button>
   <button role="tab" id="m-tr" aria-selected="false" data-mode="tr">Table de transition</button>
   <button role="tab" id="m-et" aria-selected="false" data-mode="et">Table des états</button>
   <button role="tab" id="m-ca" aria-selected="false" data-mode="ca">Compteurs async</button>
@@ -260,6 +261,17 @@ svg .inum{opacity:.6}
       <input type="radio" name="type-qz" id="tqz-c" value="C"><label for="tqz-c">Compteurs async</label>
     </div>
     <label class="ctl" for="qz-n">Questions <select id="qz-n"><option>10</option><option selected>15</option><option>20</option><option value="all">Toutes</option></select></label>
+  </div>
+  <div class="grp" data-for="tv" hidden>
+    <div class="seg" role="radiogroup" aria-label="Type de bascule">
+      <input type="radio" name="type-tv" id="ttv-rand" value="rand" checked><label for="ttv-rand">Aléatoire</label>
+      <input type="radio" name="type-tv" id="ttv-rs" value="RS"><label for="ttv-rs">RS</label>
+      <input type="radio" name="type-tv" id="ttv-rsh" value="RSH"><label for="ttv-rsh">RSH</label>
+      <input type="radio" name="type-tv" id="ttv-dl" value="DL"><label for="ttv-dl">D-latch</label>
+      <input type="radio" name="type-tv" id="ttv-d" value="D"><label for="ttv-d">D</label>
+      <input type="radio" name="type-tv" id="ttv-jk" value="JK"><label for="ttv-jk">JK</label>
+    </div>
+    <label class="ctl" for="tv-mix"><input type="checkbox" id="tv-mix" checked> Lignes mélangées</label>
   </div>
   <label class="ctl prio" for="opt-async"><input type="checkbox" id="opt-async"> Entrées prioritaires ~PR / ~CLR</label>
 </div>
@@ -383,6 +395,25 @@ svg .inum{opacity:.6}
   </div>
   <div class="feedback" id="qz-feedback" hidden><div class="score" id="qz-score"></div><ol class="expl" id="qz-expl"></ol></div>
   <div class="feedback"><div class="tally" id="qz-tally">Exercices vérifiés : 0 · sans faute : 0</div></div>
+</section>
+
+<!-- ============ MODE TABLES DE VÉRITÉ ============ -->
+<section id="sec-tv" class="sheet" hidden>
+  <div class="statement">
+    <h2 id="tv-title">Table de vérité</h2>
+    <div class="facts" id="tv-facts"></div>
+    <p class="how">Complète la table de vérité : pour chaque combinaison d'entrées, l'état de Q et de Q̄ après l'événement, puis la fonction réalisée. « Q » veut dire que la sortie garde sa valeur, « Q̄ » qu'elle prend la valeur inverse.</p>
+    <div class="legend">M = Mémoire · S = Set · R = Reset · T = Toggle · C = Copie · NU = Non utilisé (interdit) · PRE / CLR = forçage par ~PR / ~CLR</div>
+  </div>
+  <div class="xt" id="tv-table"></div>
+  <div class="actions">
+    <button class="btn main" id="tv-check" type="button">Vérifier</button>
+    <button class="btn" id="tv-retry" type="button" hidden>Corriger mes erreurs</button>
+    <button class="btn" id="tv-sol" type="button">Voir la solution</button>
+    <button class="btn" id="tv-new" type="button">Nouvel exercice</button>
+  </div>
+  <div class="feedback" id="tv-feedback" hidden><div class="score" id="tv-score"></div><ol class="expl" id="tv-expl"></ol></div>
+  <div class="feedback"><div class="tally" id="tv-tally">Exercices vérifiés : 0 · sans faute : 0</div></div>
 </section>
 
 <details class="help">
@@ -1363,6 +1394,114 @@ svg .inum{opacity:.6}
   $('qz-new').addEventListener('click',qzNew);
 
   /* =================================================================== */
+  /* MODE 7 : TABLES DE VÉRITÉ                                           */
+  /* =================================================================== */
+  var TV={st:null,tally:{done:0,perfect:0}};
+  var QOPT=[['0','0'],['1','1'],['Q','Q'],['Qb','Q̄']], QTXT={'0':'0','1':'1','Q':'Q','Qb':'Q̄'};
+  var TVNAME={RSNOR:'Bascule RS asynchrone à portes NOR',RSNAND:'Bascule RS asynchrone à portes NAND',RSH:'Bascule RSH synchrone sur niveau haut',DL:'D-latch, synchrone sur niveau haut',D:'Bascule D sur front',JK:'Bascule JK sur front'};
+  function tvGenerate(){
+    var sel=radio('type-tv'), type=sel==='rand'?pick(['RSNOR','RSNAND','RSH','DL','D','D','JK','JK']):(sel==='RS'?pick(['RSNOR','RSNAND']):sel);
+    var edge=pick(['up','down']), ar=edge==='up'?'↑':'↓', no='pas de '+ar, prio=asyncOn()&&(type==='D'||type==='JK');
+    var cols, rows, facts=[];
+    function r(i,q,qb,fn,why){ return {inp:i,q:q,qb:qb,fn:fn,why:why}; }
+    if(type==='RSNOR'){ cols=['S','R']; facts.push(['k','Entrées actives à 1']); rows=[
+      r(['0','0'],'Q','Qb','M','Aucune entrée active : la bascule garde son état.'),
+      r(['1','0'],'1','0','S','S = 1 active la mise à 1.'),
+      r(['0','1'],'0','1','R','R = 1 active la remise à 0.'),
+      r(['1','1'],'0','0','NU','Les deux NOR reçoivent un 1 : Q = Q̄ = 0, ce qui contredit la définition. État interdit.')]; }
+    else if(type==='RSNAND'){ cols=['~S','~R']; facts.push(['k','Entrées actives à 0']); rows=[
+      r(['1','1'],'Q','Qb','M','Aucune entrée active (toutes à 1) : la bascule garde son état.'),
+      r(['0','1'],'1','0','S','~S = 0 active la mise à 1.'),
+      r(['1','0'],'0','1','R','~R = 0 active la remise à 0.'),
+      r(['0','0'],'1','1','NU','Les deux NAND reçoivent un 0 : Q = Q̄ = 1, ce qui contredit la définition. État interdit.')]; }
+    else if(type==='RSH'){ cols=['T','S','R']; facts.push(['k','Active quand T = 1, entrées actives à 1']); rows=[
+      r(['0','X','X'],'Q','Qb','M','T = 0 : la bascule est verrouillée, elle garde son état.'),
+      r(['1','0','0'],'Q','Qb','M','T = 1 mais aucune entrée active : mémoire.'),
+      r(['1','1','0'],'1','0','S','T = 1 et S = 1 : mise à 1.'),
+      r(['1','0','1'],'0','1','R','T = 1 et R = 1 : remise à 0.'),
+      r(['1','1','1'],'1','1','NU','T = 1 et S = R = 1 : Q = Q̄ = 1 (réalisation à NAND du cours), état interdit.')]; }
+    else if(type==='DL'){ cols=['clk','D']; facts.push(['k','Transparente quand clk = 1']); rows=[
+      r(['0','X'],'Q','Qb','M','clk = 0 : la latch est fermée, Q garde sa valeur.'),
+      r(['1','0'],'0','1','C','clk = 1 : la latch est transparente, Q recopie D = 0.'),
+      r(['1','1'],'1','0','C','clk = 1 : la latch est transparente, Q recopie D = 1.')]; }
+    else if(type==='D'){ cols=['CLK','D']; facts.push(['k','Active sur front '+(edge==='up'?'montant ↑':'descendant ↓')]); rows=[
+      r([no,'X'],'Q','Qb','M','Pas de front actif : la bascule ne regarde pas D, mémoire.'),
+      r([ar,'0'],'0','1','C','Front actif : Q recopie D = 0.'),
+      r([ar,'1'],'1','0','C','Front actif : Q recopie D = 1.')]; }
+    else { cols=['CLK','J','K']; facts.push(['k','Active sur front '+(edge==='up'?'montant ↑':'descendant ↓')]); rows=[
+      r([no,'X','X'],'Q','Qb','M','Pas de front actif : mémoire, quels que soient J et K.'),
+      r([ar,'0','0'],'Q','Qb','M','J = K = 0 : mémoire.'),
+      r([ar,'0','1'],'0','1','R','K = 1 seul : remise à 0 (K comme « kill »).'),
+      r([ar,'1','0'],'1','0','S','J = 1 seul : mise à 1 (J comme « jump »).'),
+      r([ar,'1','1'],'Qb','Q','T','J = K = 1 : la sortie s\'inverse (toggle).')]; }
+    if(prio){
+      facts.push(['w','~PR, ~CLR actives à 0, prioritaires']);
+      var nx=cols.length;
+      rows.forEach(function(x){ x.inp=x.inp.concat(['1','1']); });
+      var xs=[]; for(var k=0;k<nx;k++) xs.push('X');
+      rows.push(r(xs.concat(['0','1']),'1','0','PRE','~PR = 0 : forçage asynchrone à 1, prioritaire. L\'horloge et les autres entrées sont ignorées (X).'));
+      rows.push(r(xs.concat(['1','0']),'0','1','CLR','~CLR = 0 : forçage asynchrone à 0, prioritaire. L\'horloge et les autres entrées sont ignorées (X).'));
+      cols=cols.concat(['~PR','~CLR']);
+    }
+    if($('tv-mix').checked) shuffle(rows);
+    var s={type:type,edge:edge,cols:cols,rows:rows,facts:facts,prio:prio};
+    s.ans=rows.map(function(){return {q:'',qb:'',fn:''}}); s.checked=false; s.revealed=false;
+    return s;
+  }
+  function tvFnOpts(s){ var o=['M','S','R','T','C','NU']; if(s.prio) o=o.concat(['PRE','CLR']); return o; }
+  function tvScore(s){ var t=0,g=0; s.rows.forEach(function(r,i){ var a=s.ans[i]; t+=3; if(a.q===r.q) g++; if(a.qb===r.qb) g++; if(a.fn===r.fn) g++; }); return {t:t,g:g}; }
+  function tvSel(id,val,opts,checked,exp,label){
+    var cls=checked?(val===exp?'ok':'err'):'';
+    var o='<td class="'+cls+'"><select class="qsel" id="'+id+'" aria-label="'+label+'"'+(checked?' disabled':'')+'><option value="">—</option>';
+    opts.forEach(function(op){ o+='<option value="'+op[0]+'"'+(val===op[0]?' selected':'')+'>'+op[1]+'</option>'; });
+    return o+'</select>'+(checked?'<span class="res">'+(val===exp?'✓':'✗')+'</span>':'')+'</td>';
+  }
+  function tvRender(){
+    var s=TV.st, fo=tvFnOpts(s).map(function(f){return [f,f]});
+    var o='<table><thead><tr>';
+    s.cols.forEach(function(c,k){ o+='<th'+(c.charAt(0)==='~'&&s.prio&&c!=='~S'&&c!=='~R'&&k===s.cols.length-2?' class="sep"':'')+'>'+c+'</th>'; });
+    o+='<th class="sep">Q(t+Δt)</th><th>Q̄(t+Δt)</th><th class="sep">Fonction</th></tr></thead><tbody>';
+    s.rows.forEach(function(r,i){
+      var a=s.ans[i];
+      o+='<tr>';
+      r.inp.forEach(function(v,k){ var z=(s.cols[k].charAt(0)==='~'&&v==='0'); o+='<td class="'+(z?'z':'')+(s.prio&&k===s.cols.length-2?' sep':'')+'">'+v+'</td>'; });
+      o+=tvSel('tv-q-'+i,a.q,QOPT,s.checked,r.q,'Ligne '+(i+1)+', Q').replace('<td class="','<td class="sep ');
+      o+=tvSel('tv-qb-'+i,a.qb,QOPT,s.checked,r.qb,'Ligne '+(i+1)+', Q barre');
+      o+=tvSel('tv-fn-'+i,a.fn,fo,s.checked,r.fn,'Ligne '+(i+1)+', fonction').replace('<td class="','<td class="sep ');
+      o+='</tr>';
+    });
+    $('tv-table').innerHTML=o+'</tbody></table>';
+    var sc=tvScore(s), pf=sc.g===sc.t;
+    $('tv-check').hidden=s.checked;
+    $('tv-retry').hidden=!s.checked||s.revealed||pf;
+    $('tv-sol').hidden=s.checked&&(s.revealed||pf);
+    if(!s.checked){ $('tv-feedback').hidden=true; return; }
+    $('tv-feedback').hidden=false;
+    var el=$('tv-score');
+    if(s.revealed){ el.className='score'; el.textContent='Solution affichée'; }
+    else { el.className='score'+(pf?' perfect':''); el.textContent=pf?'Sans faute, '+sc.t+'/'+sc.t+' !':'Cases justes : '+sc.g+'/'+sc.t; }
+    if(!s.revealed&&!pf){ $('tv-expl').innerHTML=hintHTML(sc.t-sc.g); return; }
+    $('tv-expl').innerHTML=s.rows.map(function(r){
+      return '<li><b>'+s.cols.map(function(c,k){return c+'='+r.inp[k]}).join(' ')+'</b>Q = '+QTXT[r.q]+', Q̄ = '+QTXT[r.qb]+', '+FN[r.fn]+'. '+r.why+'</li>';
+    }).join('');
+  }
+  function tvNew(){
+    var s=TV.st=tvGenerate();
+    $('tv-title').textContent=TVNAME[s.type]+(s.type==='D'||s.type==='JK'?(s.edge==='up'?' montant':' descendant'):'');
+    $('tv-facts').innerHTML=s.facts.map(function(x){return '<span class="fact '+x[0]+'">'+x[1]+'</span>'}).join('');
+    tvRender();
+  }
+  $('tv-table').addEventListener('change',function(e){
+    var t=e.target; if(t.tagName!=='SELECT'||TV.st.checked) return;
+    var m=t.id.match(/^tv-(q|qb|fn)-(\d+)$/); if(!m) return;
+    TV.st.ans[+m[2]][m[1]]=t.value;
+  });
+  $('tv-check').addEventListener('click',function(){ var s=TV.st; s.checked=true; TV.tally.done++; var sc=tvScore(s); if(sc.g===sc.t) TV.tally.perfect++; setTally('tv-tally',TV.tally); tvRender(); });
+  $('tv-retry').addEventListener('click',function(){ var s=TV.st; s.rows.forEach(function(r,i){ var a=s.ans[i]; if(a.q!==r.q) a.q=''; if(a.qb!==r.qb) a.qb=''; if(a.fn!==r.fn) a.fn=''; }); s.checked=false; tvRender(); });
+  $('tv-sol').addEventListener('click',function(){ var s=TV.st; s.ans=s.rows.map(function(r){return {q:r.q,qb:r.qb,fn:r.fn}}); s.checked=true; s.revealed=true; tvRender(); });
+  $('tv-new').addEventListener('click',tvNew);
+
+  /* =================================================================== */
   /* Rappel, modes, réglages                                             */
   /* =================================================================== */
   $('tt').innerHTML=
@@ -1375,12 +1514,12 @@ svg .inum{opacity:.6}
     '<div><h4>Registres</h4><table><tr><th>Fonction</th><th>Câblage</th></tr><tr><td>Décalage droite</td><td>Di = Qi−1, D0 = E</td></tr><tr><td>Décalage gauche</td><td>Di = Qi+1, Dn−1 = E</td></tr><tr><td>Rotation droite</td><td>D0 = Qn−1</td></tr><tr><td>Johnson</td><td>D0 = Q̄n−1 (2n états)</td></tr><tr><td>Anneau</td><td>un seul 1 (n états)</td></tr></table></div>'+
     '<p>~PR = 0 force Q à 1 et ~CLR = 0 force Q à 0, tout de suite, sans attendre le front et avant D, J, K. Au repos, on les laisse à 1. Pour une D, au front actif c\'est toujours une copie, même si Q ne change pas.</p>';
 
-  var MODES={chrono:chNew,tr:trNew,et:etNew,ca:CA.fresh,rg:RG.fresh,qcm:qzNew}, cur='chrono';
+  var MODES={chrono:chNew,tv:tvNew,tr:trNew,et:etNew,ca:CA.fresh,rg:RG.fresh,qcm:qzNew}, cur='chrono';
   function setMode(m){
     cur=m;
     Array.prototype.forEach.call(document.querySelectorAll('.modes button'),function(b){ b.setAttribute('aria-selected',String(b.getAttribute('data-mode')===m)); });
     Array.prototype.forEach.call(document.querySelectorAll('.controls .grp'),function(g){ g.hidden=g.getAttribute('data-for')!==m; });
-    ['chrono','tr','et','ca','rg','qcm'].forEach(function(k){ $('sec-'+k).hidden=k!==m; });
+    ['chrono','tv','tr','et','ca','rg','qcm'].forEach(function(k){ $('sec-'+k).hidden=k!==m; });
     $('opt-async').parentNode.hidden = m==='qcm';
     try{ localStorage.setItem('te302-mode',m); }catch(e){}
   }
@@ -1394,13 +1533,15 @@ svg .inum{opacity:.6}
   $('tr-n').addEventListener('change',trNew);
   $('et-bits').addEventListener('change',etNew);
   $('et-inputs').addEventListener('change',etNew);
-  $('opt-async').addEventListener('change',function(){ chNew(); trNew(); etNew(); CA.fresh(); RG.fresh(); });
+  $('opt-async').addEventListener('change',function(){ chNew(); tvNew(); trNew(); etNew(); CA.fresh(); RG.fresh(); });
+  Array.prototype.forEach.call(document.querySelectorAll('input[name="type-tv"]'),function(r){r.addEventListener('change',tvNew)});
+  $('tv-mix').addEventListener('change',tvNew);
   Array.prototype.forEach.call(document.querySelectorAll('input[name="type-ca"]'),function(r){r.addEventListener('change',CA.fresh)});
   Array.prototype.forEach.call(document.querySelectorAll('input[name="type-rg"]'),function(r){r.addEventListener('change',RG.fresh)});
   $('ca-bits').addEventListener('change',CA.fresh); $('ca-n').addEventListener('change',CA.fresh);
   $('rg-bits').addEventListener('change',RG.fresh); $('rg-n').addEventListener('change',RG.fresh);
 
-  chNew(); trNew(); etNew(); CA.fresh(); RG.fresh(); qzNew();
+  chNew(); tvNew(); trNew(); etNew(); CA.fresh(); RG.fresh(); qzNew();
   Array.prototype.forEach.call(document.querySelectorAll('input[name="type-qz"]'),function(r){r.addEventListener('change',qzNew)});
   $('qz-n').addEventListener('change',qzNew);
   var start='chrono';
