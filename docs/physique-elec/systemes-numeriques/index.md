@@ -41,7 +41,7 @@ chronogramme.
 
     ---
 
-    Exercices aléatoires corrigés : chronogrammes, transitions, table des états, compteurs asynchrones, registres, QCM.
+    Exercices aléatoires corrigés : chronogrammes, tables de vérité, transitions, table des états, compteurs asynchrones, registres, QCM.
 
     [:octicons-arrow-right-24: S'entraîner](entrainement/index.md)
 
