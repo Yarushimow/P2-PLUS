@@ -3,9 +3,13 @@
 /* ==================================================================== */
 
 .versions-bascule {
+  /* Centré en bas de l'écran (marges auto : pas de transform, qui gênerait l'animation) */
   position: fixed;
-  right: 1.2rem;
-  bottom: 1.2rem;
+  left: 0;
+  right: 0;
+  bottom: max(1.2rem, env(safe-area-inset-bottom));
+  width: max-content;
+  margin-inline: auto;
   z-index: 4;
   display: inline-grid;
   grid-template-columns: 1fr 1fr;
@@ -74,17 +78,12 @@
 /* Laisse de la place en bas de page pour ne pas masquer le dernier bloc */
 .md-content:has(.tabbed-set) { padding-bottom: 3.5rem; }
 
-/* Téléphones : centré en bas, un peu plus grand pour le pouce */
+/* Téléphones : un peu plus grand pour le pouce */
 @media screen and (max-width: 44.984375em) {
   .versions-bascule {
-    left: 50%;
-    right: auto;
     bottom: max(0.9rem, env(safe-area-inset-bottom));
-    transform: translateX(-50%);
     font-size: 0.72rem;
-    animation: none;
   }
-  .versions-bascule:active { transform: translateX(-50%) scale(0.97); }
   .versions-bascule__option { padding: 0.65rem 1.1rem; }
 }
 
