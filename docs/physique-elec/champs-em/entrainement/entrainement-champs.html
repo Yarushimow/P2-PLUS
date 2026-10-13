@@ -1,0 +1,545 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Entraînement champs EM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..800&family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<style>
+/* Même charte que l'entraînement aux bascules : feuille d'exercice une colonne, modes en onglets */
+:root{
+  --paper:#f2f4f6; --card:#ffffff; --ink:#17202a; --muted:#5b6673; --line:#d4dbe2; --grid:#e9edf1;
+  --accent:#2347a6; --accent-soft:#e3e9f8; --warn:#b4235a; --warn-soft:#f8e3eb; --ok:#1d7a4f; --ok-soft:#dff2e8;
+  --pos:#c2410c; --neg:#1d4ed8;
+  --f-display:"Archivo","Arial Narrow",system-ui,sans-serif;
+  --f-body:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#11161c; --card:#182029; --ink:#e4e9ef; --muted:#9aa6b4; --line:#2c3743; --grid:#202a34;
+  --accent:#8eaaff; --accent-soft:#1e2a47; --warn:#ff7fa9; --warn-soft:#3a1d2a; --ok:#5fd19b; --ok-soft:#173527;
+  --pos:#fb923c; --neg:#60a5fa; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#11161c; --card:#182029; --ink:#e4e9ef; --muted:#9aa6b4; --line:#2c3743; --grid:#202a34;
+  --accent:#8eaaff; --accent-soft:#1e2a47; --warn:#ff7fa9; --warn-soft:#3a1d2a; --ok:#5fd19b; --ok-soft:#173527;
+  --pos:#fb923c; --neg:#60a5fa; color-scheme:dark}
+
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html.embedded header{display:none}
+html.embedded body{padding-block:0 8px}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.5;padding-inline:16px;padding-block:0 48px}
+.wrap{max-width:860px;margin:0 auto}
+header{padding-block:24px 10px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--f-display);font-weight:800;font-stretch:78%;font-size:clamp(30px,7vw,42px);line-height:1.05;margin:6px 0 8px;text-wrap:balance}
+.lead{color:var(--muted);margin:0;max-width:64ch}
+
+.modes{display:flex;margin-top:16px;border-bottom:2px solid var(--ink);overflow-x:auto;scrollbar-width:none}
+.modes button{flex:0 0 auto;font-family:var(--f-display);font-stretch:82%;font-weight:700;font-size:17px;padding:9px 14px 8px;border:0;background:none;color:var(--muted);cursor:pointer;border-bottom:4px solid transparent;margin-bottom:-2px}
+.modes button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
+.modes button:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+
+.controls{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line);font-size:14.5px}
+.ctl{display:inline-flex;align-items:center;gap:6px}
+.ctl select{font:inherit;font-size:14px;padding:4px 6px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--ink)}
+
+.sheet{background:var(--card);border:1px solid var(--line);border-radius:10px;margin-top:18px;padding:14px 0 16px}
+.statement{padding:0 16px}
+.statement h2{font-family:var(--f-display);font-weight:800;font-stretch:82%;font-size:24px;line-height:1.15;margin:0 0 4px;text-wrap:balance}
+.facts{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.fact{font-family:var(--f-mono);font-size:12.5px;padding:3px 8px;border-radius:5px;background:var(--grid)}
+.fact.k{background:var(--accent-soft);color:var(--accent)}
+.how{font-size:14.5px;color:var(--muted);margin:6px 0 0}
+
+.board{overflow-x:auto;margin-top:12px;padding:0 16px 4px}
+svg{display:block;max-width:100%;height:auto}
+svg .ax{stroke:var(--line);stroke-width:1}
+svg .gr{stroke:var(--grid);stroke-width:1}
+svg .lbl{font-family:var(--f-mono);font-size:12px;fill:var(--muted)}
+svg .qlbl{font-family:var(--f-mono);font-size:13px;font-weight:600}
+svg .pos{fill:var(--pos)} svg .neg{fill:var(--neg)}
+svg .qtxt{fill:#fff;font-family:var(--f-mono);font-size:11.5px;font-weight:700;text-anchor:middle;dominant-baseline:central}
+svg .mpt{fill:var(--ink)}
+svg .part{stroke:var(--muted);stroke-width:1.6;fill:none}
+svg .res{stroke:var(--ok);stroke-width:3;fill:none}
+svg .ahp{fill:var(--muted)} svg .ahr{fill:var(--ok)}
+
+.answers{display:flex;flex-wrap:wrap;gap:10px 16px;padding:14px 16px 0}
+.field{display:flex;flex-direction:column;gap:4px;padding:8px 10px;border-radius:8px;border:1px solid var(--line);min-width:150px;flex:1 1 150px}
+.field label{font-size:14px}
+.field input{font-family:var(--f-mono);font-size:15px;padding:6px 8px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--ink);width:100%}
+.field input:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.field.ok{background:var(--ok-soft);border-color:var(--ok)}
+.field.err{background:var(--warn-soft);border-color:var(--warn)}
+.field .sol{font-family:var(--f-mono);font-size:12.5px;min-height:16px}
+.field.ok .sol{color:var(--ok)} .field.err .sol{color:var(--warn)}
+
+.qtext{font-size:17px;margin:4px 0 0}
+.opts{display:grid;gap:8px;padding:14px 16px 0}
+.opt{display:flex;align-items:center;gap:10px;text-align:left;font:inherit;font-size:16px;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);cursor:pointer;min-height:48px}
+.opt:hover{background:var(--accent-soft)}
+.opt:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.opt .let{font-family:var(--f-mono);font-weight:600;font-size:13px;color:var(--muted);width:18px;flex:0 0 auto}
+.opt[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft)}
+.opt.ok{background:var(--ok-soft);border-color:var(--ok)}
+.opt.err{background:var(--warn-soft);border-color:var(--warn)}
+.opt:disabled{cursor:default}
+
+.actions{display:flex;flex-wrap:wrap;gap:8px;padding:14px 16px 0}
+.btn{font-family:var(--f-display);font-stretch:88%;font-weight:700;font-size:15px;padding:9px 16px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
+.btn.main{background:var(--accent);border-color:var(--accent);color:var(--card)}
+.btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+.feedback{padding:12px 16px 0}
+.score{font-family:var(--f-display);font-stretch:85%;font-weight:800;font-size:22px}
+.score.perfect{color:var(--ok)}
+.expl{list-style:none;padding:0;margin:8px 0 0;display:grid;gap:4px}
+.expl li{font-size:14.5px;padding:8px 10px;border-radius:6px;background:var(--grid);overflow-x:auto}
+.expl li.err{background:var(--warn-soft)}
+.tally{font-family:var(--f-mono);font-size:12.5px;color:var(--muted);margin-top:10px}
+
+details.help{margin-top:16px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:0 16px}
+details.help summary{cursor:pointer;padding:12px 0;font-weight:700}
+details.help ul{margin:0 0 14px;padding-left:20px;font-size:14.5px}
+details.help li{margin:4px 0}
+.katex{font-size:1.05em}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="eyebrow">SP301P · Champs électromagnétiques</div>
+  <h1>Entraînement aux champs</h1>
+  <p class="lead">Exercices tirés au hasard et corrigés : charges ponctuelles, charges totales, Gauss et Ampère, coordonnées, questions de cours.</p>
+</header>
+
+<nav class="modes" role="tablist" aria-label="Mode d'exercice">
+  <button role="tab" data-mode="ponctuel" aria-selected="true">Charges ponctuelles</button>
+  <button role="tab" data-mode="charge" aria-selected="false">Charge totale</button>
+  <button role="tab" data-mode="gauss" aria-selected="false">Gauss et Ampère</button>
+  <button role="tab" data-mode="coord" aria-selected="false">Coordonnées</button>
+  <button role="tab" data-mode="qcm" aria-selected="false">QCM de cours</button>
+</nav>
+
+<div class="controls" id="controls"></div>
+
+<section class="sheet" aria-live="polite">
+  <div class="statement" id="statement"></div>
+  <div class="board" id="board"></div>
+  <div id="work"></div>
+  <div class="actions">
+    <button class="btn main" id="check" type="button">Corriger</button>
+    <button class="btn" id="next" type="button">Nouvel exercice</button>
+  </div>
+  <div class="feedback" id="feedback"></div>
+</section>
+
+<details class="help">
+  <summary>Rappels utiles</summary>
+  <ul id="help"></ul>
+</details>
+</div>
+
+<script>
+(function(){
+"use strict";
+
+/* ---------- Outils ---------- */
+var $ = function(id){ return document.getElementById(id); };
+var rnd = function(n){ return Math.floor(Math.random()*n); };
+var pick = function(a){ return a[rnd(a.length)]; };
+function shuffle(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){ var j=rnd(i+1), t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];}); }
+// Formule : rendue par KaTeX si disponible, sinon texte brut
+function m(tex){ return '<span class="m" data-tex="'+esc(tex)+'">'+esc(tex)+'</span>'; }
+function renderMath(root){
+  if(!window.katex) return;
+  root.querySelectorAll(".m[data-tex]").forEach(function(el){
+    try{ katex.render(el.getAttribute("data-tex"), el, {throwOnError:false}); }catch(e){}
+  });
+}
+function fmt(x){ var r=Math.round(x*100)/100; if(Object.is(r,-0)) r=0; return r.toFixed(2).replace(".",","); }
+function parseNum(s){
+  s=String(s).trim().replace(/\s/g,"").replace(",",".").replace("−","-");
+  if(s==="") return NaN;
+  if(/^-?\d*\.?\d+\/\d*\.?\d+$/.test(s)){ var p=s.split("/"); return parseFloat(p[0])/parseFloat(p[1]); }
+  if(/^-?\d*\.?\d+$/.test(s)) return parseFloat(s);
+  return NaN;
+}
+function close(u,ans){ return isFinite(u) && Math.abs(u-ans) <= Math.max(0.02, 0.03*Math.abs(ans)); }
+
+var tally = {ok:0, tot:0};
+function showTally(){ return '<div class="tally">Session : '+tally.ok+' / '+tally.tot+' exercice'+(tally.tot>1?"s":"")+' entièrement juste'+(tally.ok>1?"s":"")+'</div>'; }
+
+/* ---------- Mode 1 : charges ponctuelles ---------- */
+var P = null;
+var ponctuelCfg = {n:"3"};
+function genPonctuel(){
+  var n = ponctuelCfg.n==="mix" ? 2+rnd(3) : parseInt(ponctuelCfg.n,10);
+  var charges=[], used={};
+  var vals=[1,-1,2,-2,1,-1];
+  while(charges.length<n){
+    var x=rnd(5)-2, y=rnd(5)-2, k=x+","+y;
+    if(used[k]) continue;
+    used[k]=1; charges.push({x:x,y:y,q:pick(vals)});
+  }
+  var M;
+  do{ M={x:rnd(5)-2,y:rnd(5)-2}; }while(used[M.x+","+M.y]);
+  var Ex=0,Ey=0,V=0,parts=[];
+  charges.forEach(function(c){
+    var dx=M.x-c.x, dy=M.y-c.y, r=Math.hypot(dx,dy), r3=r*r*r;
+    var ex=c.q*dx/r3, ey=c.q*dy/r3;
+    Ex+=ex; Ey+=ey; V+=c.q/r; parts.push({c:c,ex:ex,ey:ey,r:r});
+  });
+  P={charges:charges,M:M,Ex:Ex,Ey:Ey,V:V,E:Math.hypot(Ex,Ey),parts:parts};
+}
+function ca(v){ return v===0?"0":(v===1?"a":(v===-1?"−a":(v<0?"−"+(-v):v)+"a")); }
+function qLabel(q){ return (q>0?"+":"−")+(Math.abs(q)===1?"":Math.abs(q))+"q"; }
+function svgPonctuel(withFields){
+  var S=56, O=3.2, W=Math.round(6.4*S), H=W;
+  var X=function(x){ return (x+O)*S; }, Y=function(y){ return (O-y)*S; };
+  var g='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" role="img" aria-label="Disposition des charges et du point M">';
+  g+='<defs><marker id="ahp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="ahp" d="M0,0L10,5L0,10z"/></marker>'+
+     '<marker id="ahr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path class="ahr" d="M0,0L10,5L0,10z"/></marker></defs>';
+  for(var i=-3;i<=3;i++){
+    g+='<line class="gr" x1="'+X(i)+'" y1="'+Y(-3)+'" x2="'+X(i)+'" y2="'+Y(3)+'"/>';
+    g+='<line class="gr" x1="'+X(-3)+'" y1="'+Y(i)+'" x2="'+X(3)+'" y2="'+Y(i)+'"/>';
+  }
+  g+='<line class="ax" x1="'+X(-3)+'" y1="'+Y(0)+'" x2="'+X(3)+'" y2="'+Y(0)+'"/><line class="ax" x1="'+X(0)+'" y1="'+Y(-3)+'" x2="'+X(0)+'" y2="'+Y(3)+'"/>';
+  g+='<text class="lbl" x="'+(X(3)-4)+'" y="'+(Y(0)-6)+'" text-anchor="end">x</text><text class="lbl" x="'+(X(0)+6)+'" y="'+(Y(3)+12)+'">y</text>';
+  g+='<text class="lbl" x="'+(X(1)+3)+'" y="'+(Y(0)+14)+'">a</text>';
+  if(withFields){
+    var mx=0; P.parts.forEach(function(p){ mx=Math.max(mx,Math.hypot(p.ex,p.ey)); }); mx=Math.max(mx,P.E);
+    var L=1.6*S/mx;
+    P.parts.forEach(function(p){
+      g+='<line class="part" marker-end="url(#ahp)" x1="'+X(P.M.x)+'" y1="'+Y(P.M.y)+'" x2="'+(X(P.M.x)+p.ex*L)+'" y2="'+(Y(P.M.y)-p.ey*L)+'"/>';
+    });
+    if(P.E>1e-9) g+='<line class="res" marker-end="url(#ahr)" x1="'+X(P.M.x)+'" y1="'+Y(P.M.y)+'" x2="'+(X(P.M.x)+P.Ex*L)+'" y2="'+(Y(P.M.y)-P.Ey*L)+'"/>';
+  }
+  P.charges.forEach(function(c){
+    g+='<circle class="'+(c.q>0?"pos":"neg")+'" cx="'+X(c.x)+'" cy="'+Y(c.y)+'" r="18"/><text class="qtxt" x="'+X(c.x)+'" y="'+Y(c.y)+'">'+qLabel(c.q)+'</text>';
+  });
+  g+='<circle class="mpt" cx="'+X(P.M.x)+'" cy="'+Y(P.M.y)+'" r="5"/><text class="qlbl" x="'+(X(P.M.x)+9)+'" y="'+(Y(P.M.y)-9)+'" fill="currentColor">M</text>';
+  return g+'</svg>';
+}
+function viewPonctuel(){
+  var list=P.charges.map(function(c){ return '<span class="fact">'+qLabel(c.q)+' en ('+ca(c.x)+' ; '+ca(c.y)+')</span>'; }).join("");
+  $("statement").innerHTML='<h2>Champ et potentiel en M</h2>'+
+    '<div class="facts">'+list+'<span class="fact k">M ('+ca(P.M.x)+' ; '+ca(P.M.y)+')</span></div>'+
+    '<p class="how">Donne les composantes du champ en unités de '+m("\\dfrac{kq}{a^2}")+' et le potentiel en unités de '+m("\\dfrac{kq}{a}")+'. Deux décimales suffisent (tolérance 3 %). Les fractions comme 1/8 sont acceptées.</p>';
+  $("board").innerHTML=svgPonctuel(false);
+  $("work").innerHTML='<div class="answers">'+
+    fieldHtml("ex",m("E_x"))+fieldHtml("ey",m("E_y"))+fieldHtml("v",m("V(M)"))+'</div>';
+}
+function fieldHtml(id,label){ return '<div class="field" id="f-'+id+'"><label for="in-'+id+'">'+label+'</label><input id="in-'+id+'" inputmode="decimal" autocomplete="off"><span class="sol"></span></div>'; }
+function checkPonctuel(){
+  var items=[["ex",P.Ex],["ey",P.Ey],["v",P.V]], good=0;
+  items.forEach(function(it){
+    var f=$("f-"+it[0]), u=parseNum($("in-"+it[0]).value), ok=close(u,it[1]);
+    f.classList.remove("ok","err"); f.classList.add(ok?"ok":"err");
+    f.querySelector(".sol").textContent=(ok?"✓ ":"✗ ")+fmt(it[1]);
+    if(ok) good++;
+  });
+  $("board").innerHTML=svgPonctuel(true);
+  var lines=P.parts.map(function(p){
+    var c=p.c, dx=P.M.x-c.x, dy=P.M.y-c.y, r2=dx*dx+dy*dy;
+    var rt = Number.isInteger(Math.sqrt(r2)) ? String(Math.sqrt(r2)) : "\\sqrt{"+r2+"}";
+    return '<li>'+qLabel(c.q)+' en ('+ca(c.x)+' ; '+ca(c.y)+') : '+m("\\vec r = ("+dx+"\\,;\\,"+dy+")a,\\ r = "+rt+"\\,a")+
+      ' → '+m("\\vec E = "+(c.q<0?"-":"")+(Math.abs(c.q)===1?"":Math.abs(c.q))+"\\dfrac{kq}{a^2}\\cdot\\dfrac{("+dx+"\\,;\\,"+dy+")}{("+rt+")^3}")+
+      ' = ('+fmt(p.ex)+' ; '+fmt(p.ey)+'), '+m("V = "+(c.q<0?"-":"")+(Math.abs(c.q)===1?"":Math.abs(c.q))+"\\dfrac{kq}{"+rt+"\\,a}")+' = '+fmt(c.q/p.r)+'</li>';
+  }).join("");
+  tally.tot++; if(good===3) tally.ok++;
+  $("feedback").innerHTML='<div class="score'+(good===3?" perfect":"")+'">'+good+' / 3</div>'+
+    '<ul class="expl">'+lines+'<li><b>Somme :</b> '+m("\\vec E(M) = ("+fmt(P.Ex)+"\\ ;\\ "+fmt(P.Ey)+")\\,\\dfrac{kq}{a^2}")+', norme '+fmt(P.E)+'. '+
+    m("V(M) = "+fmt(P.V)+"\\,\\dfrac{kq}{a}")+'. Le champ s\'additionne en vecteurs (flèche verte = résultante), le potentiel en nombres.</li></ul>'+showTally();
+}
+
+/* ---------- Mode 2 : charge totale (QCM générés) ---------- */
+function gcd(a,b){ return b?gcd(b,a%b):Math.abs(a); }
+function coef(n,d,piPow,rest){ // (n/d)·π^piPow·rest, simplifié
+  var g=gcd(n,d); n/=g; d/=g;
+  var pi = piPow===0?"":(piPow===1?"\\pi":"\\pi^2");
+  var num = (n===1 && pi) ? pi : (n+(pi?"\\,"+pi:""));
+  if(d===1) return (num==="1"?"":num+"\\,")+rest;
+  return "\\dfrac{"+num+"}{"+d+"}\\,"+rest;
+}
+var CHARGE_GEN = [
+  function(){ // boule, rho0 (r/R)^n
+    var n=pick([0,1,2,3]);
+    var dens = n===0?"\\rho_0":"\\rho_0\\left(\\dfrac rR\\right)"+(n===1?"":"^"+n);
+    return {txt:"Boule de centre O et de rayon R, densité volumique "+m("\\rho(r) = "+dens)+".",
+      good:coef(4,n+3,1,"\\rho_0R^3"),
+      bad:[coef(4,n+2,1,"\\rho_0R^3"),coef(1,n+3,1,"\\rho_0R^3"),coef(4,3,1,"\\rho_0R^3"),coef(2,n+3,1,"\\rho_0R^3")],
+      expl:m("Q = \\displaystyle\\int_0^R \\rho_0\\frac{r^{"+n+"}}{R^{"+n+"}}\\,4\\pi r^2\\,\\mathrm dr = \\frac{4\\pi\\rho_0}{R^{"+n+"}}\\cdot\\frac{R^{"+(n+3)+"}}{"+(n+3)+"}")+" (les angles donnent "+m("\\int_0^\\pi\\sin\\theta\\,\\mathrm d\\theta\\int_0^{2\\pi}\\mathrm d\\varphi = 4\\pi")+")."};
+  },
+  function(){ // demi-boule
+    var n=pick([0,1,2,-1]);
+    var dens = n===0?"\\rho_0":(n===-1?"\\rho_0\\dfrac Rr":"\\rho_0\\left(\\dfrac rR\\right)"+(n===1?"":"^"+n));
+    return {txt:"Demi-boule (z ≥ 0) de rayon R, densité "+m("\\rho(r) = "+dens)+".",
+      good:coef(2,n+3,1,"\\rho_0R^3"),
+      bad:[coef(4,n+3,1,"\\rho_0R^3"),coef(1,n+3,1,"\\rho_0R^3"),coef(2,n+2,1,"\\rho_0R^3")],
+      expl:"Demi-boule : "+m("\\theta\\in[0,\\pi/2]")+", donc "+m("\\int_0^{\\pi/2}\\sin\\theta\\,\\mathrm d\\theta = 1")+" et le facteur angulaire vaut "+m("2\\pi")+". Puis "+m("\\int_0^R r^{"+(n+2)+"}\\,\\mathrm dr = \\dfrac{R^{"+(n+3)+"}}{"+(n+3)+"}")+"."};
+  },
+  function(){ // cylindre plein
+    var n=pick([0,1,2]);
+    var dens = n===0?"\\rho_0":"\\rho_0\\left(\\dfrac rR\\right)"+(n===1?"":"^"+n);
+    return {txt:"Cylindre plein d'axe (Oz), de rayon R et de hauteur H, densité "+m("\\rho(r) = "+dens)+".",
+      good:coef(2,n+2,1,"\\rho_0R^2H"),
+      bad:[coef(2,n+3,1,"\\rho_0R^2H"),coef(1,n+2,1,"\\rho_0R^2H"),coef(4,n+3,1,"\\rho_0R^2H")],
+      expl:m("\\mathrm d\\tau = r\\,\\mathrm dr\\,\\mathrm d\\theta\\,\\mathrm dz")+" : "+m("Q = \\rho_0\\,2\\pi H\\displaystyle\\int_0^R\\frac{r^{"+(n+1)+"}}{R^{"+n+"}}\\,\\mathrm dr = \\frac{2\\pi\\rho_0 R^2H}{"+(n+2)+"}")+". Attention au "+m("r")+" de "+m("\\mathrm d\\tau")+"."};
+  },
+  function(){ // surface latérale de cylindre
+    var c=pick([["\\sigma_0",coef(2,1,1,"\\sigma_0RH"),"Densité uniforme : "+m("Q = \\sigma_0\\cdot 2\\pi RH")+"."],
+                ["\\sigma_0\\sin\\theta","0","Les charges + (0 < θ < π) et − (π < θ < 2π) se compensent : "+m("\\int_0^{2\\pi}\\sin\\theta\\,\\mathrm d\\theta = 0")+"."],
+                ["\\sigma_0\\cos\\theta","0",m("\\int_0^{2\\pi}\\cos\\theta\\,\\mathrm d\\theta = 0")+" : charge totale nulle."],
+                ["\\sigma_0\\sin^2\\theta",coef(1,1,1,"\\sigma_0RH"),m("\\int_0^{2\\pi}\\sin^2\\theta\\,\\mathrm d\\theta = \\pi")+", donc "+m("Q = \\sigma_0 RH\\pi")+"."]]);
+    var pool=["0",coef(2,1,1,"\\sigma_0RH"),coef(1,1,1,"\\sigma_0RH"),coef(1,1,1,"\\sigma_0R^2H"),coef(2,1,0,"\\sigma_0RH")];
+    return {txt:"Surface latérale d'un cylindre de rayon R et de hauteur H, densité "+m("\\sigma(\\theta) = "+c[0])+" (élément "+m("\\mathrm dS = R\\,\\mathrm d\\theta\\,\\mathrm dz")+").",
+      good:c[1], bad:pool.filter(function(p){return p!==c[1];}), expl:c[2]};
+  },
+  function(){ // sphère creuse en surface
+    var c=pick([["\\sigma_0",coef(4,1,1,"\\sigma_0R^2"),"Uniforme : "+m("Q = \\sigma_0\\cdot 4\\pi R^2")+"."],
+                ["\\sigma_0\\sin\\theta",coef(1,1,2,"\\sigma_0R^2"),"On intègre "+m("\\sin\\theta\\cdot\\sin\\theta")+" (densité × élément de surface) : "+m("2\\pi\\sigma_0R^2\\int_0^\\pi\\sin^2\\theta\\,\\mathrm d\\theta = 2\\pi\\sigma_0R^2\\cdot\\dfrac\\pi2")+"."],
+                ["\\sigma_0\\cos\\theta","0","Hémisphère nord positif, sud négatif : "+m("\\int_0^\\pi\\cos\\theta\\sin\\theta\\,\\mathrm d\\theta = 0")+"."],
+                ["\\sigma_0\\cos^2\\theta",coef(4,3,1,"\\sigma_0R^2"),m("\\int_0^\\pi\\cos^2\\theta\\sin\\theta\\,\\mathrm d\\theta = \\left[-\\tfrac{\\cos^3\\theta}{3}\\right]_0^\\pi = \\tfrac23")+", donc "+m("Q = 2\\pi R^2\\sigma_0\\cdot\\tfrac23")+"."]]);
+    var pool=["0",coef(4,1,1,"\\sigma_0R^2"),coef(1,1,2,"\\sigma_0R^2"),coef(4,3,1,"\\sigma_0R^2"),coef(2,1,1,"\\sigma_0R^2"),coef(1,2,2,"\\sigma_0R^2")];
+    return {txt:"Sphère creuse de rayon R chargée en surface, "+m("\\sigma(\\theta) = "+c[0])+" (élément "+m("\\mathrm dS = R^2\\sin\\theta\\,\\mathrm d\\theta\\,\\mathrm d\\varphi")+").",
+      good:c[1], bad:pool.filter(function(p){return p!==c[1];}), expl:c[2]};
+  },
+  function(){ // disque
+    var n=pick([0,1,2]);
+    var dens = n===0?"\\sigma_0":"\\sigma_0\\left(\\dfrac rR\\right)"+(n===1?"":"^"+n);
+    return {txt:"Disque de rayon R chargé en surface, "+m("\\sigma(r) = "+dens)+".",
+      good:coef(2,n+2,1,"\\sigma_0R^2"),
+      bad:[coef(2,n+1,1,"\\sigma_0R^2"),coef(1,n+2,1,"\\sigma_0R^2"),coef(2,n+2,0,"\\sigma_0R")],
+      expl:m("\\mathrm dS = r\\,\\mathrm dr\\,\\mathrm d\\theta")+" : "+m("Q = 2\\pi\\sigma_0\\displaystyle\\int_0^R\\frac{r^{"+(n+1)+"}}{R^{"+n+"}}\\mathrm dr = \\frac{2\\pi\\sigma_0R^2}{"+(n+2)+"}")+"."};
+  },
+  function(){ // fil
+    var n=pick([0,1,2]);
+    var dens = n===0?"\\lambda_0":"\\lambda_0\\left(\\dfrac xL\\right)"+(n===1?"":"^"+n);
+    return {txt:"Segment [0, L] de l'axe (Ox), densité linéique "+m("\\lambda(x) = "+dens)+".",
+      good:coef(1,n+1,0,"\\lambda_0L"),
+      bad:[coef(1,n+2,0,"\\lambda_0L"),coef(1,1,0,"\\lambda_0L^2"),coef(2,n+1,0,"\\lambda_0L")].filter(function(b){return b!==coef(1,n+1,0,"\\lambda_0L");}),
+      expl:m("Q = \\displaystyle\\int_0^L\\lambda_0\\frac{x^{"+n+"}}{L^{"+n+"}}\\,\\mathrm dx = \\frac{\\lambda_0 L}{"+(n+1)+"}")+"."};
+  }
+];
+
+/* ---------- Mode 3 : Gauss et Ampère ---------- */
+var GAUSS = [
+  {g:"Boule de rayon R, densité ρ uniforme", r:"r < R", a:"\\dfrac{\\rho\\,r}{3\\varepsilon_0}", o:["\\dfrac{\\rho R^3}{3\\varepsilon_0 r^2}","\\dfrac{\\rho\\,r}{2\\varepsilon_0}","\\dfrac{\\rho R}{3\\varepsilon_0}","0"],
+   e:"Sphère de Gauss de rayon r : "+"$4\\pi r^2E = \\dfrac{\\rho\\frac43\\pi r^3}{\\varepsilon_0}$."},
+  {g:"Boule de rayon R, densité ρ uniforme", r:"r > R", a:"\\dfrac{\\rho R^3}{3\\varepsilon_0 r^2}", o:["\\dfrac{\\rho\\,r}{3\\varepsilon_0}","\\dfrac{\\rho R^2}{2\\varepsilon_0 r}","\\dfrac{\\rho R^3}{\\varepsilon_0 r^2}","0"],
+   e:"Toute la charge $\\rho\\frac43\\pi R^3$ est intérieure : $E = \\dfrac{Q}{4\\pi\\varepsilon_0r^2}$."},
+  {g:"Boule de rayon R, densité ρ = ρ₀ r/R", r:"r < R", a:"\\dfrac{\\rho_0 r^2}{4\\varepsilon_0 R}", o:["\\dfrac{\\rho_0 r}{3\\varepsilon_0}","\\dfrac{\\rho_0 r^2}{3\\varepsilon_0 R}","\\dfrac{\\rho_0 R^3}{4\\varepsilon_0 r^2}"],
+   e:"$Q_{int} = \\dfrac{4\\pi\\rho_0}{R}\\dfrac{r^4}{4} = \\dfrac{\\pi\\rho_0r^4}{R}$ puis $E = \\dfrac{Q_{int}}{4\\pi\\varepsilon_0r^2}$."},
+  {g:"Boule de rayon R, densité ρ = ρ₀ r/R", r:"r > R", a:"\\dfrac{\\rho_0 R^3}{4\\varepsilon_0 r^2}", o:["\\dfrac{\\rho_0 R^3}{3\\varepsilon_0 r^2}","\\dfrac{\\rho_0 r^2}{4\\varepsilon_0 R}","\\dfrac{\\rho_0 R^2}{4\\varepsilon_0 r}"],
+   e:"Charge totale $\\pi\\rho_0R^3$, donc $E = \\dfrac{\\pi\\rho_0R^3}{4\\pi\\varepsilon_0r^2}$."},
+  {g:"Coque sphérique de rayon R, charge Q en surface", r:"r < R", a:"0", o:["\\dfrac{Q}{4\\pi\\varepsilon_0 R^2}","\\dfrac{Q}{4\\pi\\varepsilon_0 r^2}","\\dfrac{Q\\,r}{4\\pi\\varepsilon_0R^3}"],
+   e:"Aucune charge à l'intérieur et $E$ constant sur la sphère de Gauss : $E = 0$."},
+  {g:"Coque sphérique de rayon R, charge Q en surface", r:"r > R", a:"\\dfrac{Q}{4\\pi\\varepsilon_0 r^2}", o:["0","\\dfrac{Q}{4\\pi\\varepsilon_0 R^2}","\\dfrac{Q}{2\\pi\\varepsilon_0 r}"],
+   e:"Comme une charge ponctuelle Q au centre."},
+  {g:"Fil infini, densité linéique λ", r:"à la distance r", a:"\\dfrac{\\lambda}{2\\pi\\varepsilon_0 r}", o:["\\dfrac{\\lambda}{4\\pi\\varepsilon_0 r^2}","\\dfrac{\\lambda}{2\\varepsilon_0}","\\dfrac{\\lambda}{\\varepsilon_0 r}"],
+   e:"Cylindre de Gauss : $2\\pi rH\\,E = \\dfrac{\\lambda H}{\\varepsilon_0}$ (flux nul sur les bases)."},
+  {g:"Plan infini, densité surfacique σ", r:"de chaque côté", a:"\\dfrac{\\sigma}{2\\varepsilon_0}", o:["\\dfrac{\\sigma}{\\varepsilon_0}","\\dfrac{\\sigma}{2\\varepsilon_0 z}","\\dfrac{\\sigma}{4\\pi\\varepsilon_0 z^2}"],
+   e:"Cylindre traversant le plan : deux bases, $2ES = \\dfrac{\\sigma S}{\\varepsilon_0}$."},
+  {g:"Condensateur plan, plaques +σ et −σ", r:"entre les plaques", a:"\\dfrac{\\sigma}{\\varepsilon_0}", o:["\\dfrac{\\sigma}{2\\varepsilon_0}","0","\\dfrac{2\\sigma}{\\varepsilon_0}"],
+   e:"Superposition : les deux champs $\\dfrac{\\sigma}{2\\varepsilon_0}$ ont le même sens entre les plaques."},
+  {g:"Condensateur plan, plaques +σ et −σ", r:"à l'extérieur", a:"0", o:["\\dfrac{\\sigma}{2\\varepsilon_0}","\\dfrac{\\sigma}{\\varepsilon_0}","\\dfrac{2\\sigma}{\\varepsilon_0}"],
+   e:"À l'extérieur, les deux champs $\\dfrac{\\sigma}{2\\varepsilon_0}$ sont opposés."},
+  {g:"Cylindre creux de rayon R, densité surfacique σ", r:"r > R", a:"\\dfrac{\\sigma R}{\\varepsilon_0 r}", o:["\\dfrac{\\sigma}{\\varepsilon_0}","\\dfrac{\\sigma R}{2\\varepsilon_0 r}","0"],
+   e:"$Q_{int} = \\sigma\\,2\\pi RH$ et $\\Phi = 2\\pi rH\\,E$."},
+  {g:"Cylindre plein infini de rayon R, densité ρ uniforme", r:"r < R", a:"\\dfrac{\\rho\\,r}{2\\varepsilon_0}", o:["\\dfrac{\\rho\\,r}{3\\varepsilon_0}","\\dfrac{\\rho R^2}{2\\varepsilon_0 r}","\\dfrac{\\rho R}{2\\varepsilon_0}"],
+   e:"$Q_{int} = \\rho\\pi r^2H$ et $\\Phi = 2\\pi rH\\,E$."},
+  {g:"Fil infini parcouru par I (champ B)", r:"à la distance r", a:"\\dfrac{\\mu_0 I}{2\\pi r}", o:["\\dfrac{\\mu_0 I}{2r}","\\dfrac{\\mu_0 I}{4\\pi r^2}","\\mu_0 I"],
+   e:"Ampère sur un cercle de rayon $r$ : $2\\pi r\\,B = \\mu_0I$."},
+  {g:"Cylindre plein de rayon R, courant I uniforme (champ B)", r:"r < R", a:"\\dfrac{\\mu_0 I r}{2\\pi R^2}", o:["\\dfrac{\\mu_0 I}{2\\pi r}","0","\\dfrac{\\mu_0 I r^2}{2\\pi R^3}"],
+   e:"Courant enlacé $I\\dfrac{r^2}{R^2}$ (rapport des sections)."},
+  {g:"Cylindre creux de rayon R, courant I en surface (champ B)", r:"r < R", a:"0", o:["\\dfrac{\\mu_0 I}{2\\pi r}","\\dfrac{\\mu_0 I r}{2\\pi R^2}","\\dfrac{\\mu_0 I}{2\\pi R}"],
+   e:"Aucun courant enlacé à l'intérieur."},
+  {g:"Câble coaxial (I à l'aller, −I au retour) (champ B)", r:"à l'extérieur", a:"0", o:["\\dfrac{\\mu_0 I}{2\\pi r}","\\dfrac{\\mu_0 I}{\\pi r}","\\mu_0 I"],
+   e:"Courant enlacé $I - I = 0$."},
+  {g:"Solénoïde infini, n spires par mètre (champ B)", r:"à l'intérieur", a:"\\mu_0 nI", o:["\\dfrac{\\mu_0 nI}{2}","\\dfrac{\\mu_0 I}{2\\pi r}","0"],
+   e:"Contour rectangulaire à cheval sur l'enroulement : $B\\ell = \\mu_0 n\\ell I$."},
+  {g:"Spire de rayon R parcourue par I (champ B)", r:"au centre", a:"\\dfrac{\\mu_0 I}{2R}", o:["\\dfrac{\\mu_0 I}{2\\pi R}","\\dfrac{\\mu_0 I}{4R}","\\dfrac{\\mu_0 I R}{2}"],
+   e:"Biot-Savart : $\\dfrac{\\mu_0 I}{4\\pi R^2}\\cdot 2\\pi R$."},
+  {g:"Demi-spire de rayon R parcourue par I (champ B)", r:"au centre", a:"\\dfrac{\\mu_0 I}{4R}", o:["\\dfrac{\\mu_0 I}{2R}","\\dfrac{\\mu_0 I}{4\\pi R}","\\dfrac{\\mu_0 I}{8R}"],
+   e:"La moitié de la spire : $\\dfrac{\\mu_0 I}{4\\pi R^2}\\cdot\\pi R$."}
+];
+
+/* ---------- Mode 4 : coordonnées ---------- */
+var COORD = [
+  {q:"Élément de volume en coordonnées cylindriques ?", a:"r\\,\\mathrm dr\\,\\mathrm d\\theta\\,\\mathrm dz", o:["\\mathrm dr\\,\\mathrm d\\theta\\,\\mathrm dz","r^2\\,\\mathrm dr\\,\\mathrm d\\theta\\,\\mathrm dz","r\\sin\\theta\\,\\mathrm dr\\,\\mathrm d\\theta\\,\\mathrm dz"], e:"Produit des trois longueurs $\\mathrm dr$, $r\\,\\mathrm d\\theta$, $\\mathrm dz$."},
+  {q:"Élément de volume en coordonnées sphériques ?", a:"r^2\\sin\\theta\\,\\mathrm dr\\,\\mathrm d\\theta\\,\\mathrm d\\varphi", o:["r^2\\,\\mathrm dr\\,\\mathrm d\\theta\\,\\mathrm d\\varphi","r\\sin\\theta\\,\\mathrm dr\\,\\mathrm d\\theta\\,\\mathrm d\\varphi","r^2\\cos\\theta\\,\\mathrm dr\\,\\mathrm d\\theta\\,\\mathrm d\\varphi"], e:"$\\mathrm dr\\times r\\,\\mathrm d\\theta\\times r\\sin\\theta\\,\\mathrm d\\varphi$."},
+  {q:"Élément de surface d'une sphère de rayon R ?", a:"R^2\\sin\\theta\\,\\mathrm d\\theta\\,\\mathrm d\\varphi", o:["R\\,\\mathrm d\\theta\\,\\mathrm d\\varphi","R^2\\,\\mathrm d\\theta\\,\\mathrm d\\varphi","R\\sin\\theta\\,\\mathrm d\\theta\\,\\mathrm d\\varphi"], e:"$r$ est fixé : il reste $R\\,\\mathrm d\\theta\\times R\\sin\\theta\\,\\mathrm d\\varphi$."},
+  {q:"Élément de surface latérale d'un cylindre de rayon R ?", a:"R\\,\\mathrm d\\theta\\,\\mathrm dz", o:["\\mathrm d\\theta\\,\\mathrm dz","r\\,\\mathrm dr\\,\\mathrm d\\theta","\\mathrm dr\\,\\mathrm dz"], e:"$r = R$ fixé : $R\\,\\mathrm d\\theta\\times\\mathrm dz$."},
+  {q:"Élément de surface d'un disque (z fixé) en cylindriques ?", a:"r\\,\\mathrm dr\\,\\mathrm d\\theta", o:["\\mathrm dr\\,\\mathrm d\\theta","r\\,\\mathrm d\\theta\\,\\mathrm dz","\\mathrm dr\\,\\mathrm dz"], e:"$z$ fixé : $\\mathrm dr\\times r\\,\\mathrm d\\theta$."},
+  {q:"Déplacement élémentaire en coordonnées sphériques ?", a:"\\mathrm dr\\,\\vec e_r + r\\,\\mathrm d\\theta\\,\\vec e_\\theta + r\\sin\\theta\\,\\mathrm d\\varphi\\,\\vec e_\\varphi", o:["\\mathrm dr\\,\\vec e_r + \\mathrm d\\theta\\,\\vec e_\\theta + \\mathrm d\\varphi\\,\\vec e_\\varphi","\\mathrm dr\\,\\vec e_r + r\\,\\mathrm d\\theta\\,\\vec e_\\theta + r\\,\\mathrm d\\varphi\\,\\vec e_\\varphi","\\mathrm dr\\,\\vec e_r + r\\,\\mathrm d\\theta\\,\\vec e_\\theta + \\mathrm dz\\,\\vec e_z"], e:"Le rayon du cercle décrit par $\\varphi$ est $r\\sin\\theta$."},
+  {q:"Intervalle de θ en coordonnées sphériques ?", a:"[0,\\ \\pi]", o:["[0,\\ 2\\pi]","[0,\\ \\pi/2]","[-\\pi,\\ \\pi]"], e:"θ est mesuré depuis l'axe Oz : de 0 (pôle nord) à π (pôle sud)."},
+  {q:"Coordonnées cartésiennes d'un point en sphériques (r, θ, φ) ?", a:"(r\\sin\\theta\\cos\\varphi,\\ r\\sin\\theta\\sin\\varphi,\\ r\\cos\\theta)", o:["(r\\cos\\theta\\cos\\varphi,\\ r\\cos\\theta\\sin\\varphi,\\ r\\sin\\theta)","(r\\cos\\varphi,\\ r\\sin\\varphi,\\ r\\cos\\theta)","(r\\sin\\theta,\\ r\\cos\\theta,\\ r\\varphi)"], e:"$z = r\\cos\\theta$ car θ part de l'axe Oz."},
+  {q:"Composante selon $\\vec e_\\theta$ du gradient en cylindriques ?", a:"\\dfrac1r\\dfrac{\\partial f}{\\partial\\theta}", o:["\\dfrac{\\partial f}{\\partial\\theta}","r\\dfrac{\\partial f}{\\partial\\theta}","\\dfrac{1}{r\\sin\\theta}\\dfrac{\\partial f}{\\partial\\theta}"], e:"On divise la variation par la longueur $r\\,\\mathrm d\\theta$."},
+  {q:"Composante selon $\\vec e_\\varphi$ du gradient en sphériques ?", a:"\\dfrac{1}{r\\sin\\theta}\\dfrac{\\partial f}{\\partial\\varphi}", o:["\\dfrac1r\\dfrac{\\partial f}{\\partial\\varphi}","\\dfrac{\\partial f}{\\partial\\varphi}","\\dfrac{\\sin\\theta}{r}\\dfrac{\\partial f}{\\partial\\varphi}"], e:"Longueur élémentaire $r\\sin\\theta\\,\\mathrm d\\varphi$."},
+  {q:"Valeur de $\\int_0^\\pi\\sin^2\\theta\\,\\mathrm d\\theta$ ?", a:"\\dfrac\\pi2", o:["\\pi","2","1"], e:"$\\sin^2\\theta = \\dfrac{1-\\cos2\\theta}{2}$."},
+  {q:"Valeur de $\\int_0^\\pi\\sin\\theta\\,\\mathrm d\\theta$ ?", a:"2", o:["0","1","\\pi"], e:"$[-\\cos\\theta]_0^\\pi = 1 - (-1)$."},
+  {q:"Quel système pour un câble coaxial ?", a:"\\text{cylindriques}", o:["\\text{sphériques}","\\text{cartésiennes}","\\text{polaires seulement}"], e:"Un axe de symétrie : cylindriques."},
+  {q:"Quel système pour une sphère chargée ?", a:"\\text{sphériques}", o:["\\text{cylindriques}","\\text{cartésiennes}","\\text{n'importe lequel}"], e:"Un centre de symétrie : sphériques."}
+];
+
+/* ---------- Mode 5 : QCM de cours ---------- */
+var QCM = [
+  {q:"Deux charges de même signe…", a:"se repoussent", o:["s'attirent","n'interagissent pas","s'attirent si elles sont proches"], e:"Coulomb : répulsion si $q_1q_2>0$."},
+  {q:"Si on double la distance entre deux charges, la force est…", a:"divisée par 4", o:["divisée par 2","multipliée par 2","inchangée"], e:"$F \\propto 1/r^2$."},
+  {q:"Unité du champ électrique ?", a:"V/m (ou N/C)", o:["V","N","C/m²"], e:"$E = F/q$ en N/C, et $E = U/d$ en V/m."},
+  {q:"Le champ d'une charge négative est…", a:"dirigé vers la charge (centripète)", o:["dirigé vers l'extérieur","nul","perpendiculaire à OM"], e:"$\\vec E = kq/r^2\\,\\vec u$ avec $q<0$ : sens opposé à $\\vec u$."},
+  {q:"Une charge Q < 0 placée dans un champ $\\vec E$ subit une force…", a:"de sens opposé à $\\vec E$", o:["de même sens que $\\vec E$","perpendiculaire à $\\vec E$","nulle"], e:"$\\vec F = Q\\vec E$."},
+  {q:"Le potentiel électrique est…", a:"une grandeur scalaire", o:["un vecteur","toujours positif","indépendant de la distance"], e:"$V = kq/r$ : un nombre (avec le signe de $q$)."},
+  {q:"Relation entre champ et potentiel ?", a:"$\\vec E = -\\overrightarrow{\\mathrm{grad}}\\,V$", o:["$\\vec E = \\overrightarrow{\\mathrm{grad}}\\,V$","$V = -\\overrightarrow{\\mathrm{grad}}\\,E$","$\\vec E = V/r$"], e:"Le champ pointe vers les potentiels décroissants."},
+  {q:"Le champ électrique est orienté vers…", a:"les potentiels décroissants", o:["les potentiels croissants","les équipotentielles","l'infini toujours"], e:"Conséquence du signe − dans $\\vec E = -\\overrightarrow{\\mathrm{grad}}\\,V$."},
+  {q:"Les lignes de champ et les équipotentielles sont…", a:"perpendiculaires", o:["parallèles","confondues","sans lien"], e:"$\\vec E$ est normal aux surfaces $V$ = constante."},
+  {q:"Énergie potentielle d'une charge Q dans un potentiel V ?", a:"$E_p = QV$", o:["$E_p = V/Q$","$E_p = QV^2/2$","$E_p = Q/V$"], e:"Avec $E_p$ et $V$ nuls à l'infini."},
+  {q:"La circulation de $\\vec E$ entre A et B vaut…", a:"$V(A) - V(B)$", o:["$V(B) - V(A)$","$V(A) + V(B)$","toujours 0"], e:"$\\mathcal C_{AB} = -\\Delta V = V(A)-V(B)$."},
+  {q:"La circulation du champ électrostatique…", a:"ne dépend pas du chemin suivi", o:["dépend du chemin","est toujours nulle","dépend de la charge testée"], e:"Le champ électrostatique est conservatif."},
+  {q:"Énergie mécanique de l'électron de l'atome d'hydrogène (modèle classique) ?", a:"$-\\dfrac{ke^2}{2r}$", o:["$\\dfrac{ke^2}{2r}$","$-\\dfrac{ke^2}{r}$","$0$"], e:"$E_p = -ke^2/r$ et $E_c = ke^2/(2r)$."},
+  {q:"Dans un condensateur plan, le champ est…", a:"uniforme, du + vers le −", o:["nul","radial","du − vers le +"], e:"$E = U/d$ entre les armatures."},
+  {q:"Le théorème de Gauss s'applique à une surface…", a:"fermée", o:["ouverte","plane uniquement","sphérique uniquement"], e:"$\\oint\\!\\!\\oint \\vec E\\cdot\\mathrm d\\vec S = Q_{int}/\\varepsilon_0$."},
+  {q:"Si la charge intérieure à une surface fermée est nulle…", a:"le flux est nul (le champ peut ne pas l'être)", o:["le champ est nul partout sur la surface","le potentiel est nul","le flux est infini"], e:"Des charges extérieures créent du champ sur la surface."},
+  {q:"Dans le théorème de Gauss, les charges extérieures à la surface…", a:"ne comptent pas dans $Q_{int}$", o:["comptent avec un signe −","comptent pour moitié","rendent le théorème faux"], e:"Leur flux total est nul."},
+  {q:"Si un plan passant par M est plan de symétrie des charges, $\\vec E(M)$ est…", a:"contenu dans ce plan", o:["perpendiculaire à ce plan","nul","quelconque"], e:"C'est la règle utilisée avant chaque Gauss."},
+  {q:"Distribution invariante par translation selon z : le champ…", a:"ne dépend pas de z", o:["est selon $\\vec e_z$","est nul","dépend seulement de z"], e:"Invariance → indépendance vis-à-vis de la variable."},
+  {q:"La capacité d'un condensateur dépend…", a:"de la géométrie et du milieu", o:["de la charge stockée","de la tension appliquée","du courant"], e:"Plan : $C = \\varepsilon_0 S/e$."},
+  {q:"Unité du champ magnétique ?", a:"le tesla (T)", o:["le weber (Wb)","le henry (H)","le volt par mètre"], e:"Le weber est l'unité du flux ($1$ Wb $= 1$ T·m²)."},
+  {q:"Expérience d'Oersted : un courant fait dévier une boussole. Conclusion ?", a:"un courant crée un champ magnétique", o:["une charge immobile crée un champ magnétique","le champ terrestre est nul","la boussole est chargée"], e:"Premier lien entre électricité et magnétisme (1820)."},
+  {q:"Valeur de $\\mu_0$ ?", a:"$4\\pi\\times10^{-7}$ H/m", o:["$8{,}85\\times10^{-12}$ F/m","$9\\times10^9$ SI","$4\\pi\\times10^{7}$ H/m"], e:"$8{,}85\\times10^{-12}$ F/m est $\\varepsilon_0$."},
+  {q:"Les lignes de champ magnétique…", a:"sont fermées", o:["partent des pôles nord vers l'infini","partent des charges +","se croisent aux pôles"], e:"Pas de monopôle magnétique."},
+  {q:"Flux de $\\vec B$ à travers une surface fermée ?", a:"toujours nul", o:["$Q_{int}/\\varepsilon_0$","$\\mu_0 I$","dépend de la surface"], e:"Le champ magnétique est à flux conservatif."},
+  {q:"Autour d'un fil infini, le champ magnétique est…", a:"orthoradial (cercles autour du fil)", o:["radial","parallèle au fil","nul"], e:"$\\vec B = \\dfrac{\\mu_0I}{2\\pi r}\\vec e_\\theta$."},
+  {q:"Champ magnétique créé en M par une portion rectiligne dont le prolongement passe par M ?", a:"nul", o:["$\\dfrac{\\mu_0 I}{2\\pi r}$","infini","$\\dfrac{\\mu_0I}{4R}$"], e:"$\\mathrm d\\vec l\\parallel\\overrightarrow{PM}$ donc le produit vectoriel est nul."},
+  {q:"Le théorème d'Ampère s'applique sur…", a:"un contour fermé", o:["une surface fermée","un volume","une ligne ouverte"], e:"$\\oint \\vec B\\cdot\\mathrm d\\vec l = \\mu_0\\sum I_{enl}$."},
+  {q:"Deux courants opposés de même intensité traversent le contour d'Ampère. $\\sum I_{enl}$ = ?", a:"0", o:["2I","I","−2I"], e:"Somme algébrique."},
+  {q:"Deux fils parallèles, courants opposés, point M au milieu : les champs…", a:"s'ajoutent", o:["se compensent","sont perpendiculaires","sont nuls"], e:"Règle de la main droite : même sens au milieu."},
+  {q:"Densité surfacique de courant $J_s$ : unité ?", a:"A/m", o:["A/m²","A","A·m"], e:"Volumique : A/m² ; surfacique : A/m."},
+  {q:"Le théorème d'Ampère, à la différence de Gauss, n'est valable que…", a:"en régime permanent (courants continus)", o:["dans le vide","pour les fils infinis","en coordonnées cylindriques"], e:"Rappel du cours (diapo 17)."},
+  {q:"Équivalent magnétique de la loi de Coulomb ?", a:"la loi de Biot et Savart", o:["le théorème d'Ampère","le théorème de Gauss","la loi d'Ohm"], e:"Les deux donnent le champ élémentaire d'une source."},
+  {q:"Intensité relative de l'interaction gravitationnelle (forte = 1) ?", a:"$10^{-39}$", o:["$10^{-2}$","$10^{-5}$","$1$"], e:"Électromagnétique $10^{-2}$, faible $10^{-5}$, gravitation $10^{-39}$."}
+];
+
+/* ---------- Moteur QCM commun ---------- */
+var Q=null, chosen=null;
+function texOrText(s){ // option : texte avec $…$, formule LaTeX pure, ou texte simple
+  if(s.indexOf("$")>=0) return inlineTex(s);
+  if(s.indexOf("\\")>=0 || s==="0") return m(s);
+  return esc(s);
+}
+function inlineTex(s){ return esc(s).replace(/\$([^$]+)\$/g,function(_,t){ return '<span class="m" data-tex="'+t+'">'+t+'</span>'; }); }
+function setQuestion(text, good, bads, expl){
+  var seen={}; seen[good]=1;
+  bads=bads.filter(function(b){ if(seen[b]) return false; seen[b]=1; return true; });
+  var opts=shuffle([good].concat(shuffle(bads).slice(0,3)));
+  Q={good:good,opts:opts,expl:expl}; chosen=null;
+  $("statement").innerHTML='<p class="qtext">'+text+'</p>';
+  $("board").innerHTML="";
+  $("work").innerHTML='<div class="opts" role="group">'+opts.map(function(o,i){
+    return '<button type="button" class="opt" data-i="'+i+'" aria-pressed="false"><span class="let">'+"ABCD"[i]+'</span><span>'+texOrText(o)+'</span></button>';
+  }).join("")+'</div>';
+  $("work").querySelectorAll(".opt").forEach(function(b){
+    b.addEventListener("click",function(){
+      if(b.disabled) return;
+      chosen=parseInt(b.getAttribute("data-i"),10);
+      $("work").querySelectorAll(".opt").forEach(function(x){ x.setAttribute("aria-pressed", x===b?"true":"false"); });
+    });
+  });
+}
+function checkQuestion(){
+  if(chosen===null){ $("feedback").innerHTML='<p class="how">Choisis une réponse.</p>'; return; }
+  var ok = Q.opts[chosen]===Q.good;
+  $("work").querySelectorAll(".opt").forEach(function(b,i){
+    b.disabled=true;
+    if(Q.opts[i]===Q.good) b.classList.add("ok"); else if(i===chosen) b.classList.add("err");
+  });
+  tally.tot++; if(ok) tally.ok++;
+  $("feedback").innerHTML='<div class="score'+(ok?" perfect":"")+'">'+(ok?"Juste":"Raté")+'</div><ul class="expl"><li'+(ok?"":' class="err"')+'>'+(Q.expl.indexOf("<span")>=0?Q.expl:inlineTex(Q.expl))+'</li></ul>'+showTally();
+}
+
+/* ---------- Modes ---------- */
+var deck={};
+function draw(name, arr){ // tirage sans remise
+  if(!deck[name] || !deck[name].length) deck[name]=shuffle(arr.map(function(_,i){return i;}));
+  return arr[deck[name].pop()];
+}
+var MODES = {
+  ponctuel:{
+    controls:'<label class="ctl">Nombre de charges <select id="nq"><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option><option value="mix">au hasard</option></select></label>',
+    init:function(){ var s=$("nq"); s.value=ponctuelCfg.n; s.addEventListener("change",function(){ ponctuelCfg.n=s.value; nouveau(); }); },
+    gen:function(){ genPonctuel(); viewPonctuel(); }, check:checkPonctuel,
+    help:["Champ de chaque charge : $\\vec E_i = k\\dfrac{q_i}{r_i^3}\\,\\overrightarrow{P_iM}$ (même formule que $kq/r^2\\,\\vec u$).",
+          "On additionne les composantes : $E_x = \\sum E_{ix}$, $E_y = \\sum E_{iy}$.",
+          "Potentiel : $V = \\sum k\\dfrac{q_i}{r_i}$, une somme de nombres avec leur signe.",
+          "Repère les compensations par symétrie avant de calculer."]
+  },
+  charge:{ controls:"", gen:function(){ var t=pick(CHARGE_GEN)(); setQuestion("Charge totale ? "+t.txt, t.good, t.bad, t.expl); }, check:checkQuestion,
+    help:["$Q = \\int\\lambda\\,\\mathrm dl = \\iint\\sigma\\,\\mathrm dS = \\iiint\\rho\\,\\mathrm d\\tau$.",
+          "Sphérique : $\\mathrm d\\tau = r^2\\sin\\theta\\,\\mathrm dr\\,\\mathrm d\\theta\\,\\mathrm d\\varphi$, facteur angulaire $4\\pi$ (boule) ou $2\\pi$ (demi-boule).",
+          "Cylindrique : $\\mathrm d\\tau = r\\,\\mathrm dr\\,\\mathrm d\\theta\\,\\mathrm dz$ ; surface latérale $R\\,\\mathrm d\\theta\\,\\mathrm dz$.",
+          "Une densité en $\\sin\\theta$ ou $\\cos\\theta$ sur un tour complet donne souvent 0."] },
+  gauss:{ controls:"", gen:function(){ var g=draw("gauss",GAUSS); setQuestion("<strong>"+esc(g.g)+"</strong>, "+esc(g.r)+" : norme du champ ?", g.a, g.o, g.e); }, check:checkQuestion,
+    help:["Gauss : $\\Phi = Q_{int}/\\varepsilon_0$ ; sphère $\\Phi = 4\\pi r^2E$, cylindre $\\Phi = 2\\pi rHE$, plan $\\Phi = 2ES$.",
+          "Ampère : $2\\pi r\\,B = \\mu_0 I_{enl}$ sur un cercle centré sur l'axe.",
+          "La charge (ou le courant) intérieure se calcule région par région."] },
+  coord:{ controls:"", gen:function(){ var c=draw("coord",COORD); setQuestion(inlineTex(c.q), c.a, c.o, c.e); }, check:checkQuestion,
+    help:["Longueurs élémentaires : $\\mathrm dr$, $r\\,\\mathrm d\\theta$, $\\mathrm dz$ (cylindriques) ; $\\mathrm dr$, $r\\,\\mathrm d\\theta$, $r\\sin\\theta\\,\\mathrm d\\varphi$ (sphériques).",
+          "Surface = produit de deux longueurs, volume = produit des trois."] },
+  qcm:{ controls:"", gen:function(){ var c=draw("qcm",QCM); setQuestion(inlineTex(c.q), c.a, c.o, c.e); }, check:checkQuestion,
+    help:["Une seule bonne réponse par question.","Les questions sont tirées sans remise : tu les vois toutes avant de retomber sur la même."] }
+};
+var mode="ponctuel";
+function nouveau(){
+  $("feedback").innerHTML="";
+  MODES[mode].gen();
+  renderMath(document.querySelector(".sheet"));
+  var first=document.querySelector("#work input"); if(first && !window.matchMedia("(pointer:coarse)").matches) first.focus({preventScroll:true});
+}
+function setMode(m2){
+  mode=m2;
+  document.querySelectorAll(".modes button").forEach(function(b){ b.setAttribute("aria-selected", b.getAttribute("data-mode")===m2?"true":"false"); });
+  $("controls").innerHTML=MODES[m2].controls;
+  $("controls").hidden = !MODES[m2].controls;
+  if(MODES[m2].init) MODES[m2].init();
+  $("help").innerHTML=MODES[m2].help.map(function(h){ return "<li>"+inlineTex(h)+"</li>"; }).join("");
+  renderMath($("help"));
+  nouveau();
+}
+document.querySelectorAll(".modes button").forEach(function(b){ b.addEventListener("click",function(){ setMode(b.getAttribute("data-mode")); }); });
+$("check").addEventListener("click",function(){ MODES[mode].check(); renderMath(document.querySelector(".sheet")); });
+$("next").addEventListener("click",nouveau);
+document.addEventListener("keydown",function(e){
+  if(e.key==="Enter" && !e.ctrlKey && !e.metaKey && !(e.target.closest && e.target.closest("button"))){
+    if($("feedback").innerHTML) nouveau(); else { MODES[mode].check(); renderMath(document.querySelector(".sheet")); }
+    e.preventDefault();
+  }
+});
+
+/* Intégré dans le site (iframe) : on masque l'en-tête et on suit le thème de la page parente */
+try{
+  if(window.self!==window.top){
+    var root=document.documentElement; root.classList.add("embedded");
+    var syncTheme=function(){
+      try{
+        var s=window.parent.document.body.getAttribute("data-md-color-scheme");
+        root.setAttribute("data-theme", s==="slate"?"dark":"light");
+      }catch(e){}
+    };
+    syncTheme();
+    try{ new MutationObserver(syncTheme).observe(window.parent.document.body,{attributes:true,attributeFilter:["data-md-color-scheme"]}); }catch(e){}
+  }
+}catch(e){}
+
+function start(){ setMode("ponctuel"); }
+if(window.katex) start(); else window.addEventListener("load", start);
+})();
+</script>
+</body>
+</html>

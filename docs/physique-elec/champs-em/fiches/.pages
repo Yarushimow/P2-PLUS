@@ -1,1 +1,7 @@
 title: Fiches
+nav:
+  - index.md
+  - fiche-electrostatique.md
+  - fiche-gauss.md
+  - fiche-magnetostatique.md
+  - formulaire.md
