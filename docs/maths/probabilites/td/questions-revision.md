@@ -219,7 +219,7 @@ Les numéros 24, 34 et 35 sont vides dans le document d'origine.
     $\dfrac{P(X = 1, Y = 2) + P(X = 1, Y = 4)}{P(Y = 2) + P(Y = 4)} = \dfrac{2/9}{6/9} = \dfrac13$.
 
 ??? question "58. Démontrer $V(X + Y) = V(X) + V(Y) + 2\mathrm{Cov}(X, Y)$"
-    Voir l'[exercice 3.6](td-3-va-discretes.md#exercice-36-demonstrations-a-savoir-refaire) :
+    Voir l'[exercice 3.6](td-3-va-discretes.md#exercice-36-demonstrations-theoreme-38-propositions-36-et-39) :
     on développe $E\big((X + Y)^2\big) - \big(E(X) + E(Y)\big)^2$.
 
 ??? question "59. Démontrer que $X$, $Y$ indépendantes $\Rightarrow \mathrm{Cov}(X, Y) = 0$"
