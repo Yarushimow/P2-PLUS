@@ -1,0 +1,99 @@
+/* ==================================================================== */
+/* Bouton flottant « Simplifiée | Papier » (docs/javascripts/versions.js) */
+/* ==================================================================== */
+
+.versions-bascule {
+  position: fixed;
+  right: 1.2rem;
+  bottom: 1.2rem;
+  z-index: 4;
+  display: inline-grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  padding: 0.22rem;
+  border: 1px solid var(--site-border);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--site-surface) 88%, transparent);
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+  box-shadow: 0 10px 30px -10px rgba(15, 23, 42, 0.45), 0 2px 6px rgba(15, 23, 42, 0.12);
+  font: 600 0.68rem/1 var(--md-text-font-family, inherit);
+  color: var(--md-default-fg-color--light);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  animation: versions-arrivee 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.versions-bascule:focus-visible {
+  outline: 2px solid var(--md-primary-fg-color);
+  outline-offset: 3px;
+}
+
+.versions-bascule__option {
+  position: relative;
+  z-index: 1;
+  padding: 0.55rem 0.95rem;
+  text-align: center;
+  white-space: nowrap;
+  transition: color 0.25s ease;
+}
+.versions-bascule__option.est-active { color: #fff; }
+
+/* Curseur qui glisse sous la version active */
+.versions-bascule__curseur {
+  position: absolute;
+  top: 0.22rem;
+  bottom: 0.22rem;
+  left: 0.22rem;
+  width: calc(50% - 0.22rem);
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--md-primary-fg-color--dark, #4338ca), var(--md-accent-fg-color, #7c3aed));
+  box-shadow: 0 4px 12px -4px rgba(79, 70, 229, 0.6);
+  transition: transform 0.35s cubic-bezier(0.3, 1.3, 0.5, 1);
+}
+.versions-bascule[data-active="papier"] .versions-bascule__curseur { transform: translateX(100%); }
+
+.versions-bascule:hover { border-color: var(--md-primary-fg-color); }
+.versions-bascule:hover .versions-bascule__option:not(.est-active) { color: var(--md-default-fg-color); }
+.versions-bascule:active { transform: scale(0.97); }
+
+/* Le bloc retrouvé s'illumine brièvement */
+.md-typeset .version-retrouvee {
+  animation: versions-retrouve 1.2s ease-out;
+  border-radius: 6px;
+}
+
+@keyframes versions-arrivee {
+  from { opacity: 0; transform: translateY(14px) scale(0.96); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes versions-retrouve {
+  0%   { box-shadow: 0 0 0 0 var(--md-accent-fg-color--transparent); background-color: var(--md-accent-fg-color--transparent); }
+  100% { box-shadow: 0 0 0 12px transparent; background-color: transparent; }
+}
+
+/* Laisse de la place en bas de page pour ne pas masquer le dernier bloc */
+.md-content:has(.tabbed-set) { padding-bottom: 3.5rem; }
+
+/* Téléphones : centré en bas, un peu plus grand pour le pouce */
+@media screen and (max-width: 44.984375em) {
+  .versions-bascule {
+    left: 50%;
+    right: auto;
+    bottom: max(0.9rem, env(safe-area-inset-bottom));
+    transform: translateX(-50%);
+    font-size: 0.72rem;
+    animation: none;
+  }
+  .versions-bascule:active { transform: translateX(-50%) scale(0.97); }
+  .versions-bascule__option { padding: 0.65rem 1.1rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .versions-bascule,
+  .versions-bascule__curseur,
+  .md-typeset .version-retrouvee { animation: none; transition: none; }
+}
+
+@media print {
+  .versions-bascule { display: none; }
+}
