@@ -29,6 +29,14 @@ chronogramme.
 
     [:octicons-arrow-right-24: Travaux dirigés](td/index.md)
 
+-   :material-chip:{ .lg .middle } **TP**
+
+    ---
+
+    Sujets Multisim : fichiers circuits à télécharger et PDF des TP.
+
+    [:octicons-arrow-right-24: Travaux pratiques](tp/index.md)
+
 -   :material-card-text:{ .lg .middle } **Fiches**
 
     ---
@@ -52,14 +60,14 @@ chronogramme.
 L'ordre suit le planning 2026-2027 (les registres passent avant les compteurs ;
 dans les supports 2024 c'était l'inverse).
 
-| Chapitre | Cours | TD | Fiche |
-|----------|:-----:|:--:|:-----:|
-| 0. Introduction à la logique séquentielle | [:material-book-open-variant:](cours/chapitre-0-introduction.md) | | [:material-card-text:](fiches/fiche-bascules.md) |
-| 1. Les bascules | [:material-book-open-variant:](cours/chapitre-1-bascules.md) | [TD 1](td/td-1-bascules.md) | [:material-card-text:](fiches/fiche-bascules.md) |
-| 2. Les registres | [:material-book-open-variant:](cours/chapitre-2-registres.md) | [TD 3](td/td-3-registres.md) | [:material-card-text:](fiches/fiche-registres.md) |
-| 3. Les compteurs | [:material-book-open-variant:](cours/chapitre-3-compteurs.md) | [TD 2](td/td-2-compteurs.md) | [:material-card-text:](fiches/fiche-compteurs.md) |
-| 4. Les machines à états | [:material-book-open-variant:](cours/chapitre-4-machines-etats.md) | [TD 4](td/td-4-machines-etats.md) | [:material-card-text:](fiches/fiche-machines-etats.md) |
-| Annale | | [DE 2023](td/annale-de-2023.md) | |
+| Chapitre | Cours | TD | TP | Fiche |
+|----------|:-----:|:--:|:--:|:-----:|
+| 0. Introduction à la logique séquentielle | [:material-book-open-variant:](cours/chapitre-0-introduction.md) | | | [:material-card-text:](fiches/fiche-bascules.md) |
+| 1. Les bascules | [:material-book-open-variant:](cours/chapitre-1-bascules.md) | [TD 1](td/td-1-bascules.md) | [TP 1](tp/tp-1-bascules.md) | [:material-card-text:](fiches/fiche-bascules.md) |
+| 2. Les registres | [:material-book-open-variant:](cours/chapitre-2-registres.md) | [TD 3](td/td-3-registres.md) | [TP 2](tp/tp-2-registres.md) | [:material-card-text:](fiches/fiche-registres.md) |
+| 3. Les compteurs | [:material-book-open-variant:](cours/chapitre-3-compteurs.md) | [TD 2](td/td-2-compteurs.md) | | [:material-card-text:](fiches/fiche-compteurs.md) |
+| 4. Les machines à états | [:material-book-open-variant:](cours/chapitre-4-machines-etats.md) | [TD 4](td/td-4-machines-etats.md) | | [:material-card-text:](fiches/fiche-machines-etats.md) |
+| Annale | | [DE 2023](td/annale-de-2023.md) | | |
 
 ## Infos pratiques
 

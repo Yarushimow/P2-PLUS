@@ -3,6 +3,8 @@ pdf/
 *.pdf
 # Exceptions : fiches partagées avec la classe, publiées
 !docs/informatique/linux/fiches/fiche-prof-ti307.pdf
+# PDF des TP rendus, publiés
+!docs/physique-elec/systemes-numeriques/tp/rapports/*.pdf
 
 # Site généré par `mkdocs build`
 site/

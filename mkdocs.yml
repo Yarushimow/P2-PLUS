@@ -14,6 +14,7 @@ exclude_docs: |
   pdf/
   *.pdf
   !informatique/linux/fiches/fiche-prof-ti307.pdf
+  !physique-elec/systemes-numeriques/tp/rapports/*.pdf
 
 theme:
   name: material
