@@ -245,9 +245,26 @@ a.agenda-carte:focus-visible {
   font-family: var(--md-code-font-family);
 }
 .simu-input:focus { outline: 2px solid var(--md-accent-fg-color); outline-offset: 1px; }
-.simu-choix { display: flex; gap: 0.8rem; }
+.simu-choix { display: flex; flex-wrap: wrap; gap: 0.3rem 0.9rem; }
 .simu-choix label { cursor: pointer; }
 .simu-retour { min-width: 1.2rem; font-weight: 700; }
+.simu-parcours { font-size: 0.72rem; display: flex; align-items: center; gap: 0.3rem; cursor: pointer; }
+.simu-progres {
+  position: relative;
+  height: 1.1rem;
+  margin-bottom: 0.6rem;
+  border-radius: 0.55rem;
+  background: var(--md-default-fg-color--lightest);
+  overflow: hidden;
+}
+.simu-progres-barre { height: 100%; background: var(--md-primary-fg-color); opacity: 0.35; transition: width 0.3s; }
+.simu-progres span {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.65rem; font-weight: 700;
+}
+.simu-svg { display: block; width: 100%; height: auto; margin: 0.6rem 0; font-family: var(--md-text-font-family); }
+.md-typeset .simu-petit { font-size: 0.65rem; color: var(--md-default-fg-color--light); margin-top: -0.4rem; }
 .md-typeset .simu-questions li.simu-bon { background: rgba(0, 200, 83, 0.12); }
 .md-typeset .simu-questions li.simu-bon .simu-retour { color: #00a152; }
 .md-typeset .simu-questions li.simu-faux { background: rgba(255, 82, 82, 0.12); }
@@ -302,3 +319,5 @@ a.agenda-carte:focus-visible {
 .etats .sn { font-weight: 700; font-size: 15px; fill: currentColor; }
 .etats .ss { font-size: 11.5px; fill: currentColor; }
 .etats .lb { font-size: 13px; fill: currentColor; paint-order: stroke; stroke: var(--md-default-bg-color); stroke-width: 4px; }
+.simu-tableau { display: block; }
+.simu-enonce > table, .simu-enonce > .simu-tableau { margin-top: 0.4rem; }

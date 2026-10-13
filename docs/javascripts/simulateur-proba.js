@@ -1,4 +1,4 @@
-// Simulateur d'exercices de probabilités (SM301P, chapitres 1 à 3).
+// Simulateur d'exercices de probabilités (SM301P, chapitres 1 à 3) : 39 types, un par formule du cours.
 //
 // Emplacement dans une page Markdown :
 //   <div id="simulateur-proba"></div>
@@ -419,8 +419,8 @@
     return res;
   }
   const loiTable = (xs, ps, nomX = "x", nomP = "P(X = x)") =>
-    `<table><tbody><tr><th>${m(nomX)}</th>${xs.map((x) => `<td>${m(x)}</td>`).join("")}</tr>
-     <tr><th>${m(nomP)}</th>${ps.map((p) => `<td>${p}</td>`).join("")}</tr></tbody></table>`;
+    `<div class="simu-tableau"><table><tbody><tr><th>${m(nomX)}</th>${xs.map((x) => `<td>${m(x)}</td>`).join("")}</tr>
+     <tr><th>${m(nomP)}</th>${ps.map((p) => `<td>${p}</td>`).join("")}</tr></tbody></table></div>`;
 
   ajout(3, "loi", "Loi, espérance, variance", () => {
     const k = rnd(4, 5);
@@ -666,10 +666,750 @@
   });
 
   // ------------------------------------------------------------------
+  // Dessins SVG (arbres, diagrammes de Venn, circuits)
+  // ------------------------------------------------------------------
+  const ACC = "var(--md-accent-fg-color)";
+  const BAR = "̅"; // surlignement combinant : "A" + BAR = Ā
+  const ligne = (x1, y1, x2, y2) =>
+    `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="currentColor" stroke-opacity=".5" stroke-width="1.5"/>`;
+  function svgTxt(x, y, s, o = {}) {
+    const inconnu = s === "?";
+    return `<text x="${x}" y="${y}" font-size="${o.size || 13}" text-anchor="${o.anchor || "middle"}"
+      fill="${inconnu ? ACC : "currentColor"}" font-weight="${inconnu || o.gras ? 700 : 400}"
+      ${o.halo === false ? "" : `stroke="var(--md-default-bg-color)" stroke-width="5" paint-order="stroke"`}>${s}</text>`;
+  }
+  const svg = (w, h, contenu, aria) =>
+    `<svg class="simu-svg" viewBox="0 0 ${w} ${h}" style="max-width:${Math.round(w * 1.35)}px" role="img" aria-label="${aria}">${contenu}</svg>`;
+
+  // br = [{ nom, p, fils: [{ nom, p }] }] ; p est un texte ("0,3", "?", "pₙ")
+  function arbreSVG(br, racine = "") {
+    const pas = 40, nf = br.reduce((s, b) => s + b.fils.length, 0);
+    const H = nf * pas + 6, xr = 16, x1 = 140, x2 = 286, yr = H / 2;
+    let y = pas / 2 + 3, out = `<circle cx="${xr}" cy="${yr}" r="3.5" fill="currentColor"/>`;
+    if (racine) out += svgTxt(xr, yr - 10, racine, { size: 11, anchor: "start" });
+    for (const b of br) {
+      const ys = b.fils.map(() => { const v = y; y += pas; return v; });
+      const yb = (ys[0] + ys[ys.length - 1]) / 2;
+      out += ligne(xr, yr, x1 - 14, yb) + svgTxt((xr + x1 - 14) / 2, (yr + yb) / 2 + 4, b.p)
+        + svgTxt(x1, yb + 5, b.nom, { gras: true, halo: false });
+      b.fils.forEach((f, i) => {
+        out += ligne(x1 + 16, yb, x2 - 14, ys[i]) + svgTxt((x1 + 16 + x2 - 14) / 2, (yb + ys[i]) / 2 + 4, f.p)
+          + svgTxt(x2, ys[i] + 5, f.nom, { gras: true, halo: false });
+      });
+    }
+    return svg(310, H, out, "Arbre pondéré");
+  }
+
+  // r = valeurs des 8 régions : a, b, c (seulement), ab, ac, bc (exactement ces deux), abc, hors
+  function vennSVG(r) {
+    const cercle = (cx, cy) => `<circle cx="${cx}" cy="${cy}" r="58" fill="none" stroke="currentColor" stroke-opacity=".6" stroke-width="1.5"/>`;
+    const out = cercle(110, 88) + cercle(172, 88) + cercle(141, 140)
+      + svgTxt(48, 38, "A", { gras: true, halo: false, size: 15 }) + svgTxt(234, 38, "B", { gras: true, halo: false, size: 15 })
+      + svgTxt(214, 196, "C", { gras: true, halo: false, size: 15 })
+      + svgTxt(76, 80, r.a) + svgTxt(206, 80, r.b) + svgTxt(141, 182, r.c)
+      + svgTxt(141, 66, r.ab) + svgTxt(103, 134, r.ac) + svgTxt(179, 134, r.bc) + svgTxt(141, 112, r.abc)
+      + svgTxt(4, 214, `Hors des trois : ${r.hors}`, { anchor: "start", size: 12 });
+    return svg(282, 222, out, "Diagramme de Venn");
+  }
+
+  function circuitSVG(type) {
+    const boite = (x, y, k) => `<rect x="${x}" y="${y}" width="44" height="26" rx="4" fill="none" stroke="currentColor" stroke-width="1.5"/>`
+      + svgTxt(x + 22, y + 18, `C${k}`, { halo: false, gras: true });
+    const L = (...p) => ligne(...p);
+    const plans = {
+      serie: [300, 80, () => L(10, 40, 50, 40) + boite(50, 27, 1) + L(94, 40, 130, 40) + boite(130, 27, 2) + L(174, 40, 210, 40) + boite(210, 27, 3) + L(254, 40, 290, 40)],
+      parallele: [300, 130, () => L(10, 65, 70, 65) + L(70, 26, 70, 104) + L(230, 26, 230, 104) + L(230, 65, 290, 65)
+        + [26, 65, 104].map((yc, i) => L(70, yc, 128, yc) + boite(128, yc - 13, i + 1) + L(172, yc, 230, yc)).join("")],
+      mixte: [300, 100, () => L(10, 50, 30, 50) + boite(30, 37, 1) + L(74, 50, 130, 50) + L(130, 25, 130, 75) + L(240, 25, 240, 75) + L(240, 50, 290, 50)
+        + [25, 75].map((yc, i) => L(130, yc, 160, yc) + boite(160, yc - 13, i + 2) + L(204, yc, 240, yc)).join("")],
+      mixte2: [300, 100, () => L(10, 50, 40, 50) + L(40, 25, 40, 75) + L(250, 25, 250, 75) + L(250, 50, 290, 50)
+        + L(40, 25, 70, 25) + boite(70, 12, 1) + L(114, 25, 160, 25) + boite(160, 12, 2) + L(204, 25, 250, 25)
+        + L(40, 75, 115, 75) + boite(115, 62, 3) + L(159, 75, 250, 75)],
+    };
+    const [w, h, f] = plans[type];
+    return svg(w, h, f(), "Schéma du circuit");
+  }
+
+  // QCM vrai / faux tiré d'une banque d'affirmations { e, v, j }
+  function vraiFaux(banque, n = 4) {
+    const items = melange(banque).slice(0, n);
+    return {
+      titre: "Vrai ou faux ?",
+      enonce: "Pour chaque affirmation, réponds <strong>Vrai</strong> ou <strong>Faux</strong>.",
+      questions: items.map((it) => ({ label: it.e, type: "choix", options: ["Vrai", "Faux"], reponse: it.v ? "Vrai" : "Faux" })),
+      indice: "Pour montrer qu'une affirmation est fausse, un seul contre-exemple suffit. Pour une vraie, cite la formule du cours.",
+      correction: `<ol>${items.map((it) => `<li><strong>${it.v ? "Vrai" : "Faux"}.</strong> ${it.j}</li>`).join("")}</ol>`,
+    };
+  }
+  // Question à choix : bonne réponse + 3 distracteurs, mélangés
+  const choix4 = (label, bonne, autres) => ({
+    label, type: "choix", reponse: bonne,
+    options: melange([bonne, ...melange(autres.filter((o) => o !== bonne)).slice(0, 3)]),
+  });
+
+  // ------------------------------------------------------------------
+  // Nouveaux générateurs — chapitre 1
+  // ------------------------------------------------------------------
+  const Ab = T`\overline{A}`, Bb = T`\overline{B}`, Cb = T`\overline{C}`;
+
+  ajout(1, "demorgan", "De Morgan : traduire et calculer", () => {
+    let a, b, c;
+    do { a = rnd(4, 14); b = rnd(4, 14); c = rnd(1, Math.min(a, b) - 1); } while (a + b - c > 19);
+    const PA = new Fr(a, 20), PB = new Fr(b, 20), PAB = new Fr(c, 20), PU = PA.add(PB).sub(PAB);
+    const ecr = {
+      ni: m(T`${Ab} \cap ${Bb}`), pasdeux: m(T`${Ab} \cup ${Bb}`), union: m(T`A \cup B`),
+      exact: m(T`(A \cap ${Bb}) \cup (${Ab} \cap B)`), aseul: m(T`A \cap ${Bb}`), inter: m(T`A \cap B`),
+    };
+    const phrases = [
+      { txt: "ni A ni B ne sont réalisés", e: "ni", p: UN.sub(PU), calc: T`P(${Ab} \cap ${Bb}) = P(\overline{A \cup B}) = 1 - P(A \cup B)`, val: T`1 - ${d(PU)}` },
+      { txt: "A et B ne sont pas réalisés tous les deux", e: "pasdeux", p: UN.sub(PAB), calc: T`P(${Ab} \cup ${Bb}) = P(\overline{A \cap B}) = 1 - P(A \cap B)`, val: T`1 - ${d(PAB)}` },
+      { txt: "au plus un des deux est réalisé", e: "pasdeux", p: UN.sub(PAB), calc: T`P(${Ab} \cup ${Bb}) = P(\overline{A \cap B}) = 1 - P(A \cap B)`, val: T`1 - ${d(PAB)}` },
+      { txt: "au moins un des deux est réalisé", e: "union", p: PU, calc: T`P(A \cup B) = P(A) + P(B) - P(A \cap B)`, val: T`${d(PA)} + ${d(PB)} - ${d(PAB)}` },
+      { txt: "exactement un des deux est réalisé", e: "exact", p: PA.add(PB).sub(PAB.mul(2)), calc: T`P(A) + P(B) - 2P(A \cap B)`, val: T`${d(PA)} + ${d(PB)} - 2 \times ${d(PAB)}` },
+      { txt: "A est réalisé mais pas B", e: "aseul", p: PA.sub(PAB), calc: T`P(A \cap ${Bb}) = P(A) - P(A \cap B)`, val: T`${d(PA)} - ${d(PAB)}` },
+    ];
+    const ch = melange(phrases).filter((x, i, l) => l.findIndex((y) => y.e === x.e) === i).slice(0, 2);
+    const donnee = pick(["inter", "union"]);
+    return {
+      titre: "Traduire avec De Morgan",
+      enonce: `${m(T`P(A) = ${d(PA)}`)}, ${m(T`P(B) = ${d(PB)}`)} et
+        ${donnee === "inter" ? m(T`P(A \cap B) = ${d(PAB)}`) : m(T`P(A \cup B) = ${d(PU)}`)}.`,
+      questions: ch.flatMap((x) => [
+        choix4(`« ${x.txt} » s'écrit :`, ecr[x.e], Object.values(ecr)),
+        { label: `Probabilité de « ${x.txt} »`, reponse: x.p.val() },
+      ]),
+      indice: `De Morgan : ${m(T`\overline{A \cup B} = ${Ab} \cap ${Bb}`)} (« ni… ni ») et
+        ${m(T`\overline{A \cap B} = ${Ab} \cup ${Bb}`)} (« pas les deux »). Le « ou » est inclusif.`,
+      correction: `
+        ${donnee === "union" ? M(T`P(A \cap B) = P(A) + P(B) - P(A \cup B) = ${d(PA)} + ${d(PB)} - ${d(PU)} = ${d(PAB)}`)
+          : M(T`P(A \cup B) = ${d(PA)} + ${d(PB)} - ${d(PAB)} = ${d(PU)}`)}
+        ${ch.map((x) => `<p>« ${x.txt} » s'écrit ${ecr[x.e]}.</p>${M(T`${x.calc} = ${x.val} = ${d(x.p)}`)}`).join("")}
+        <p>Les deux lois de De Morgan : le contraire d'un « ou » est un « et » de contraires, et inversement.</p>`,
+    };
+  });
+
+  ajout(1, "venn", "Distributivité, Venn à 3 évènements", () => {
+    const v = partition(50, 8).map((x) => new Fr(x, 50));
+    // régions : [dans A, dans B, dans C]
+    const R = [[1, 0, 0], [0, 1, 0], [0, 0, 1], [1, 1, 0], [1, 0, 1], [0, 1, 1], [1, 1, 1], [0, 0, 0]];
+    const cles = ["a", "b", "c", "ab", "ac", "bc", "abc", "hors"];
+    const noms = ["seulement A", "seulement B", "seulement C", T`A \cap B \cap ${Cb}`, T`A \cap ${Bb} \cap C`, T`${Ab} \cap B \cap C`, T`A \cap B \cap C`, T`${Ab} \cap ${Bb} \cap ${Cb}`];
+    const pool = [
+      { l: m(T`P\big((A \cup B) \cap C\big)`), t: ([a, b, c]) => (a || b) && c, n: T`(A \cup B) \cap C = (A \cap C) \cup (B \cap C)` },
+      { l: m(T`P\big((A \cap B) \cup C\big)`), t: ([a, b, c]) => (a && b) || c, n: T`(A \cap B) \cup C = (A \cup C) \cap (B \cup C)` },
+      { l: m(T`P(${Ab} \cap ${Bb} \cap ${Cb})`), t: ([a, b, c]) => !a && !b && !c, n: T`${Ab} \cap ${Bb} \cap ${Cb} = \overline{A \cup B \cup C}` },
+      { l: m(T`P(A \cup B \cup C)`), t: ([a, b, c]) => a || b || c, n: T`\text{tout sauf la région extérieure}` },
+      { l: m(T`P\big(A \cap (B \cup C)\big)`), t: ([a, b, c]) => a && (b || c), n: T`A \cap (B \cup C) = (A \cap B) \cup (A \cap C)` },
+      { l: m(T`P\big((A \cup B) \cap ${Cb}\big)`), t: ([a, b, c]) => (a || b) && !c, n: T`(A \cup B) \cap ${Cb} = (A \cap ${Cb}) \cup (B \cap ${Cb})` },
+      { l: m(T`P(${Ab} \cup ${Bb})`), t: ([a, b]) => !(a && b), n: T`${Ab} \cup ${Bb} = \overline{A \cap B}` },
+      { l: "Probabilité d'être dans <strong>exactement deux</strong> des trois", t: (r) => r.filter(Boolean).length === 2, n: T`\text{les trois régions « deux à deux »}` },
+      { l: "Probabilité d'être dans <strong>au moins deux</strong> des trois", t: (r) => r.filter(Boolean).length >= 2, n: T`(A \cap B) \cup (A \cap C) \cup (B \cap C)` },
+      { l: "Probabilité d'être dans <strong>A seulement</strong>", t: ([a, b, c]) => a && !b && !c, n: T`A \cap ${Bb} \cap ${Cb}` },
+    ];
+    const qs = melange(pool).slice(0, 4);
+    const calc = qs.map((q) => {
+      const idx = R.map((r, i) => (q.t(r.map(Boolean)) ? i : -1)).filter((i) => i >= 0);
+      return { idx, p: somme(idx.map((i) => v[i])) };
+    });
+    const vals = {};
+    cles.forEach((k, i) => (vals[k] = txt(v[i].val())));
+    return {
+      titre: "Diagramme de Venn",
+      enonce: `Le diagramme donne la probabilité de chacune des 8 régions (elles sont disjointes et leur somme vaut 1).
+        ${vennSVG(vals)}`,
+      questions: qs.map((q, i) => ({ label: q.l, reponse: calc[i].p.val() })),
+      indice: `Réécris l'évènement (distributivité, De Morgan), repère les régions qu'il contient, puis additionne-les :
+        les régions sont incompatibles deux à deux.`,
+      correction: qs.map((q, i) => `<p>${q.l} : ${m(q.n)}.</p>
+        ${M(T`${calc[i].idx.map((j) => d(v[j])).join(" + ")} = ${d(calc[i].p)}`)}
+        <p class="simu-petit">Régions : ${calc[i].idx.map((j) => (j < 3 ? noms[j] : m(noms[j]))).join(", ")}.</p>`).join(""),
+    };
+  });
+
+  ajout(1, "bornes", "Bornes : inclusion, Boole, Bonferroni", () => {
+    const a = rnd(2, 8), b = rnd(2, 8);
+    const PA = new Fr(a, 10), PB = new Fr(b, 10);
+    const maxI = a < b ? PA : PB, minI = a + b > 10 ? new Fr(a + b - 10, 10) : new Fr(0);
+    const minU = a > b ? PA : PB, maxU = a + b < 10 ? new Fr(a + b, 10) : UN;
+    const incomp = a + b <= 10;
+    return {
+      titre: "Encadrer une probabilité",
+      enonce: `${m(T`P(A) = ${d(PA)}`)} et ${m(T`P(B) = ${d(PB)}`)}. On ne sait rien d'autre sur ${m("A")} et ${m("B")}.`,
+      questions: [
+        { label: `Plus grande valeur possible de ${m(T`P(A \cap B)`)}`, reponse: maxI.val() },
+        { label: `Plus petite valeur possible de ${m(T`P(A \cap B)`)}`, reponse: minI.val() },
+        { label: `Plus petite valeur possible de ${m(T`P(A \cup B)`)}`, reponse: minU.val() },
+        { label: `Plus grande valeur possible de ${m(T`P(A \cup B)`)}`, reponse: maxU.val() },
+        { label: `${m("A")} et ${m("B")} peuvent-ils être incompatibles ?`, type: "choix", options: ["Oui", "Non"], reponse: incomp ? "Oui" : "Non" },
+      ],
+      indice: `${m(T`A \cap B \subset A`)} donc ${m(T`P(A \cap B) \le P(A)`)} ; ${m(T`P(A \cup B) \le 1`)} donne Bonferroni
+        ${m(T`P(A \cap B) \ge P(A) + P(B) - 1`)} ; Boole : ${m(T`P(A \cup B) \le P(A) + P(B)`)}.`,
+      correction: `
+        ${M(T`P(A \cap B) \le \min\big(P(A), P(B)\big) = ${d(maxI)}`)}
+        <p>(atteint quand le plus petit évènement est inclus dans l'autre).</p>
+        ${M(T`P(A \cap B) = P(A) + P(B) - P(A \cup B) \ge ${d(PA)} + ${d(PB)} - 1 = ${nb((a + b - 10) / 10)}`)}
+        <p>et une probabilité est ${m(T`\ge 0`)} : minimum ${m(d(minI))}.</p>
+        ${M(T`P(A \cup B) \ge \max\big(P(A), P(B)\big) = ${d(minU)} \qquad P(A \cup B) \le \min\big(1, P(A) + P(B)\big) = ${d(maxU)}`)}
+        <p>${incomp ? `${m(T`P(A) + P(B) \le 1`)} : on peut avoir ${m(T`P(A \cap B) = 0`)}, donc <strong>oui</strong>.`
+          : `${m(T`P(A) + P(B) > 1`)} : forcément ${m(T`P(A \cap B) \ge ${d(minI)} > 0`)}, donc <strong>non</strong>.`}</p>`,
+    };
+  });
+
+  ajout(1, "ordonne", "Tirages ordonnés sans répétition (anniversaires)", () => {
+    const ctx = pick([
+      { t: "de", N: 6, k: rnd(2, 5), enonce: (k) => `On lance ${k} dés équilibrés à six faces.`, ev: "tous les résultats sont différents", rep: "au moins deux dés donnent le même résultat" },
+      { t: "code", N: 10, k: rnd(3, 5), enonce: (k) => `Un code de ${k} chiffres est tiré au hasard (chaque chiffre de 0 à 9, répétitions permises).`, ev: "tous les chiffres sont différents", rep: "au moins un chiffre se répète" },
+      { t: "anniv", N: 365, k: pick([5, 10, 15, 20, 23, 25, 30]), enonce: (k) => `Un groupe compte ${k} personnes ; les anniversaires sont uniformes sur 365 jours (on ignore le 29 février).`, ev: "les anniversaires sont tous différents", rep: "au moins deux personnes ont le même anniversaire" },
+    ]);
+    const { N, k } = ctx;
+    let p = 1;
+    for (let i = 0; i < k; i++) p *= (N - i) / N;
+    const qs = [
+      { label: `Probabilité que ${ctx.ev}`, reponse: p },
+      { label: `Probabilité qu'${ctx.rep}`, reponse: 1 - p },
+    ];
+    if (ctx.t !== "anniv") qs.unshift({ label: m(T`\operatorname{card}(\Omega)`), reponse: N ** k, entier: true });
+    const prod = k <= 6 ? [...Array(k).keys()].map((i) => N - i).join(T` \times `) : T`${N} \times ${N - 1} \times \dots \times ${N - k + 1}`;
+    return {
+      titre: "Tous différents ?",
+      enonce: ctx.enonce(k),
+      questions: qs,
+      indice: `${m(T`\Omega`)} = les ${m("k")}-uplets : ${m(T`\operatorname{card}(\Omega) = N^k`)}. « Tous différents » :
+        ${m(T`N(N-1)\cdots(N-k+1)`)} cas (arrangements). « Au moins deux pareils » : complémentaire.`,
+      correction: `
+        <p>${m(T`\operatorname{card}(\Omega) = ${N}^{${k}}${ctx.t !== "anniv" ? ` = ${N ** k}` : ""}`)} (tirages ordonnés avec répétition, uniformes).</p>
+        ${M(T`P(\text{tous différents}) = \frac{${prod}}{${N}^{${k}}} \approx ${nb(p)}`)}
+        ${M(T`P(\text{au moins une répétition}) = 1 - ${nb(p)} \approx ${nb(1 - p)}`)}
+        ${ctx.t === "anniv" ? "<p>Dès 23 personnes, une coïncidence est plus probable que l'inverse.</p>" : ""}`,
+    };
+  });
+
+  ajout(1, "combinaisons", "Dénombrement : tirages simultanés (binomial)", () => {
+    const r = rnd(3, 7), v = rnd(3, 8), N = r + v;
+    const k = rnd(2, Math.min(4, v));
+    const j = rnd(1, Math.min(k, r));
+    const tot = binom(N, k);
+    const fav = binom(r, j) * binom(v, k - j);
+    const zero = binom(v, k);
+    const ctx = pick([
+      { qui: "Une urne", r: "boules rouges", v: "boules vertes", act: `On tire simultanément ${k} boules` },
+      { qui: "Un groupe", r: "filles", v: "garçons", act: `On forme au hasard un comité de ${k} personnes` },
+      { qui: "Un lot", r: "pièces défectueuses", v: "pièces conformes", act: `On prélève ${k} pièces au hasard, sans remise` },
+    ]);
+    return {
+      titre: "Tirage simultané",
+      enonce: `${ctx.qui} contient ${r} ${ctx.r} et ${v} ${ctx.v}. ${ctx.act}.`,
+      questions: [
+        { label: `Nombre de tirages possibles ${m(T`\operatorname{card}(\Omega)`)}`, reponse: tot, entier: true },
+        { label: `Probabilité d'avoir exactement ${j} ${ctx.r}`, reponse: fav / tot },
+        { label: `Probabilité de n'avoir aucune des ${ctx.r}`, reponse: zero / tot },
+        { label: `Probabilité d'en avoir au moins une`, reponse: 1 - zero / tot },
+      ],
+      indice: `Sans ordre : ${m(T`\operatorname{card}(\Omega) = \binom{${N}}{${k}}`)}. Pour « exactement ${j} » : on choisit les ${j}
+        parmi ${r}, <strong>et</strong> les ${k - j} autres parmi ${v} (produit).`,
+      correction: `
+        ${M(T`\operatorname{card}(\Omega) = \binom{${N}}{${k}} = \frac{${N}!}{${k}!\,${N - k}!} = ${tot}`)}
+        ${M(T`P(\text{exactement } ${j}) = \frac{\binom{${r}}{${j}}\binom{${v}}{${k - j}}}{\binom{${N}}{${k}}} = \frac{${binom(r, j)} \times ${binom(v, k - j)}}{${tot}} = ${vf(new Fr(fav, tot))}`)}
+        ${M(T`P(\text{aucune}) = \frac{\binom{${v}}{${k}}}{\binom{${N}}{${k}}} = \frac{${zero}}{${tot}} = ${vf(new Fr(zero, tot))}`)}
+        ${M(T`P(\text{au moins une}) = 1 - P(\text{aucune}) = ${vf(new Fr(tot - zero, tot))}`)}`,
+    };
+  });
+
+  ajout(1, "qcm1", "QCM de cours — chapitre 1", () => vraiFaux([
+    { e: `Si ${m(T`A \subset B`)}, alors ${m(T`P(A) \le P(B)`)}.`, v: true, j: `${m(T`B = A \cup (B \cap ${Ab})`)}, union disjointe, donc ${m(T`P(B) = P(A) + P(B \cap ${Ab}) \ge P(A)`)}.` },
+    { e: `Pour tous évènements, ${m(T`P(A \cup B) = P(A) + P(B)`)}.`, v: false, j: `Seulement si ${m("A")} et ${m("B")} sont incompatibles ; sinon on retire ${m(T`P(A \cap B)`)}.` },
+    { e: `${m(T`P(A \cap B) \le \min\big(P(A), P(B)\big)`)}.`, v: true, j: `${m(T`A \cap B`)} est inclus dans ${m("A")} et dans ${m("B")}.` },
+    { e: `Le contraire de ${m(T`A \cap B`)} est ${m(T`${Ab} \cap ${Bb}`)}.`, v: false, j: `De Morgan : ${m(T`\overline{A \cap B} = ${Ab} \cup ${Bb}`)} (« pas les deux »).` },
+    { e: `Le contraire de « au moins un des deux » est « ni l'un ni l'autre ».`, v: true, j: `${m(T`\overline{A \cup B} = ${Ab} \cap ${Bb}`)}.` },
+    { e: `Si ${m(T`P(A) = 0{,}7`)} et ${m(T`P(B) = 0{,}5`)}, ${m("A")} et ${m("B")} peuvent être incompatibles.`, v: false, j: `Bonferroni : ${m(T`P(A \cap B) \ge 0{,}7 + 0{,}5 - 1 = 0{,}2 > 0`)}.` },
+    { e: `${m(T`P(A \cap ${Bb}) = P(A) - P(A \cap B)`)}.`, v: true, j: `${m(T`A = (A \cap B) \cup (A \cap ${Bb})`)}, union disjointe.` },
+    { e: `${m(T`P(A \cap ${Bb}) = P(A) - P(B)`)} pour tous ${m("A")}, ${m("B")}.`, v: false, j: `Vrai seulement si ${m(T`B \subset A`)}. En général c'est ${m(T`P(A) - P(A \cap B)`)}.` },
+    { e: `${m(T`P(A \cup B \cup C) \le P(A) + P(B) + P(C)`)}.`, v: true, j: `Inégalité de Boole (on retire des intersections positives dans Poincaré).` },
+    { e: `${m(T`(A \cup B) \cap C = A \cup (B \cap C)`)}.`, v: false, j: `Distributivité : ${m(T`(A \cup B) \cap C = (A \cap C) \cup (B \cap C)`)}. Contre-exemple : ${m("A")} non vide et ${m(T`C = \emptyset`)}.` },
+    { e: `${m(T`(A \cap B) \cup C = (A \cup C) \cap (B \cup C)`)}.`, v: true, j: `C'est l'autre loi de distributivité.` },
+    { e: `${m("A")} et ${m(Ab)} forment un système complet d'évènements.`, v: true, j: `Incompatibles et de réunion ${m(T`\Omega`)}.` },
+    { e: `Avec deux dés, (1, 2) et (2, 1) sont la même issue, donc ${m(T`\operatorname{card}(\Omega) = 21`)}.`, v: false, j: `Pour avoir l'équiprobabilité on distingue les dés : ${m(T`\operatorname{card}(\Omega) = 36`)}.` },
+    { e: `Le nombre de façons de choisir 3 personnes parmi 10 (sans ordre) est ${m(T`10 \times 9 \times 8`)}.`, v: false, j: `Ça, c'est avec ordre. Sans ordre : ${m(T`\binom{10}{3} = 120`)}.` },
+    { e: `La probabilité d'obtenir au moins un 6 en 4 lancers de dé est ${m(T`\frac{4}{6}`)}.`, v: false, j: `${m(T`1 - \left(\frac{5}{6}\right)^4 \approx 0{,}518`)} : on passe par « aucun 6 ».` },
+    { e: `${m(T`P(A \cup B \cup C) = P(A) + P(B) + P(C) - P(A \cap B) - P(A \cap C) - P(B \cap C) + P(A \cap B \cap C)`)}.`, v: true, j: `Formule de Poincaré à 3 évènements.` },
+    { e: `« Exactement un des deux » a pour probabilité ${m(T`P(A) + P(B) - P(A \cap B)`)}.`, v: false, j: `Ça, c'est « au moins un ». Exactement un : ${m(T`P(A) + P(B) - 2P(A \cap B)`)}.` },
+  ]));
+
+  // ------------------------------------------------------------------
+  // Nouveaux générateurs — chapitre 2
+  // ------------------------------------------------------------------
+  ajout(2, "arbre", "Arbre pondéré : compléter et lire", () => {
+    const k = pick([2, 2, 3]);
+    let pa;
+    if (k === 2) { const a = rnd(2, 8); pa = [new Fr(a, 10), new Fr(10 - a, 10)]; }
+    else pa = partition(20, 3).map((x) => new Fr(x, 20));
+    const pb = pa.map(() => new Fr(rnd(1, 19), 20));
+    const noms = k === 2 ? ["A", "A" + BAR] : ["A₁", "A₂", "A₃"];
+    const tx = k === 2 ? ["A", Ab] : ["A_1", "A_2", "A_3"];
+    const h1 = rnd(0, k - 1), h2 = rnd(0, k - 1), h2b = rnd(0, 1);
+    const br = pa.map((p, i) => ({
+      nom: noms[i], p: i === h1 ? "?" : txt(p.val()),
+      fils: [
+        { nom: "B", p: i === h2 && h2b === 0 ? "?" : txt(pb[i].val()) },
+        { nom: "B" + BAR, p: i === h2 && h2b === 1 ? "?" : txt(UN.sub(pb[i]).val()) },
+      ],
+    }));
+    const i2 = rnd(0, k - 1), j = rnd(0, k - 1);
+    const PB = somme(pa.map((p, i) => p.mul(pb[i])));
+    const inter = pa[i2].mul(UN.sub(pb[i2]));
+    const post = pa[j].mul(pb[j]).div(PB);
+    const manque2 = h2b === 0 ? pb[h2] : UN.sub(pb[h2]);
+    const B2 = h2b === 0 ? "B" : Bb;
+    return {
+      titre: "Arbre pondéré",
+      enonce: `Deux étapes : d'abord ${k === 2 ? `${m("A")} ou ${m(Ab)}` : `${m("A_1")}, ${m("A_2")} ou ${m("A_3")}`},
+        ensuite ${m("B")} ou ${m(Bb)}. Deux branches ont été effacées.${arbreSVG(br)}`,
+      questions: [
+        { label: `Branche effacée ${m(T`P(${tx[h1]})`)}`, reponse: pa[h1].val() },
+        { label: `Branche effacée ${m(T`P(${B2} \mid ${tx[h2]})`)}`, reponse: manque2.val() },
+        { label: m(T`P(${tx[i2]} \cap ${Bb})`), reponse: inter.val() },
+        { label: m(T`P(B)`), reponse: PB.val() },
+        { label: m(T`P(${tx[j]} \mid B)`), reponse: post.val() },
+      ],
+      indice: `Les branches issues d'un même nœud ont une somme égale à 1. Sur une branche du 2e niveau on lit une
+        probabilité <strong>conditionnelle</strong>. Un chemin = un produit, ${m(T`P(B)`)} = somme des chemins qui mènent à ${m("B")}.`,
+      correction: `
+        ${M(T`P(${tx[h1]}) = 1 - ${pa.filter((_, i) => i !== h1).map(d).join(" - ")} = ${d(pa[h1])}`)}
+        ${M(T`P(${B2} \mid ${tx[h2]}) = 1 - ${d(UN.sub(manque2))} = ${d(manque2)}`)}
+        ${M(T`P(${tx[i2]} \cap ${Bb}) = P(${tx[i2]})\,P(${Bb} \mid ${tx[i2]}) = ${d(pa[i2])} \times ${d(UN.sub(pb[i2]))} = ${d(inter)}`)}
+        ${M(T`P(B) = ${pa.map((_, i) => `P(${tx[i]})P(B \\mid ${tx[i]})`).join(" + ")} = ${pa.map((p, i) => `${d(p)} \\times ${d(pb[i])}`).join(" + ")} = ${d(PB)}`)}
+        ${M(T`P(${tx[j]} \mid B) = \frac{P(${tx[j]})P(B \mid ${tx[j]})}{P(B)} = \frac{${d(pa[j].mul(pb[j]))}}{${d(PB)}} = ${vf(post)}`)}`,
+    };
+  });
+
+  ajout(2, "composees", "Probabilités composées (3 tirages)", () => {
+    const r = rnd(3, 6), v = rnd(2, 6), N = r + v;
+    const den = N * (N - 1) * (N - 2);
+    const RRR = new Fr(r * (r - 1) * (r - 2), den), RVR = new Fr(r * v * (r - 1), den);
+    const deux = new Fr(3 * r * (r - 1) * v, den);
+    return {
+      titre: "Trois tirages sans remise",
+      enonce: `Une urne contient ${r} boules rouges et ${v} vertes. On tire successivement trois boules <strong>sans remise</strong>.
+        ${m("R_i")} : « la ${m("i")}-ème est rouge », ${m("V_i")} : « la ${m("i")}-ème est verte ».`,
+      questions: [
+        { label: m(T`P(R_1 \cap R_2 \cap R_3)`), reponse: RRR.val() },
+        { label: m(T`P(R_1 \cap V_2 \cap R_3)`), reponse: RVR.val() },
+        { label: "Probabilité d'avoir exactement deux rouges", reponse: deux.val() },
+      ],
+      indice: `Formule des probabilités composées : ${m(T`P(A \cap B \cap C) = P(A)\,P(B \mid A)\,P(C \mid A \cap B)`)}.
+        Après chaque tirage, l'urne a une boule de moins.`,
+      correction: `
+        ${M(T`P(R_1 \cap R_2 \cap R_3) = P(R_1)P(R_2 \mid R_1)P(R_3 \mid R_1 \cap R_2) = \frac{${r}}{${N}} \times \frac{${r - 1}}{${N - 1}} \times \frac{${r - 2}}{${N - 2}} = ${vf(RRR)}`)}
+        ${M(T`P(R_1 \cap V_2 \cap R_3) = \frac{${r}}{${N}} \times \frac{${v}}{${N - 1}} \times \frac{${r - 1}}{${N - 2}} = ${vf(RVR)}`)}
+        <p>Exactement deux rouges : 3 positions possibles pour la verte (RRV, RVR, VRR), chacune de même probabilité
+          (mêmes facteurs dans un autre ordre).</p>
+        ${M(T`P = 3 \times ${RVR.tex()} = ${vf(deux)}`)}`,
+    };
+  });
+
+  ajout(2, "circuit", "n évènements indépendants : circuits", () => {
+    const type = pick(["serie", "parallele", "mixte", "mixte2"]);
+    const p = [0, 1, 2].map(() => new Fr(rnd(12, 19), 20));
+    const q = p.map((x) => UN.sub(x));
+    const tous = p[0].mul(p[1]).mul(p[2]);
+    const aucun = q[0].mul(q[1]).mul(q[2]);
+    let F, form, detail;
+    if (type === "serie") { F = tous; form = T`P(F_1 \cap F_2 \cap F_3) = p_1 p_2 p_3`; detail = `${d(p[0])} \\times ${d(p[1])} \\times ${d(p[2])}`; }
+    else if (type === "parallele") { F = UN.sub(aucun); form = T`1 - P(\overline{F_1} \cap \overline{F_2} \cap \overline{F_3}) = 1 - (1 - p_1)(1 - p_2)(1 - p_3)`; detail = `1 - ${d(q[0])} \\times ${d(q[1])} \\times ${d(q[2])}`; }
+    else if (type === "mixte") { F = p[0].mul(UN.sub(q[1].mul(q[2]))); form = T`p_1 \times \big(1 - (1 - p_2)(1 - p_3)\big)`; detail = `${d(p[0])} \\times (1 - ${d(q[1])} \\times ${d(q[2])})`; }
+    else { F = UN.sub(UN.sub(p[0].mul(p[1])).mul(q[2])); form = T`1 - (1 - p_1 p_2)(1 - p_3)`; detail = `1 - (1 - ${d(p[0])} \\times ${d(p[1])}) \\times ${d(q[2])}`; }
+    const desc = { serie: "trois composants en série", parallele: "trois composants en parallèle", mixte: "C1 en série avec le bloc (C2 ∥ C3)", mixte2: "la branche C1–C2 en parallèle avec C3" }[type];
+    return {
+      titre: "Fiabilité d'un circuit",
+      enonce: `Un circuit est formé de ${desc}. Le courant passe par un composant s'il fonctionne. Les composants fonctionnent
+        indépendamment, avec probabilités ${m(T`p_1 = ${d(p[0])}`)}, ${m(T`p_2 = ${d(p[1])}`)}, ${m(T`p_3 = ${d(p[2])}`)}.
+        ${circuitSVG(type)}`,
+      questions: [
+        { label: "Probabilité que les trois fonctionnent", reponse: tous.val() },
+        { label: "Probabilité qu'au moins un tombe en panne", reponse: UN.sub(tous).val() },
+        { label: "Probabilité que le courant passe", reponse: F.val() },
+      ],
+      indice: `Indépendance mutuelle : la probabilité d'une intersection est le produit. En série il faut <strong>tous</strong>
+        les composants ; en parallèle il en faut <strong>au moins un</strong> (passe par « aucun »).`,
+      correction: `
+        ${M(T`P(F_1 \cap F_2 \cap F_3) = ${d(p[0])} \times ${d(p[1])} \times ${d(p[2])} = ${d(tous)}`)}
+        ${M(T`P(\text{au moins une panne}) = 1 - ${d(tous)} = ${d(UN.sub(tous))}`)}
+        ${M(T`P(\text{passe}) = ${form} = ${detail} = ${d(F)}`)}`,
+    };
+  });
+
+  ajout(2, "indepcompl", "Indépendance et complémentaires", () => {
+    const a = new Fr(rnd(1, 9), 10), b = new Fr(rnd(1, 9), 10);
+    const qa = UN.sub(a), qb = UN.sub(b);
+    return {
+      titre: "Évènements indépendants",
+      enonce: `${m("A")} et ${m("B")} sont <strong>indépendants</strong>, avec ${m(T`P(A) = ${d(a)}`)} et ${m(T`P(B) = ${d(b)}`)}.`,
+      questions: [
+        { label: m(T`P(A \cap ${Bb})`), reponse: a.mul(qb).val() },
+        { label: m(T`P(${Ab} \cap ${Bb})`), reponse: qa.mul(qb).val() },
+        { label: m(T`P(A \cup B)`), reponse: UN.sub(qa.mul(qb)).val() },
+        { label: m(T`P(A \mid ${Bb})`), reponse: a.val() },
+        { label: `${m("A")} et ${m("B")} sont-ils incompatibles ?`, type: "choix", options: ["Oui", "Non"], reponse: "Non" },
+      ],
+      indice: `Si ${m("A")} et ${m("B")} sont indépendants, alors ${m(T`A, ${Bb}`)} et ${m(T`${Ab}, ${Bb}`)} le sont aussi.
+        Pour la réunion, passe par « ni l'un ni l'autre ».`,
+      correction: `
+        ${M(T`P(A \cap ${Bb}) = P(A)P(${Bb}) = ${d(a)} \times ${d(qb)} = ${d(a.mul(qb))}`)}
+        ${M(T`P(${Ab} \cap ${Bb}) = ${d(qa)} \times ${d(qb)} = ${d(qa.mul(qb))}`)}
+        ${M(T`P(A \cup B) = 1 - P(${Ab} \cap ${Bb}) = ${d(UN.sub(qa.mul(qb)))}`)}
+        ${M(T`P(A \mid ${Bb}) = \frac{P(A \cap ${Bb})}{P(${Bb})} = P(A) = ${d(a)}`)}
+        <p>Incompatibles voudrait dire ${m(T`P(A \cap B) = 0`)}, or ${m(T`P(A \cap B) = ${d(a.mul(b))} \neq 0`)} : <strong>non</strong>.
+          Deux évènements de probabilité non nulle ne peuvent pas être à la fois incompatibles et indépendants.</p>`,
+    };
+  });
+
+  ajout(2, "avant", "« E avant F » et série géométrique", () => {
+    if (Math.random() < 0.5) {
+      let s1, s2;
+      do { s1 = rnd(2, 12); s2 = rnd(2, 12); } while (s1 === s2);
+      const pS = (s) => new Fr(6 - Math.abs(s - 7), 36);
+      const pE = pS(s1), pF = pS(s2), r = UN.sub(pE).sub(pF);
+      const res = pE.div(pE.add(pF));
+      return {
+        titre: "Qui sort en premier ?",
+        enonce: `On lance deux dés de façon répétée jusqu'à obtenir une somme égale à ${s1} ou à ${s2}.
+          ${m("E")} : « la somme ${s1} sort avant la somme ${s2} ».`,
+        questions: [
+          { label: `Probabilité d'obtenir ${s1} en un lancer`, reponse: pE.val() },
+          { label: `Probabilité que le premier lancer ne donne ni ${s1} ni ${s2}`, reponse: r.val() },
+          { label: m(T`P(E)`), reponse: res.val() },
+        ],
+        indice: `${m(T`P(S = s) = \frac{6 - |s - 7|}{36}`)}. ${m("E")} = réunion disjointe des évènements « rien pendant
+          ${m(T`n - 1`)} lancers, puis ${s1} au ${m("n")}-ème ». Série géométrique.`,
+        correction: `
+          ${M(T`P(S = ${s1}) = ${vf(pE)} \qquad P(S = ${s2}) = ${vf(pF)} \qquad r = 1 - ${pE.tex()} - ${pF.tex()} = ${vf(r)}`)}
+          ${M(T`P(E) = \sum_{n \ge 1} r^{n - 1}\,${pE.tex()} = \frac{${pE.tex()}}{1 - r} = \frac{P(S = ${s1})}{P(S = ${s1}) + P(S = ${s2})} = ${vf(res)}`)}
+          <p>Retiens le raccourci : ${m(T`\frac{P(E)}{P(E) + P(F)}`)}, les lancers « neutres » ne comptent pas.</p>`,
+      };
+    }
+    const p = new Fr(rnd(1, 6), 10), q = new Fr(rnd(1, 6), 10);
+    const r = UN.sub(p).mul(UN.sub(q));
+    const res = p.div(UN.sub(r));
+    return {
+      titre: "Tir alterné",
+      enonce: `Alice et Bob tirent à tour de rôle sur une cible, Alice commence. Alice touche avec probabilité ${m(d(p))},
+        Bob avec ${m(d(q))}, les tirs sont indépendants. Le premier qui touche gagne.`,
+      questions: [
+        { label: "Probabilité que personne ne touche lors du premier tour (Alice puis Bob)", reponse: r.val() },
+        { label: "Probabilité qu'Alice gagne à son 2e tir", reponse: r.mul(p).val() },
+        { label: "Probabilité qu'Alice gagne", reponse: res.val() },
+      ],
+      indice: `Alice gagne à son ${m("n")}-ème tir si les ${m(T`n - 1`)} premiers tours sont ratés par les deux,
+        puis elle touche : ${m(T`r^{n-1} p`)}. Somme d'une série géométrique ${m(T`\sum_{n \ge 0} r^n = \frac{1}{1 - r}`)}.`,
+      correction: `
+        ${M(T`r = (1 - ${d(p)})(1 - ${d(q)}) = ${d(r)} \qquad P(\text{gagne au 2e tir}) = r \times ${d(p)} = ${d(r.mul(p))}`)}
+        ${M(T`P(\text{Alice gagne}) = \sum_{n \ge 1} r^{n - 1} \times ${d(p)} = \frac{${d(p)}}{1 - ${d(r)}} = ${vf(res)}`)}`,
+    };
+  });
+
+  ajout(2, "urnes", "Bayes : choix d'une urne au dé", () => {
+    const k = rnd(1, 5);
+    const b1 = rnd(1, 7), n1 = rnd(1, 7), b2 = rnd(1, 7), n2 = rnd(1, 7);
+    const P1 = new Fr(k, 6), P2 = UN.sub(P1);
+    const pb1 = new Fr(b1, b1 + n1), pb2 = new Fr(b2, b2 + n2);
+    const PBl = P1.mul(pb1).add(P2.mul(pb2));
+    const U1Bl = P1.mul(pb1).div(PBl);
+    const U2N = P2.mul(UN.sub(pb2)).div(UN.sub(PBl));
+    return {
+      titre: "Deux urnes",
+      enonce: `On lance un dé : s'il donne ${k === 1 ? "1" : `1 à ${k}`}, on pioche dans l'urne ${m("U_1")} (${b1} blanches, ${n1} noires),
+        sinon dans ${m("U_2")} (${b2} blanches, ${n2} noires). On tire une boule.`,
+      questions: [
+        { label: "Probabilité de tirer une boule blanche", reponse: PBl.val() },
+        { label: "Probabilité d'avoir pioché dans U₁ sachant que la boule est blanche", reponse: U1Bl.val() },
+        { label: "Probabilité d'avoir pioché dans U₂ sachant que la boule est noire", reponse: U2N.val() },
+      ],
+      indice: `Système complet ${m(T`\{U_1, U_2\}`)} avec ${m(T`P(U_1) = \frac{${k}}{6}`)}. Probabilités totales pour la couleur, puis Bayes.`,
+      correction: `
+        ${M(T`P(\text{Bl}) = P(U_1)P(\text{Bl} \mid U_1) + P(U_2)P(\text{Bl} \mid U_2) = ${P1.tex()} \times ${pb1.tex()} + ${P2.tex()} \times ${pb2.tex()} = ${vf(PBl)}`)}
+        ${M(T`P(U_1 \mid \text{Bl}) = \frac{${P1.tex()} \times ${pb1.tex()}}{${PBl.tex()}} = ${vf(U1Bl)}`)}
+        ${M(T`P(U_2 \mid \text{N}) = \frac{P(U_2)P(\text{N} \mid U_2)}{1 - P(\text{Bl})} = \frac{${P2.tex()} \times ${UN.sub(pb2).tex()}}{${UN.sub(PBl).tex()}} = ${vf(U2N)}`)}`,
+    };
+  });
+
+  ajout(2, "markov", "Suite récurrente (arbre de transition)", () => {
+    const p = new Fr(rnd(5, 9), 10), q = new Fr(rnd(1, 4), 10);
+    const a = p.sub(q);
+    const p1 = p, p2 = a.mul(p).add(q), p3 = a.mul(p2).add(q);
+    const l = q.div(UN.sub(a));
+    const br = [
+      { nom: "S", p: "pₙ", fils: [{ nom: "S", p: txt(p.val()) }, { nom: "P", p: txt(UN.sub(p).val()) }] },
+      { nom: "P", p: "1 − pₙ", fils: [{ nom: "S", p: txt(q.val()) }, { nom: "P", p: txt(UN.sub(q).val()) }] },
+    ];
+    return {
+      titre: "Soleil ou pluie",
+      enonce: `S'il fait soleil (S) un jour, il fait soleil le lendemain avec probabilité ${m(d(p))} ; s'il pleut (P), il fait
+        soleil le lendemain avec probabilité ${m(d(q))}. Aujourd'hui (jour 0) il fait soleil : ${m(T`p_0 = 1`)},
+        où ${m("p_n")} = P(soleil au jour ${m("n")}).${arbreSVG(br)}`,
+      questions: [
+        { label: m("p_1"), reponse: p1.val() },
+        { label: m("p_2"), reponse: p2.val() },
+        { label: m("p_3"), reponse: p3.val() },
+        { label: `Limite ${m(T`\ell = \lim p_n`)}`, reponse: l.val() },
+      ],
+      indice: `Probabilités totales avec le système complet (soleil / pluie au jour ${m("n")}) :
+        ${m(T`p_{n+1} = ${d(p)}\,p_n + ${d(q)}\,(1 - p_n)`)}. Suite arithmético-géométrique : point fixe ${m(T`\ell = a\ell + b`)}.`,
+      correction: `
+        ${M(T`p_{n+1} = ${d(p)}\,p_n + ${d(q)}(1 - p_n) = ${d(a)}\,p_n + ${d(q)}`)}
+        ${M(T`p_1 = ${d(p1)} \qquad p_2 = ${d(a)} \times ${d(p1)} + ${d(q)} = ${d(p2)} \qquad p_3 = ${d(a)} \times ${d(p2)} + ${d(q)} = ${d(p3)}`)}
+        ${M(T`\ell = ${d(a)}\,\ell + ${d(q)} \iff \ell = \frac{${d(q)}}{1 - ${d(a)}} = ${vf(l)}`)}
+        <p>Et ${m(T`p_n = \ell + ${d(a)}^n (p_0 - \ell) \to \ell`)} car ${m(T`|${d(a)}| < 1`)}.</p>`,
+    };
+  });
+
+  ajout(2, "qcm2", "QCM de cours — chapitre 2", () => vraiFaux([
+    { e: `Deux évènements incompatibles de probabilités non nulles sont indépendants.`, v: false, j: `${m(T`P(A \cap B) = 0 \neq P(A)P(B) > 0`)} : jamais indépendants.` },
+    { e: `Si ${m("A")} et ${m("B")} sont indépendants, ${m(Ab)} et ${m(Bb)} le sont aussi.`, v: true, j: `${m(T`P(${Ab} \cap ${Bb}) = 1 - P(A \cup B) = (1 - P(A))(1 - P(B))`)}.` },
+    { e: `${m(T`P(A \mid B) = P(B \mid A)`)} pour tous ${m("A")}, ${m("B")}.`, v: false, j: `${m(T`P(A \mid B) = \frac{P(B \mid A)P(A)}{P(B)}`)} : égal seulement si ${m(T`P(A) = P(B)`)}.` },
+    { e: `${m(T`P(${Ab} \mid B) = 1 - P(A \mid B)`)}.`, v: true, j: `${m(T`P(\cdot \mid B)`)} est une probabilité.` },
+    { e: `${m(T`P(A \mid ${Bb}) = 1 - P(A \mid B)`)}.`, v: false, j: `On change la condition, pas l'évènement. Le bon complément est ${m(T`P(${Ab} \mid B)`)}.` },
+    { e: `${m(T`P(A \cap B) = P(A)\,P(B \mid A)`)} quand ${m(T`P(A) > 0`)}.`, v: true, j: `C'est la définition de ${m(T`P(B \mid A)`)} réarrangée (produit le long d'une branche).` },
+    { e: `Si ${m(T`P(A \mid B) = P(A)`)} (avec ${m(T`P(B) > 0`)}), alors ${m("A")} et ${m("B")} sont indépendants.`, v: true, j: `On multiplie par ${m(T`P(B)`)} : ${m(T`P(A \cap B) = P(A)P(B)`)}.` },
+    { e: `Dans un arbre, les probabilités des branches issues d'un même nœud ont une somme égale à 1.`, v: true, j: `Elles forment une loi conditionnelle sachant le nœud.` },
+    { e: `Trois évènements deux à deux indépendants sont mutuellement indépendants.`, v: false, j: `Contre-exemple classique : deux pièces, A = « 1re pile », B = « 2e pile », C = « mêmes faces » : ${m(T`P(A \cap B \cap C) = \frac14 \neq \frac18`)}.` },
+    { e: `La formule des probabilités totales demande un système complet d'évènements.`, v: true, j: `Les ${m("A_i")} doivent être incompatibles deux à deux et de réunion ${m(T`\Omega`)}.` },
+    { e: `${m(T`P(A \mid B)`)} peut être strictement supérieure à 1.`, v: false, j: `${m(T`A \cap B \subset B`)} donc ${m(T`P(A \cap B) \le P(B)`)}.` },
+    { e: `Avec remise, les résultats des tirages successifs sont indépendants.`, v: true, j: `L'urne est remise dans le même état à chaque tirage.` },
+    { e: `Sans remise, ${m(T`P(B_2) = P(B_1)`)} (2e boule blanche ou 1re boule blanche).`, v: true, j: `Par probabilités totales, l'ordre ne compte pas tant qu'on ne sait rien du 1er tirage.` },
+    { e: `Si ${m(T`A \subset B`)} et ${m(T`P(B) > 0`)}, alors ${m(T`P(A \mid B) = \frac{P(A)}{P(B)}`)}.`, v: true, j: `${m(T`A \cap B = A`)}.` },
+    { e: `${m(T`P(A \mid B) + P(A \mid ${Bb}) = 1`)}.`, v: false, j: `Ex. : si ${m(T`A = \Omega`)}, la somme vaut 2.` },
+  ]));
+
+  // ------------------------------------------------------------------
+  // Nouveaux générateurs — chapitre 3
+  // ------------------------------------------------------------------
+  ajout(3, "transfert", "Loi de g(X) et théorème de transfert", () => {
+    const gs = [
+      { tex: "X^2", f: (x) => x * x },
+      { tex: T`|X|`, f: (x) => Math.abs(x) },
+      { tex: "(X - 1)^2", f: (x) => (x - 1) ** 2 },
+    ];
+    let g, xs, imgs;
+    for (;;) {
+      g = pick(gs);
+      xs = melange([-2, -1, 0, 1, 2, 3]).slice(0, rnd(4, 5)).sort((x, y) => x - y);
+      imgs = [...new Set(xs.map(g.f))].sort((x, y) => x - y);
+      if (imgs.length < xs.length) break;
+    }
+    const ps = partition(20, xs.length).map((x) => new Fr(x, 20));
+    const loiY = imgs.map((y) => somme(xs.map((x, i) => (g.f(x) === y ? ps[i] : new Fr(0)))));
+    const vi = loiY.findIndex((_, k) => xs.filter((x) => g.f(x) === imgs[k]).length > 1);
+    const EY = somme(xs.map((x, i) => ps[i].mul(g.f(x))));
+    const pre = xs.filter((x) => g.f(x) === imgs[vi]);
+    return {
+      titre: "Fonction d'une variable",
+      enonce: `${m("X")} a la loi ci-dessous, et on pose ${m(T`Y = ${g.tex}`)}.
+        ${loiTable(xs, ps.map((p) => m(d(p))))}`,
+      questions: [
+        { label: `Nombre de valeurs distinctes prises par ${m("Y")}`, reponse: imgs.length, entier: true },
+        { label: m(T`P(Y = ${imgs[vi]})`), reponse: loiY[vi].val() },
+        { label: m(T`E(Y)`), reponse: EY.val() },
+      ],
+      indice: `Calcule ${m(T`g(x)`)} pour chaque valeur : les ${m("x")} qui donnent le même ${m("y")} se regroupent
+        (on additionne leurs probabilités). Transfert : ${m(T`E(g(X)) = \sum_x g(x)P(X = x)`)}, inutile de passer par la loi de ${m("Y")}.`,
+      correction: `
+        <p>Valeurs : ${xs.map((x) => m(T`g(${x}) = ${g.f(x)}`)).join(", ")}.</p>
+        ${loiTable(imgs, loiY.map((p) => m(d(p))), "y", "P(Y = y)")}
+        ${M(T`P(Y = ${imgs[vi]}) = ${pre.map((x) => `P(X = ${x})`).join(" + ")} = ${d(loiY[vi])}`)}
+        ${M(T`E(Y) = ${xs.map((x, i) => `${g.f(x)} \\times ${d(ps[i])}`).join(" + ")} = ${vf(EY)}`)}`,
+    };
+  });
+
+  ajout(3, "somme", "Somme de deux variables indépendantes", () => {
+    const px = partition(10, 3).map((x) => new Fr(x, 10));
+    const q = new Fr(rnd(1, 9), 10), nq = UN.sub(q);
+    const pS = [px[0].mul(nq), px[1].mul(nq).add(px[0].mul(q)), px[2].mul(nq).add(px[1].mul(q)), px[2].mul(q)];
+    const EX = px[1].add(px[2].mul(2)), EX2 = px[1].add(px[2].mul(4));
+    const VX = EX2.sub(EX.mul(EX));
+    const ES = EX.add(q), VS = VX.add(q.mul(nq));
+    const s = rnd(1, 2);
+    const egal = px[0].mul(nq).add(px[1].mul(q));
+    return {
+      titre: "Loi d'une somme",
+      enonce: `${m("X")} et ${m("Y")} sont indépendantes. ${m("X")} prend les valeurs 0, 1, 2 avec probabilités
+        ${px.map((p) => m(d(p))).join(", ")} ; ${m(T`Y \sim \mathcal{B}(${d(q)})`)} (Bernoulli). On pose ${m("S = X + Y")}.`,
+      questions: [
+        { label: m(T`P(S = ${s})`), reponse: pS[s].val() },
+        { label: m(T`P(X = Y)`), reponse: egal.val() },
+        { label: m(T`E(S)`), reponse: ES.val() },
+        { label: m(T`V(S)`), reponse: VS.val() },
+      ],
+      indice: `Liste les couples ${m("(x, y)")} qui donnent la valeur voulue et additionne ${m(T`P(X = x)P(Y = y)`)} (indépendance).
+        ${m(T`E(X + Y) = E(X) + E(Y)`)} toujours ; ${m(T`V(X + Y) = V(X) + V(Y)`)} car indépendantes.`,
+      correction: `
+        ${M(T`P(S = ${s}) = P(X = ${s})P(Y = 0) + P(X = ${s - 1})P(Y = 1) = ${d(px[s])} \times ${d(nq)} + ${d(px[s - 1])} \times ${d(q)} = ${d(pS[s])}`)}
+        ${M(T`P(X = Y) = P(X = 0)P(Y = 0) + P(X = 1)P(Y = 1) = ${d(egal)}`)}
+        ${M(T`E(X) = ${d(EX)} \qquad E(X^2) = ${d(EX2)} \qquad V(X) = ${d(EX2)} - ${d(EX)}^2 = ${d(VX)}`)}
+        ${M(T`E(S) = ${d(EX)} + ${d(q)} = ${d(ES)} \qquad V(S) = ${d(VX)} + ${d(q)} \times ${d(nq)} = ${d(VS)}`)}
+        <p>Loi complète de ${m("S")} :</p>${loiTable([0, 1, 2, 3], pS.map((p) => m(d(p))), "s", "P(S = s)")}`,
+    };
+  });
+
+  ajout(3, "correlation", "Écart-type, covariance, corrélation", () => {
+    const sx = rnd(1, 5), sy = rnd(1, 5);
+    const ex = rnd(-3, 5), ey = rnd(-3, 5);
+    const rho = pick([-0.8, -0.6, -0.5, -0.25, 0, 0.25, 0.4, 0.5, 0.6, 0.75]);
+    const cov = Math.round(rho * sx * sy * 100) / 100;
+    const r = cov / (sx * sy);
+    const a = pick([-3, -2, -1, 2, 3]), b = rnd(-5, 5);
+    return {
+      titre: "Covariance et corrélation",
+      enonce: `On donne ${m(T`E(X) = ${ex}`)}, ${m(T`E(X^2) = ${sx * sx + ex * ex}`)}, ${m(T`E(Y) = ${ey}`)},
+        ${m(T`E(Y^2) = ${sy * sy + ey * ey}`)} et ${m(T`E(XY) = ${nb(cov + ex * ey)}`)}.`,
+      questions: [
+        { label: m(T`\sigma(X)`), reponse: sx },
+        { label: m(T`\mathrm{Cov}(X, Y)`), reponse: cov },
+        { label: m(T`\rho(X, Y)`), reponse: r },
+        { label: m(T`V(X - Y)`), reponse: sx * sx + sy * sy - 2 * cov },
+        choix4(`${m(T`\rho(X, ${a}X ${b < 0 ? "-" : "+"} ${Math.abs(b)})`)} vaut :`, a < 0 ? "−1" : "1", ["−1", "0", "1", "ça dépend de la loi de X"]),
+      ],
+      indice: `${m(T`V(X) = E(X^2) - E(X)^2`)}, ${m(T`\sigma = \sqrt{V}`)}, ${m(T`\mathrm{Cov}(X, Y) = E(XY) - E(X)E(Y)`)},
+        ${m(T`\rho = \frac{\mathrm{Cov}}{\sigma(X)\sigma(Y)}`)}. ${m(T`|\rho| = 1`)} exactement quand ${m("Y")} est une fonction affine de ${m("X")}.`,
+      correction: `
+        ${M(T`V(X) = ${sx * sx + ex * ex} - ${ex < 0 ? `(${ex})` : ex}^2 = ${sx * sx} \Rightarrow \sigma(X) = ${sx} \qquad V(Y) = ${sy * sy} \Rightarrow \sigma(Y) = ${sy}`)}
+        ${M(T`\mathrm{Cov}(X, Y) = ${nb(cov + ex * ey)} - ${ex < 0 ? `(${ex})` : ex} \times ${ey < 0 ? `(${ey})` : ey} = ${nb(cov)}`)}
+        ${M(T`\rho(X, Y) = \frac{${nb(cov)}}{${sx} \times ${sy}} = ${nb(r)}`)}
+        ${M(T`V(X - Y) = V(X) + V(Y) - 2\,\mathrm{Cov}(X, Y) = ${sx * sx} + ${sy * sy} - 2 \times ${cov < 0 ? `(${nb(cov)})` : nb(cov)} = ${nb(sx * sx + sy * sy - 2 * cov)}`)}
+        <p>${m(T`\mathrm{Cov}(X, aX + b) = a V(X)`)} et ${m(T`\sigma(aX + b) = |a|\sigma(X)`)} donc ${m(T`\rho = \frac{a}{|a|}`)} :
+          ici ${m(T`a = ${a}`)}, ${m(T`\rho = ${a < 0 ? -1 : 1}`)}.</p>`,
+    };
+  });
+
+  ajout(3, "moyenne", "Moyenne empirique", () => {
+    const mu = rnd(2, 40), s = rnd(2, 12), n = pick([4, 9, 16, 25, 36, 49, 64, 100]);
+    const cible = pick([0.5, 1, 1.5, 2]);
+    const nmin = Math.ceil((s / cible) ** 2 - 1e-9);
+    return {
+      titre: "Moyenne de n mesures",
+      enonce: `${m("X_1, \\dots, X_n")} sont indépendantes, de même loi, d'espérance ${m(T`\mu = ${mu}`)} et d'écart-type
+        ${m(T`\sigma = ${s}`)}. On note ${m(T`\overline{X} = \frac{1}{n}\sum_{i=1}^n X_i`)}, ici avec ${m(T`n = ${n}`)}.`,
+      questions: [
+        { label: m(T`E(\overline{X})`), reponse: mu },
+        { label: m(T`V(\overline{X})`), reponse: (s * s) / n },
+        { label: m(T`\sigma(\overline{X})`), reponse: s / Math.sqrt(n) },
+        { label: `Plus petit ${m("n")} tel que ${m(T`\sigma(\overline{X}) \le ${nb(cible)}`)}`, reponse: nmin, entier: true },
+      ],
+      indice: `${m(T`E(\overline{X}) = \mu`)} par linéarité. ${m(T`V\big(\sum X_i\big) = \sum V(X_i)`)} (indépendance) et ${m(T`V(aX) = a^2 V(X)`)}
+        donnent ${m(T`V(\overline{X}) = \frac{\sigma^2}{n}`)}.`,
+      correction: `
+        ${M(T`E(\overline{X}) = \frac{1}{n} \sum E(X_i) = \mu = ${mu}`)}
+        ${M(T`V(\overline{X}) = \frac{1}{n^2} \sum V(X_i) = \frac{\sigma^2}{n} = \frac{${s * s}}{${n}} = ${nb((s * s) / n)}`)}
+        ${M(T`\sigma(\overline{X}) = \frac{\sigma}{\sqrt{n}} = \frac{${s}}{${Math.sqrt(n)}} = ${nb(s / Math.sqrt(n))}`)}
+        ${M(T`\frac{${s}}{\sqrt{n}} \le ${nb(cible)} \iff n \ge \left(\frac{${s}}{${nb(cible)}}\right)^2 = ${nb((s / cible) ** 2)} \Rightarrow n = ${nmin}`)}`,
+    };
+  });
+
+  ajout(3, "uniforme", "Loi uniforme discrète", () => {
+    const n = pick([4, 6, 8, 10, 12, 20]), k = rnd(2, n - 1);
+    const pairs = Math.floor(n / 2);
+    return {
+      titre: "Dé à n faces",
+      enonce: `On lance un dé équilibré à ${n} faces numérotées de 1 à ${n}. ${m("X")} est le résultat : ${m(T`X \sim \mathcal{U}(\{1, \dots, ${n}\})`)}.`,
+      questions: [
+        { label: m(T`P(X \le ${k})`), reponse: k / n },
+        { label: "Probabilité que X soit pair", reponse: pairs / n },
+        { label: m(T`E(X)`), reponse: (n + 1) / 2 },
+        { label: m(T`V(X)`), reponse: (n * n - 1) / 12 },
+      ],
+      indice: `${m(T`P(X = k) = \frac{1}{${n}}`)} pour chaque face. ${m(T`E(X) = \frac{n + 1}{2}`)} (loi symétrique autour du milieu)
+        et ${m(T`V(X) = \frac{n^2 - 1}{12}`)}.`,
+      correction: `
+        ${M(T`P(X \le ${k}) = \frac{${k}}{${n}} = ${vf(new Fr(k, n))} \qquad P(X \text{ pair}) = \frac{${pairs}}{${n}} = ${vf(new Fr(pairs, n))}`)}
+        ${M(T`E(X) = \frac{1}{${n}}\sum_{k=1}^{${n}} k = \frac{${n} + 1}{2} = ${nb((n + 1) / 2)}`)}
+        ${M(T`E(X^2) = \frac{(${n} + 1)(2 \times ${n} + 1)}{6} \qquad V(X) = \frac{${n}^2 - 1}{12} = ${vf(new Fr(n * n - 1, 12))}`)}`,
+    };
+  });
+
+  ajout(3, "indicatrice", "Variables indicatrices", () => {
+    const p = [0, 1, 2].map(() => new Fr(rnd(2, 9), 10));
+    const ctx = pick([
+      { qui: "Un étudiant passe trois partiels", ev: "il valide le partiel", N: "le nombre de partiels validés" },
+      { qui: "Trois clients entrent dans une boutique", ev: "le client achète", N: "le nombre d'acheteurs" },
+      { qui: "Trois lampes sont allumées pour la nuit", ev: "la lampe grille", N: "le nombre de lampes grillées" },
+    ]);
+    const E = somme(p), V = somme(p.map((x) => x.mul(UN.sub(x))));
+    const z = UN.sub(p[0]).mul(UN.sub(p[1])).mul(UN.sub(p[2]));
+    return {
+      titre: "Compter avec des indicatrices",
+      enonce: `${ctx.qui}. Pour ${m(T`i = 1, 2, 3`)}, ${m("A_i")} : « ${ctx.ev} ${m("i")} », de probabilités
+        ${p.map((x, i) => m(T`P(A_${i + 1}) = ${d(x)}`)).join(", ")}, indépendants. ${m("N")} est ${ctx.N} :
+        ${m(T`N = \mathbb 1_{A_1} + \mathbb 1_{A_2} + \mathbb 1_{A_3}`)}.`,
+      questions: [
+        { label: m(T`E(N)`), reponse: E.val() },
+        { label: m(T`V(N)`), reponse: V.val() },
+        { label: m(T`P(N = 0)`), reponse: z.val() },
+        { label: m(T`E(\mathbb 1_{A_1}\mathbb 1_{A_2})`), reponse: p[0].mul(p[1]).val() },
+      ],
+      indice: `${m(T`E(\mathbb 1_A) = P(A)`)}, ${m(T`V(\mathbb 1_A) = P(A)(1 - P(A))`)}, ${m(T`\mathbb 1_A \mathbb 1_B = \mathbb 1_{A \cap B}`)}.
+        Indépendance : les variances s'additionnent. ${m("N")} n'est <strong>pas</strong> binomiale (probabilités différentes).`,
+      correction: `
+        ${M(T`E(N) = ${p.map(d).join(" + ")} = ${d(E)}`)}
+        ${M(T`V(N) = ${p.map((x) => `${d(x)} \\times ${d(UN.sub(x))}`).join(" + ")} = ${d(V)}`)}
+        ${M(T`P(N = 0) = P(\overline{A_1} \cap \overline{A_2} \cap \overline{A_3}) = ${p.map((x) => d(UN.sub(x))).join(T` \times `)} = ${d(z)}`)}
+        ${M(T`E(\mathbb 1_{A_1}\mathbb 1_{A_2}) = E(\mathbb 1_{A_1 \cap A_2}) = P(A_1 \cap A_2) = ${d(p[0])} \times ${d(p[1])} = ${d(p[0].mul(p[1]))}`)}`,
+    };
+  });
+
+  ajout(3, "constante", "Loi valide : trouver la constante", () => {
+    const n = rnd(3, 6);
+    const f = pick([
+      { tex: "ck", w: (k) => k },
+      { tex: `c(${n + 1} - k)`, w: (k) => n + 1 - k },
+      { tex: "ck^2", w: (k) => k * k },
+    ]);
+    const ks = [...Array(n).keys()].map((i) => i + 1);
+    const S = ks.reduce((s, k) => s + f.w(k), 0);
+    const c = new Fr(1, S);
+    const mm = rnd(2, n);
+    const pge = new Fr(ks.filter((k) => k >= mm).reduce((s, k) => s + f.w(k), 0), S);
+    const E = new Fr(ks.reduce((s, k) => s + k * f.w(k), 0), S);
+    return {
+      titre: "Trouver la constante",
+      enonce: `${m("X")} prend les valeurs ${m(T`1, \dots, ${n}`)} avec ${m(T`P(X = k) = ${f.tex}`)}, où ${m("c")} est une constante.`,
+      questions: [
+        { label: `Valeur de ${m("c")}`, reponse: c.val() },
+        { label: m(T`P(X \ge ${mm})`), reponse: pge.val() },
+        { label: m(T`E(X)`), reponse: E.val() },
+      ],
+      indice: `Une loi est valide si ${m(T`p_k \ge 0`)} et ${m(T`\sum p_k = 1`)} : écris la somme, elle donne ${m("c")}.`,
+      correction: `
+        ${M(T`\sum_{k=1}^{${n}} P(X = k) = c\,(${ks.map(f.w).join(" + ")}) = ${S}c = 1 \Rightarrow c = ${c.tex()}`)}
+        ${M(T`P(X \ge ${mm}) = \frac{${ks.filter((k) => k >= mm).map(f.w).join(" + ")}}{${S}} = ${vf(pge)}`)}
+        ${M(T`E(X) = \frac{${ks.map((k) => `${k} \\times ${f.w(k)}`).join(" + ")}}{${S}} = ${vf(E)}`)}`,
+    };
+  });
+
+  ajout(3, "qcm3", "QCM de cours — chapitre 3", () => vraiFaux([
+    { e: `Si ${m(T`\mathrm{Cov}(X, Y) = 0`)}, alors ${m("X")} et ${m("Y")} sont indépendantes.`, v: false, j: `Réciproque fausse. Ex. : ${m(T`X`)} uniforme sur ${m(T`\{-1, 0, 1\}`)} et ${m(T`Y = X^2`)} : covariance nulle, mais ${m("Y")} dépend de ${m("X")}.` },
+    { e: `Si ${m("X")} et ${m("Y")} sont indépendantes, alors ${m(T`\mathrm{Cov}(X, Y) = 0`)}.`, v: true, j: `${m(T`E(XY) = E(X)E(Y)`)} dans ce cas.` },
+    { e: `${m(T`V(X - Y) = V(X) - V(Y)`)} pour ${m("X")}, ${m("Y")} indépendantes.`, v: false, j: `${m(T`V(X - Y) = V(X) + V(-Y) = V(X) + V(Y)`)} : les variances s'ajoutent.` },
+    { e: `${m(T`V(2X) = 2V(X)`)}.`, v: false, j: `${m(T`V(aX) = a^2 V(X)`)}, donc ${m(T`4V(X)`)}.` },
+    { e: `${m(T`V(X + 3) = V(X)`)}.`, v: true, j: `Décaler une variable ne change pas sa dispersion.` },
+    { e: `${m(T`E(XY) = E(X)E(Y)`)} pour toutes variables ${m("X")}, ${m("Y")}.`, v: false, j: `La différence est justement ${m(T`\mathrm{Cov}(X, Y)`)}. Ex. : ${m(T`E(X \cdot X) = E(X^2) \neq E(X)^2`)} en général.` },
+    { e: `${m(T`|\rho(X, Y)| \le 1`)}.`, v: true, j: `Inégalité de Cauchy-Schwarz.` },
+    { e: `${m(T`\rho(X, Y) = -1`)} si et seulement si ${m(T`Y = aX + b`)} avec ${m(T`a < 0`)}.`, v: true, j: `Cas d'égalité de Cauchy-Schwarz.` },
+    { e: `${m(T`\mathrm{Cov}(X, X) = V(X)`)}.`, v: true, j: `${m(T`E(X \cdot X) - E(X)^2`)}.` },
+    { e: `${m(T`E(\mathbb 1_A) = P(A)`)}.`, v: true, j: `${m(T`\mathbb 1_A`)} vaut 1 avec probabilité ${m(T`P(A)`)}, 0 sinon.` },
+    { e: `Si ${m(T`X \sim \mathcal{B}(n, p)`)}, alors ${m(T`V(X) = np`)}.`, v: false, j: `${m(T`V(X) = np(1 - p)`)}.` },
+    { e: `Si ${m(T`X \sim \mathcal{P}(\lambda)`)}, alors ${m(T`E(X) = V(X) = \lambda`)}.`, v: true, j: `Propriété caractéristique de la loi de Poisson.` },
+    { e: `Si ${m(T`X \sim \mathcal{G}(p)`)} (rang du 1er succès), ${m(T`E(X) = \frac{1}{p}`)}.`, v: true, j: `Cas ${m("r = 1")} de la binomiale négative : ${m(T`E = \frac{r}{p}`)}.` },
+    { e: `Avec ${m("n")} variables indépendantes de même écart-type ${m(T`\sigma`)}, ${m(T`\sigma(\overline{X}) = \frac{\sigma}{n}`)}.`, v: false, j: `${m(T`V(\overline{X}) = \frac{\sigma^2}{n}`)} donc ${m(T`\sigma(\overline{X}) = \frac{\sigma}{\sqrt{n}}`)}.` },
+    { e: `Si la loi de ${m("X")} est symétrique autour de ${m("c")}, alors ${m(T`E(X) = c`)}.`, v: true, j: `${m(T`X - c`)} et ${m(T`c - X`)} ont même loi, donc ${m(T`E(X - c) = 0`)}.` },
+    { e: `${m(T`F(x) = P(X \le x)`)} est croissante et ${m(T`P(X = k) = F(k) - F(k - 1)`)} pour ${m("X")} à valeurs entières.`, v: true, j: `${m(T`\{X \le k\} = \{X \le k - 1\} \cup \{X = k\}`)}, union disjointe.` },
+    { e: `Une variance peut être négative.`, v: false, j: `${m(T`V(X) = E\big((X - E(X))^2\big) \ge 0`)}.` },
+  ]));
+
+  // ------------------------------------------------------------------
   // Interface
   // ------------------------------------------------------------------
   const CHAPITRES = { 1: "Ch. 1 — Espace probabilisé", 2: "Ch. 2 — Conditionnement", 3: "Ch. 3 — Variables discrètes" };
   const CLE = "simulateur-proba-score";
+  const CLE_TYPES = "simulateur-proba-types";
 
   function lireNombre(s) {
     s = String(s).trim().replace(/\s/g, "").replace(/,/g, ".").replace(/−/g, "-");
@@ -701,12 +1441,17 @@
 
   function monter(racine) {
     racine.dataset.monte = "1";
-    let score = { ok: 0, total: 0, serie: 0 };
-    try { score = JSON.parse(localStorage.getItem(CLE)) || score; } catch { /* stockage indisponible */ }
-    const sauver = () => { try { localStorage.setItem(CLE, JSON.stringify(score)); } catch { /* rien */ } };
+    const lire = (cle, def) => { try { return JSON.parse(localStorage.getItem(cle)) || def; } catch { return def; } };
+    const ecrire = (cle, v) => { try { localStorage.setItem(cle, JSON.stringify(v)); } catch { /* stockage indisponible */ } };
+    let score = lire(CLE, { ok: 0, total: 0, serie: 0 });
+    let stats = lire(CLE_TYPES, {}); // id -> { ok, total } en exercices entièrement réussis
+    const sauver = () => { ecrire(CLE, score); ecrire(CLE_TYPES, stats); };
 
     let chap = 0; // 0 = tous
-    let type = ""; // "" = aléatoire
+    let type = ""; // "" = aléatoire, "__faibles" = points faibles, sinon un id
+    let parcours = false;
+    let file = []; // types restants du parcours
+    let tailleParcours = 0;
     let courant = null;
     let num = 0;
 
@@ -717,11 +1462,15 @@
             <button type="button" data-chap="0" class="actif">Tout</button>
             ${Object.entries(CHAPITRES).map(([k, v]) => `<button type="button" data-chap="${k}" title="${v}">Ch. ${k}</button>`).join("")}
           </div>
-          <label class="simu-type-label">Type
+          <label class="simu-type-label">Formule
             <select class="simu-type"></select>
+          </label>
+          <label class="simu-parcours" title="Passe par chaque type d'exercice une fois, dans un ordre aléatoire">
+            <input type="checkbox" class="simu-parcours-case"> Parcours complet
           </label>
           <div class="simu-score" aria-live="polite"></div>
         </div>
+        <div class="simu-progres" hidden><div class="simu-progres-barre"></div><span></span></div>
         <div class="simu-carte"></div>
         <p class="simu-aide">Réponses acceptées : <code>0,375</code>, <code>0.375</code>, <code>3/8</code> ou <code>37,5 %</code>.
           Un arrondi à 3 décimales suffit. <kbd>Entrée</kbd> pour vérifier.</p>
@@ -733,32 +1482,74 @@
 
     function majScore() {
       const pct = score.total ? Math.round((100 * score.ok) / score.total) : 0;
+      const vus = GEN.filter((g) => stats[g.id] && stats[g.id].total).length;
       $(".simu-score").innerHTML = `<span><strong>${score.ok}</strong> / ${score.total} bonnes réponses${score.total ? ` (${pct} %)` : ""}</span>
+        <span title="Types d'exercices déjà essayés">${vus} / ${GEN.length} types</span>
         <span class="simu-serie" title="Exercices réussis d'affilée">🔥 ${score.serie}</span>
         <button type="button" class="simu-raz" title="Remettre le score à zéro">↺</button>`;
-      $(".simu-raz").onclick = () => { score = { ok: 0, total: 0, serie: 0 }; sauver(); majScore(); };
+      $(".simu-raz").onclick = () => {
+        if (!confirm("Remettre à zéro le score et les statistiques par type ?")) return;
+        score = { ok: 0, total: 0, serie: 0 }; stats = {}; sauver(); majScore(); majTypes();
+      };
     }
 
+    const faible = (g) => { const s = stats[g.id]; return !s || !s.total || s.ok / s.total < 0.75; };
+    const etiquette = (g) => {
+      const s = stats[g.id];
+      const marque = !s || !s.total ? "○" : s.ok / s.total >= 0.75 ? "✓" : "✗";
+      return `${marque} ${g.nom}${s && s.total ? ` (${s.ok}/${s.total})` : ""}`;
+    };
+
     function majTypes() {
-      const dispo = GEN.filter((g) => !chap || g.chap === chap);
-      selType.innerHTML = `<option value="">Aléatoire</option>` +
-        dispo.map((g) => `<option value="${g.id}">${chap ? "" : `Ch. ${g.chap} · `}${g.nom}</option>`).join("");
-      if (!dispo.some((g) => g.id === type)) type = "";
+      const chaps = chap ? [chap] : [1, 2, 3];
+      const nbFaibles = GEN.filter((g) => (!chap || g.chap === chap) && faible(g)).length;
+      selType.innerHTML = `<option value="">Toutes (au hasard)</option>
+        <option value="__faibles">À retravailler (${nbFaibles})</option>` +
+        chaps.map((c) => `<optgroup label="${CHAPITRES[c]}">${GEN.filter((g) => g.chap === c)
+          .map((g) => `<option value="${g.id}">${etiquette(g)}</option>`).join("")}</optgroup>`).join("");
+      if (type && type !== "__faibles" && !GEN.some((g) => g.id === type && (!chap || g.chap === chap))) type = "";
       selType.value = type;
     }
 
+    function candidats() {
+      const l = GEN.filter((g) => !chap || g.chap === chap);
+      if (type === "__faibles") { const f = l.filter(faible); return f.length ? f : l; }
+      if (type) return l.filter((g) => g.id === type);
+      return l;
+    }
+
+    function majProgres() {
+      const barre = $(".simu-progres");
+      barre.hidden = !parcours;
+      if (!parcours) return;
+      const fait = tailleParcours - file.length;
+      barre.querySelector(".simu-progres-barre").style.width = `${(100 * fait) / tailleParcours}%`;
+      barre.querySelector("span").textContent = `Parcours : ${fait} / ${tailleParcours}`;
+    }
+
     function nouvel() {
-      const dispo = GEN.filter((g) => (!chap || g.chap === chap) && (!type || g.id === type));
-      let g = pick(dispo);
-      if (dispo.length > 1 && courant && g.id === courant.gen.id) g = pick(dispo.filter((x) => x.id !== courant.gen.id));
+      let g;
+      if (parcours) {
+        if (!file.length) {
+          file = melange(candidats());
+          tailleParcours = file.length;
+        }
+        g = file.shift();
+      } else {
+        const dispo = candidats();
+        g = pick(dispo);
+        if (dispo.length > 1 && courant && g.id === courant.gen.id) g = pick(dispo.filter((x) => x.id !== courant.gen.id));
+      }
       courant = { gen: g, ex: g.f(), note: false };
       racine.exerciceCourant = courant.ex; // utilisé par les tests automatiques
       num++;
       afficher();
+      majProgres();
     }
 
     function afficher() {
       const { gen, ex } = courant;
+      const fin = parcours && !file.length;
       carte.innerHTML = `
         <div class="simu-entete">
           <span class="simu-tag">Ch. ${gen.chap} · ${gen.nom}</span>
@@ -771,7 +1562,7 @@
             <li data-i="${i}">
               <span class="simu-label">${q.label}</span>
               ${q.type === "choix"
-                ? `<span class="simu-choix">${q.options.map((o) => `<label><input type="radio" name="q${num}-${i}" value="${o}"> ${o}</label>`).join("")}</span>`
+                ? `<span class="simu-choix">${q.options.map((o, k) => `<label><input type="radio" name="q${num}-${i}" value="${k}"> ${o}</label>`).join("")}</span>`
                 : `<input class="simu-input" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" aria-label="Réponse ${i + 1}" placeholder="${q.entier ? "entier" : "réponse"}">`}
               <span class="simu-retour" aria-live="polite"></span>
             </li>`).join("")}
@@ -780,7 +1571,7 @@
           <button type="button" class="md-button md-button--primary simu-verifier">Vérifier</button>
           <button type="button" class="md-button simu-btn-indice">Indice</button>
           <button type="button" class="md-button simu-btn-correction">Correction</button>
-          <button type="button" class="md-button simu-suivant">Nouvel exercice →</button>
+          <button type="button" class="md-button simu-suivant">${fin ? "Parcours terminé — recommencer ↻" : "Nouvel exercice →"}</button>
         </div>
         <div class="simu-panneau simu-indice" hidden><strong>Indice.</strong> ${ex.indice}</div>
         <div class="simu-panneau simu-correction" hidden><strong>Correction.</strong>${ex.correction}</div>`;
@@ -811,9 +1602,14 @@
       courant.note = true;
       score.total += resultats.length;
       score.ok += resultats.filter(Boolean).length;
-      score.serie = resultats.every(Boolean) ? score.serie + 1 : 0;
+      const reussi = resultats.every(Boolean);
+      score.serie = reussi ? score.serie + 1 : 0;
+      const s = stats[courant.gen.id] || { ok: 0, total: 0 };
+      s.total++; if (reussi) s.ok++;
+      stats[courant.gen.id] = s;
       sauver();
       majScore();
+      majTypes();
     }
 
     function verifier() {
@@ -825,7 +1621,7 @@
         if (q.type === "choix") {
           const coche = li.querySelector("input:checked");
           vide = !coche;
-          bon = !!coche && coche.value === q.reponse;
+          bon = !!coche && q.options[Number(coche.value)] === q.reponse;
         } else {
           const brut = li.querySelector(".simu-input").value;
           const u = lireNombre(brut);
@@ -841,7 +1637,12 @@
         retour.textContent = vide ? "—" : bon ? "✓" : "✗";
         return bon;
       });
-      noter(res);
+      // On ne note qu'une fois tout rempli, pour ne pas compter une vérification partielle
+      const complet = courant.ex.questions.every((q, i) => {
+        const li = carte.querySelector(`li[data-i="${i}"]`);
+        return q.type === "choix" ? !!li.querySelector("input:checked") : !!li.querySelector(".simu-input").value.trim();
+      });
+      if (complet) noter(res);
       if (res.every(Boolean)) {
         carte.querySelector(".simu-verifier").textContent = "Bravo !";
         carte.querySelector(".simu-suivant").focus({ preventScroll: true });
@@ -852,11 +1653,18 @@
       b.onclick = () => {
         chap = Number(b.dataset.chap);
         racine.querySelectorAll(".simu-chips button").forEach((x) => x.classList.toggle("actif", x === b));
+        file = []; tailleParcours = 0;
         majTypes();
         nouvel();
       };
     });
-    selType.onchange = () => { type = selType.value; nouvel(); };
+    selType.onchange = () => { type = selType.value; file = []; tailleParcours = 0; nouvel(); };
+    $(".simu-parcours-case").onchange = (e) => {
+      parcours = e.target.checked;
+      file = []; tailleParcours = 0;
+      if (parcours && type && type !== "__faibles") { type = ""; selType.value = ""; }
+      nouvel();
+    };
 
     majScore();
     majTypes();
