@@ -9,7 +9,7 @@ Exemples :
 Ce que le script fait :
   - crée docs/<categorie>/<slug>/ avec index.md, cours/, td/, fiches/ (+ fiches/_modele.md) ;
   - crée la catégorie si elle n'existe pas encore (index.md + .pages) ;
-  - ajoute une carte vers la matière sur la page d'accueil.
+  - ajoute une carte vers la matière sur la page d'accueil et sur celle de sa catégorie.
 
 Il n'écrase jamais un fichier existant : on peut le relancer sans risque.
 """
@@ -33,6 +33,10 @@ CATEGORIES_CONNUES = {
 }
 
 MARQUEUR_FIN_CATEGORIES = "<!-- categories:fin -->"
+
+
+# Emplacement des cartes dans la page d'une catégorie (docs/<categorie>/index.md)
+MARQUEUR_CARTES_CATEGORIE = "<!-- cartes -->"
 
 
 def marqueur_cartes(categorie: str) -> str:
@@ -68,7 +72,13 @@ title: {titre}
 
 # :{icone}: {titre}
 
-Choisis une matière dans le menu de gauche.
+Choisis une matière :
+
+<div class="grid cards" markdown>
+
+{MARQUEUR_CARTES_CATEGORIE}
+
+</div>
 """
 
 
@@ -144,15 +154,16 @@ def pages_meta(titre: str, nav: list[str] | None = None) -> str:
     return "\n".join(lignes) + "\n"
 
 
-def carte_matiere(categorie: str, slug: str, titre: str, code: str,
+def carte_matiere(dossier: str, titre: str, code: str,
                   description: str, icone: str) -> str:
+    """Carte d'une matière ; `dossier` est le chemin relatif vers la matière."""
     return f"""-   :{icone}:{{ .lg .middle }} **{titre}** · `{code}`
 
     ---
 
     {description}
 
-    [:octicons-arrow-right-24: Réviser]({categorie}/{slug}/index.md)
+    [:octicons-arrow-right-24: Réviser]({dossier}/index.md)
 
 """
 
@@ -235,10 +246,27 @@ def ajouter_carte_accueil(categorie: str, slug: str, titre: str, code: str,
             + MARQUEUR_FIN_CATEGORIES,
         )
 
-    carte = carte_matiere(categorie, slug, titre, code, description, icone)
+    carte = carte_matiere(f"{categorie}/{slug}", titre, code, description, icone)
     texte = texte.replace(marqueur, carte + marqueur)
     ACCUEIL.write_text(texte, encoding="utf-8")
     print(f"  ~ {ACCUEIL.relative_to(RACINE)} (carte ajoutée)")
+
+
+def ajouter_carte_categorie(categorie: str, slug: str, titre: str, code: str,
+                            description: str, icone: str) -> None:
+    fichier = DOCS / categorie / "index.md"
+    nom = fichier.relative_to(RACINE)
+    texte = fichier.read_text(encoding="utf-8")
+    if f"({slug}/index.md)" in texte:
+        print(f"  = {nom} (carte déjà présente)")
+        return
+    if MARQUEUR_CARTES_CATEGORIE not in texte:
+        print(f"  ! {nom} : marqueur {MARQUEUR_CARTES_CATEGORIE} absent, carte non ajoutée")
+        return
+    carte = carte_matiere(slug, titre, code, description, icone)
+    fichier.write_text(texte.replace(MARQUEUR_CARTES_CATEGORIE, carte + MARQUEUR_CARTES_CATEGORIE),
+                       encoding="utf-8")
+    print(f"  ~ {nom} (carte ajoutée)")
 
 
 def main() -> None:
@@ -273,6 +301,8 @@ def main() -> None:
     creer_matiere(args.categorie, args.slug, args.titre, args.code, description)
     ajouter_carte_accueil(args.categorie, args.slug, args.titre, args.code,
                           description, args.icone, titre_cat, icone_cat)
+    ajouter_carte_categorie(args.categorie, args.slug, args.titre, args.code,
+                            description, args.icone)
     print("Terminé. Lance `mkdocs serve` pour voir le résultat.")
 
 
