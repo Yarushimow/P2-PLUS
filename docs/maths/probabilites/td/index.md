@@ -9,9 +9,9 @@ est repliée, avec souvent un **indice** avant : essaie d'abord, ouvre ensuite.
 | Page | Contenu |
 |------|---------|
 | [Questions de révision](questions-revision.md) | Les 62 questions du document de révision, avec réponses |
-| [TD 1 — Espace probabilisé](td-1-espace-probabilise.md) | QCM, 1.1, 1.3 à 1.6, 1.10, 1.12, anniversaires |
-| [TD 2 — Probabilités conditionnelles](td-2-probabilites-conditionnelles.md) | QCM, indépendance, craps, contingence, Bayes (2.9 à 2.22) |
-| [TD 3 — Variables aléatoires discrètes](td-3-va-discretes.md) | QCM, lois, couples, covariance, binomiale, Poisson, binomiale négative |
+| [TD 1 — Espace probabilisé](td-1-espace-probabilise.md) | QCM, exercices 1.1 à 1.14 (tous) : différence symétrique, Bonferroni, Boole, Poincaré, anniversaires, urne infinie |
+| [TD 2 — Probabilités conditionnelles](td-2-probabilites-conditionnelles.md) | QCM, démonstrations, indépendance, craps, contingence, Bayes, indicatrice d'Euler, rencontres, suites et matrices (2.1 à 2.25, tous traités) |
+| [TD 3 — Variables aléatoires discrètes](td-3-va-discretes.md) | QCM, 3.1 à 3.15 complets (programme du CE) : lois, couples, covariance, corrélation, moyenne empirique ; hors CE : binomiale, Poisson, binomiale négative |
 | [TD 4 — Variables aléatoires continues](td-4-va-continues.md) | QCM, densités, $Y = g(X)$, exponentielle, loi normale |
 
 !!! tip "S'entraîner sans fin"
