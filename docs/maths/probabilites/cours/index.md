@@ -1,5 +1,8 @@
 # Notes de cours
 
+Les chapitres 1 à 3 ont deux onglets : **Version simplifiée** (mes notes) et
+**Version papier** (les pages du poly, à agrandir d'un clic).
+
 D'après le polycopié *Probabilités* 2026-2027 du département de mathématiques
 (licence CC BY-NC-SA 4.0). Le poly reste la référence ; ces pages en sont une version
 condensée et réorganisée pour réviser.
