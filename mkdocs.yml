@@ -105,14 +105,13 @@ markdown_extensions:
       custom_checkbox: true
 
 extra_javascript:
+  # MathJax et simulateur-proba.js sont chargés à la demande par mathjax.js
   - javascripts/mathjax.js
   - javascripts/agenda.js
   - javascripts/titre-accueil.js
   - javascripts/menu.js
   - javascripts/animations.js
   - javascripts/versions.js
-  - javascripts/simulateur-proba.js
-  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 
 extra_css:
   - stylesheets/theme.css
