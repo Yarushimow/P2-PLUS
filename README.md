@@ -38,7 +38,9 @@ python ajouter_cours.py maths algebre-lineaire --titre "Algèbre linéaire" --co
 ## Publication
 
 Chaque push sur `main` déclenche `.github/workflows/deploy.yml`, qui construit le
-site (`mkdocs build --strict`) et le publie sur GitHub Pages.
+site (`mkdocs build --strict`), optimise les images (`outils/optimiser_images.py` :
+copies WebP plus légères et dimensions dans le HTML, sans toucher à `docs/`) et le
+publie sur GitHub Pages.
 
 ## Agenda et comptes à rebours
 

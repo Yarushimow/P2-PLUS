@@ -43,6 +43,9 @@ jobs:
       - name: Construire le site
         run: mkdocs build --strict
 
+      - name: Optimiser les images (WebP + dimensions)
+        run: python outils/optimiser_images.py site
+
       - uses: actions/upload-pages-artifact@v3
         with:
           path: site
