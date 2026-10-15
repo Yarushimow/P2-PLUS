@@ -42,6 +42,22 @@ site (`mkdocs build --strict`), optimise les images (`outils/optimiser_images.py
 copies WebP plus légères et dimensions dans le HTML, sans toucher à `docs/`) et le
 publie sur GitHub Pages.
 
+## Section protégée (TP de Systèmes numériques)
+
+Les TP sont chiffrés (AES-256-GCM, clé dérivée du mot de passe par PBKDF2) : le
+dépôt ne contient aucune version lisible, et le mot de passe n'y figure nulle
+part. Le site le demande et déchiffre dans le navigateur.
+
+```bash
+pip install cryptography
+python outils/coffre.py ouvrir    # déchiffre vers prive/ (ignoré par git)
+# … modifier ou ajouter des pages, PDF, fichiers .ms14 dans prive/systemes-numeriques-tp/ …
+python outils/coffre.py fermer    # re-chiffre vers docs/…/tp/
+```
+
+Ne jamais ajouter de fichier lisible directement dans `docs/physique-elec/systemes-numeriques/tp/` :
+la CI (`coffre.py verifier`) refuse le déploiement.
+
 ## Agenda et comptes à rebours
 
 La page **Agenda** et l'encadré de chaque matière affichent le compte à rebours

@@ -3,8 +3,9 @@ pdf/
 *.pdf
 # Exceptions : fiches partagées avec la classe, publiées
 !docs/informatique/linux/fiches/fiche-prof-ti307.pdf
-# PDF des TP rendus, publiés
-!docs/physique-elec/systemes-numeriques/tp/rapports/*.pdf
+
+# Sources lisibles du coffre chiffré (outils/coffre.py) : jamais dans le dépôt
+prive/
 
 # Site généré par `mkdocs build`
 site/
