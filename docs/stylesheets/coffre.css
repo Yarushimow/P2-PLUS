@@ -1,0 +1,69 @@
+/* ==================================================================== */
+/* Pages protégées par mot de passe (docs/javascripts/coffre.js)        */
+/* ==================================================================== */
+
+.md-typeset .coffre-form {
+  max-width: 26rem;
+  margin: 2.5rem auto;
+  padding: 1.6rem 1.4rem 1.3rem;
+  border: 1px solid var(--site-border, var(--md-default-fg-color--lightest));
+  border-radius: 14px;
+  background: var(--site-surface, var(--md-default-bg-color));
+  box-shadow: 0 12px 32px -16px rgba(15, 23, 42, 0.35);
+  text-align: center;
+}
+.md-typeset .coffre-icone { font-size: 2rem; line-height: 1; }
+.md-typeset .coffre-form h2 { margin: 0.6rem 0 0.3rem; }
+.md-typeset .coffre-form p { margin: 0 0 1rem; color: var(--md-default-fg-color--light); font-size: 0.72rem; }
+
+.md-typeset .coffre-ligne { display: flex; gap: 0.5rem; }
+.md-typeset .coffre-mdp {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 0.55rem 0.7rem;
+  border: 1px solid var(--md-default-fg-color--lighter);
+  border-radius: 8px;
+  background: var(--md-default-bg-color);
+  color: var(--md-default-fg-color);
+  font: inherit;
+  font-size: 0.8rem;
+}
+.md-typeset .coffre-mdp:focus { outline: 2px solid var(--md-primary-fg-color); outline-offset: 1px; }
+.md-typeset .coffre-ligne .md-button { margin: 0; white-space: nowrap; }
+
+.md-typeset .coffre-souvenir {
+  display: inline-flex;
+  gap: 0.4rem;
+  align-items: center;
+  margin-top: 0.8rem;
+  font-size: 0.68rem;
+  color: var(--md-default-fg-color--light);
+  cursor: pointer;
+}
+.md-typeset .coffre-form .coffre-erreur { margin: 0.7rem 0 0; color: #dc2626; font-weight: 600; }
+
+.coffre-secoue { animation: coffre-secoue 0.35s; }
+@keyframes coffre-secoue {
+  20%, 60% { transform: translateX(-6px); }
+  40%, 80% { transform: translateX(6px); }
+}
+
+.md-typeset .coffre-verrouiller {
+  margin-top: 2rem;
+  padding: 0.35rem 0.8rem;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 999px;
+  color: var(--md-default-fg-color--light);
+  font-size: 0.65rem;
+  cursor: pointer;
+}
+.md-typeset .coffre-verrouiller:hover { color: var(--md-default-fg-color); border-color: var(--md-default-fg-color--lighter); }
+
+.md-typeset a.coffre-chargement { opacity: 0.6; cursor: progress; }
+
+@media screen and (max-width: 44.984375em) {
+  .md-typeset .coffre-ligne { flex-direction: column; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .coffre-secoue { animation: none; }
+}

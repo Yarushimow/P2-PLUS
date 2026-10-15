@@ -112,6 +112,7 @@ extra_javascript:
   - javascripts/menu.js
   - javascripts/animations.js
   - javascripts/versions.js
+  - javascripts/coffre.js
 
 extra_css:
   - stylesheets/theme.css
@@ -119,3 +120,4 @@ extra_css:
   - stylesheets/animations.css
   - stylesheets/mobile.css
   - stylesheets/versions.css
+  - stylesheets/coffre.css

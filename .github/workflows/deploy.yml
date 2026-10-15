@@ -40,6 +40,9 @@ jobs:
         if: env.EFREI_ICS_URL != '' && github.event_name != 'pull_request'
         run: python outils/sync_calendrier.py || echo "::warning::Synchronisation de l'agenda impossible, données précédentes conservées"
 
+      - name: Vérifier que la section TP est bien chiffrée
+        run: python outils/coffre.py verifier
+
       - name: Construire le site
         run: mkdocs build --strict
 
