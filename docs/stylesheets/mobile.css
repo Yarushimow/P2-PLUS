@@ -38,6 +38,7 @@
   [data-section="fiches"] { --nav-icone: var(--nav-icone-fiches); }
   [data-section="entrainement"] { --nav-icone: var(--nav-icone-entrainement); }
   [data-section="annales"] { --nav-icone: var(--nav-icone-annales); }
+  [data-section="protegee"] { --nav-icone: var(--nav-icone-protegee); }
 }
 
 /* ---------- Téléphones ---------- */
