@@ -50,14 +50,29 @@
     try { sessionStorage.setItem(CLE_STOCKAGE, v); } catch { /* */ }
     try { if (surAppareil) localStorage.setItem(CLE_STOCKAGE, v); } catch { /* */ }
   }
+  // Menu : tant que la section est verrouillée, on cache la liste des TP et
+  // l'entrée « TP » passe en rouge (styles dans coffre.css, classe sur <html>)
+  function cleMemorisee() {
+    for (const stock of [sessionStorage, localStorage]) {
+      try { if (stock.getItem(CLE_STOCKAGE)) return true; } catch { /* */ }
+    }
+    return false;
+  }
+  function majMenu() {
+    document.documentElement.classList.toggle("coffre-ferme", !cleMemorisee());
+  }
+  majMenu();
+
   function oublierCle() {
     try { sessionStorage.removeItem(CLE_STOCKAGE); } catch { /* */ }
     try { localStorage.removeItem(CLE_STOCKAGE); } catch { /* */ }
+    majMenu();
   }
 
   // ---------- Affichage ----------
   function afficher(zone, page, brut) {
     zone.innerHTML = page.html;
+    majMenu();
     // Le titre de la page est déjà affiché par le thème au-dessus de la zone
     if (zone.closest("article")?.querySelector("h1:not(.coffre h1)")) zone.querySelector(":scope > h1")?.remove();
     zone.classList.add("coffre--ouvert");
@@ -176,6 +191,7 @@
   }, true);
 
   function initialiser() {
+    majMenu();
     document.querySelectorAll(".coffre[data-coffre]").forEach(monter);
   }
 
