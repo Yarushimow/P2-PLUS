@@ -28,6 +28,8 @@
   // Sections : data-section="cours|td|fiches|entrainement" pour l'icône.
   const SECTIONS = { cours: "cours", td: "td", fiches: "fiches", "entraînement": "entrainement", entrainement: "entrainement", annales: "annales" };
 
+  const SECTIONS_PROTEGEES = ["systemes-numeriques/tp/"];
+
   function structurer() {
     document.querySelectorAll('.md-nav[data-md-level="1"] > .md-nav__list > .md-nav__item').forEach((item) => {
       const el = item.querySelector(":scope > .md-nav__link .md-ellipsis, :scope > .md-nav__container > .md-nav__link:first-child .md-ellipsis");
@@ -42,6 +44,12 @@
       const el = item.querySelector(":scope > .md-nav__link, :scope > .md-nav__container > .md-nav__link:first-child");
       const cle = SECTIONS[el?.textContent.trim().toLowerCase()];
       if (cle) item.dataset.section = cle;
+      // Sections protégées par mot de passe (outils/coffre.py) : cadenas
+      // (liens relatifs dans le menu : on compare les URL absolues)
+      const liens = [...item.querySelectorAll("a[href]")].map((a) => a.href);
+      if (liens.some((url) => SECTIONS_PROTEGEES.some((chemin) => url.includes(chemin)))) {
+        item.dataset.section = "protegee";
+      }
     });
   }
 
