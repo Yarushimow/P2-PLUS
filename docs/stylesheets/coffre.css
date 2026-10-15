@@ -67,3 +67,23 @@
 @media (prefers-reduced-motion: reduce) {
   .coffre-secoue { animation: none; }
 }
+
+/* ---------- Menu : section verrouillée ---------- */
+/* html.coffre-ferme est posé par coffre.js tant que le mot de passe n'a pas été entré */
+html.coffre-ferme [data-section="protegee"] {
+  --coffre-rouge: #dc2626;
+}
+html.coffre-ferme [data-md-color-scheme="slate"] [data-section="protegee"] {
+  --coffre-rouge: #f87171;
+}
+html.coffre-ferme [data-section="protegee"] > .md-nav__link,
+html.coffre-ferme [data-section="protegee"] > .md-nav__container > .md-nav__link {
+  color: var(--coffre-rouge) !important;
+}
+/* Pas de liste des TP ni de flèche pour la déplier */
+html.coffre-ferme [data-section="protegee"] > .md-nav,
+html.coffre-ferme [data-section="protegee"] > .md-nav__container > label.md-nav__link,
+html.coffre-ferme [data-section="protegee"] > label.md-nav__link > .md-nav__icon,
+html.coffre-ferme [data-section="protegee"] > .md-nav__link .md-nav__icon {
+  display: none !important;
+}
