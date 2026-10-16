@@ -46,7 +46,7 @@ sommets et cols).
 
     ---
 
-    Visualiseur de domaines, simulateur de limites et exercices corrigés.
+    Questions aléatoires corrigées (limites, dérivées, EDP, intégrales doubles) et simulateur de limites.
 
     [:octicons-arrow-right-24: S'entraîner](entrainement/index.md)
 

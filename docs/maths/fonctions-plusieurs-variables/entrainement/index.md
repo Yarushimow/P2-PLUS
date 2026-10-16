@@ -1,21 +1,18 @@
 ---
-title: Entraînement — limites et domaines
+title: Entraînement — questions aléatoires et simulateur
 hide:
   - toc
 ---
 
-# Fiche interactive (chapitres 1 à 3)
+# Entraînement (chapitres 1 à 3 + intégrales doubles)
 
-Une page à manipuler pour les chapitres 1 à 3 :
+- **Entraînement** : des questions tirées au hasard (valeurs différentes à chaque série) sur les limites, la continuité, les dérivées partielles, les EDP et les intégrales doubles. Choisis tes thèmes et la longueur de la série. Chaque question a un indice, puis une correction rédigée, et un bilan par thème à la fin (conservé dans ton navigateur).
+- **Simulateur de limites** : choisis une fonction et un chemin vers $(0, 0)$, rapproche-toi du point et enregistre plusieurs chemins. Le panneau polaire montre l'écart max − min de $f$ sur un petit cercle : s'il ne tend pas vers $0$, la limite n'existe pas.
 
-- **Visualiseur de domaines** : les domaines du cours et du TD 1, bords exclus en pointillés.
-- **Simulateur de limites** : choisis une fonction et un chemin vers $(0, 0)$ (droite d'angle $\theta$, parabole), rapproche-toi du point et enregistre plusieurs chemins. Dès que deux chemins donnent deux valeurs, la page le signale.
-- **Entraînement** : quatre fonctions tirées au hasard, comme au contrôle, avec la correction rédigée.
+<iframe src="entrainement.html" title="Entraînement FDPV" loading="lazy" style="width:100%;height:85vh;min-height:640px;border:0;border-radius:8px;"></iframe>
 
-<iframe src="fiche-interactive.html" title="Fiche interactive FDPV" loading="lazy" style="width:100%;height:1800px;border:0;border-radius:8px;"></iframe>
+[:material-open-in-new: Ouvrir en plein écran](entrainement.html){ .md-button }
+[:material-clipboard-text: Sujet blanc CE](sujet-blanc-ce.md){ .md-button }
 
-[:material-open-in-new: Ouvrir en plein écran](fiche-interactive.html){ .md-button }
-
-!!! tip "Le curseur θ"
-    Pour une droite, le curseur « Angle θ » est exactement le $\theta$ des coordonnées polaires.
-    Si la limite affichée change quand tu le bouges, la limite dépend de $\theta$ : elle n'existe pas.
+!!! tip "Raccourcis"
+    Pendant une série : touches 1 à 5 pour répondre, H pour l'indice, Entrée pour passer à la suite.

@@ -1,0 +1,1163 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Entraînement FDPV</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] },
+  svg: { fontCache: 'global' },
+  startup: { typeset: false }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg.js" async></script>
+<style>
+:root {
+  --paper: #f5f7fb; --surface: #ffffff; --grid: #e3e8f3; --ink: #1a2140; --muted: #5a6385;
+  --line: #d3d9e8; --accent: #2f55d4; --accent-soft: #e6ecfd; --yes: #17805a; --yes-soft: #e1f3ea;
+  --no: #c63c33; --no-soft: #fbe7e5; --warm: #e0782c; --cool: #2f6fd6;
+  --f-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+:root[data-theme="dark"] {
+  --paper: #10142a; --surface: #181d36; --grid: #1d2342; --ink: #e7eafc; --muted: #9aa2c6;
+  --line: #2c3460; --accent: #7f9bff; --accent-soft: #232c58; --yes: #4cc995; --yes-soft: #15322a;
+  --no: #ff7c70; --no-soft: #3a1f26; --warm: #ff9a52; --cool: #6aa0ff; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0; background-color: var(--paper);
+  background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 24px 24px; color: var(--ink); font-family: var(--f-body); font-size: 16px; line-height: 1.6;
+}
+.wrap { max-width: 780px; margin: 0 auto; padding: 24px 16px 64px; display: flex; flex-direction: column; gap: 22px; }
+header { display: flex; flex-direction: column; gap: 8px; }
+.eyebrow { font-family: var(--f-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+h1 { font-family: var(--f-display); font-weight: 700; font-size: clamp(30px, 6vw, 42px); line-height: 1.05; margin: 0; letter-spacing: -.01em; }
+h2 { font-family: var(--f-display); font-weight: 700; font-size: 22px; margin: 0; }
+h3 { font-family: var(--f-display); font-weight: 500; font-size: 17px; margin: 0; }
+p { margin: 0; }
+.lede { color: var(--muted); max-width: 62ch; }
+.tabs { display: flex; gap: 6px; position: sticky; top: 0; z-index: 5; padding: 8px 0; background: color-mix(in srgb, var(--paper) 90%, transparent); backdrop-filter: blur(6px); }
+.tabs button { flex: 1; font: inherit; font-weight: 600; padding: 10px 14px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); color: var(--ink); cursor: pointer; }
+.tabs button[aria-selected="true"] { background: var(--accent); border-color: var(--accent); color: var(--surface); }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px; display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.row.between { justify-content: space-between; }
+.btn { font: inherit; font-weight: 600; font-size: 14px; padding: 10px 16px; border-radius: 8px; border: 1px solid var(--accent); background: var(--accent); color: var(--surface); cursor: pointer; }
+.btn.ghost { background: transparent; color: var(--accent); }
+.btn:disabled { opacity: .45; cursor: default; }
+.btn:focus-visible, .chip-t:focus-visible, .opt:focus-visible, .tabs button:focus-visible, select:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.lab { font-family: var(--f-mono); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 4px; }
+.mjx-wrap, .stmt { overflow-x: auto; max-width: 100%; }
+
+/* Entraînement */
+.topics { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 8px; }
+.chip-t { font: inherit; text-align: left; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); color: var(--ink); cursor: pointer; display: flex; flex-direction: column; gap: 2px; }
+.chip-t b { font-weight: 600; }
+.chip-t small { color: var(--muted); font-size: 13px; }
+.chip-t[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-soft); box-shadow: inset 0 0 0 1px var(--accent); }
+.seg { display: flex; gap: 6px; flex-wrap: wrap; }
+.seg button { font: inherit; padding: 8px 14px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); color: var(--ink); cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--surface); }
+.bar { height: 6px; background: var(--grid); border-radius: 4px; overflow: hidden; }
+.bar > i { display: block; height: 100%; background: var(--accent); transition: width .25s; }
+.tag { font-family: var(--f-mono); font-size: 12px; padding: 3px 10px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); }
+.stmt { font-size: 18px; }
+.opts { display: flex; flex-direction: column; gap: 8px; }
+.opt { font: inherit; text-align: left; display: flex; gap: 12px; align-items: center; padding: 11px 14px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); color: var(--ink); cursor: pointer; }
+.opt .k { font-family: var(--f-mono); font-size: 12px; width: 24px; height: 24px; flex: none; border-radius: 6px; display: grid; place-items: center; background: var(--grid); color: var(--muted); }
+.opt .h { overflow-x: auto; min-width: 0; }
+.opt:hover:not(:disabled) { border-color: var(--accent); }
+.opt:disabled { cursor: default; }
+.opt.right { background: var(--yes-soft); border-color: var(--yes); }
+.opt.wrong { background: var(--no-soft); border-color: var(--no); }
+.hintbox, .sol { border-radius: 10px; padding: 12px 14px; font-size: 15px; display: flex; flex-direction: column; gap: 8px; }
+.hintbox { background: var(--accent-soft); }
+.sol { border: 1px solid var(--line); }
+.verdict { font-family: var(--f-display); font-weight: 700; font-size: 19px; }
+.verdict.yes { color: var(--yes); } .verdict.no { color: var(--no); }
+.score-big { font-family: var(--f-display); font-weight: 700; font-size: 44px; line-height: 1; }
+.tbl { border-collapse: collapse; width: 100%; font-size: 15px; }
+.tbl th { text-align: left; font-family: var(--f-mono); font-size: 12px; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); font-weight: 500; padding: 6px 8px; border-bottom: 1px solid var(--line); }
+.tbl td { padding: 8px; border-bottom: 1px solid var(--line); }
+.kbd { font-family: var(--f-mono); font-size: 11px; color: var(--muted); }
+
+/* Simulateur */
+.controls { display: grid; gap: 12px; }
+select { width: 100%; font: inherit; padding: 10px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); color: var(--ink); }
+input[type=range] { width: 100%; accent-color: var(--accent); }
+.rowlab { display: flex; justify-content: space-between; gap: 8px; align-items: baseline; }
+.val { font-family: var(--f-mono); font-size: 13px; color: var(--accent); font-variant-numeric: tabular-nums; }
+.fn-show { font-size: 19px; text-align: center; padding: 6px 0; overflow-x: auto; }
+.plots { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.plots .wide { grid-column: 1 / -1; }
+@media (max-width: 620px) { .plots { grid-template-columns: 1fr; } }
+.plot { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.plot canvas { width: 100%; display: block; border-radius: 8px; border: 1px solid var(--line); background: var(--surface); }
+.plot .cap { font-size: 13px; color: var(--muted); }
+#heat { aspect-ratio: 1; } #along { aspect-ratio: 1; } #polar { aspect-ratio: 16 / 7; }
+.readout { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+@media (max-width: 460px) { .readout { grid-template-columns: 1fr 1fr; } }
+.ro { border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; min-width: 0; }
+.ro .k { font-family: var(--f-mono); font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+.ro .v { font-family: var(--f-mono); font-size: 14px; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.paths { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
+.paths li { display: flex; justify-content: space-between; gap: 10px; align-items: center; font-size: 14px; padding: 6px 10px; border-radius: 6px; background: var(--paper); }
+.paths li .dot { width: 10px; height: 10px; border-radius: 50%; flex: none; }
+.paths li .l { display: flex; gap: 8px; align-items: center; }
+.paths .empty { color: var(--muted); background: transparent; padding-left: 0; }
+.banner { border-radius: 8px; padding: 12px 14px; font-size: 15px; }
+.banner.no { background: var(--no-soft); } .banner.no b { color: var(--no); }
+.banner.maybe { background: var(--accent-soft); } .banner.maybe b { color: var(--accent); }
+.osc { font-family: var(--f-mono); font-size: 13px; display: flex; gap: 14px; flex-wrap: wrap; }
+.osc span b { color: var(--accent); font-weight: 500; }
+.expl { font-size: 15px; display: flex; flex-direction: column; gap: 8px; }
+[hidden] { display: none !important; }
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; transition: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="eyebrow">SM302 · CE du 24 octobre · chapitres 1 à 3 + intégrales doubles</span>
+    <h1>Entraînement FDPV</h1>
+    <p class="lede">Des exercices tirés au hasard (valeurs différentes à chaque série), avec un indice avant la correction, et un simulateur pour <em>voir</em> pourquoi une limite existe ou non.</p>
+  </header>
+
+  <div class="tabs" role="tablist">
+    <button type="button" role="tab" id="tabT" aria-selected="true" aria-controls="paneT">Entraînement</button>
+    <button type="button" role="tab" id="tabS" aria-selected="false" aria-controls="paneS">Simulateur de limites</button>
+  </div>
+
+  <!-- ===================== ENTRAÎNEMENT ===================== -->
+  <section id="paneT" role="tabpanel" aria-labelledby="tabT">
+    <div class="panel" id="setup">
+      <h2>Choisis tes thèmes</h2>
+      <div class="topics" id="topics"></div>
+      <div class="row between">
+        <div>
+          <span class="lab">Longueur de la série</span>
+          <div class="seg" id="lenSeg" role="group" aria-label="Nombre de questions">
+            <button type="button" data-n="6" aria-pressed="false">6</button>
+            <button type="button" data-n="10" aria-pressed="true">10</button>
+            <button type="button" data-n="15" aria-pressed="false">15</button>
+          </div>
+        </div>
+        <div class="row">
+          <button class="btn ghost" type="button" id="allTopics">Tout le CE</button>
+          <button class="btn" type="button" id="startBtn">Commencer</button>
+        </div>
+      </div>
+      <p class="kbd">Raccourcis pendant la série : 1 à 5 pour répondre · H pour l'indice · Entrée pour la suite.</p>
+    </div>
+
+    <div class="panel" id="session" hidden>
+      <div class="row between">
+        <span class="tag" id="qTag"></span>
+        <span class="kbd" id="qCount"></span>
+      </div>
+      <div class="bar"><i id="bar" style="width:0"></i></div>
+      <div class="stmt" id="qStmt"></div>
+      <div class="opts" id="qOpts"></div>
+      <div class="row">
+        <button class="btn ghost" type="button" id="hintBtn">Indice (H)</button>
+        <button class="btn ghost" type="button" id="skipBtn">Je sèche</button>
+      </div>
+      <div class="hintbox" id="hintBox" hidden></div>
+      <div class="sol" id="solBox" hidden>
+        <div class="verdict" id="verdict"></div>
+        <div class="expl" id="solText"></div>
+        <div class="row"><button class="btn" type="button" id="nextBtn">Question suivante</button></div>
+      </div>
+    </div>
+
+    <div class="panel" id="result" hidden>
+      <h2>Bilan de la série</h2>
+      <div class="row between"><div class="score-big" id="finalScore"></div><span class="kbd" id="finalNote"></span></div>
+      <div class="mjx-wrap"><table class="tbl"><thead><tr><th>Thème</th><th>Cette série</th><th>Cumul</th></tr></thead><tbody id="resBody"></tbody></table></div>
+      <div class="row">
+        <button class="btn" type="button" id="againBtn">Nouvelle série</button>
+        <button class="btn ghost" type="button" id="errBtn">Revoir mes erreurs</button>
+        <button class="btn ghost" type="button" id="setupBtn">Changer de thèmes</button>
+        <button class="btn ghost" type="button" id="resetStats">Effacer mes stats</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SIMULATEUR ===================== -->
+  <section id="paneS" role="tabpanel" aria-labelledby="tabS" hidden>
+    <div class="panel">
+      <p class="lede">Choisis une fonction et un chemin, puis rapproche-toi de l'origine. Enregistre plusieurs chemins : deux valeurs différentes suffisent pour dire que la limite n'existe pas. Le panneau du bas fait le test des polaires : si l'écart max − min de $f$ sur le cercle de rayon $r$ ne tend pas vers $0$, la limite n'existe pas.</p>
+      <div class="controls">
+        <div><label class="lab" for="fnSel">Fonction</label><select id="fnSel"></select></div>
+        <div class="fn-show" id="fnShow"></div>
+        <div>
+          <span class="lab">Chemin vers l'origine</span>
+          <div class="seg" id="pathSeg" role="group" aria-label="Type de chemin">
+            <button type="button" data-p="line" aria-pressed="true">Droite</button>
+            <button type="button" data-p="paraY" aria-pressed="false">Parabole y = a·x²</button>
+            <button type="button" data-p="paraX" aria-pressed="false">Parabole x = a·y²</button>
+          </div>
+        </div>
+        <div>
+          <div class="rowlab"><label class="lab" for="param" id="paramLab">Angle θ</label><span class="val" id="paramVal"></span></div>
+          <input type="range" id="param" min="0" max="180" step="1" value="45">
+        </div>
+        <div>
+          <div class="rowlab"><label class="lab" for="dist">Distance au point (aussi le rayon r du cercle)</label><span class="val" id="distVal"></span></div>
+          <input type="range" id="dist" min="0" max="1000" step="1" value="0">
+        </div>
+      </div>
+
+      <div class="plots">
+        <div class="plot">
+          <canvas id="heat" aria-label="Carte des valeurs de f autour de l'origine"></canvas>
+          <span class="cap">Valeurs de f sur [−1, 1]². Orange : positif, bleu : négatif. Trait noir : ton chemin ; traits colorés : chemins enregistrés.</span>
+        </div>
+        <div class="plot">
+          <canvas id="along" aria-label="Valeur de f le long du chemin"></canvas>
+          <span class="cap">f le long du chemin, selon t. Le rond creux marque la valeur vers laquelle f tend en t = 0.</span>
+        </div>
+        <div class="plot wide">
+          <canvas id="polar" aria-label="Valeur de f sur le cercle de rayon r selon l'angle"></canvas>
+          <span class="cap">f(r cos θ, r sin θ) selon θ ∈ [0, 2π], pour le rayon r du curseur. La limite existe seulement si cette courbe s'aplatit quand r → 0 (sur <em>tous</em> les θ, pointes comprises).</span>
+          <div class="osc" id="oscRow"></div>
+        </div>
+      </div>
+
+      <div class="readout">
+        <div class="ro"><div class="k">Point (x, y)</div><div class="v" id="roPt">–</div></div>
+        <div class="ro"><div class="k">f(x, y)</div><div class="v" id="roF">–</div></div>
+        <div class="ro"><div class="k">Limite sur ce chemin</div><div class="v" id="roL">–</div></div>
+      </div>
+
+      <div class="row">
+        <button class="btn" type="button" id="approach">Approcher (r → 0)</button>
+        <button class="btn ghost" type="button" id="record">Enregistrer ce chemin</button>
+        <button class="btn ghost" type="button" id="usual">Tester les 6 chemins usuels</button>
+        <button class="btn ghost" type="button" id="clearPaths">Effacer</button>
+      </div>
+      <div>
+        <span class="lab">Chemins testés</span>
+        <ul class="paths" id="pathList"><li class="empty">Aucun chemin enregistré.</li></ul>
+      </div>
+      <div id="pathBanner"></div>
+      <div id="polarBanner"></div>
+      <div class="row"><button class="btn ghost" type="button" id="revealBtn" aria-expanded="false">Voir la conclusion rédigée</button></div>
+      <div id="revealBox" hidden>
+        <div class="verdict" id="simVerdict"></div>
+        <div class="expl" id="simExpl"></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+(function () {
+'use strict';
+// ==BEGIN PURE==
+const R = String.raw;
+const rnd = (n) => Math.floor(Math.random() * n);
+const pick = (a) => a[rnd(a.length)];
+function shuffle(a) { const b = a.slice(); for (let i = b.length - 1; i > 0; i--) { const j = rnd(i + 1); [b[i], b[j]] = [b[j], b[i]]; } return b; }
+const gcd = (a, b) => { a = Math.abs(a); b = Math.abs(b); while (b) { [a, b] = [b, a % b]; } return a || 1; };
+function Fr(n, d = 1) { if (d < 0) { n = -n; d = -d; } const g = gcd(n, d); return { n: n / g, d: d / g }; }
+const fadd = (a, b) => Fr(a.n * b.d + b.n * a.d, a.d * b.d);
+const fsub = (a, b) => Fr(a.n * b.d - b.n * a.d, a.d * b.d);
+const fmul = (a, b) => Fr(a.n * b.n, a.d * b.d);
+const fdiv = (a, b) => Fr(a.n * b.d, a.d * b.n);
+const fval = (a) => a.n / a.d;
+const fkey = (a) => a.n + '/' + a.d;
+const ipow = (b, e) => { let r = 1; for (let i = 0; i < e; i++) r *= b; return r; };
+function ftex(a) { return a.d === 1 ? String(a.n) : (a.n < 0 ? '-' : '') + '\\dfrac{' + Math.abs(a.n) + '}{' + a.d + '}'; }
+function pitex(a) {
+  if (a.n === 0) return '0';
+  const s = a.n < 0 ? '-' : ''; const n = Math.abs(a.n);
+  const num = n === 1 ? '\\pi' : n + '\\pi';
+  return a.d === 1 ? s + num : s + '\\dfrac{' + num + '}{' + a.d + '}';
+}
+const tx = (s) => '$' + s + '$';
+const opt = (k, h) => ({ k: String(k), h });
+const fopt = (a) => opt(fkey(a), tx(ftex(a)));
+
+function build(topic, statement, hint, correct, wrongs, sol, o = {}) {
+  const seen = new Set([correct.k]); const list = [correct];
+  for (const w of wrongs) { if (!w || seen.has(w.k)) continue; seen.add(w.k); list.push(w); if (list.length >= 5) break; }
+  if (list.length < 3) throw new Error('options insuffisantes : ' + statement);
+  const opts = o.order ? list.slice().sort((a, b) => o.order.indexOf(a.k) - o.order.indexOf(b.k)) : shuffle(list);
+  return { topic, statement, hint, options: opts, correct: opts.findIndex((x) => x.k === correct.k), sol };
+}
+// options numériques/fractionnaires : le premier est juste, on complète avec des voisins
+function fracQuestion(topic, statement, hint, ans, wrongs, sol) {
+  const extra = [fadd(ans, Fr(1)), fsub(ans, Fr(1)), fmul(ans, Fr(2)), fdiv(ans, Fr(2)), fmul(ans, Fr(-1)), fadd(ans, Fr(1, 2))];
+  const ws = wrongs.concat(extra).filter((w) => !(w.n === ans.n && w.d === ans.d));
+  return build(topic, statement, hint, fopt(ans), ws.map(fopt), sol);
+}
+
+// ---------- polynômes en x, y ----------
+function monoTex(a, b) {
+  const px = a === 0 ? '' : (a === 1 ? 'x' : 'x^{' + a + '}');
+  const py = b === 0 ? '' : (b === 1 ? 'y' : 'y^{' + b + '}');
+  return px + py;
+}
+function polyTex(ts) {
+  const parts = [];
+  ts.forEach((t) => {
+    if (t.c === 0) return;
+    const m = monoTex(t.p, t.q); const a = Math.abs(t.c);
+    parts.push({ neg: t.c < 0, body: (a === 1 && m !== '') ? m : String(a) + m });
+  });
+  if (!parts.length) return '0';
+  return parts.map((p, i) => (i === 0 ? (p.neg ? '-' : '') : (p.neg ? ' - ' : ' + ')) + p.body).join('');
+}
+const pdx = (ts) => ts.filter((t) => t.p > 0).map((t) => ({ c: t.c * t.p, p: t.p - 1, q: t.q }));
+const pdy = (ts) => ts.filter((t) => t.q > 0).map((t) => ({ c: t.c * t.q, p: t.p, q: t.q - 1 }));
+const pev = (ts, x, y) => ts.reduce((s, t) => s + t.c * Math.pow(x, t.p) * Math.pow(y, t.q), 0);
+function randPoly() {
+  const used = new Set(); const ts = [];
+  while (ts.length < 3) {
+    const p = rnd(4), q = rnd(4);
+    if (p + q < 1 || p + q > 4 || used.has(p + ',' + q)) continue;
+    used.add(p + ',' + q);
+    ts.push({ c: pick([-4, -3, -2, -1, 1, 2, 3, 4]), p, q });
+  }
+  return ts;
+}
+
+// ---------- BANQUE DE LIMITES (en (0,0) sauf mention) ----------
+const LIMS = [
+  { label: 'xy / (x² + y²)', expr: R`\dfrac{xy}{x^2+y^2}`, f: (x, y) => x * y / (x * x + y * y), lim: 'N',
+    hint: R`Essaie $y=mx$ : que reste-t-il après simplification ?`,
+    expl: R`<p>Forme $\frac00$. Chemin $y=mx$ : $f(x,mx)=\dfrac{mx^2}{x^2(1+m^2)}=\dfrac{m}{1+m^2}$.</p><p>Ça dépend de $m$ ($m=0$ donne $0$, $m=1$ donne $\tfrac12$).</p>` },
+  { label: '(x² − y²) / (x² + y²)', expr: R`\dfrac{x^2-y^2}{x^2+y^2}`, f: (x, y) => (x * x - y * y) / (x * x + y * y), lim: 'N',
+    hint: R`Compare l'axe $y=0$ et l'axe $x=0$.`,
+    expl: R`<p>Sur $y=0$ : $f=\dfrac{x^2}{x^2}=1$. Sur $x=0$ : $f=\dfrac{-y^2}{y^2}=-1$.</p><p>Deux chemins, deux valeurs.</p>` },
+  { label: '3x²y / (x² + y²)', expr: R`\dfrac{3x^2y}{x^2+y^2}`, f: (x, y) => 3 * x * x * y / (x * x + y * y), lim: 0,
+    hint: R`Les chemins donnent $0$. Pour prouver : majore $\dfrac{x^2}{x^2+y^2}$.`,
+    expl: R`<p>Les chemins donnent tous $0$ : on soupçonne $\ell=0$.</p><p>Majoration : $\dfrac{x^2}{x^2+y^2}\le1$, donc $|f|\le3|y|\to0$.</p>` },
+  { label: 'xy² / (x² + y⁴)', expr: R`\dfrac{xy^2}{x^2+y^4}`, f: (x, y) => x * y * y / (x * x + y ** 4), lim: 'N',
+    hint: R`Toutes les droites donnent $0$ ; essaie une parabole qui égalise le dénominateur.`,
+    expl: R`<p>Piège. $y=mx$ : $f=\dfrac{m^2x}{1+m^4x^2}\to0$ pour toute droite.</p><p>Mais sur $x=y^2$ : $f=\dfrac{y^4}{2y^4}=\tfrac12$. Deux valeurs.</p>` },
+  { label: 'x²y / (x⁴ + y²)', expr: R`\dfrac{x^2y}{x^4+y^2}`, f: (x, y) => x * x * y / (x ** 4 + y * y), lim: 'N',
+    hint: R`Les droites ne suffisent pas : essaie $y=x^2$.`,
+    expl: R`<p>Piège. $y=mx$ : $f=\dfrac{mx}{x^2+m^2}\to0$ pour toute droite.</p><p>Mais sur $y=x^2$ : $f=\dfrac{x^4}{2x^4}=\tfrac12$.</p>` },
+  { label: '(x³ + y³) / (x² + y²)', expr: R`\dfrac{x^3+y^3}{x^2+y^2}`, f: (x, y) => (x ** 3 + y ** 3) / (x * x + y * y), lim: 0,
+    hint: R`Passe en polaires : combien de $r$ reste-t-il ?`,
+    expl: R`<p>Polaires : $f=r(\cos^3\theta+\sin^3\theta)$.</p><p>$|\cos^3\theta+\sin^3\theta|\le2$, donc $|f|\le2r\to0$ sans dépendre de $\theta$.</p>` },
+  { label: 'x²y² / (x² + y²)', expr: R`\dfrac{x^2y^2}{x^2+y^2}`, f: (x, y) => x * x * y * y / (x * x + y * y), lim: 0,
+    hint: R`Polaires, ou $x^2\le x^2+y^2$.`,
+    expl: R`<p>Polaires : $f=r^2\cos^2\theta\sin^2\theta\le r^2\to0$, indépendant de $\theta$.</p>` },
+  { label: 'xy / (x² + xy + y²)', expr: R`\dfrac{xy}{x^2+xy+y^2}`, f: (x, y) => x * y / (x * x + x * y + y * y), lim: 'N',
+    hint: R`Sur $y=mx$, que vaut $f$ ?`,
+    expl: R`<p>$y=mx$ : $f=\dfrac{m}{1+m+m^2}$. $m=0$ donne $0$, $m=1$ donne $\tfrac13$.</p>` },
+  { label: '(x − y)² / (x² + y²)', expr: R`\dfrac{(x-y)^2}{x^2+y^2}`, f: (x, y) => (x - y) ** 2 / (x * x + y * y), lim: 'N',
+    hint: R`En polaires, que devient $f$ ? (pense à $1-\sin2\theta$)`,
+    expl: R`<p>Polaires : $f=(\cos\theta-\sin\theta)^2=1-\sin2\theta$.</p><p>$\theta=0$ donne $1$, $\theta=\tfrac\pi4$ donne $0$.</p>` },
+  { label: '2xy² / (x² + y²)^(3/2)', expr: R`\dfrac{2xy^2}{(x^2+y^2)^{3/2}}`, f: (x, y) => 2 * x * y * y / Math.pow(x * x + y * y, 1.5), lim: 'N',
+    hint: R`Compte les degrés : $3$ en haut, $3$ en bas. Polaires.`,
+    expl: R`<p>Polaires : $f=2\cos\theta\sin^2\theta$. Les $r$ disparaissent, il reste du $\theta$.</p><p>$\theta=0$ donne $0$, $\theta=\tfrac\pi4$ donne $\tfrac{\sqrt2}{2}$.</p>` },
+  { label: 'sin(x² + y²) / (x² + y²)', expr: R`\dfrac{\sin(x^2+y^2)}{x^2+y^2}`, f: (x, y) => { const t = x * x + y * y; return Math.sin(t) / t; }, lim: 1,
+    hint: R`Pose $t=x^2+y^2$ : quelle limite usuelle reconnais-tu ?`,
+    expl: R`<p>On pose $t=x^2+y^2\to0$ : $\dfrac{\sin t}{t}\to1$ (limite usuelle).</p>` },
+  { label: '(x² + y²) / (√(x² + y² + 1) − 1)', expr: R`\dfrac{x^2+y^2}{\sqrt{x^2+y^2+1}-1}`, f: (x, y) => { const t = x * x + y * y; return t * (Math.sqrt(t + 1) + 1) / t; }, lim: 2,
+    hint: R`Forme $\frac00$ avec une racine : quantité conjuguée.`,
+    expl: R`<p>Conjuguée : $f=\sqrt{x^2+y^2+1}+1\to2$.</p>` },
+  { label: '(x − 1)y² / ((x − 1)² + y²) en (1, 0)', expr: R`\dfrac{(x-1)y^2}{(x-1)^2+y^2}`, at: '(1,0)',
+    simTex: R`f=\dfrac{Xy^2}{X^2+y^2},\quad X=x-1`, f: (X, y) => X * y * y / (X * X + y * y), lim: 0,
+    hint: R`Le point n'est pas l'origine : recentre avec $X=x-1$.`,
+    expl: R`<p>On pose $X=x-1\to0$ : on étudie $\dfrac{Xy^2}{X^2+y^2}$ en $(0,0)$.</p><p>$\dfrac{y^2}{X^2+y^2}\le1$, donc $|f|\le|X|\to0$.</p>` },
+  { label: '(1 − cos(x² + y²)) / (x² + y²)²', expr: R`\dfrac{1-\cos(x^2+y^2)}{(x^2+y^2)^2}`, f: (x, y) => { const t = x * x + y * y; const s = Math.sin(t / 2); return 2 * s * s / (t * t); }, lim: 0.5,
+    hint: R`Pose $t=x^2+y^2$ et rappelle-toi $1-\cos t\sim\dfrac{t^2}{2}$.`,
+    expl: R`<p>$t=x^2+y^2\to0$ : $\dfrac{1-\cos t}{t^2}\to\dfrac12$.</p>` },
+  { label: 'x³y / (x⁴ + y²)', expr: R`\dfrac{x^3y}{x^4+y^2}`, f: (x, y) => x ** 3 * y / (x ** 4 + y * y), lim: 0,
+    hint: R`Utilise $x^4+y^2\ge2x^2|y|$.`,
+    expl: R`<p>$x^4+y^2\ge2x^2|y|$, donc $|f|=\dfrac{|x|\,x^2|y|}{x^4+y^2}\le\dfrac{|x|}{2}\to0$.</p>` },
+  { label: 'xy / √(x² + y²)', expr: R`\dfrac{xy}{\sqrt{x^2+y^2}}`, f: (x, y) => x * y / Math.sqrt(x * x + y * y), lim: 0,
+    hint: R`$2|xy|\le x^2+y^2$.`,
+    expl: R`<p>$|xy|\le\dfrac{x^2+y^2}{2}$, donc $|f|\le\dfrac{\sqrt{x^2+y^2}}{2}\to0$.</p>` },
+  { label: 'xy(x² − y²) / (x² + y²)', expr: R`\dfrac{xy(x^2-y^2)}{x^2+y^2}`, f: (x, y) => x * y * (x * x - y * y) / (x * x + y * y), lim: 0,
+    hint: R`Majore $\dfrac{|x^2-y^2|}{x^2+y^2}$ par $1$.`,
+    expl: R`<p>$|x^2-y^2|\le x^2+y^2$, donc $|f|\le|xy|\to0$.</p>` },
+  { label: 'x² / (x² + y²)', expr: R`\dfrac{x^2}{x^2+y^2}`, f: (x, y) => x * x / (x * x + y * y), lim: 'N',
+    hint: R`Compare $y=0$ et $x=0$.`,
+    expl: R`<p>Sur $y=0$ : $f=1$. Sur $x=0$ : $f=0$. Deux valeurs. (En polaires : $\cos^2\theta$.)</p>` },
+  { label: '2xy / (x² + 3y²)', expr: R`\dfrac{2xy}{x^2+3y^2}`, f: (x, y) => 2 * x * y / (x * x + 3 * y * y), lim: 'N',
+    hint: R`Sur $y=mx$, simplifie par $x^2$.`,
+    expl: R`<p>$y=mx$ : $f=\dfrac{2m}{1+3m^2}$. $m=0$ donne $0$, $m=1$ donne $\tfrac12$.</p>` },
+];
+const limKey = (l) => l === 'N' ? 'N' : (l === 0 ? '0' : (l === 0.5 ? '1/2' : String(l)));
+const limTex = (l) => l === 0.5 ? '\\tfrac12' : String(l);
+
+function trigTex(a, b) {
+  const c = a === 0 ? '' : (a === 1 ? '\\cos\\theta' : '\\cos^{' + a + '}\\theta');
+  const s = b === 0 ? '' : (b === 1 ? '\\sin\\theta' : '\\sin^{' + b + '}\\theta');
+  return c + s;
+}
+function famA() {
+  for (;;) {
+    const a = rnd(5), b = rnd(5), c = 1 + rnd(3), d = a + b;
+    if (d === 0 || d < 2 * c || d > 2 * c + 2) continue;
+    const den = c === 1 ? 'x^2+y^2' : '(x^2+y^2)^{' + c + '}';
+    const e = d - 2 * c; const trig = trigTex(a, b);
+    const item = {
+      label: monoTex(a, b) + '/' + den, expr: '\\dfrac{' + monoTex(a, b) + '}{' + den + '}',
+      f: (x, y) => Math.pow(x, a) * Math.pow(y, b) / Math.pow(x * x + y * y, c),
+      lim: e > 0 ? 0 : 'N',
+      hint: R`Compte les degrés : $${d}$ en haut, $${2 * c}$ en bas. Polaires.`,
+    };
+    if (e > 0) {
+      item.expl = R`<p>Polaires : $f=r^{${e}}${trig}$ (le numérateur donne $r^{${d}}$, le dénominateur $r^{${2 * c}}$).</p><p>$|${trig}|\le1$, donc $|f|\le r^{${e}}\to0$, sans dépendre de $\theta$.</p>`;
+    } else {
+      const v0 = b === 0 ? 1 : 0;
+      item.expl = R`<p>Polaires : $r^{${d}}$ en haut, $r^{${2 * c}}$ en bas : les $r$ se simplifient, $f=${trig}$, qui dépend de $\theta$.</p><p>$\theta=0$ donne $${v0}$, $\theta=\tfrac\pi4$ donne $\tfrac{1}{${ipow(2, c)}}$. Deux valeurs.</p>`;
+    }
+    return item;
+  }
+}
+
+const LIM_ORDER = ['0', '1/2', '1', '2', 'N'];
+const LIM_OPTS = [opt('0', '$0$'), opt('1/2', '$\\tfrac12$'), opt('1', '$1$'), opt('2', '$2$'), opt('N', "La limite n'existe pas")];
+function verdictText(it) {
+  return it.lim === 'N' ? '<b>La limite n\'existe pas.</b>' : '<b>La limite existe et vaut $' + limTex(it.lim) + '$.</b>';
+}
+function qLimit() {
+  const it = Math.random() < 0.4 ? famA() : pick(LIMS);
+  const at = it.at || '(0,0)';
+  const statement = R`Que vaut $\displaystyle\lim_{(x,y)\to${at}}${it.expr}$ ?`;
+  const correct = LIM_OPTS.find((o) => o.k === limKey(it.lim));
+  return build('lim', statement, it.hint, correct, LIM_OPTS.filter((o) => o !== correct), it.expl + '<p>' + verdictText(it) + '</p>', { order: LIM_ORDER });
+}
+function qCont() {
+  const it = pick(LIMS.filter((x) => !x.at));
+  let v;
+  if (it.lim === 'N') v = pick([0, 1]);
+  else v = Math.random() < 0.5 ? it.lim : pick([0, 1, 2].filter((z) => z !== it.lim));
+  const vtex = limTex(v);
+  const statement = R`Soit $f(x,y)=\begin{cases}${it.expr} & \text{si } (x,y)\neq(0,0)\\ ${vtex} & \text{si } (x,y)=(0,0)\end{cases}$. Que peut-on dire de $f$ en $(0,0)$ ?`;
+  const key = it.lim === 'N' ? 'nolim' : (v === it.lim ? 'cont' : 'jump');
+  const opts = [opt('cont', 'Continue en $(0,0)$'), opt('jump', 'Discontinue, mais prolongeable par continuité'), opt('nolim', "Discontinue et non prolongeable (la limite n'existe pas)")];
+  const lead = it.expl;
+  const sol = {
+    cont: lead + R`<p>La limite vaut $${limTex(it.lim)}=f(0,0)$ : <b>$f$ est continue en $(0,0)$.</b></p>`,
+    jump: lead + R`<p>La limite vaut $${limTex(it.lim)}$ mais $f(0,0)=${vtex}$ : elles diffèrent, <b>$f$ est discontinue</b>. On la prolonge en posant $f(0,0)=${limTex(it.lim)}$.</p>`,
+    nolim: lead + R`<p>La limite n'existe pas : <b>$f$ est discontinue en $(0,0)$ et ne se prolonge pas.</b></p>`,
+  }[key];
+  return build('cont', statement, R`Étape 1 : la limite existe-t-elle ? Étape 2 : <b>compare-la à la valeur imposée</b> $f(0,0)=${vtex}$.`, opts.find((o) => o.k === key), opts.filter((o) => o.k !== key), sol, { order: ['cont', 'jump', 'nolim'] });
+}
+
+// ---------- dérivées ----------
+function qPartial() {
+  const ts = randPoly(); const x0 = rnd(5) - 2, y0 = rnd(5) - 2;
+  const kind = pick(['x', 'y', 'xy', 'xx', 'yy']);
+  const D = {
+    x: { t: pdx(ts), sym: R`\dfrac{\partial f}{\partial x}`, step: R`$f_x$ : on dérive en $x$, $y$ est une constante` },
+    y: { t: pdy(ts), sym: R`\dfrac{\partial f}{\partial y}`, step: R`$f_y$ : on dérive en $y$, $x$ est une constante` },
+    xy: { t: pdx(pdy(ts)), sym: R`\dfrac{\partial^2 f}{\partial x\,\partial y}`, step: R`$f_y$ d'abord, puis on dérive en $x$` },
+    xx: { t: pdx(pdx(ts)), sym: R`\dfrac{\partial^2 f}{\partial x^2}`, step: R`on dérive deux fois en $x$` },
+    yy: { t: pdy(pdy(ts)), sym: R`\dfrac{\partial^2 f}{\partial y^2}`, step: R`on dérive deux fois en $y$` },
+  };
+  const val = pev(D[kind].t, x0, y0);
+  const others = Object.keys(D).filter((k) => k !== kind).map((k) => pev(D[k].t, x0, y0)).concat([pev(ts, x0, y0), -val]);
+  const ws = others.concat([val + 1, val - 1, val + 2, 2 * val]).filter((v) => v !== val);
+  const statement = R`Soit $f(x,y)=${polyTex(ts)}$. Calculer $${D[kind].sym}(${x0},${y0})$.`;
+  const mid = kind === 'xy' ? R`<p>$f_y=${polyTex(pdy(ts))}$, puis $\dfrac{\partial^2 f}{\partial x\,\partial y}=${polyTex(D[kind].t)}$.</p>` :
+    (kind === 'xx' || kind === 'yy') ? R`<p>$${D[kind].sym}=${polyTex(D[kind].t)}$.</p>` : R`<p>$${D[kind].sym}=${polyTex(D[kind].t)}$.</p>`;
+  const sol = mid + R`<p>En $(${x0},${y0})$ : <b>$${val}$</b>.</p>`;
+  return build('der', statement, 'Dérive en traitant l\'autre variable comme une constante, puis remplace par les valeurs du point.',
+    opt(val, tx(String(val))), ws.map((v) => opt(v, tx(String(v)))), sol);
+}
+function qDirectional() {
+  const a = pick([1, 2, 3]), b = pick([-2, -1, 1, 2, 3]), c = pick([1, 2, 3]);
+  const ts = [{ c: a, p: 2, q: 0 }, { c: b, p: 1, q: 1 }, { c: c, p: 0, q: 2 }];
+  const x0 = rnd(5) - 2, y0 = rnd(5) - 2;
+  const fx = pev(pdx(ts), x0, y0), fy = pev(pdy(ts), x0, y0);
+  const D = Fr(3 * fx + 4 * fy, 5);
+  const statement = R`Soit $f(x,y)=${polyTex(ts)}$. Calculer la dérivée de $f$ au point $P(${x0},${y0})$ dans la direction du vecteur $\vec v=(3,4)$.`;
+  const sol = R`<p>$\nabla f(P)=(f_x,f_y)=(${fx},${fy})$.</p><p>$\lVert\vec v\rVert=5$, donc $\vec u=\left(\tfrac35,\tfrac45\right)$ et $D_{\vec u}f(P)=\nabla f(P)\cdot\vec u=\dfrac{3\times${fx}+4\times${fy}}{5}=${ftex(D)}$.</p>`;
+  return fracQuestion('der', statement, R`Le vecteur doit être <b>unitaire</b> : divise par sa norme.`, D,
+    [Fr(3 * fx + 4 * fy), Fr(4 * fx + 3 * fy, 5), Fr(fx + fy), Fr(3 * fx + 4 * fy, 25)], sol);
+}
+function qDefinition() {
+  const p = pick([-3, -2, -1, 1, 2, 3, 4]), q = pick([-3, -2, -1, 1, 2, 3, 4]), s = pick([2, 3, 4]);
+  const num = polyTex([{ c: p, p: 3, q: 0 }, { c: q, p: 0, q: 3 }]);
+  const wantX = Math.random() < 0.5;
+  const ans = wantX ? Fr(p) : Fr(q, s);
+  const wrongs = wantX ? [Fr(0), Fr(p, s), Fr(p * s), Fr(q)] : [Fr(0), Fr(q), Fr(q * s), Fr(p)];
+  const statement = R`Soit $f(x,y)=\dfrac{${num}}{x^2+${s}y^2}$ si $(x,y)\neq(0,0)$ et $f(0,0)=0$. Que vaut $f_${wantX ? 'x' : 'y'}(0,0)$ ?`;
+  const sol = wantX
+    ? R`<p>Au point problématique : définition. $f(h,0)=\dfrac{${p}h^3}{h^2}=${p}h$, donc $f_x(0,0)=\lim\limits_{h\to0}\dfrac{f(h,0)-f(0,0)}{h}=${p}$.</p><p>(Utiliser la formule de dérivation hors de l'origine n'a pas de sens ici.)</p>`
+    : R`<p>Au point problématique : définition. $f(0,h)=\dfrac{${q}h^3}{${s}h^2}=\dfrac{${q}}{${s}}h$, donc $f_y(0,0)=\lim\limits_{h\to0}\dfrac{f(0,h)-f(0,0)}{h}=${ftex(ans)}$.</p>`;
+  return fracQuestion('der', statement, R`En $(0,0)$, la règle du quotient ne marche pas : calcule $\dfrac{f(h,0)-f(0,0)}{h}$ (ou $\dfrac{f(0,h)-f(0,0)}{h}$).`, ans, wrongs, sol);
+}
+
+// ---------- EDP ----------
+function coefMono(c, mono) {
+  if (c.d === 1) return c.n === 1 ? mono : String(c.n) + mono;
+  return '\\dfrac{' + c.n + '}{' + c.d + '}' + mono;
+}
+function qEdpPrim() {
+  if (Math.random() < 0.5) {
+    const k = pick([1, 2, 3, 4]), m = rnd(3), n = rnd(3);
+    const c = Fr(k, (m + 1) * (n + 1));
+    const rhs = coefMono(Fr(k), monoTex(m, n)) || String(k);
+    const term = coefMono(c, monoTex(m + 1, n + 1));
+    const good = R`f(x,y)=${term}+G(x)+H(y)`;
+    const statement = R`Déterminer les fonctions $f$ de classe $C^2$ telles que $\dfrac{\partial^2 f}{\partial x\,\partial y}(x,y)=${rhs}$.`;
+    const wr = [
+      R`f(x,y)=${term}+C`,
+      R`f(x,y)=${term}+G(x)`,
+      R`f(x,y)=${coefMono(Fr(k), monoTex(m + 1, n + 1))}+G(x)+H(y)`,
+      R`f(x,y)=${coefMono(Fr(k, m + 1), monoTex(m + 1, n + 1))}+G(x)+H(y)`,
+      R`f(x,y)=${coefMono(c, monoTex(m, n))}+G(x)+H(y)`,
+    ];
+    return build('edp', statement, R`Primitive en $y$ puis en $x$ : chaque intégration ajoute une fonction de <b>l'autre</b> variable.`,
+      opt(good, tx(good)), wr.map((w) => opt(w, tx(w))),
+      R`<p>$\dfrac{\partial}{\partial x}\Big(\dfrac{\partial f}{\partial y}\Big)=${rhs}$ : on primitive en $x$, la « constante » est une fonction de $y$. Puis on primitive en $y$ : une fonction de $x$ apparaît.</p><p><b>$${good}$</b>, avec $G$, $H$ de classe $C^2$ quelconques.</p>`);
+  }
+  const a = pick([1, 2, 3, 4]), b = pick([1, 2, 3]);
+  const term = coefMono(Fr(a, 2), 'x^2') + ' + ' + (b === 1 ? '' : b) + 'xy';
+  const good = R`f(x,y)=${term}+g(y)`;
+  const statement = R`Déterminer les fonctions $f$ de classe $C^1$ telles que $\dfrac{\partial f}{\partial x}(x,y)=${a === 1 ? '' : a}x+${b === 1 ? '' : b}y$.`;
+  const wr = [
+    R`f(x,y)=${term}+C`,
+    R`f(x,y)=${term}+h(x)`,
+    R`f(x,y)=${a === 1 ? '' : a}x^2+${b === 1 ? '' : b}xy+g(y)`,
+    R`f(x,y)=${a === 1 ? '' : a}x+${b === 1 ? '' : b}y+g(y)`,
+  ];
+  return build('edp', statement, R`On primitive en $x$ : la constante d'intégration peut dépendre de $y$.`,
+    opt(good, tx(good)), wr.map((w) => opt(w, tx(w))),
+    R`<p>On primitive en $x$ en gardant $y$ constante : $f=${term}+g(y)$, où $g$ est une fonction de $y$ seule (elle disparaît en dérivant en $x$).</p>`);
+}
+function lin(a, b) { return (a === 1 ? '' : String(a)) + 'x' + (b < 0 ? ' - ' : ' + ') + (Math.abs(b) === 1 ? '' : String(Math.abs(b))) + 'y'; }
+function qEdpChain() {
+  const al = pick([1, 2, 3]); let be = pick([1, 2, 3]);
+  while (be === al) be = pick([1, 2, 3]);
+  const A = al === 1 ? '' : al, B = be === 1 ? '' : be;
+  const statement = R`Soit $f$ de classe $C^1$ sur $\mathbb{R}^2$ vérifiant $${A}\dfrac{\partial f}{\partial x}+${B}\dfrac{\partial f}{\partial y}=0$. Les solutions sont les fonctions…`;
+  const good = R`f(x,y)=h(${lin(be, -al)})`;
+  const wr = [R`f(x,y)=h(${lin(al, -be)})`, R`f(x,y)=h(${lin(al, be)})`, R`f(x,y)=h(${lin(be, al)})`, R`f(x,y)=h(x)+k(y)`];
+  const sol = R`<p>On pose $u=${lin(be, -al)}$ et $v=x$, et $f(x,y)=g(u,v)$.</p><p>Chaîne : $f_x=${be === 1 ? '' : be}g_u+g_v$ et $f_y=-${al === 1 ? '' : al}g_u$.</p><p>$${A}f_x+${B}f_y=${al * be}g_u+${A}g_v-${al * be}g_u=${A}g_v$. L'équation devient $g_v=0$ : $g(u,v)=h(u)$.</p><p><b>$${good}$</b>, avec $h$ de classe $C^1$ quelconque.</p>`;
+  return build('edp', statement, R`Cherche $u=px+qy$ pour lequel $f=h(u)$ annule l'équation : $f_x=p\,h'(u)$ et $f_y=q\,h'(u)$.`,
+    opt(good, tx(good)), wr.map((w) => opt(w, tx(w))), sol);
+}
+const qEdp = () => (Math.random() < 0.55 ? qEdpPrim() : qEdpChain());
+
+// ---------- intégrales doubles ----------
+const BT = (a, p) => a === 0 ? '0' : (p === 0 ? String(a) : (a === 1 ? '' : String(a)) + (p === 1 ? 'x' : 'x^{' + p + '}'));
+const FTPL = [
+  { L: 1, g1: [0, 0], g2: [2, 1] }, { L: 2, g1: [1, 2], g2: [2, 1] }, { L: 1, g1: [1, 2], g2: [1, 1] }, { L: 1, g1: [1, 3], g2: [1, 1] },
+  { L: 2, g1: [0, 0], g2: [1, 2] }, { L: 1, g1: [1, 1], g2: [3, 1] }, { L: 2, g1: [1, 2], g2: [3, 1] }, { L: 1, g1: [0, 0], g2: [3, 2] },
+];
+function fubiniInner(ts, tpl, o = {}) {
+  // renvoie les termes en x (coef Fr, puissance) de l'intégrale intérieure en y
+  const out = new Map(); const add = (p, c) => { const k = String(p); out.set(k, fadd(out.get(k) || Fr(0), c)); };
+  const [a1, p1] = tpl.g1, [a2, p2] = tpl.g2;
+  ts.forEach((t) => {
+    const j = t.j, den = o.noInner ? 1 : j + 1;
+    add(t.i + p2 * (j + 1), Fr(t.c * ipow(a2, j + 1), den));
+    if (a1 !== 0 && !o.dropLower) add(t.i + p1 * (j + 1), Fr(-t.c * ipow(a1, j + 1), den));
+  });
+  return [...out.entries()].map(([p, c]) => ({ p: +p, c })).filter((t) => t.c.n !== 0).sort((u, v) => u.p - v.p);
+}
+function fubiniVal(inner, L) { return inner.reduce((s, t) => fadd(s, fmul(t.c, Fr(ipow(L, t.p + 1), t.p + 1))), Fr(0)); }
+function fxTex(inner) {
+  if (!inner.length) return '0';
+  return inner.map((t, i) => {
+    const neg = t.c.n < 0; const a = Fr(Math.abs(t.c.n), t.c.d);
+    const m = t.p === 0 ? '' : (t.p === 1 ? 'x' : 'x^{' + t.p + '}');
+    let body;
+    if (a.d === 1) body = (a.n === 1 && m) ? m : String(a.n) + m; else body = '\\dfrac{' + a.n + '}{' + a.d + '}' + m;
+    return (i === 0 ? (neg ? '-' : '') : (neg ? ' - ' : ' + ')) + body;
+  }).join('');
+}
+function qFubini() {
+  const tpl = pick(FTPL);
+  const nt = Math.random() < 0.5 ? 1 : 2; const used = new Set(); const ts = [];
+  while (ts.length < nt) {
+    const i = rnd(3), j = rnd(3);
+    if (i + j > 3 || used.has(i + ',' + j)) continue;
+    used.add(i + ',' + j); ts.push({ c: pick([1, 1, 2, 3]), i, j });
+  }
+  const ftex = polyTex(ts.map((t) => ({ c: t.c, p: t.i, q: t.j })));
+  const inner = fubiniInner(ts, tpl); const ans = fubiniVal(inner, tpl.L);
+  const wrongs = [fubiniVal(fubiniInner(ts, tpl, { dropLower: true }), tpl.L), fmul(ans, Fr(-1)), fubiniVal(fubiniInner(ts, tpl, { noInner: true }), tpl.L), fmul(ans, Fr(2))];
+  const g1 = BT(tpl.g1[0], tpl.g1[1]), g2 = BT(tpl.g2[0], tpl.g2[1]);
+  const statement = R`Calculer $I=\displaystyle\iint_D ${ftex}\,dx\,dy$ où $D=\{(x,y)\in\mathbb{R}^2\mid 0\le x\le ${tpl.L},\ ${g1}\le y\le ${g2}\}$.`;
+  const sol = R`<p>Tranches verticales : $I=\displaystyle\int_0^{${tpl.L}}\!\int_{${g1}}^{${g2}}${ftex}\,dy\,dx$.</p><p>Intégrale en $y$ (bornes en $x$) : $\displaystyle\int_{${g1}}^{${g2}}${ftex}\,dy=${fxTex(inner)}$.</p><p>Puis en $x$ entre $0$ et $${tpl.L}$ : <b>$I=${ftex_(ans)}$</b>.</p>`;
+  return fracQuestion('int', statement, R`Intégrale intérieure : bornes <b>fonctions de $x$</b>, on les remplace <i>haut moins bas</i>. Intégrale extérieure : bornes numériques.`, ans, wrongs, sol);
+}
+const ftex_ = ftex; // l'identifiant ftex est masqué localement dans qFubini
+
+const SECT = [
+  { c: '', t: [Fr(0), Fr(2)], k: 'full' },
+  { c: 'x\\ge0', t: [Fr(-1, 2), Fr(1, 2)], k: 'x' },
+  { c: 'y\\ge0', t: [Fr(0), Fr(1)], k: 'y' },
+  { c: 'x\\ge0,\\ y\\ge0', t: [Fr(0), Fr(1, 2)], k: 'q' },
+  { c: 'x\\ge0,\\ y\\ge x', t: [Fr(1, 4), Fr(1, 2)], k: 'oct' },
+  { c: 'y\\ge x,\\ y\\ge-x', t: [Fr(1, 4), Fr(3, 4)], k: 'up' },
+  { c: 'x\\ge0,\\ y\\ge-x', t: [Fr(-1, 4), Fr(1, 2)], k: 'm' },
+  { c: 'y\\ge0,\\ y\\le x', t: [Fr(0), Fr(1, 4)], k: 'o2' },
+  { c: 'x\\le0,\\ y\\ge0', t: [Fr(1, 2), Fr(1)], k: 'q2' },
+];
+function qPolar() {
+  const S = pick(SECT); const dth = fsub(S.t[1], S.t[0]);
+  const r1 = pick([0, 0, 1, 2]); const r2 = r1 + 1 + rnd(2);
+  const kind = (r1 === 0 && Math.random() < 0.35) ? 'ln' : 'pow';
+  const cond = (r1 === 0 ? 'x^2+y^2\\le' + (r2 * r2) : (r1 * r1) + '\\le x^2+y^2\\le' + (r2 * r2)) + (S.c ? ',\\ ' + S.c : '');
+  if (kind === 'ln') {
+    const N = 1 + r2 * r2; const cc = fmul(dth, Fr(1, 2));
+    const good = pitex(cc) + '\\ln ' + N;
+    const wr = [pitex(dth) + '\\ln ' + N, pitex(dth) + '\\arctan ' + r2, pitex(cc) + '\\arctan ' + r2, pitex(cc) + '\\ln ' + (1 + r2)];
+    const statement = R`Calculer $\displaystyle\iint_D\dfrac{dx\,dy}{1+x^2+y^2}$ où $D=\{(x,y)\mid ${cond}\}$.`;
+    const sol = R`<p>Polaires : $r\in[0,${r2}]$, $\theta\in[${pitex(S.t[0])},${pitex(S.t[1])}]$, $dx\,dy=r\,dr\,d\theta$.</p><p>$\displaystyle I=${pitex(dth)}\int_0^{${r2}}\dfrac{r}{1+r^2}dr=${pitex(dth)}\cdot\tfrac12\ln(1+r^2)\Big|_0^{${r2}}=${good}$.</p>`;
+    return build('int', statement, R`Domaine circulaire : polaires. N'oublie pas le $r$ de $dx\,dy=r\,dr\,d\theta$, qui permet de reconnaître $\dfrac{u'}{u}$.`, opt(good, tx(good)), wr.map((w) => opt(w, tx(w))), sol);
+  }
+  const s = pick([0, 1, 2, 4]);
+  const ftx = { 0: '1', 1: '\\sqrt{x^2+y^2}', 2: 'x^2+y^2', 4: '(x^2+y^2)^2' }[s];
+  const rad = (e) => Fr(ipow(r2, e) - ipow(r1, e), e);
+  const ans = fmul(dth, rad(s + 2));
+  const wrongs = [fmul(dth, rad(s + 1)), fmul(Fr(2), rad(s + 2)), fmul(dth, Fr(ipow(r2, s + 2) - ipow(r1, s + 2))), fmul(dth, rad(s + 3))];
+  const statement = R`Calculer $\displaystyle\iint_D ${ftx}\,dx\,dy$ où $D=\{(x,y)\mid ${cond}\}$.`;
+  const sol = R`<p>Polaires : $r\in[${r1},${r2}]$, $\theta\in[${pitex(S.t[0])},${pitex(S.t[1])}]$, et $dx\,dy=r\,dr\,d\theta$.</p><p>$\displaystyle I=\int_{${pitex(S.t[0])}}^{${pitex(S.t[1])}}\!d\theta\int_{${r1}}^{${r2}} r^{${s}}\cdot r\,dr=${pitex(dth)}\times${ftex(rad(s + 2))}$ : <b>$I=${pitex(ans)}$</b>.</p>`;
+  const optP = (a) => opt(fkey(a), tx(pitex(a)));
+  const extra = [fadd(ans, Fr(1, 2)), fmul(ans, Fr(2)), fmul(ans, Fr(1, 2))];
+  return build('int', statement, R`Domaine circulaire : polaires. Ne pas oublier le <b>jacobien $r$</b>.`, optP(ans), wrongs.concat(extra).filter((w) => !(w.n === ans.n && w.d === ans.d)).map(optP), sol);
+}
+
+const THETA = [
+  { c: 'x\\ge0', t: [Fr(-1, 2), Fr(1, 2)], p: (x, y) => x >= 0 },
+  { c: 'y\\ge0', t: [Fr(0), Fr(1)], p: (x, y) => y >= 0 },
+  { c: 'x\\le0', t: [Fr(1, 2), Fr(3, 2)], p: (x, y) => x <= 0 },
+  { c: 'x\\ge0,\\ y\\ge0', t: [Fr(0), Fr(1, 2)], p: (x, y) => x >= 0 && y >= 0 },
+  { c: 'x\\ge0,\\ y\\ge x', t: [Fr(1, 4), Fr(1, 2)], p: (x, y) => x >= 0 && y >= x },
+  { c: 'y\\ge x,\\ y\\ge-x', t: [Fr(1, 4), Fr(3, 4)], p: (x, y) => y >= x && y >= -x },
+  { c: 'x\\ge0,\\ y\\ge-x', t: [Fr(-1, 4), Fr(1, 2)], p: (x, y) => x >= 0 && y >= -x },
+  { c: 'y\\ge0,\\ y\\le x', t: [Fr(0), Fr(1, 4)], p: (x, y) => y >= 0 && y <= x },
+  { c: 'x\\le0,\\ y\\ge0', t: [Fr(1, 2), Fr(1)], p: (x, y) => x <= 0 && y >= 0 },
+  { c: 'x\\ge0,\\ y\\le x,\\ y\\ge-x', t: [Fr(-1, 4), Fr(1, 4)], p: (x, y) => x >= 0 && y <= x && y >= -x },
+  { c: 'y\\le0,\\ y\\ge x', t: [Fr(1), Fr(5, 4)], p: (x, y) => y <= 0 && y >= x },
+];
+const ivTex = (t) => '\\left[' + pitex(t[0]) + ',\\ ' + pitex(t[1]) + '\\right]';
+function qTheta() {
+  const T = pick(THETA);
+  const pool = THETA.filter((z) => z !== T).map((z) => z.t).concat([[Fr(0), Fr(2)], [Fr(-1), Fr(1)], [Fr(0), Fr(1, 4)], [Fr(0), Fr(1)]]);
+  const good = ivTex(T.t);
+  const wr = shuffle(pool).map((t) => ivTex(t));
+  const statement = R`Le domaine $D=\{(x,y)\mid 1\le x^2+y^2\le4,\ ${T.c}\}$ est décrit en polaires par $r\in[1,2]$ et $\theta\in$ …`;
+  const sol = R`<p>Dessine la couronne et ne garde que la partie vérifiant $${T.c}$. L'angle balaye <b>$\theta\in${good}$</b> (angle mesuré depuis l'axe $Ox$ dans le sens trigonométrique).</p>`;
+  return build('int', statement, R`Repères : $y=x$ ($x>0$) ↔ $\tfrac\pi4$ ; axe $Oy$ ($y>0$) ↔ $\tfrac\pi2$ ; $y=-x$ ($x>0$) ↔ $-\tfrac\pi4$.`, opt(good, tx(good)), wr.map((w) => opt(w, tx(w))), sol);
+}
+
+// inversion de l'ordre d'intégration : région décrite par des bornes (fonctions)
+const sq = Math.sqrt;
+const OR = (outer, ov, iv, lo, hi) => ({ outer, ov, iv, lo, hi });
+const tex_ = (o) => R`\int_{${o.outer[0]}}^{${o.outer[1]}}\int_{${o.lo.t}}^{${o.hi.t}} f(x,y)\,d${o.iv}\,d${o.ov}`;
+const B = (t, f) => ({ t, f });
+const ORD = [
+  { given: OR([0, 1], 'y', 'x', B('\\sqrt{y}', (y) => sq(y)), B('1', () => 1)),
+    ans: OR([0, 1], 'x', 'y', B('0', () => 0), B('x^2', (x) => x * x)),
+    wrong: [OR([0, 1], 'x', 'y', B('\\sqrt{x}', (x) => sq(x)), B('1', () => 1)), OR([0, 1], 'x', 'y', B('x^2', (x) => x * x), B('1', () => 1)), OR([0, 1], 'x', 'y', B('0', () => 0), B('\\sqrt{x}', (x) => sq(x)))] },
+  { given: OR([0, 1], 'x', 'y', B('x^2', (x) => x * x), B('x', (x) => x)),
+    ans: OR([0, 1], 'y', 'x', B('y', (y) => y), B('\\sqrt{y}', (y) => sq(y))),
+    wrong: [OR([0, 1], 'y', 'x', B('y^2', (y) => y * y), B('y', (y) => y)), OR([0, 1], 'y', 'x', B('\\sqrt{y}', (y) => sq(y)), B('y', (y) => y)), OR([0, 1], 'y', 'x', B('0', () => 0), B('\\sqrt{y}', (y) => sq(y)))] },
+  { given: OR([0, 2], 'x', 'y', B('0', () => 0), B('\\tfrac{x}{2}', (x) => x / 2)),
+    ans: OR([0, 1], 'y', 'x', B('2y', (y) => 2 * y), B('2', () => 2)),
+    wrong: [OR([0, 1], 'y', 'x', B('\\tfrac{y}{2}', (y) => y / 2), B('2', () => 2)), OR([0, 1], 'y', 'x', B('0', () => 0), B('2y', (y) => 2 * y)), OR([0, 1], 'y', 'x', B('y', (y) => y), B('2', () => 2))] },
+  { given: OR([-1, 1], 'x', 'y', B('x^2', (x) => x * x), B('1', () => 1)),
+    ans: OR([0, 1], 'y', 'x', B('-\\sqrt{y}', (y) => -sq(y)), B('\\sqrt{y}', (y) => sq(y))),
+    wrong: [OR([0, 1], 'y', 'x', B('0', () => 0), B('\\sqrt{y}', (y) => sq(y))), OR([0, 1], 'y', 'x', B('-y', (y) => -y), B('y', (y) => y)), OR([0, 1], 'y', 'x', B('-y^2', (y) => -y * y), B('y^2', (y) => y * y))] },
+  { given: OR([0, 1], 'x', 'y', B('0', () => 0), B('\\sqrt{1-x^2}', (x) => sq(1 - x * x))),
+    ans: OR([0, 1], 'y', 'x', B('0', () => 0), B('\\sqrt{1-y^2}', (y) => sq(1 - y * y))),
+    wrong: [OR([0, 1], 'y', 'x', B('0', () => 0), B('1-y^2', (y) => 1 - y * y)), OR([0, 1], 'y', 'x', B('0', () => 0), B('\\sqrt{1-y}', (y) => sq(1 - y))), OR([0, 1], 'y', 'x', B('y', (y) => y), B('\\sqrt{1-y^2}', (y) => sq(1 - y * y)))] },
+  { given: OR([0, 1], 'y', 'x', B('y', (y) => y), B('1', () => 1)),
+    ans: OR([0, 1], 'x', 'y', B('0', () => 0), B('x', (x) => x)),
+    wrong: [OR([0, 1], 'x', 'y', B('x', (x) => x), B('1', () => 1)), OR([0, 1], 'x', 'y', B('0', () => 0), B('x^2', (x) => x * x)), OR([0, 1], 'x', 'y', B('x^2', (x) => x * x), B('x', (x) => x))] },
+];
+// indicateur de la région (x,y) décrite par une écriture
+function inRegion(o, x, y) {
+  const outerV = o.ov === 'x' ? x : y, innerV = o.iv === 'x' ? x : y;
+  if (outerV < o.outer[0] || outerV > o.outer[1]) return false;
+  const lo = o.lo.f(outerV), hi = o.hi.f(outerV);
+  return isFinite(lo) && isFinite(hi) && innerV >= lo && innerV <= hi;
+}
+function qOrder() {
+  const T = pick(ORD);
+  const good = tex_(T.ans);
+  const statement = R`On a $I=${tex_(T.given)}$. Après inversion de l'ordre d'intégration, $I$ s'écrit…`;
+  const sol = R`<p>Dessine la région : $${T.given.outer[0]}\le ${T.given.ov}\le${T.given.outer[1]}$ et $${T.given.lo.t}\le ${T.given.iv}\le${T.given.hi.t}$.</p><p>En lisant les mêmes courbes dans l'autre sens (nombres à l'extérieur, fonctions à l'intérieur) : <b>$I=${good}$</b>.</p>`;
+  return build('int', statement, R`Fais un dessin, puis lis la région par tranches dans l'autre direction. Bornes extérieures : des <b>nombres</b>.`, opt(good, tx(good)), T.wrong.map((w) => opt(tex_(w), tx(tex_(w)))), sol);
+}
+const OCALC = [
+  { given: R`\int_0^1\int_x^1 e^{y^2}\,dy\,dx`, swapped: R`\int_0^1\int_0^y e^{y^2}\,dx\,dy=\int_0^1 y\,e^{y^2}dy`, ans: Fr(1, 2), tex: R`\dfrac{e-1}{2}`, val: (Math.E - 1) / 2, wr: [R`e-1`, R`\dfrac12`, R`\dfrac e2`, R`\dfrac{e^2-1}{2}`], g: (y) => y * Math.exp(y * y) },
+  { given: R`\int_0^1\int_{\sqrt{y}}^1 e^{x^3}\,dx\,dy`, swapped: R`\int_0^1\int_0^{x^2} e^{x^3}\,dy\,dx=\int_0^1 x^2e^{x^3}dx`, tex: R`\dfrac{e-1}{3}`, val: (Math.E - 1) / 3, wr: [R`e-1`, R`\dfrac13`, R`\dfrac e3`, R`\dfrac{e-1}{2}`] },
+  { given: R`\int_0^1\int_y^1 \sin(x^2)\,dx\,dy`, swapped: R`\int_0^1\int_0^x \sin(x^2)\,dy\,dx=\int_0^1 x\sin(x^2)dx`, tex: R`\dfrac{1-\cos1}{2}`, val: (1 - Math.cos(1)) / 2, wr: [R`1-\cos1`, R`\dfrac{\cos1}{2}`, R`\dfrac{1-\sin1}{2}`, R`\dfrac{\sin1}{2}`] },
+];
+function qOrderCalc() {
+  const T = pick(OCALC);
+  const statement = R`Calculer $I=${T.given}$.`;
+  const sol = R`<p>$e^{y^2}$, $e^{x^3}$ ou $\sin(x^2)$ n'ont pas de primitive usuelle dans l'ordre donné : on <b>inverse l'ordre</b>.</p><p>$I=${T.swapped}=${T.tex}$.</p>`;
+  const good = opt(T.tex, tx(T.tex));
+  return build('int', statement, R`Une primitive est impossible dans cet ordre : dessine le domaine et inverse.`, good, T.wr.map((w) => opt(w, tx(w))), sol);
+}
+function qJacobian() {
+  const v = rnd(3);
+  if (v === 0) {
+    let a, b, c, d, det;
+    do { a = pick([1, 1, 2, 3]); b = pick([-2, -1, 1, 2]); c = pick([-1, 1, 2]); d = pick([-2, -1, 1, 2]); det = a * d - b * c; } while (Math.abs(det) < 2 || Math.abs(det) > 6);
+    const ut = lin(a, b), vt = lin(c, d);
+    const ad = Math.abs(det); const ans = Fr(1, ad);
+    const statement = R`On pose $u=${ut}$ et $v=${vt}$. Dans $\iint f\,dx\,dy=\iint g(u,v)\,\bigl(\dots\bigr)\,du\,dv$, le facteur $(\dots)$ vaut…`;
+    const sol = R`<p>Le déterminant $\begin{vmatrix}u_x&u_y\\v_x&v_y\end{vmatrix}=${a}\times${d < 0 ? '(' + d + ')' : d}-${b < 0 ? '(' + b + ')' : b}\times${c < 0 ? '(' + c + ')' : c}=${det}$ donne $du\,dv=${ad}\,dx\,dy$.</p><p>Donc $dx\,dy=\dfrac{1}{${ad}}\,du\,dv$ : <b>le facteur est $${ftex(ans)}$</b>. (Le jacobien utilisé est celui de $(u,v)\mapsto(x,y)$, l'inverse.)</p>`;
+    return fracQuestion('int', statement, R`Calcule le déterminant de $(x,y)\mapsto(u,v)$ : le jacobien de $(u,v)\mapsto(x,y)$ est son <b>inverse</b>.`, ans, [Fr(ad), Fr(1), Fr(1, ad * ad), Fr(det)], sol);
+  }
+  if (v === 1) {
+    const statement = R`En passant en coordonnées polaires $x=r\cos\theta$, $y=r\sin\theta$, l'élément $dx\,dy$ devient…`;
+    const opts = [opt('r', R`$r\,dr\,d\theta$`), opt('1', R`$dr\,d\theta$`), opt('1/r', R`$\dfrac1r\,dr\,d\theta$`), opt('r2', R`$r^2\,dr\,d\theta$`), opt('rs', R`$r\sin\theta\,dr\,d\theta$`)];
+    return build('int', statement, R`Calcule $\begin{vmatrix}x_r&x_\theta\\y_r&y_\theta\end{vmatrix}$.`, opts[0], opts.slice(1), R`<p>$\begin{vmatrix}\cos\theta&-r\sin\theta\\ \sin\theta&r\cos\theta\end{vmatrix}=r(\cos^2\theta+\sin^2\theta)=r$ : <b>$dx\,dy=r\,dr\,d\theta$</b>.</p>`);
+  }
+  const statement = R`On pose $u=xy$ et $v=\dfrac yx$ (avec $x,y>0$). Alors $dx\,dy=\bigl(\dots\bigr)\,du\,dv$ avec…`;
+  const opts = [opt('a', R`$\dfrac{1}{2v}$`), opt('b', R`$2v$`), opt('c', R`$\dfrac{1}{2u}$`), opt('d', R`$\dfrac{u}{v}$`), opt('e', R`$\dfrac12$`)];
+  return build('int', statement, R`$\dfrac{\partial(u,v)}{\partial(x,y)}=\begin{vmatrix}y&x\\-\frac{y}{x^2}&\frac1x\end{vmatrix}$, puis on inverse.`, opts[0], opts.slice(1),
+    R`<p>$\dfrac{\partial(u,v)}{\partial(x,y)}=y\cdot\dfrac1x-x\cdot\Big(-\dfrac{y}{x^2}\Big)=\dfrac{2y}{x}=2v$.</p><p>Donc $du\,dv=2v\,dx\,dy$, soit <b>$dx\,dy=\dfrac{1}{2v}\,du\,dv$</b>.</p>`);
+}
+const qInt = () => { const r = Math.random(); return r < 0.2 ? qFubini() : r < 0.4 ? qPolar() : r < 0.52 ? qTheta() : r < 0.7 ? qOrder() : r < 0.8 ? qOrderCalc() : qJacobian(); };
+const qDer = () => { const r = Math.random(); return r < 0.4 ? qPartial() : r < 0.65 ? qDefinition() : qDirectional(); };
+
+const TOPICS = [
+  { id: 'lim', name: 'Limites', sub: 'chemins, majoration, polaires', gen: qLimit },
+  { id: 'cont', name: 'Continuité', sub: 'comparer à la valeur imposée', gen: qCont },
+  { id: 'der', name: 'Dérivées partielles', sub: 'calcul, définition, directionnelle', gen: qDer },
+  { id: 'edp', name: 'EDP', sub: 'primitiver, changement de variables', gen: qEdp },
+  { id: 'int', name: 'Intégrales doubles', sub: 'Fubini, polaires, inversion, jacobien', gen: qInt },
+];
+const TOPIC_NAME = Object.fromEntries(TOPICS.map((t) => [t.id, t.name]));
+// ==END PURE==
+
+// ====================================================================
+//  Interface
+// ====================================================================
+const $ = (id) => document.getElementById(id);
+const css = (n) => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+function typeset(el) {
+  const run = () => { if (window.MathJax && MathJax.typesetPromise) return MathJax.typesetPromise(el ? [el] : undefined).catch(() => {}); };
+  if (window.MathJax && MathJax.typesetPromise) run();
+  else setTimeout(() => typeset(el), 250);
+}
+function fmt(v, d = 4) {
+  if (!isFinite(v)) return 'non défini';
+  let s = v.toFixed(d);
+  if (s.includes('.')) s = s.replace(/0+$/, '').replace(/\.$/, '');
+  if (s === '-0') s = '0';
+  return s;
+}
+function hexToRgb(c) {
+  const m = c.replace('#', ''); const n = m.length === 3 ? m.split('').map((ch) => ch + ch).join('') : m;
+  return [parseInt(n.slice(0, 2), 16), parseInt(n.slice(2, 4), 16), parseInt(n.slice(4, 6), 16)];
+}
+
+// ---------- thème (suit celui du site quand l'iframe est dans MkDocs) ----------
+function isDark() {
+  try {
+    const s = window.parent && window.parent !== window ? window.parent.document.body.getAttribute('data-md-color-scheme') : null;
+    if (s) return s === 'slate';
+  } catch (e) { /* autre origine */ }
+  return matchMedia('(prefers-color-scheme: dark)').matches;
+}
+function applyTheme() { document.documentElement.setAttribute('data-theme', isDark() ? 'dark' : 'light'); }
+applyTheme();
+let onThemeChange = () => {};
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => { applyTheme(); onThemeChange(); });
+try {
+  if (window.parent && window.parent !== window) new MutationObserver(() => { applyTheme(); onThemeChange(); }).observe(window.parent.document.body, { attributes: true, attributeFilter: ['data-md-color-scheme'] });
+} catch (e) { /* ignoré */ }
+
+// ---------- onglets ----------
+function showTab(which) {
+  const t = which === 'T';
+  $('tabT').setAttribute('aria-selected', String(t)); $('tabS').setAttribute('aria-selected', String(!t));
+  $('paneT').hidden = !t; $('paneS').hidden = t;
+  if (!t) { requestAnimationFrame(() => { heatCache = null; refresh(); }); }
+}
+$('tabT').addEventListener('click', () => showTab('T'));
+$('tabS').addEventListener('click', () => showTab('S'));
+
+// ---------- stats ----------
+const SKEY = 'fdpv-ce-stats-v2';
+function loadStats() { try { return JSON.parse(localStorage.getItem(SKEY)) || {}; } catch (e) { return {}; } }
+function saveStats(s) { try { localStorage.setItem(SKEY, JSON.stringify(s)); } catch (e) { /* ignoré */ } }
+function pct(s) { return s && s.n ? Math.round(100 * s.ok / s.n) + ' % (' + s.ok + '/' + s.n + ')' : 'pas encore essayé'; }
+
+// ---------- entraînement ----------
+let selected = new Set(TOPICS.map((t) => t.id));
+let serieLen = 10;
+let session = null;
+function renderTopics() {
+  const st = loadStats(); const box = $('topics'); box.innerHTML = '';
+  TOPICS.forEach((t) => {
+    const b = document.createElement('button'); b.type = 'button'; b.className = 'chip-t';
+    b.setAttribute('aria-pressed', String(selected.has(t.id)));
+    b.innerHTML = '<b>' + t.name + '</b><small>' + t.sub + '</small><small>' + pct(st[t.id]) + '</small>';
+    b.addEventListener('click', () => { if (selected.has(t.id)) { if (selected.size > 1) selected.delete(t.id); } else selected.add(t.id); renderTopics(); });
+    box.appendChild(b);
+  });
+}
+$('lenSeg').addEventListener('click', (e) => {
+  const b = e.target.closest('button'); if (!b) return;
+  serieLen = +b.dataset.n;
+  [...$('lenSeg').children].forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+});
+$('allTopics').addEventListener('click', () => { selected = new Set(TOPICS.map((t) => t.id)); renderTopics(); });
+
+function makeQuestion(topicId) {
+  const T = TOPICS.find((t) => t.id === topicId);
+  for (let k = 0; k < 20; k++) { try { return T.gen(); } catch (e) { /* on retente */ } }
+  throw new Error('génération impossible pour ' + topicId);
+}
+function startSession(questions) {
+  session = { qs: questions, i: 0, results: [], answered: false, hinted: false };
+  $('setup').hidden = true; $('result').hidden = true; $('session').hidden = false;
+  renderQ();
+}
+function newSerie() {
+  const ids = [...selected]; const qs = [];
+  for (let i = 0; i < serieLen; i++) qs.push(makeQuestion(ids[i % ids.length]));
+  startSession(shuffle(qs));
+}
+$('startBtn').addEventListener('click', newSerie);
+$('againBtn').addEventListener('click', newSerie);
+$('setupBtn').addEventListener('click', () => { $('result').hidden = true; $('session').hidden = true; $('setup').hidden = false; renderTopics(); });
+$('errBtn').addEventListener('click', () => {
+  const bad = session.results.map((r, i) => (r.ok ? null : session.qs[i])).filter(Boolean);
+  if (bad.length) startSession(bad);
+});
+$('resetStats').addEventListener('click', () => { saveStats({}); renderTopics(); if (session) showResult(); });
+
+function renderQ() {
+  const q = session.qs[session.i]; session.answered = false; session.hinted = false;
+  $('qTag').textContent = TOPIC_NAME[q.topic];
+  $('qCount').textContent = 'Question ' + (session.i + 1) + ' / ' + session.qs.length;
+  $('bar').style.width = (100 * session.i / session.qs.length) + '%';
+  $('qStmt').innerHTML = q.statement;
+  const box = $('qOpts'); box.innerHTML = '';
+  q.options.forEach((o, i) => {
+    const b = document.createElement('button'); b.type = 'button'; b.className = 'opt'; b.dataset.i = i;
+    b.innerHTML = '<span class="k">' + (i + 1) + '</span><span class="h">' + o.h + '</span>';
+    b.addEventListener('click', () => answer(i));
+    box.appendChild(b);
+  });
+  $('hintBox').hidden = true; $('hintBox').innerHTML = '';
+  $('solBox').hidden = true; $('hintBtn').disabled = false; $('skipBtn').disabled = false;
+  $('nextBtn').textContent = session.i + 1 < session.qs.length ? 'Question suivante' : 'Voir le bilan';
+  typeset($('session'));
+}
+$('hintBtn').addEventListener('click', showHint);
+function showHint() {
+  if (!session || session.answered) return;
+  const q = session.qs[session.i]; session.hinted = true;
+  const h = $('hintBox'); h.hidden = false; h.innerHTML = '<b>Indice.</b> ' + q.hint; typeset(h);
+}
+$('skipBtn').addEventListener('click', () => answer(-1));
+function answer(i) {
+  if (!session || session.answered) return;
+  const q = session.qs[session.i]; session.answered = true;
+  const ok = i === q.correct;
+  session.results.push({ ok, topic: q.topic, hinted: session.hinted, skipped: i < 0 });
+  const st = loadStats(); const s = st[q.topic] || { ok: 0, n: 0 }; s.n += 1; if (ok) s.ok += 1; st[q.topic] = s; saveStats(st);
+  [...$('qOpts').children].forEach((b, k) => { b.disabled = true; if (k === q.correct) b.classList.add('right'); else if (k === i) b.classList.add('wrong'); });
+  $('hintBtn').disabled = true; $('skipBtn').disabled = true;
+  const v = $('verdict'); v.className = 'verdict ' + (ok ? 'yes' : 'no');
+  v.textContent = i < 0 ? 'Voici la correction' : (ok ? (session.hinted ? 'Juste (avec indice)' : 'Juste') : 'Pas tout à fait');
+  $('solText').innerHTML = q.sol; $('solBox').hidden = false;
+  typeset($('session'));
+  $('solBox').scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+}
+$('nextBtn').addEventListener('click', nextQ);
+function nextQ() {
+  if (!session.answered) return;
+  if (session.i + 1 < session.qs.length) { session.i += 1; renderQ(); window.scrollTo({ top: 0 }); } else showResult();
+}
+function showResult() {
+  $('session').hidden = true; $('result').hidden = false;
+  const R_ = session.results; const ok = R_.filter((r) => r.ok).length;
+  $('finalScore').textContent = ok + ' / ' + R_.length;
+  const clean = R_.filter((r) => r.ok && !r.hinted).length;
+  $('finalNote').textContent = clean + ' juste(s) sans indice';
+  const st = loadStats(); const body = $('resBody'); body.innerHTML = '';
+  const byT = {}; R_.forEach((r) => { const t = byT[r.topic] || (byT[r.topic] = { ok: 0, n: 0 }); t.n++; if (r.ok) t.ok++; });
+  Object.keys(byT).forEach((id) => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = '<td>' + TOPIC_NAME[id] + '</td><td>' + byT[id].ok + ' / ' + byT[id].n + '</td><td>' + pct(st[id]) + '</td>';
+    body.appendChild(tr);
+  });
+  $('errBtn').hidden = ok === R_.length;
+}
+document.addEventListener('keydown', (e) => {
+  if (e.target.closest && e.target.closest('select, input')) return;
+  if ($('paneT').hidden || $('session').hidden) return;
+  if (e.key >= '1' && e.key <= '5') { const q = session.qs[session.i]; const i = +e.key - 1; if (!session.answered && i < q.options.length) answer(i); }
+  else if (e.key === 'h' || e.key === 'H') showHint();
+  else if (e.key === 'Enter' && session.answered) { e.preventDefault(); nextQ(); }
+});
+
+// ====================================================================
+//  Simulateur
+// ====================================================================
+const FNS = LIMS.map((F) => Object.assign({}, F, { tex: 'f(x,y)=' + F.expr, start: { p: 'line', v: 45 } }));
+FNS.forEach((F) => { if (F.simTex) F.tex = F.simTex; });
+const COLORS = ['#d95f02', '#1b9e77', '#7570b3', '#e7298a', '#66a61e', '#e6ab02'];
+let fn = FNS[0], pathType = 'line', param = 45, recorded = [], heatCache = null;
+const fnSel = $('fnSel');
+FNS.forEach((F, i) => { const o = document.createElement('option'); o.value = i; o.textContent = F.label; fnSel.appendChild(o); });
+
+function P(type, prm, t) {
+  if (type === 'line') { const a = prm * Math.PI / 180; return [t * Math.cos(a), t * Math.sin(a)]; }
+  if (type === 'paraY') return [t, prm * t * t];
+  return [prm * t * t, t];
+}
+function labelOf(type, prm) {
+  if (type === 'line') {
+    if (prm === 90) return 'x = 0';
+    if (prm === 0 || prm === 180) return 'y = 0';
+    const m = Math.tan(prm * Math.PI / 180);
+    return 'y = ' + fmt(m, 2) + '·x';
+  }
+  if (type === 'paraY') return 'y = ' + fmt(prm, 1) + '·x²';
+  return 'x = ' + fmt(prm, 1) + '·y²';
+}
+function limitOf(type, prm) {
+  const e = 1e-5; const [x1, y1] = P(type, prm, e), [x2, y2] = P(type, prm, -e);
+  const a = fn.f(x1, y1), b = fn.f(x2, y2);
+  if (!isFinite(a) || !isFinite(b)) return { ok: false, text: 'non défini' };
+  if (Math.abs(a - b) > 1e-3) return { ok: false, text: 'côtés différents' };
+  const v = Math.round(((a + b) / 2) * 1000) / 1000;
+  return { ok: true, v: Object.is(v, -0) ? 0 : v, text: fmt(v, 3) };
+}
+const pathPoint = (t) => P(pathType, param, t);
+const distT = () => Math.pow(10, -3 * (+$('dist').value / 1000));
+
+function setParamControl() {
+  const p = $('param');
+  if (pathType === 'line') { p.min = 0; p.max = 180; p.step = 1; $('paramLab').textContent = 'Angle θ de la droite'; }
+  else { p.min = -3; p.max = 3; p.step = 0.1; $('paramLab').textContent = 'Coefficient a'; }
+  p.value = param;
+}
+$('pathSeg').addEventListener('click', (e) => {
+  const b = e.target.closest('button'); if (!b) return;
+  pathType = b.dataset.p;
+  [...$('pathSeg').children].forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+  param = pathType === 'line' ? 45 : 1; setParamControl(); refresh();
+});
+$('param').addEventListener('input', (e) => { param = pathType === 'line' ? Math.round(+e.target.value) : Math.round(+e.target.value * 10) / 10; refresh(); });
+$('dist').addEventListener('input', refresh);
+fnSel.addEventListener('change', () => loadFn(FNS[+fnSel.value]));
+
+function loadFn(F) {
+  fn = F; recorded = []; pathType = 'line'; param = 45;
+  [...$('pathSeg').children].forEach((x) => x.setAttribute('aria-pressed', String(x.dataset.p === pathType)));
+  setParamControl(); $('dist').value = 0;
+  $('fnShow').innerHTML = '$$' + F.tex + '$$'; typeset($('fnShow'));
+  $('revealBox').hidden = true; $('revealBtn').setAttribute('aria-expanded', 'false'); $('revealBtn').textContent = 'Voir la conclusion rédigée';
+  heatCache = null; renderPaths(); refresh();
+}
+function addPath(type, prm) {
+  const lab = labelOf(type, prm);
+  if (recorded.some((r) => r.lab === lab)) return;
+  recorded.push({ type, prm, lab, L: limitOf(type, prm), color: COLORS[recorded.length % COLORS.length] });
+}
+$('record').addEventListener('click', () => { addPath(pathType, param); renderPaths(); drawHeat(); });
+$('usual').addEventListener('click', () => {
+  [['line', 0], ['line', 90], ['line', 45], ['line', 135], ['paraY', 1], ['paraX', 1]].forEach(([t, p]) => addPath(t, p));
+  renderPaths(); drawHeat();
+});
+$('clearPaths').addEventListener('click', () => { recorded = []; renderPaths(); drawHeat(); });
+function renderPaths() {
+  const ul = $('pathList'); ul.innerHTML = '';
+  if (!recorded.length) { ul.innerHTML = '<li class="empty">Aucun chemin enregistré.</li>'; $('pathBanner').innerHTML = ''; return; }
+  recorded.forEach((r) => {
+    const li = document.createElement('li');
+    li.innerHTML = '<span class="l"><i class="dot" style="background:' + r.color + '"></i>' + r.lab + '</span><span class="val">→ ' + r.L.text + '</span>';
+    ul.appendChild(li);
+  });
+  const vals = [...new Set(recorded.filter((r) => r.L.ok).map((r) => r.L.v))];
+  const b = $('pathBanner');
+  if (vals.length >= 2) {
+    const a = recorded.find((r) => r.L.ok && r.L.v === vals[0]), c = recorded.find((r) => r.L.ok && r.L.v === vals[1]);
+    b.innerHTML = '<div class="banner no"><b>La limite n\'existe pas.</b> ' + a.lab + ' donne ' + a.L.text + ', ' + c.lab + ' donne ' + c.L.text + '. Deux chemins, deux valeurs.</div>';
+  } else if (vals.length === 1 && recorded.length >= 2) {
+    b.innerHTML = '<div class="banner maybe"><b>Tous tes chemins donnent ' + fmt(vals[0], 3) + '.</b> Ça ne prouve rien : essaie une autre parabole, puis regarde le panneau polaire, et prouve avec une majoration ou les polaires.</div>';
+  } else b.innerHTML = '';
+}
+$('revealBtn').addEventListener('click', () => {
+  const box = $('revealBox'); const open = box.hidden; box.hidden = !open;
+  $('revealBtn').setAttribute('aria-expanded', String(open));
+  $('revealBtn').textContent = open ? 'Masquer la conclusion' : 'Voir la conclusion rédigée';
+  if (open) {
+    const v = $('simVerdict');
+    if (fn.lim === 'N') { v.className = 'verdict no'; v.textContent = "La limite n'existe pas"; }
+    else { v.className = 'verdict yes'; v.textContent = 'La limite existe et vaut ' + (fn.lim === 0.5 ? '1/2' : fn.lim); }
+    $('simExpl').innerHTML = fn.expl; typeset($('simExpl'));
+  }
+});
+let anim = null;
+$('approach').addEventListener('click', () => {
+  if (anim) cancelAnimationFrame(anim);
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) { $('dist').value = 1000; refresh(); return; }
+  const t0 = performance.now(), dur = 2400;
+  const step = (now) => { const k = Math.min(1, (now - t0) / dur); $('dist').value = Math.round(1000 * (1 - Math.pow(1 - k, 2))); refresh(); anim = k < 1 ? requestAnimationFrame(step) : null; };
+  anim = requestAnimationFrame(step);
+});
+
+// oscillation de f sur le cercle de rayon r (échantillonnage dense + raffinement près des axes et des paraboles)
+function circleSamples(r) {
+  const th = []; const N = 1440;
+  for (let k = 0; k < N; k++) th.push(2 * Math.PI * k / N);
+  for (let q = 0; q < 4; q++) [0.25, 0.5, 1, 2, 4, 8].forEach((c) => { th.push(q * Math.PI / 2 + c * r); th.push(q * Math.PI / 2 - c * r); });
+  return th;
+}
+function oscillation(r) {
+  let lo = Infinity, hi = -Infinity;
+  circleSamples(r).forEach((t) => { const v = fn.f(r * Math.cos(t), r * Math.sin(t)); if (isFinite(v)) { lo = Math.min(lo, v); hi = Math.max(hi, v); } });
+  return { lo, hi, osc: hi - lo };
+}
+
+function sizeCanvas(c) {
+  const dpr = window.devicePixelRatio || 1; const w = c.clientWidth, h = c.clientHeight;
+  if (c.width !== Math.round(w * dpr) || c.height !== Math.round(h * dpr)) { c.width = Math.round(w * dpr); c.height = Math.round(h * dpr); }
+}
+function buildHeat() {
+  const N = 160; const vals = new Float32Array(N * N); const abs = [];
+  for (let j = 0; j < N; j++) for (let i = 0; i < N; i++) {
+    const x = -1 + (i + .5) * 2 / N, y = 1 - (j + .5) * 2 / N; const v = fn.f(x, y); vals[j * N + i] = v; if (isFinite(v)) abs.push(Math.abs(v));
+  }
+  abs.sort((a, b) => a - b);
+  const max = Math.max(1e-6, abs[Math.floor(abs.length * .97)] || 1);
+  const bg = hexToRgb(css('--surface')), pos = hexToRgb(css('--warm')), neg = hexToRgb(css('--cool'));
+  const img = new ImageData(N, N);
+  for (let k = 0; k < N * N; k++) {
+    const v = vals[k]; let c = bg;
+    if (isFinite(v)) { const s = Math.max(-1, Math.min(1, v / max)); const tg = s >= 0 ? pos : neg; const a = Math.abs(s); c = [bg[0] + (tg[0] - bg[0]) * a, bg[1] + (tg[1] - bg[1]) * a, bg[2] + (tg[2] - bg[2]) * a]; }
+    img.data[k * 4] = c[0]; img.data[k * 4 + 1] = c[1]; img.data[k * 4 + 2] = c[2]; img.data[k * 4 + 3] = 255;
+  }
+  const off = document.createElement('canvas'); off.width = N; off.height = N; off.getContext('2d').putImageData(img, 0, 0);
+  heatCache = { off, max };
+}
+function strokePath(ctx, type, prm, X, Y) {
+  ctx.beginPath(); let first = true;
+  for (let k = -200; k <= 200; k++) {
+    const t = k / 200 * 1.5; const [x, y] = P(type, prm, t);
+    if (Math.abs(x) > 1.2 || Math.abs(y) > 1.2) { first = true; continue; }
+    if (first) { ctx.moveTo(X(x), Y(y)); first = false; } else ctx.lineTo(X(x), Y(y));
+  }
+  ctx.stroke();
+}
+function drawHeat() {
+  const c = $('heat'); sizeCanvas(c); if (!c.clientWidth) return;
+  if (!heatCache) buildHeat();
+  const ctx = c.getContext('2d'); const W = c.width, H = c.height; const dpr = window.devicePixelRatio || 1;
+  ctx.drawImage(heatCache.off, 0, 0, W, H);
+  const X = (x) => (x + 1) / 2 * W, Y = (y) => (1 - y) / 2 * H;
+  ctx.strokeStyle = css('--muted'); ctx.globalAlpha = .5; ctx.lineWidth = dpr;
+  ctx.beginPath(); ctx.moveTo(0, H / 2); ctx.lineTo(W, H / 2); ctx.moveTo(W / 2, 0); ctx.lineTo(W / 2, H); ctx.stroke(); ctx.globalAlpha = 1;
+  recorded.forEach((r) => { ctx.strokeStyle = r.color; ctx.lineWidth = 2 * dpr; strokePath(ctx, r.type, r.prm, X, Y); });
+  ctx.strokeStyle = css('--ink'); ctx.lineWidth = 2.5 * dpr; strokePath(ctx, pathType, param, X, Y);
+  ctx.strokeStyle = css('--ink'); ctx.lineWidth = 1.5 * dpr; ctx.fillStyle = css('--surface');
+  ctx.beginPath(); ctx.arc(W / 2, H / 2, 5 * dpr, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+  const t = distT(); const [px, py] = pathPoint(t);
+  ctx.fillStyle = css('--accent'); ctx.strokeStyle = css('--surface'); ctx.lineWidth = 2 * dpr;
+  ctx.beginPath(); ctx.arc(X(px), Y(py), 7 * dpr, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+  ctx.fillStyle = css('--muted'); ctx.font = (11 * dpr) + 'px ' + css('--f-mono');
+  ctx.fillText('x', W - 12 * dpr, H / 2 + 16 * dpr); ctx.fillText('y', W / 2 - 14 * dpr, 14 * dpr);
+}
+function niceStep(raw) { const p = Math.pow(10, Math.floor(Math.log10(raw))); const n = raw / p; return (n < 1.5 ? 1 : n < 3 ? 2 : n < 7 ? 5 : 10) * p; }
+function drawAlong() {
+  const c = $('along'); sizeCanvas(c); if (!c.clientWidth) return;
+  const ctx = c.getContext('2d'); const W = c.width, H = c.height; const dpr = window.devicePixelRatio || 1;
+  ctx.fillStyle = css('--surface'); ctx.fillRect(0, 0, W, H);
+  const pts = []; let lo = Infinity, hi = -Infinity;
+  for (let k = -300; k <= 300; k++) { if (k === 0) continue; const t = k / 300; const [x, y] = pathPoint(t); const v = fn.f(x, y); pts.push([t, v]); if (isFinite(v)) { lo = Math.min(lo, v); hi = Math.max(hi, v); } }
+  const L = limitOf(pathType, param); if (L.ok) { lo = Math.min(lo, L.v); hi = Math.max(hi, L.v); }
+  lo = Math.max(lo, -4); hi = Math.min(hi, 4);
+  if (!(hi - lo >= 1)) { const m = isFinite((hi + lo) / 2) ? (hi + lo) / 2 : 0; lo = m - .5; hi = m + .5; }
+  const pad = (hi - lo) * .12; lo -= pad; hi += pad;
+  const ml = 36 * dpr, mr = 10 * dpr, mt = 12 * dpr, mb = 26 * dpr;
+  const X = (t) => ml + (t + 1) / 2 * (W - ml - mr), Y = (v) => mt + (hi - v) / (hi - lo) * (H - mt - mb);
+  ctx.strokeStyle = css('--line'); ctx.lineWidth = dpr; ctx.fillStyle = css('--muted'); ctx.font = (11 * dpr) + 'px ' + css('--f-mono');
+  const step = niceStep((hi - lo) / 4);
+  for (let v = Math.ceil(lo / step) * step; v <= hi; v += step) { ctx.beginPath(); ctx.moveTo(ml, Y(v)); ctx.lineTo(W - mr, Y(v)); ctx.stroke(); ctx.fillText(fmt(v, 2), 4 * dpr, Y(v) + 4 * dpr); }
+  [-1, -.5, 0, .5, 1].forEach((t) => ctx.fillText(fmt(t, 1), X(t) - 8 * dpr, H - 8 * dpr));
+  ctx.strokeStyle = css('--muted'); ctx.globalAlpha = .6; ctx.beginPath(); ctx.moveTo(X(0), mt); ctx.lineTo(X(0), H - mb); ctx.stroke(); ctx.globalAlpha = 1;
+  ctx.strokeStyle = css('--accent'); ctx.lineWidth = 2.2 * dpr; ctx.beginPath(); let first = true;
+  pts.forEach(([t, v]) => { if (!isFinite(v) || v < lo || v > hi) { first = true; return; } if (first) { ctx.moveTo(X(t), Y(v)); first = false; } else ctx.lineTo(X(t), Y(v)); });
+  ctx.stroke();
+  if (L.ok) {
+    ctx.setLineDash([4 * dpr, 4 * dpr]); ctx.strokeStyle = css('--ink'); ctx.globalAlpha = .5; ctx.lineWidth = dpr;
+    ctx.beginPath(); ctx.moveTo(ml, Y(L.v)); ctx.lineTo(W - mr, Y(L.v)); ctx.stroke(); ctx.setLineDash([]); ctx.globalAlpha = 1;
+    ctx.fillStyle = css('--surface'); ctx.strokeStyle = css('--ink'); ctx.lineWidth = 2 * dpr;
+    ctx.beginPath(); ctx.arc(X(0), Y(L.v), 5 * dpr, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+  }
+  const t = distT(); const [x, y] = pathPoint(t); const v = fn.f(x, y);
+  if (isFinite(v) && v >= lo && v <= hi) { ctx.fillStyle = css('--accent'); ctx.strokeStyle = css('--surface'); ctx.lineWidth = 2 * dpr; ctx.beginPath(); ctx.arc(X(t), Y(v), 6 * dpr, 0, Math.PI * 2); ctx.fill(); ctx.stroke(); }
+}
+function drawPolar() {
+  const c = $('polar'); sizeCanvas(c); if (!c.clientWidth) return;
+  const ctx = c.getContext('2d'); const W = c.width, H = c.height; const dpr = window.devicePixelRatio || 1;
+  ctx.fillStyle = css('--surface'); ctx.fillRect(0, 0, W, H);
+  const r = distT(); const N = 720; const pts = []; let lo = Infinity, hi = -Infinity;
+  for (let k = 0; k <= N; k++) { const t = 2 * Math.PI * k / N; const v = fn.f(r * Math.cos(t), r * Math.sin(t)); pts.push([t, v]); if (isFinite(v)) { lo = Math.min(lo, v); hi = Math.max(hi, v); } }
+  lo = Math.max(lo, -4); hi = Math.min(hi, 4);
+  if (!(hi - lo >= 1)) { const m = isFinite((hi + lo) / 2) ? (hi + lo) / 2 : 0; lo = m - .5; hi = m + .5; }
+  const pad = (hi - lo) * .12; lo -= pad; hi += pad;
+  const ml = 36 * dpr, mr = 10 * dpr, mt = 10 * dpr, mb = 22 * dpr;
+  const X = (t) => ml + t / (2 * Math.PI) * (W - ml - mr), Y = (v) => mt + (hi - v) / (hi - lo) * (H - mt - mb);
+  ctx.strokeStyle = css('--line'); ctx.lineWidth = dpr; ctx.fillStyle = css('--muted'); ctx.font = (11 * dpr) + 'px ' + css('--f-mono');
+  const step = niceStep((hi - lo) / 4);
+  for (let v = Math.ceil(lo / step) * step; v <= hi; v += step) { ctx.beginPath(); ctx.moveTo(ml, Y(v)); ctx.lineTo(W - mr, Y(v)); ctx.stroke(); ctx.fillText(fmt(v, 2), 4 * dpr, Y(v) + 4 * dpr); }
+  [['0', 0], ['π/2', Math.PI / 2], ['π', Math.PI], ['3π/2', 3 * Math.PI / 2], ['2π', 2 * Math.PI]].forEach(([s, t]) => { ctx.fillText(s, Math.min(X(t) - 6 * dpr, W - 30 * dpr), H - 6 * dpr); ctx.beginPath(); ctx.moveTo(X(t), mt); ctx.lineTo(X(t), H - mb); ctx.globalAlpha = .35; ctx.stroke(); ctx.globalAlpha = 1; });
+  ctx.strokeStyle = css('--accent'); ctx.lineWidth = 2.2 * dpr; ctx.beginPath(); let first = true;
+  pts.forEach(([t, v]) => { if (!isFinite(v) || v < lo || v > hi) { first = true; return; } if (first) { ctx.moveTo(X(t), Y(v)); first = false; } else ctx.lineTo(X(t), Y(v)); });
+  ctx.stroke();
+  if (pathType === 'line') {
+    [param, param + 180].forEach((deg) => {
+      const t = ((deg % 360) * Math.PI / 180); const v = fn.f(r * Math.cos(t), r * Math.sin(t));
+      if (isFinite(v) && v >= lo && v <= hi) { ctx.fillStyle = css('--warm'); ctx.strokeStyle = css('--surface'); ctx.lineWidth = 2 * dpr; ctx.beginPath(); ctx.arc(X(t), Y(v), 5 * dpr, 0, Math.PI * 2); ctx.fill(); ctx.stroke(); }
+    });
+  }
+}
+function updateOsc() {
+  const rs = [1e-1, 1e-3, 1e-5]; const out = rs.map((r) => ({ r, o: oscillation(r) }));
+  $('oscRow').innerHTML = '<span>Écart max − min sur le cercle :</span>' + out.map((x) => '<span>r = 10<sup>' + Math.round(Math.log10(x.r)) + '</sup> → <b>' + fmt(x.o.osc, 4) + '</b></span>').join('');
+  const last = out[2].o;
+  const b = $('polarBanner');
+  if (!isFinite(last.osc)) b.innerHTML = '';
+  else if (last.osc > 0.02) b.innerHTML = '<div class="banner no"><b>L\'écart ne se réduit pas</b> (il reste ' + fmt(last.osc, 3) + ' à r = 10⁻⁵) : sur un petit cercle, f prend encore des valeurs très différentes. <b>La limite n\'existe pas.</b></div>';
+  else b.innerHTML = '<div class="banner maybe"><b>L\'écart s\'écrase</b> (' + fmt(last.osc, 5) + ' à r = 10⁻⁵) : f se resserre autour de ' + fmt((last.lo + last.hi) / 2, 3) + ' sur <i>tous</i> les angles. C\'est cohérent avec une limite ; à rédiger avec une majoration indépendante de θ.</div>';
+}
+function refresh() {
+  $('paramVal').textContent = pathType === 'line' ? param + '°  →  ' + labelOf(pathType, param) : labelOf(pathType, param);
+  const t = distT(); const [x, y] = pathPoint(t); const v = fn.f(x, y);
+  $('distVal').textContent = 'r = ' + (t < 0.01 ? t.toExponential(1) : fmt(t, 3));
+  $('roPt').textContent = '(' + fmt(x, 4) + ', ' + fmt(y, 4) + ')';
+  $('roF').textContent = fmt(v, 4);
+  $('roL').textContent = labelOf(pathType, param) + ' → ' + limitOf(pathType, param).text;
+  drawHeat(); drawAlong(); drawPolar();
+}
+let oscCache = null;
+function refreshOsc() { updateOsc(); }
+onThemeChange = () => { heatCache = null; if (!$('paneS').hidden) refresh(); };
+let rt; window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { if (!$('paneS').hidden) refresh(); }, 120); });
+
+// ---------- démarrage ----------
+renderTopics();
+loadFn(FNS[0]); refreshOsc();
+fnSel.addEventListener('change', refreshOsc);
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { if (!$('paneS').hidden) refresh(); });
+})();
+</script>
+</body>
+</html>
