@@ -12,6 +12,10 @@ sommets et cols).
 
 <div class="agenda-matiere" data-module="SM302P"></div>
 
+!!! tip "CE du samedi 24 octobre"
+    Programme : chapitres 1 à 3 et intégrales doubles (chapitre 4). Calculatrice autorisée, aucun support de cours.
+    [:material-card-text: Fiche CE](fiches/fiche-ce.md) · [:material-clipboard-text: Sujet blanc corrigé](entrainement/sujet-blanc-ce.md)
+
 <div class="grid cards" markdown>
 
 -   :material-school:{ .lg .middle } **Cours**
