@@ -40,84 +40,84 @@ title: "Ch. 4 — Machines à états"
         6. Calculer et simplifier les **sorties** en fonction de l'état.
         7. Tracer le **logigramme**.
 
-    ## Exemple : séquence de LEDs commandée par un bouton
+    ## Compteur, Moore ou Mealy : l'exemple comparatif du cours
 
-    Trois LEDs $S_2S_1S_0$ affichent une séquence de 5 motifs. Le bouton $b$
-    commande l'avancement : $b = 1$ → on reste dans l'état courant, $b = 0$ → on passe
-    à l'état suivant. On utilise des bascules D.
+    | | Compteur synchrone 2 bits | Machine de Moore à 4 états | Machine de Mealy à 4 états |
+    |-|-|-|-|
+    | Transitions | imposées | conditionnées par l'entrée $e$ | conditionnées par l'entrée $e$ |
+    | État futur | $Q(t + \Delta t) = f[Q(t)]$ | $f[Q(t), e(t)]$ | $f[Q(t), e(t)]$ |
+    | Sortie | $S(t) = Q(t)$ | $S(t) = f[Q(t)]$ | $S(t) = f[Q(t), e(t)]$ |
 
-    5 états → **3 bascules**, états codés $E_k = k$ en binaire ($Q_2Q_1Q_0$).
+    Le compteur synchrone est un cas particulier de machine à états : chaque état
+    n'a qu'un seul successeur.
 
-    ```mermaid
-    stateDiagram-v2
-        direction LR
-        E0: E0 = 000 / LEDs 000
-        E1: E1 = 001 / LEDs 001
-        E2: E2 = 010 / LEDs 010
-        E3: E3 = 011 / LEDs 100
-        E4: E4 = 100 / LEDs 111
-        E0 --> E1: b = 0
-        E1 --> E2: b = 0
-        E2 --> E3: b = 0
-        E3 --> E4: b = 0
-        E4 --> E0: b = 0
-    ```
+    ## Exemple : compteur 2 bits commandé par $e$
 
-    (Chaque état boucle sur lui-même quand $b = 1$.)
+    4 états 00 → 01 → 10 → 11 → 00. $e = 1$ → on avance, $e = 0$ → on reste.
+    La sortie $S$ signale la fin du cycle. Bascules D.
 
-    | État présent $Q_2Q_1Q_0$ | Futur si $b = 0$ | Futur si $b = 1$ | Sorties $S_2S_1S_0$ |
-    |:------------------------:|:----------------:|:----------------:|:-------------------:|
-    | 000 | 001 | 000 | 000 |
-    | 001 | 010 | 001 | 001 |
-    | 010 | 011 | 010 | 010 |
-    | 011 | 100 | 011 | 100 |
-    | 100 | 000 | 100 | 111 |
+    | État $Q_1Q_0$ | Futur si $e = 0$ | Futur si $e = 1$ | $S$ Moore | $S$ Mealy ($e = 0$ / $e = 1$) |
+    |:-:|:-:|:-:|:-:|:-:|
+    | 00 | 00 | 01 | 0 | 0 / 0 |
+    | 01 | 01 | 10 | 0 | 0 / 0 |
+    | 10 | 10 | 11 | 0 | 0 / 0 |
+    | 11 | 11 | 00 | **1** | **1** / 0 |
 
-    Après Karnaugh (états 101, 110, 111 en X) :
+    Les entrées des bascules sont les mêmes pour les deux modèles :
 
     $$
-    \begin{aligned}
-    D_2 &= b\,Q_2 + \overline{b}\,Q_1 Q_0 \\
-    D_1 &= b\,Q_1 + Q_1\overline{Q_0} + \overline{b}\,\overline{Q_1}\,Q_0 \\
-    D_0 &= b\,Q_0 + \overline{b}\,\overline{Q_2}\,\overline{Q_0}
-    \end{aligned}
+    D_0 = e \oplus Q_0, \qquad D_1 = Q_1 \oplus e\,Q_0
     $$
 
-    Sorties (Moore : fonction de l'état seulement) :
+    Seule la sortie change :
 
     $$
-    S_2 = Q_2 + Q_1 Q_0, \qquad S_1 = Q_2 + Q_1\overline{Q_0}, \qquad S_0 = Q_2 + \overline{Q_1}\,Q_0
+    S_{Moore} = Q_1 Q_0, \qquad S_{Mealy} = \overline{e}\,Q_1 Q_0
     $$
+
+    !!! piege "Ce qui distingue Moore et Mealy"
+        Les sorties : **synchrones pour Moore** (elles ne bougent qu'au front
+        d'horloge, après un changement d'état), **asynchrones pour Mealy** (elles
+        réagissent dès que l'entrée change).
 
     !!! methode "Lire une équation d'entrée D"
-        Chaque équation se lit comme « quand est-ce que ce bit vaut 1 à l'état
-        suivant ? ». Pour $D_2$ : soit on reste ($b = 1$) et $Q_2$ valait déjà 1, soit
-        on avance ($b = 0$) depuis $E_3 = 011$, le seul état qui mène à un état avec $Q_2 = 1$.
+        $D_0 = e \oplus Q_0$ : si $e = 0$, $Q_0$ est recopié (maintien) ; si $e = 1$,
+        $Q_0$ s'inverse (on compte). $D_1 = Q_1 \oplus e\,Q_0$ : $Q_1$ ne s'inverse
+        que si on avance **et** que $Q_0 = 1$, comme dans un compteur binaire.
 
-    Autre exemple complet (détecteur de séquence, en Moore **et** en Mealy) :
+    Exemples complets (5 LEDs, détecteur de séquence en Moore **et** en Mealy) :
     [TD 4](../td/td-4-machines-etats.md).
 
 === "Version papier"
 
-    Les diapos du chapitre 4 telles que le prof les projette (support 2024 de D. Achvar).
+    Les diapos de cours du chapitre 4 (support 2026-2027 de D. Achvar). Les diapos d'exercices de ce support sont dans la [version papier du TD 4](../td/td-4-machines-etats.md).
 
-    [![Chapitre 4 — support 2024, diapo 1 : Page de titre](papier/ch4/p01.jpg){ loading=lazy .papier }](papier/ch4/p01.jpg)
-    <p class="papier-legende">Page de titre · Chapitre 4 — support 2024, diapo 1</p>
+    [![Chapitre 4 — support 2026-2027, diapo 1 : Page de titre](papier/ch4/p01.jpg){ loading=lazy .papier }](papier/ch4/p01.jpg)
+    <p class="papier-legende">Page de titre · Chapitre 4 — support 2026-2027, diapo 1</p>
 
-    [![Chapitre 4 — support 2024, diapo 2 : Définitions](papier/ch4/p02.jpg){ loading=lazy .papier }](papier/ch4/p02.jpg)
-    <p class="papier-legende">Définitions · Chapitre 4 — support 2024, diapo 2</p>
+    [![Chapitre 4 — support 2026-2027, diapo 2 : Définitions : Moore et Mealy](papier/ch4/p02.jpg){ loading=lazy .papier }](papier/ch4/p02.jpg)
+    <p class="papier-legende">Définitions : Moore et Mealy · Chapitre 4 — support 2026-2027, diapo 2</p>
 
-    [![Chapitre 4 — support 2024, diapo 3 : Conception d’une machine de Moore](papier/ch4/p03.jpg){ loading=lazy .papier }](papier/ch4/p03.jpg)
-    <p class="papier-legende">Conception d’une machine de Moore · Chapitre 4 — support 2024, diapo 3</p>
+    [![Chapitre 4 — support 2026-2027, diapo 3 : Exemple comparatif de trois machines à états](papier/ch4/p03.jpg){ loading=lazy .papier }](papier/ch4/p03.jpg)
+    <p class="papier-legende">Exemple comparatif de trois machines à états · Chapitre 4 — support 2026-2027, diapo 3</p>
 
-    [![Chapitre 4 — support 2024, diapo 4 : Diagramme des états et des sorties](papier/ch4/p04.jpg){ loading=lazy .papier }](papier/ch4/p04.jpg)
-    <p class="papier-legende">Diagramme des états et des sorties · Chapitre 4 — support 2024, diapo 4</p>
+    [![Chapitre 4 — support 2026-2027, diapo 4 : Synthèse en Moore : énoncé](papier/ch4/p04.jpg){ loading=lazy .papier }](papier/ch4/p04.jpg)
+    <p class="papier-legende">Synthèse en Moore : énoncé · Chapitre 4 — support 2026-2027, diapo 4</p>
 
-    [![Chapitre 4 — support 2024, diapo 5 : Diagramme des états et des sorties](papier/ch4/p05.jpg){ loading=lazy .papier }](papier/ch4/p05.jpg)
-    <p class="papier-legende">Diagramme des états et des sorties · Chapitre 4 — support 2024, diapo 5</p>
+    [![Chapitre 4 — support 2026-2027, diapo 5 : Synthèse en Moore : tables et équations](papier/ch4/p05.jpg){ loading=lazy .papier }](papier/ch4/p05.jpg)
+    <p class="papier-legende">Synthèse en Moore : tables et équations · Chapitre 4 — support 2026-2027, diapo 5</p>
 
-    [![Chapitre 4 — support 2024, diapo 6 : Expression des entrées Di de chaque bascule](papier/ch4/p06.jpg){ loading=lazy .papier }](papier/ch4/p06.jpg)
-    <p class="papier-legende">Expression des entrées Di de chaque bascule · Chapitre 4 — support 2024, diapo 6</p>
+    [![Chapitre 4 — support 2026-2027, diapo 6 : Synthèse en Moore : logigramme](papier/ch4/p06.jpg){ loading=lazy .papier }](papier/ch4/p06.jpg)
+    <p class="papier-legende">Synthèse en Moore : logigramme · Chapitre 4 — support 2026-2027, diapo 6</p>
 
-    [![Chapitre 4 — support 2024, diapo 7 : Expression des sorties](papier/ch4/p07.jpg){ loading=lazy .papier }](papier/ch4/p07.jpg)
-    <p class="papier-legende">Expression des sorties · Chapitre 4 — support 2024, diapo 7</p>
+    [![Chapitre 4 — support 2026-2027, diapo 7 : Synthèse en Moore : chronogramme](papier/ch4/p07.jpg){ loading=lazy .papier }](papier/ch4/p07.jpg)
+    <p class="papier-legende">Synthèse en Moore : chronogramme · Chapitre 4 — support 2026-2027, diapo 7</p>
+
+    [![Chapitre 4 — support 2026-2027, diapo 8 : Synthèse en Mealy : énoncé](papier/ch4/p08.jpg){ loading=lazy .papier }](papier/ch4/p08.jpg)
+    <p class="papier-legende">Synthèse en Mealy : énoncé · Chapitre 4 — support 2026-2027, diapo 8</p>
+
+    [![Chapitre 4 — support 2026-2027, diapo 9 : Synthèse en Mealy : équations et chronogramme](papier/ch4/p09.jpg){ loading=lazy .papier }](papier/ch4/p09.jpg)
+    <p class="papier-legende">Synthèse en Mealy : équations et chronogramme · Chapitre 4 — support 2026-2027, diapo 9</p>
+
+    [![Chapitre 4 — support 2026-2027, diapo 10 : Synthèse en Mealy : logigramme et conclusion](papier/ch4/p10.jpg){ loading=lazy .papier }](papier/ch4/p10.jpg)
+    <p class="papier-legende">Synthèse en Mealy : logigramme et conclusion · Chapitre 4 — support 2026-2027, diapo 10</p>

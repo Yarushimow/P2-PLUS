@@ -5,10 +5,10 @@ Chaque TD a deux onglets : **Version simplifiée** (méthode et corrections) et
 
 | TD | Contenu |
 |----|---------|
-| [TD 1 — Bascules](td-1-bascules.md) | RS en NOR, chronogrammes JK, PRE/CLR, TP 1 |
+| [TD 1 — Bascules](td-1-bascules.md) | RS en NOR, compteur à D, temps de propagation, associations de JK, PRE/CLR |
 | [TD 2 — Compteurs](td-2-compteurs.md) | Asynchrone et $t_p$, modulo 5, LOAD, synthèses JK / T / D |
 | [TD 3 — Registres](td-3-registres.md) | Décalage, bidirectionnel, 74194, instructions AVR |
-| [TD 4 — Machines à états](td-4-machines-etats.md) | Moore (LEDs), détecteur de `010` en Moore et Mealy |
+| [TD 4 — Machines à états](td-4-machines-etats.md) | Fronts descendants (Moore vs Mealy), 5 LEDs, détecteur de `010` en D et en JK |
 | [Annale DE 2023](annale-de-2023.md) | QCM, compteur {1, 3, 0, 4} en JK et en $J = K$ |
 
 !!! tip "Numérotation"

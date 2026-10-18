@@ -154,43 +154,55 @@ title: "Ch. 1 — Les bascules"
 
 === "Version papier"
 
-    Les diapos du chapitre 1 telles que le prof les projette (support 2024 de D. Achvar).
+    Les diapos de cours du chapitre 1 (support 2026-2027 de D. Achvar, diapos 7 à 25 : les diapos 1 à 6 sont le [chapitre 0](chapitre-0-introduction.md)). Les diapos d'exercices de ce support sont dans la [version papier du TD 1](../td/td-1-bascules.md).
 
-    [![Chapitre 1 — support 2024, diapo 1 : Page de titre](papier/ch1/p01.jpg){ loading=lazy .papier }](papier/ch1/p01.jpg)
-    <p class="papier-legende">Page de titre · Chapitre 1 — support 2024, diapo 1</p>
+    [![Chapitre 1 — support 2026-2027, diapo 7 : Page de titre](papier/ch1/p07.jpg){ loading=lazy .papier }](papier/ch1/p07.jpg)
+    <p class="papier-legende">Page de titre · Chapitre 1 — support 2026-2027, diapo 7</p>
 
-    [![Chapitre 1 — support 2024, diapo 2 : Définition](papier/ch1/p02.jpg){ loading=lazy .papier }](papier/ch1/p02.jpg)
-    <p class="papier-legende">Définition · Chapitre 1 — support 2024, diapo 2</p>
+    [![Chapitre 1 — support 2026-2027, diapo 8 : Définition et familles de bascules](papier/ch1/p08.jpg){ loading=lazy .papier }](papier/ch1/p08.jpg)
+    <p class="papier-legende">Définition et familles de bascules · Chapitre 1 — support 2026-2027, diapo 8</p>
 
-    [![Chapitre 1 — support 2024, diapo 3 : Bascule RS asynchrone](papier/ch1/p03.jpg){ loading=lazy .papier }](papier/ch1/p03.jpg)
-    <p class="papier-legende">Bascule RS asynchrone · Chapitre 1 — support 2024, diapo 3</p>
+    [![Chapitre 1 — support 2026-2027, diapo 9 : Bascule RS asynchrone à NOR](papier/ch1/p09.jpg){ loading=lazy .papier }](papier/ch1/p09.jpg)
+    <p class="papier-legende">Bascule RS asynchrone à NOR · Chapitre 1 — support 2026-2027, diapo 9</p>
 
-    [![Chapitre 1 — support 2024, diapo 4 : Bascule RST (RSH) synchrone sur niveau](papier/ch1/p04.jpg){ loading=lazy .papier }](papier/ch1/p04.jpg)
-    <p class="papier-legende">Bascule RST (RSH) synchrone sur niveau · Chapitre 1 — support 2024, diapo 4</p>
+    [![Chapitre 1 — support 2026-2027, diapo 11 : Bascule R̄S̄ asynchrone à NAND](papier/ch1/p11.jpg){ loading=lazy .papier }](papier/ch1/p11.jpg)
+    <p class="papier-legende">Bascule R̄S̄ asynchrone à NAND · Chapitre 1 — support 2026-2027, diapo 11</p>
 
-    [![Chapitre 1 — support 2024, diapo 5 : Exemple D-latch synchrone sur le niveau haut de son horloge](papier/ch1/p05.jpg){ loading=lazy .papier }](papier/ch1/p05.jpg)
-    <p class="papier-legende">Exemple D-latch synchrone sur le niveau haut de son horloge · Chapitre 1 — support 2024, diapo 5</p>
+    [![Chapitre 1 — support 2026-2027, diapo 12 : Bascules RST (RSH) et D synchrones sur niveau](papier/ch1/p12.jpg){ loading=lazy .papier }](papier/ch1/p12.jpg)
+    <p class="papier-legende">Bascules RST (RSH) et D synchrones sur niveau · Chapitre 1 — support 2026-2027, diapo 12</p>
 
-    [![Chapitre 1 — support 2024, diapo 6 : Bascules synchrones sur fronts – « flip flop » ou « edge triggered »](papier/ch1/p06.jpg){ loading=lazy .papier }](papier/ch1/p06.jpg)
-    <p class="papier-legende">Bascules synchrones sur fronts – « flip flop » ou « edge triggered » · Chapitre 1 — support 2024, diapo 6</p>
+    [![Chapitre 1 — support 2026-2027, diapo 13 : D-latch synchrone sur niveau haut](papier/ch1/p13.jpg){ loading=lazy .papier }](papier/ch1/p13.jpg)
+    <p class="papier-legende">D-latch synchrone sur niveau haut · Chapitre 1 — support 2026-2027, diapo 13</p>
 
-    [![Chapitre 1 — support 2024, diapo 7 : Bascules D synchrones sur fronts – «D flip flop » ou « D edge triggered »](papier/ch1/p07.jpg){ loading=lazy .papier }](papier/ch1/p07.jpg)
-    <p class="papier-legende">Bascules D synchrones sur fronts – «D flip flop » ou « D edge triggered » · Chapitre 1 — support 2024, diapo 7</p>
+    [![Chapitre 1 — support 2026-2027, diapo 14 : Bascules sur front : entrées prioritaires PRE / CLR](papier/ch1/p14.jpg){ loading=lazy .papier }](papier/ch1/p14.jpg)
+    <p class="papier-legende">Bascules sur front : entrées prioritaires PRE / CLR · Chapitre 1 — support 2026-2027, diapo 14</p>
 
-    [![Chapitre 1 — support 2024, diapo 8 : Bascules D synchrones sur fronts – «D flip flop » ou « D edge triggered »](papier/ch1/p08.jpg){ loading=lazy .papier }](papier/ch1/p08.jpg)
-    <p class="papier-legende">Bascules D synchrones sur fronts – «D flip flop » ou « D edge triggered » · Chapitre 1 — support 2024, diapo 8</p>
+    [![Chapitre 1 — support 2026-2027, diapo 15 : Bascule D sur front : chronogrammes](papier/ch1/p15.jpg){ loading=lazy .papier }](papier/ch1/p15.jpg)
+    <p class="papier-legende">Bascule D sur front : chronogrammes · Chapitre 1 — support 2026-2027, diapo 15</p>
 
-    [![Chapitre 1 — support 2024, diapo 9 : Bascules D synchrones sur fronts – «D flip flop » ou « D edge triggered »](papier/ch1/p09.jpg){ loading=lazy .papier }](papier/ch1/p09.jpg)
-    <p class="papier-legende">Bascules D synchrones sur fronts – «D flip flop » ou « D edge triggered » · Chapitre 1 — support 2024, diapo 9</p>
+    [![Chapitre 1 — support 2026-2027, diapo 16 : Bascule D sur front : chronogrammes (suite)](papier/ch1/p16.jpg){ loading=lazy .papier }](papier/ch1/p16.jpg)
+    <p class="papier-legende">Bascule D sur front : chronogrammes (suite) · Chapitre 1 — support 2026-2027, diapo 16</p>
 
-    [![Chapitre 1 — support 2024, diapo 10 : Bascules D synchrones sur fronts – «D flip flop » ou « D edge triggered »](papier/ch1/p10.jpg){ loading=lazy .papier }](papier/ch1/p10.jpg)
-    <p class="papier-legende">Bascules D synchrones sur fronts – «D flip flop » ou « D edge triggered » · Chapitre 1 — support 2024, diapo 10</p>
+    [![Chapitre 1 — support 2026-2027, diapo 17 : Bascule D : temps tsu, th et tp](papier/ch1/p17.jpg){ loading=lazy .papier }](papier/ch1/p17.jpg)
+    <p class="papier-legende">Bascule D : temps tsu, th et tp · Chapitre 1 — support 2026-2027, diapo 17</p>
 
-    [![Chapitre 1 — support 2024, diapo 11 : Bascules JK synchrones sur fronts – «JK flip flop » ou « JK edge triggered »](papier/ch1/p11.jpg){ loading=lazy .papier }](papier/ch1/p11.jpg)
-    <p class="papier-legende">Bascules JK synchrones sur fronts – «JK flip flop » ou « JK edge triggered » · Chapitre 1 — support 2024, diapo 11</p>
+    [![Chapitre 1 — support 2026-2027, diapo 18 : Bascule D : division de fréquence](papier/ch1/p18.jpg){ loading=lazy .papier }](papier/ch1/p18.jpg)
+    <p class="papier-legende">Bascule D : division de fréquence · Chapitre 1 — support 2026-2027, diapo 18</p>
 
-    [![Chapitre 1 — support 2024, diapo 12 : Bascules JK synchrones sur fronts – «JK flip flop » ou « JK edge triggered »](papier/ch1/p12.jpg){ loading=lazy .papier }](papier/ch1/p12.jpg)
-    <p class="papier-legende">Bascules JK synchrones sur fronts – «JK flip flop » ou « JK edge triggered » · Chapitre 1 — support 2024, diapo 12</p>
+    [![Chapitre 1 — support 2026-2027, diapo 19 : Bascule D : division de fréquence (chronogramme)](papier/ch1/p19.jpg){ loading=lazy .papier }](papier/ch1/p19.jpg)
+    <p class="papier-legende">Bascule D : division de fréquence (chronogramme) · Chapitre 1 — support 2026-2027, diapo 19</p>
 
-    [![Chapitre 1 — support 2024, diapo 13 : Bascules JK synchrones sur fronts – «JK flip flop » ou « JK edge triggered »](papier/ch1/p13.jpg){ loading=lazy .papier }](papier/ch1/p13.jpg)
-    <p class="papier-legende">Bascules JK synchrones sur fronts – «JK flip flop » ou « JK edge triggered » · Chapitre 1 — support 2024, diapo 13</p>
+    [![Chapitre 1 — support 2026-2027, diapo 21 : Bascule JK sur front : tables](papier/ch1/p21.jpg){ loading=lazy .papier }](papier/ch1/p21.jpg)
+    <p class="papier-legende">Bascule JK sur front : tables · Chapitre 1 — support 2026-2027, diapo 21</p>
+
+    [![Chapitre 1 — support 2026-2027, diapo 22 : Bascule JK : exemple 1](papier/ch1/p22.jpg){ loading=lazy .papier }](papier/ch1/p22.jpg)
+    <p class="papier-legende">Bascule JK : exemple 1 · Chapitre 1 — support 2026-2027, diapo 22</p>
+
+    [![Chapitre 1 — support 2026-2027, diapo 23 : Bascule JK : exemple 1 (corrigé)](papier/ch1/p23.jpg){ loading=lazy .papier }](papier/ch1/p23.jpg)
+    <p class="papier-legende">Bascule JK : exemple 1 (corrigé) · Chapitre 1 — support 2026-2027, diapo 23</p>
+
+    [![Chapitre 1 — support 2026-2027, diapo 24 : Bascule JK : exemple 2, mode toggle](papier/ch1/p24.jpg){ loading=lazy .papier }](papier/ch1/p24.jpg)
+    <p class="papier-legende">Bascule JK : exemple 2, mode toggle · Chapitre 1 — support 2026-2027, diapo 24</p>
+
+    [![Chapitre 1 — support 2026-2027, diapo 25 : Bascule JK : exemple 2 (corrigé)](papier/ch1/p25.jpg){ loading=lazy .papier }](papier/ch1/p25.jpg)
+    <p class="papier-legende">Bascule JK : exemple 2 (corrigé) · Chapitre 1 — support 2026-2027, diapo 25</p>
