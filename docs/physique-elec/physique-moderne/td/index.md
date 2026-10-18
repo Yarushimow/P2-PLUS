@@ -2,6 +2,9 @@
 
 Tous les exercices de la feuille de TD 2026-2027 sont corrigés, avec les valeurs numériques.
 
+Chaque TD a deux onglets : **Version simplifiée** (méthode et corrections) et
+**Version papier** (les vraies pages de l'énoncé, à agrandir d'un clic).
+
 | TD | Contenu |
 |----|---------|
 | [TD 1 — Galilée](td-1-galilee.md) | Gravitation, changements de référentiel, choc élastique |
