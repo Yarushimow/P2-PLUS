@@ -63,6 +63,10 @@
 .md-header__title { font-weight: 700; letter-spacing: -0.01em; }
 .md-header__button.md-logo { color: var(--md-primary-fg-color); }
 .md-tabs { border-bottom: 1px solid var(--site-border); }
+/* Onglets centrés (marges auto : reste défilable si la barre déborde) */
+.md-tabs__list { margin: 0; }
+.md-tabs__item:first-child { margin-left: auto; }
+.md-tabs__item:last-child { margin-right: auto; }
 .md-tabs__link { opacity: 0.75; font-weight: 500; }
 .md-tabs__link--active,
 .md-tabs__link:hover { opacity: 1; color: var(--md-primary-fg-color); }
@@ -79,6 +83,15 @@
 .md-search__icon { color: var(--md-default-fg-color--light); }
 .md-search__input { color: var(--md-default-fg-color); }
 .md-source { color: var(--md-default-fg-color--light); }
+
+/* ---------- Largeur de page : moins de marges vides sur grand écran ---------- */
+.md-grid { max-width: 72rem; }
+
+/* Pages sans table des matières (TP chiffrés, pages sans sous-titres) :
+   la colonne de droite, vide, est retirée et le contenu prend la place. */
+@media screen and (min-width: 60em) {
+  .md-sidebar--secondary:not(:has(.md-nav__list)) { display: none; }
+}
 
 /* ---------- Typographie ---------- */
 .md-typeset { font-size: 0.78rem; line-height: 1.7; }
@@ -198,6 +211,44 @@
     radial-gradient(120% 140% at 0% 0%, var(--md-accent-fg-color--transparent), transparent 60%),
     var(--site-surface);
 }
+.md-typeset .accueil-hero {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+/* Fond animé de l'accueil (javascripts/fond-accueil.js) : toute la fenêtre,
+   derrière le contenu, sans capter la souris */
+.fond-accueil {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+}
+/* Bandeau translucide : le fond reste visible à travers */
+.fond-actif .md-typeset .accueil-hero {
+  background:
+    radial-gradient(120% 140% at 0% 0%, var(--md-accent-fg-color--transparent), transparent 60%),
+    color-mix(in srgb, var(--site-surface) 72%, transparent);
+}
+/* Cartes et boutons gardés sur leur propre couche : le rendu du texte ne
+   change plus au survol pendant que le fond s'anime derrière */
+.fond-actif .md-typeset .grid.cards > ul > li,
+.fond-actif .md-typeset .grid > .card,
+.fond-actif .md-typeset .md-button { will-change: transform; }
+/* Cartes des matières et de l'agenda légèrement translucides : les particules
+   se devinent derrière ; le survol les rend opaques pour la lecture */
+.fond-actif .md-typeset .grid.cards > ul > li,
+.fond-actif .md-typeset .grid > .card,
+.fond-actif .agenda-carte {
+  background: color-mix(in srgb, var(--site-surface) 70%, transparent);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease,
+              background-color 0.2s ease;
+}
+.fond-actif .md-typeset .grid.cards > ul > li:hover,
+.fond-actif .md-typeset .grid > .card:hover,
+.fond-actif .agenda-carte:hover { background-color: var(--site-surface); }
 .md-typeset .accueil-hero h1 { margin: 0 0 0.3rem; }
 .md-typeset .accueil-hero p { margin: 0; color: var(--md-default-fg-color--light); max-width: 46rem; }
 
