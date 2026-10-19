@@ -201,6 +201,31 @@
 .md-typeset pre > code { border-radius: 10px; }
 .md-footer-meta { background: var(--md-footer-bg-color--dark); }
 
+/* Chauve-souris au centre du pied de page (entre « Précédent » et « Suivant ») */
+.md-footer__inner { position: relative; }
+.md-footer__inner::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 5.4rem;
+  height: 1.6rem;
+  transform: translate(-50%, -50%);
+  background-color: var(--md-footer-fg-color--light);
+  -webkit-mask: url("../assets/chauve-souris.svg") center / contain no-repeat;
+  mask: url("../assets/chauve-souris.svg") center / contain no-repeat;
+  opacity: 0.35;
+  pointer-events: none;
+}
+/* Les titres longs se coupent (…) avant d'atteindre le logo */
+@media screen and (min-width: 45em) {
+  .md-footer__link { max-width: calc(50% - 3.4rem); }
+}
+/* Sur petit écran, le titre « Suivant » prend la place : pas de logo */
+@media screen and (max-width: 44.984375em) {
+  .md-footer__inner::after { display: none; }
+}
+
 /* ---------- Accueil : bandeau d'introduction ---------- */
 .md-typeset .accueil-hero {
   margin: 0 0 1.5rem;
