@@ -216,6 +216,9 @@
   mask: url("../assets/chauve-souris.svg") center / contain no-repeat;
   opacity: 0.35;
   transition: background-color 0.2s ease, opacity 0.2s ease;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
 }
 .logo-pied:hover,
 .logo-pied:focus-visible {

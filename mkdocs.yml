@@ -114,6 +114,7 @@ extra_javascript:
   - javascripts/versions.js
   - javascripts/coffre.js
   - javascripts/fond-accueil.js
+  - javascripts/logo-pied.js
 
 extra_css:
   - stylesheets/theme.css
