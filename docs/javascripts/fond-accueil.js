@@ -2,7 +2,9 @@
 // Constellation à la particles.js (réglages du fond d'écran « Particles ») :
 // points qui dérivent, reliés par des fils fins ; au survol, le curseur
 // « attrape » les particules proches ; un clic dans le vide en ajoute 4.
-// Mode sombre uniquement : en mode clair, pas de particules (et cartes opaques).
+// Un bouton dans l'en-tête, à côté du bouton clair / sombre, active ou coupe
+// les particules ; le choix est mémorisé. Sans choix : actives en sombre,
+// coupées en clair.
 // Sans JavaScript ou avec « réduire les animations », la page reste statique.
 (() => {
   const reduire = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -10,9 +12,24 @@
 
   const LIEN = 120;      // distance max. d'un fil entre deux particules
   const ATTRAPE = 140;   // distance max. d'un fil vers le curseur
-  // Points gris #606060, fils blancs
-  const t = { point: "rgb(96, 96, 96)", fil: [255, 255, 255], force: 0.4 };
+  // Points : gris #606060 en sombre, indigo #4f46e5 en clair.
+  // Fils : blancs en sombre, ardoise en clair.
+  const TEINTES = {
+    sombre: { point: "rgb(96, 96, 96)", fil: [255, 255, 255], force: 0.4 },
+    clair: { point: "rgb(79, 70, 229)", fil: [30, 41, 59], force: 0.28 },
+  };
   const sombre = () => document.body.getAttribute("data-md-color-scheme") === "slate";
+  const teinte = () => TEINTES[sombre() ? "sombre" : "clair"];
+
+  // Choix du visiteur (« on » / « off »), sinon selon le mode
+  const CLE = "particules";
+  function choix() {
+    try { return localStorage.getItem(CLE); } catch { return null; }
+  }
+  function memoriser(v) {
+    try { localStorage.setItem(CLE, v); } catch { /* stockage indisponible */ }
+  }
+  const actives = () => (choix() ? choix() === "on" : sombre());
   const rgba = (c, a) => `rgba(${c[0]},${c[1]},${c[2]},${a})`;
 
   // Le fond se calme quand la souris est sur un élément avec lequel on interagit
@@ -39,6 +56,7 @@
     const ctx = canvas.getContext("2d");
 
     let l = 0, h = 0, pts = [], max = 0, image = 0;
+    let t = teinte();
     const souris = { x: -1e4, y: -1e4, cx: -1e4, cy: -1e4, dedans: false, force: 0 };
 
     function redimensionner() {
@@ -114,6 +132,8 @@
       dessiner();
     }
 
+    const theme = new MutationObserver(() => { t = teinte(); });
+    theme.observe(document.body, { attributes: true, attributeFilter: ["data-md-color-scheme"] });
     window.addEventListener("resize", redimensionner);
     window.addEventListener("pointermove", bouger, { passive: true });
     document.addEventListener("pointerleave", sortir);
@@ -124,6 +144,7 @@
 
     return () => {
       cancelAnimationFrame(image);
+      theme.disconnect();
       window.removeEventListener("resize", redimensionner);
       window.removeEventListener("pointermove", bouger);
       document.removeEventListener("pointerleave", sortir);
@@ -133,11 +154,53 @@
     };
   }
 
-  // Essai : fond sur toutes les pages (false = page d'accueil seulement)
+  // ---------- Bouton de l'en-tête ----------
+  // Constellation : trois points reliés ; barrée quand les particules sont coupées
+  const ICONE = `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+      <g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+        <path d="M12 5.5 5.5 17.5h13Z"/>
+        <path class="particules-barre" d="M3.5 3.5l17 17"/>
+      </g>
+      <g fill="currentColor">
+        <circle cx="12" cy="5.5" r="2.6"/>
+        <circle cx="5.5" cy="17.5" r="2.6"/>
+        <circle cx="18.5" cy="17.5" r="2.6"/>
+      </g>
+    </svg>`;
+
+  function majBouton() {
+    const b = document.querySelector(".particules-bouton");
+    if (!b) return;
+    const on = actives();
+    b.setAttribute("aria-pressed", String(on));
+    const texte = on ? "Désactiver les particules" : "Activer les particules";
+    b.title = texte;
+    b.setAttribute("aria-label", texte);
+  }
+
+  function placerBouton() {
+    if (document.querySelector(".particules-bouton")) return majBouton();
+    const palette = document.querySelector('.md-header__option[data-md-component="palette"]');
+    if (!palette) return;
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "md-header__button md-icon particules-bouton";
+    b.innerHTML = ICONE;
+    b.addEventListener("click", () => {
+      memoriser(actives() ? "off" : "on");
+      demarrer();
+    });
+    palette.before(b);
+    majBouton();
+  }
+
+  // Fond sur toutes les pages (false = page d'accueil seulement)
   const PARTOUT = true;
 
   function demarrer() {
-    const voulu = sombre() && (PARTOUT || !!document.querySelector(".md-typeset .accueil-hero"));
+    placerBouton();
+    const voulu = actives() && (PARTOUT || !!document.querySelector(".md-typeset .accueil-hero"));
     // Déjà lancé : les particules continuent d'une page à l'autre
     if (voulu && arreter && document.querySelector(".fond-accueil")) return;
     arreter?.();
@@ -145,7 +208,7 @@
     if (voulu) arreter = lancer();
   }
 
-  // Passage clair ↔ sombre : on lance ou on arrête le fond
+  // Passage clair ↔ sombre : sans choix mémorisé, le fond suit le mode
   new MutationObserver(demarrer)
     .observe(document.body, { attributes: true, attributeFilter: ["data-md-color-scheme"] });
 

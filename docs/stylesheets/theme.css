@@ -62,6 +62,12 @@
 }
 .md-header__title { font-weight: 700; letter-spacing: -0.01em; }
 .md-header__button.md-logo { color: var(--md-primary-fg-color); }
+/* Bouton particules (javascripts/fond-accueil.js), à côté du bouton clair / sombre */
+.particules-bouton { background: none; border: 0; cursor: pointer; color: inherit; }
+.particules-bouton .particules-barre { display: none; }
+.particules-bouton[aria-pressed="false"] { opacity: 0.55; }
+.particules-bouton[aria-pressed="false"] .particules-barre { display: inline; }
+.particules-bouton:hover { opacity: 1; color: var(--md-primary-fg-color); }
 .md-tabs { border-bottom: 1px solid var(--site-border); }
 /* Onglets centrés (marges auto : reste défilable si la barre déborde) */
 .md-tabs__list { margin: 0; }
