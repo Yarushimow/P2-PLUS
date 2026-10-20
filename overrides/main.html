@@ -26,4 +26,11 @@
       }
     })();
   </script>
+  {#- Mesure d'audience GoatCounter : les pages vues sont comptées par
+      javascripts/statistiques.js (navigation instantanée), d'où no_onload. -#}
+  {% if config.extra.goatcounter %}
+    <script data-goatcounter="https://{{ config.extra.goatcounter }}.goatcounter.com/count"
+            data-goatcounter-settings='{"no_onload": true}'
+            async src="https://gc.zgo.at/count.js"></script>
+  {% endif %}
 {% endblock %}

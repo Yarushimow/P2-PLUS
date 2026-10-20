@@ -115,6 +115,7 @@ extra_javascript:
   - javascripts/coffre.js
   - javascripts/fond-accueil.js
   - javascripts/logo-pied.js
+  - javascripts/statistiques.js
 
 extra_css:
   - stylesheets/theme.css
@@ -123,3 +124,9 @@ extra_css:
   - stylesheets/mobile.css
   - stylesheets/versions.css
   - stylesheets/coffre.css
+
+extra:
+  # Mesure d'audience GoatCounter (sans cookies, sans identifier les visiteurs) :
+  # code du site créé sur goatcounter.com → https://<code>.goatcounter.com
+  # Laisser vide pour désactiver. Voir javascripts/statistiques.js.
+  goatcounter: p2-plus
