@@ -4,7 +4,8 @@
 //  - le temps *actif* passé sur la page, par tranches (« 1–3 min »…) : onglet
 //    visible et interaction (souris, clavier, défilement) il y a moins de 30 s ;
 //  - les clics importants : cartes, agenda, onglets, menu, Précédent / Suivant,
-//    téléchargements, liens externes, logo du pied de page.
+//    téléchargements, liens externes, logo du pied de page, exports PDF / .md,
+//    bouton des particules.
 // Le script GoatCounter est ajouté par overrides/main.html quand
 // `extra.goatcounter` est rempli dans mkdocs.yml ; il ignore localhost.
 (() => {
@@ -83,6 +84,9 @@
     const carte = cible.closest(".grid.cards > ul > li, .grid > .card");
     if (carte) return `carte/${texte(carte.querySelector("strong") || carte)}`;
     if (cible.closest(".logo-pied")) return "logo-github";
+    if (cible.closest(".export-pdf")) return "export/pdf";
+    if (cible.closest(".export-md")) return "export/markdown";
+    if (cible.closest(".particules-bouton")) return "bouton-particules";
     const a = cible.closest("a[href]");
     if (!a) return null;
     if (a.matches(".agenda-carte")) return `agenda/${texte(a.querySelector("strong"))}`;

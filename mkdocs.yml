@@ -115,6 +115,7 @@ extra_javascript:
   - javascripts/coffre.js
   - javascripts/fond-accueil.js
   - javascripts/logo-pied.js
+  - javascripts/export.js
   - javascripts/statistiques.js
 
 extra_css:
