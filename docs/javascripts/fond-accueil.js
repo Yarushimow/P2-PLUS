@@ -21,7 +21,7 @@
 
   // Le fond se calme quand la souris est sur un élément avec lequel on interagit
   const CALME = "a, button, input, label, .md-button, .grid.cards > ul > li, .grid > .card, "
-    + ".agenda-carte, .md-header, .md-tabs";
+    + ".agenda-carte, .md-header, .md-tabs, .md-sidebar";
 
   function particule(l, h, x, y) {
     const angle = Math.random() * Math.PI * 2, v = 0.15 + Math.random() * 0.45;
@@ -141,10 +141,16 @@
     };
   }
 
+  // Essai : fond sur toutes les pages (false = page d'accueil seulement)
+  const PARTOUT = true;
+
   function demarrer() {
+    const voulu = PARTOUT || !!document.querySelector(".md-typeset .accueil-hero");
+    // Déjà lancé : les particules continuent d'une page à l'autre
+    if (voulu && arreter && document.querySelector(".fond-accueil")) return;
     arreter?.();
     arreter = null;
-    if (document.querySelector(".md-typeset .accueil-hero")) arreter = lancer();
+    if (voulu) arreter = lancer();
   }
 
   if (typeof document$ !== "undefined") document$.subscribe(demarrer);
