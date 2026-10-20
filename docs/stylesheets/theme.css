@@ -478,6 +478,9 @@
 
 /* ---------- Export de la page (overrides/partials/actions.html) ---------- */
 .export-bouton { background: none; border: 0; cursor: pointer; }
+/* Le titre (h1) est animé à l'arrivée (animations.css) : son animation le fait
+   passer au-dessus des boutons flottants, qui ne recevaient plus les clics */
+.md-content__button { position: relative; z-index: 1; }
 .export-bouton[aria-busy="true"] { opacity: 0.4; cursor: progress; }
 
 /* Impression / PDF : ni fond animé, ni boutons */
