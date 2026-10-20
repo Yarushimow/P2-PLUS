@@ -2,6 +2,7 @@
 // Constellation à la particles.js (réglages du fond d'écran « Particles ») :
 // points qui dérivent, reliés par des fils fins ; au survol, le curseur
 // « attrape » les particules proches ; un clic dans le vide en ajoute 4.
+// Mode sombre uniquement : en mode clair, pas de particules (et cartes opaques).
 // Sans JavaScript ou avec « réduire les animations », la page reste statique.
 (() => {
   const reduire = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -9,14 +10,9 @@
 
   const LIEN = 120;      // distance max. d'un fil entre deux particules
   const ATTRAPE = 140;   // distance max. d'un fil vers le curseur
-  // Points : gris #606060 en sombre, indigo #4f46e5 en clair.
-  // Fils : blancs en sombre, ardoise en clair.
-  const TEINTES = {
-    sombre: { point: "rgb(96, 96, 96)", fil: [255, 255, 255], force: 0.4 },
-    clair: { point: "rgb(79, 70, 229)", fil: [30, 41, 59], force: 0.28 },
-  };
-  const teinte = () =>
-    TEINTES[document.body.getAttribute("data-md-color-scheme") === "slate" ? "sombre" : "clair"];
+  // Points gris #606060, fils blancs
+  const t = { point: "rgb(96, 96, 96)", fil: [255, 255, 255], force: 0.4 };
+  const sombre = () => document.body.getAttribute("data-md-color-scheme") === "slate";
   const rgba = (c, a) => `rgba(${c[0]},${c[1]},${c[2]},${a})`;
 
   // Le fond se calme quand la souris est sur un élément avec lequel on interagit
@@ -43,7 +39,6 @@
     const ctx = canvas.getContext("2d");
 
     let l = 0, h = 0, pts = [], max = 0, image = 0;
-    let t = teinte();
     const souris = { x: -1e4, y: -1e4, cx: -1e4, cy: -1e4, dedans: false, force: 0 };
 
     function redimensionner() {
@@ -119,8 +114,6 @@
       dessiner();
     }
 
-    const theme = new MutationObserver(() => { t = teinte(); });
-    theme.observe(document.body, { attributes: true, attributeFilter: ["data-md-color-scheme"] });
     window.addEventListener("resize", redimensionner);
     window.addEventListener("pointermove", bouger, { passive: true });
     document.addEventListener("pointerleave", sortir);
@@ -131,7 +124,6 @@
 
     return () => {
       cancelAnimationFrame(image);
-      theme.disconnect();
       window.removeEventListener("resize", redimensionner);
       window.removeEventListener("pointermove", bouger);
       document.removeEventListener("pointerleave", sortir);
@@ -145,13 +137,17 @@
   const PARTOUT = true;
 
   function demarrer() {
-    const voulu = PARTOUT || !!document.querySelector(".md-typeset .accueil-hero");
+    const voulu = sombre() && (PARTOUT || !!document.querySelector(".md-typeset .accueil-hero"));
     // Déjà lancé : les particules continuent d'une page à l'autre
     if (voulu && arreter && document.querySelector(".fond-accueil")) return;
     arreter?.();
     arreter = null;
     if (voulu) arreter = lancer();
   }
+
+  // Passage clair ↔ sombre : on lance ou on arrête le fond
+  new MutationObserver(demarrer)
+    .observe(document.body, { attributes: true, attributeFilter: ["data-md-color-scheme"] });
 
   if (typeof document$ !== "undefined") document$.subscribe(demarrer);
   else document.addEventListener("DOMContentLoaded", demarrer);
