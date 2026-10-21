@@ -30,9 +30,17 @@ sommets et cols).
 
     ---
 
-    Corrections des TD 1 à 6 et de trois annales de DE.
+    Corrections des TD 1 à 6.
 
     [:octicons-arrow-right-24: Travaux dirigés](td/index.md)
+
+-   :material-file-document-multiple:{ .lg .middle } **Annales**
+
+    ---
+
+    Sujets et corrigés officiels des CE et DE (SharePoint EFREI), dont trois DE corrigés en détail.
+
+    [:octicons-arrow-right-24: Annales](annales/index.md)
 
 -   :material-card-text:{ .lg .middle } **Fiches**
 
