@@ -27,6 +27,14 @@ continues, lois usuelles.
 
     [:octicons-arrow-right-24: Travaux dirigés](td/index.md)
 
+-   :material-file-document-multiple:{ .lg .middle } **Annales**
+
+    ---
+
+    Sujets et corrigés officiels des CE et DE (SharePoint EFREI).
+
+    [:octicons-arrow-right-24: Annales](annales/index.md)
+
 -   :material-card-text:{ .lg .middle } **Fiches**
 
     ---
