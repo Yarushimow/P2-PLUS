@@ -1,6 +1,7 @@
 // Bascule « Version simplifiée » ⇄ « Version papier » sans remonter en haut de la page.
 //
-// - Un bouton flottant (en bas à droite) change de version d'un clic (ou touche « v »).
+// - Un bouton flottant (en bas au centre) change de version d'un clic, ou au clavier :
+//   ← version simplifiée, → version papier, « v » pour alterner (↑ ↓ font défiler).
 // - La position est mémorisée séparément pour chaque version : en revenant sur une
 //   version, on retrouve l'endroit où on l'avait laissée (exemple 1.15, diapo 12…).
 // - Ça marche aussi avec les onglets en haut de page, et la mémoire tient pendant
@@ -157,8 +158,8 @@
     if (!bouton) return;
     const v = active();
     bouton.dataset.active = v;
-    bouton.setAttribute("aria-label", `Passer à la ${LIBELLES[autre(v)].toLowerCase()} (touche V)`);
-    bouton.title = `Passer à la ${LIBELLES[autre(v)].toLowerCase()} · touche V`;
+    bouton.setAttribute("aria-label", `Passer à la ${LIBELLES[autre(v)].toLowerCase()} (touches ← → ou V)`);
+    bouton.title = `Passer à la ${LIBELLES[autre(v)].toLowerCase()} · touches ← → ou V`;
     bouton.querySelectorAll(".versions-bascule__option").forEach((o) => {
       o.classList.toggle("est-active", o.dataset.v === v);
     });
@@ -173,11 +174,31 @@
 
   function surTouche(e) {
     if (!etat || e.ctrlKey || e.metaKey || e.altKey) return;
-    if (e.key !== "v" && e.key !== "V") return;
     const cible = e.target;
-    if (cible.closest("input, textarea, select, [contenteditable]")) return;
-    e.preventDefault();
-    basculer();
+    // Les onglets sont des boutons radio : après un clic sur un onglet, le navigateur
+    // fait changer de version avec les 4 flèches. On garde ← → pour les versions
+    // et on rend ↑ ↓ au défilement de la page.
+    const surOnglet = Object.values(etat.inputs).includes(cible);
+    const champ = !surOnglet && cible.closest("input, textarea, select, [contenteditable]");
+
+    if (e.key === "ArrowUp" || e.key === "ArrowDown") {
+      if (!surOnglet) return; // défilement normal du navigateur
+      e.preventDefault();
+      cible.blur(); // les flèches suivantes font défiler la page nativement
+      window.scrollBy({ top: e.key === "ArrowDown" ? 40 : -40 });
+      return;
+    }
+    if (champ) return;
+    if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
+      e.preventDefault();
+      const voulue = e.key === "ArrowLeft" ? "simplifiee" : "papier";
+      if (active() !== voulue) basculer();
+      return;
+    }
+    if (e.key === "v" || e.key === "V") {
+      e.preventDefault();
+      basculer();
+    }
   }
 
   function initialiser() {
