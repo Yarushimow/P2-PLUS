@@ -1,7 +1,7 @@
 # Travaux dirigés
 
-Chaque TD et chaque annale a deux onglets : **Version simplifiée** (les corrections)
-et **Version papier** (l'énoncé officiel ; pour les annales, le sujet et le corrigé du prof quand il existe).
+Chaque TD a deux onglets : **Version simplifiée** (les corrections)
+et **Version papier** (l'énoncé officiel).
 
 | TD | Contenu |
 |----|---------|
@@ -11,9 +11,6 @@ et **Version papier** (l'énoncé officiel ; pour les annales, le sujet et le co
 | [TD 4 — Intégrales multiples](td-4-integrales-multiples.md) | Fubini, polaires, changements de variables, triples |
 | [TD 5 — Convexité](td-5-convexite.md) | Jensen, hessiennes, formes quadratiques |
 | [TD 6 — Extrema](td-6-extrema.md) | Points critiques, domaine borné, optimisation |
-| [DE blanc](annale-de-blanc.md) | Continuité + polaires, cercle de maxima, cylindriques, EDP, optimisation |
-| [DE 2023-2024](annale-de-2023.md) | Cours, EDP par changement de variables, intégrales, Viviani |
-| [DE 2024-2025](annale-de-2024.md) | Points critiques, hessiennes, lagrangien, Torricelli |
 
 !!! tip "Exercices marqués ▶"
     Dans les feuilles de TD, les exercices marqués ▶ sont à faire en autonomie.
