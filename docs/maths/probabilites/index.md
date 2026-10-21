@@ -54,6 +54,7 @@ continues, lois usuelles.
 | 3. Variables aléatoires discrètes | [:material-book-open-variant:](cours/chapitre-3-va-discretes.md) | [TD 3](td/td-3-va-discretes.md) | [:material-card-text:](fiches/fiche-ce-chapitres-1-3.md) |
 | 4. Variables aléatoires continues | [:material-book-open-variant:](cours/chapitre-4-va-continues.md) | [TD 4](td/td-4-va-continues.md) | |
 | Révisions | | [62 questions](td/questions-revision.md) | [:material-dice-multiple:](entrainement/index.md) |
+| Annales | | [Sujets CE/DE](annales/index.md) | |
 
 ## Infos pratiques
 

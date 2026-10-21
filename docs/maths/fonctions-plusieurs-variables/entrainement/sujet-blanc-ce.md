@@ -107,6 +107,6 @@ $$
 |----------|:-:|:-:|:-:|:-:|:-:|:-----:|
 | Points | 3 | 3 | 5 | 3 | 6 | 20 |
 
-Pour t'entraîner davantage dans le périmètre : [DE blanc](../td/annale-de-blanc.md) ex. 1, [DE 2023](../td/annale-de-2023.md) ex. 2, 3, 4 et 6 (questions 1 à 3), [TD 4](../td/td-4-integrales-multiples.md) ex. 1 à 11.
+Pour t'entraîner davantage dans le périmètre : [DE blanc](../annales/annale-de-blanc.md) ex. 1, [DE 2023](../annales/annale-de-2023.md) ex. 2, 3, 4 et 6 (questions 1 à 3), [TD 4](../td/td-4-integrales-multiples.md) ex. 1 à 11.
 
 [:material-card-text: Retour à la fiche CE](../fiches/fiche-ce.md){ .md-button }

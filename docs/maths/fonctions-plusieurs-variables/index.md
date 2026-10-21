@@ -62,7 +62,7 @@ sommets et cols).
 | 4. Intégrales multiples | [:material-book-open-variant:](cours/chapitre-4-integrales-multiples.md) | [TD 4](td/td-4-integrales-multiples.md) | [:material-card-text:](fiches/fiche-integrales.md) |
 | 5. Convexité | [:material-book-open-variant:](cours/chapitre-5-convexite.md) | [TD 5](td/td-5-convexite.md) | [:material-card-text:](fiches/fiche-convexite.md) |
 | 6. Extrema | [:material-book-open-variant:](cours/chapitre-6-extrema.md) | [TD 6](td/td-6-extrema.md) | [:material-card-text:](fiches/fiche-extrema.md) |
-| Annales | | [DE blanc](td/annale-de-blanc.md) · [DE 2023](td/annale-de-2023.md) · [DE 2024](td/annale-de-2024.md) | |
+| Annales | | [Sujets CE/DE](annales/index.md) · [DE blanc](annales/annale-de-blanc.md) · [DE 2023](annales/annale-de-2023.md) · [DE 2024](annales/annale-de-2024.md) | |
 
 ## Infos pratiques
 
