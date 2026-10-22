@@ -83,7 +83,6 @@
   function decrire(cible) {
     const carte = cible.closest(".grid.cards > ul > li, .grid > .card");
     if (carte) return `carte/${texte(carte.querySelector("strong") || carte)}`;
-    if (cible.closest(".logo-pied")) return "logo-github";
     if (cible.closest(".export-pdf")) return "export/pdf";
     if (cible.closest(".export-md")) return "export/markdown";
     if (cible.closest(".particules-bouton")) return "bouton-particules";

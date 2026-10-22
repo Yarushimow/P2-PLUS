@@ -207,36 +207,6 @@
 .md-typeset pre > code { border-radius: 10px; }
 .md-footer-meta { background: var(--md-footer-bg-color--dark); }
 
-/* Chauve-souris au centre de la bande du bas : lien vers le GitHub de
-   FireWall-code (overrides/partials/copyright.html) ; rouge au survol */
-.md-footer-meta__inner { position: relative; }
-.logo-pied {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 5.4rem;
-  height: 1.6rem;
-  transform: translate(-50%, -50%);
-  background-color: var(--md-footer-fg-color--light);
-  -webkit-mask: url("../assets/chauve-souris.svg") center / contain no-repeat;
-  mask: url("../assets/chauve-souris.svg") center / contain no-repeat;
-  /* Invisible ; au survol, à peine visible */
-  opacity: 0;
-  transition: background-color 0.2s ease, opacity 0.3s ease;
-  border: 0;
-  padding: 0;
-  cursor: pointer;
-}
-.logo-pied:hover,
-.logo-pied:focus-visible {
-  background-color: rgb(172, 1, 19);
-  opacity: 0.15;
-}
-/* Sur petit écran, le texte « Made with… » occupe le centre : logo à droite */
-@media screen and (max-width: 44.984375em) {
-  .logo-pied { left: auto; right: 0.8rem; transform: translateY(-50%); }
-}
-
 /* ---------- Accueil : bandeau d'introduction ---------- */
 .md-typeset .accueil-hero {
   margin: 0 0 1.5rem;
@@ -487,6 +457,5 @@
 @media print {
   .fond-accueil,
   .particules-bouton,
-  .md-content__button,
-  .logo-pied { display: none !important; }
+  .md-content__button { display: none !important; }
 }
