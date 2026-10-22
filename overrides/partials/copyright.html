@@ -1,19 +1,12 @@
 {#-
-  Copie de partials/copyright.html (Material for MkDocs) : « Made with
-  FireWall-code » et le logo chauve-souris centré, qui mènent tous deux au
-  GitHub de FireWall-code.
+  Copie de partials/copyright.html (Material for MkDocs), sans la mention
+  « Made with » ; logo chauve-souris centré qui mène au GitHub de FireWall-code.
 -#}
 <div class="md-copyright">
   {% if config.copyright %}
     <div class="md-copyright__highlight">
       {{ config.copyright }}
     </div>
-  {% endif %}
-  {% if not config.extra.generator == false %}
-    Made with
-    <a href="https://github.com/FireWall-code" target="_blank" rel="noopener">
-      FireWall-code
-    </a>
   {% endif %}
 </div>
 {#- Bouton plutôt que lien : pas d'adresse affichée en bas de la fenêtre au
