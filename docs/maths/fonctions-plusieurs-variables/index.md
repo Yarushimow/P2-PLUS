@@ -14,7 +14,8 @@ sommets et cols).
 
 !!! tip "CE du samedi 24 octobre"
     Programme : chapitres 1 à 3 et intégrales doubles (chapitre 4). Calculatrice autorisée, aucun support de cours.
-    [:material-card-text: Fiche CE](fiches/fiche-ce.md) · [:material-clipboard-text: Sujet blanc corrigé](entrainement/sujet-blanc-ce.md)
+    Format habituel : 55 minutes, 4 ou 5 exercices (polaires, EDP avec $u = x + y$, limite, dérivées partielles).
+    [:material-card-text: Fiche CE](fiches/fiche-ce.md) · [:material-file-document-multiple: CE corrigés](annales/index.md#controles-ecrits-ce) · [:material-clipboard-text: Sujet blanc corrigé](entrainement/sujet-blanc-ce.md) · [:material-gesture-tap: Entraînement](entrainement/index.md)
 
 <div class="grid cards" markdown>
 
@@ -38,7 +39,7 @@ sommets et cols).
 
     ---
 
-    Sujets et corrigés officiels des CE et DE (SharePoint EFREI), dont trois DE corrigés en détail.
+    Sujets et corrigés officiels des CE et DE (SharePoint EFREI), avec quatre CE et trois DE corrigés en détail.
 
     [:octicons-arrow-right-24: Annales](annales/index.md)
 
@@ -70,7 +71,7 @@ sommets et cols).
 | 4. Intégrales multiples | [:material-book-open-variant:](cours/chapitre-4-integrales-multiples.md) | [TD 4](td/td-4-integrales-multiples.md) | [:material-card-text:](fiches/fiche-integrales.md) |
 | 5. Convexité | [:material-book-open-variant:](cours/chapitre-5-convexite.md) | [TD 5](td/td-5-convexite.md) | [:material-card-text:](fiches/fiche-convexite.md) |
 | 6. Extrema | [:material-book-open-variant:](cours/chapitre-6-extrema.md) | [TD 6](td/td-6-extrema.md) | [:material-card-text:](fiches/fiche-extrema.md) |
-| Annales | | [Sujets CE/DE](annales/index.md) · [DE blanc](annales/annale-de-blanc.md) · [DE 2023](annales/annale-de-2023.md) · [DE 2024](annales/annale-de-2024.md) | |
+| Annales | | [Sujets CE/DE](annales/index.md) · [CE 2025](annales/annale-ce-2025.md) · [CE 2024](annales/annale-ce-2024.md) · [DE blanc](annales/annale-de-blanc.md) · [DE 2023](annales/annale-de-2023.md) · [DE 2024](annales/annale-de-2024.md) | |
 
 ## Infos pratiques
 

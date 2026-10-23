@@ -4,7 +4,7 @@ title: "Sujet blanc CE"
 
 # Sujet blanc CE — Fonctions de plusieurs variables
 
-Format du CE : **calculatrice autorisée, aucun support de cours**. Durée conseillée : 1 h 30. Barème sur 20, donné à titre indicatif. Le programme est celui du CE : chapitres 1 à 3 et intégrales doubles.
+Format du CE : **calculatrice autorisée, aucun support de cours**. Ce sujet est plus long qu'un vrai CE (55 minutes, 4 ou 5 exercices) : compte environ 1 h 30, ou fais seulement les exercices 2, 4 et 5 en 55 minutes. Barème sur 20, donné à titre indicatif. Le programme est celui du CE : chapitres 1 à 3 et intégrales doubles.
 
 !!! tip "Comment l'utiliser"
     Fais-le sur papier, d'une traite, sans ouvrir le site. Les corrigés sont repliés sous chaque exercice : n'ouvre qu'après avoir rendu ta copie.

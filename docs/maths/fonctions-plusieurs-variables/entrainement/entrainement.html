@@ -546,7 +546,108 @@ function qEdpChain() {
   return build('edp', statement, R`Cherche $u=px+qy$ pour lequel $f=h(u)$ annule l'équation : $f_x=p\,h'(u)$ et $f_y=q\,h'(u)$.`,
     opt(good, tx(good)), wr.map((w) => opt(w, tx(w))), sol);
 }
-const qEdp = () => (Math.random() < 0.55 ? qEdpPrim() : qEdpChain());
+// EDP type CE : f_x ± f_y = second membre, avec u = x + y, v = x - y
+const UT = '(x+y)', VT = '(x-y)';
+function sumTex(terms) {
+  // terms : [{c: Fr, b: texte}] -> somme lisible
+  const parts = terms.filter((t) => t.c.n !== 0);
+  if (!parts.length) return '0';
+  return parts.map((t, i) => {
+    const neg = t.c.n < 0; const a = Fr(Math.abs(t.c.n), t.c.d);
+    const coef = a.d === 1 ? ((a.n === 1 && t.b !== '') ? '' : String(a.n)) : '\\dfrac{' + a.n + '}{' + a.d + '}';
+    return (i === 0 ? (neg ? '-' : '') : (neg ? ' - ' : ' + ')) + coef + t.b;
+  }).join('');
+}
+function edpCase(op, rhs, k) {
+  // renvoie {terms en (u,v) sous forme [{c, pu, pv}], hVar, eqRed (texte g_v = ... )}
+  // op '-' : 2 g_v = R(u,v) ; op '+' : 2 g_u = R(u,v)
+  // R : 'c' -> k ; 'x' -> k(u+v)/2 ; 'y' -> k(u-v)/2
+  const half = Fr(k, 2), quarter = Fr(k, 4), eighth = Fr(k, 8);
+  if (op === '-') {
+    if (rhs === 'c') return { t: [{ c: half, pu: 0, pv: 1 }], h: 'u', red: R`g_v=${ftex(half)}` };
+    if (rhs === 'x') return { t: [{ c: quarter, pu: 1, pv: 1 }, { c: eighth, pu: 0, pv: 2 }], h: 'u', red: R`g_v=${cf(quarter)}(u+v)` };
+    return { t: [{ c: quarter, pu: 1, pv: 1 }, { c: fmul(eighth, Fr(-1)), pu: 0, pv: 2 }], h: 'u', red: R`g_v=${cf(quarter)}(u-v)` };
+  }
+  if (rhs === 'c') return { t: [{ c: half, pu: 1, pv: 0 }], h: 'v', red: R`g_u=${ftex(half)}` };
+  if (rhs === 'x') return { t: [{ c: eighth, pu: 2, pv: 0 }, { c: quarter, pu: 1, pv: 1 }], h: 'v', red: R`g_u=${cf(quarter)}(u+v)` };
+  return { t: [{ c: eighth, pu: 2, pv: 0 }, { c: fmul(quarter, Fr(-1)), pu: 1, pv: 1 }], h: 'v', red: R`g_u=${cf(quarter)}(u-v)` };
+}
+const cf = (a) => (a.n === 1 && a.d === 1 ? '' : ftex(a));
+const pw = (b, p) => p === 0 ? '' : (p === 1 ? b : b + '^{' + p + '}');
+function edpTex(terms, hVar, mode) {
+  // mode 'uv' -> en u,v ; 'xy' -> en x,y
+  const U = mode === 'uv' ? 'u' : UT, V = mode === 'uv' ? 'v' : VT;
+  const body = sumTex(terms.map((t) => ({ c: t.c, b: pw(U, t.pu) + pw(V, t.pv) })));
+  const hv = hVar === 'u' ? (mode === 'uv' ? 'u' : 'x+y') : (mode === 'uv' ? 'v' : 'x-y');
+  return body + ' + h(' + hv + ')';
+}
+function qEdpCE() {
+  const op = pick(['-', '-', '+']); const rhs = pick(['c', 'x', 'y']);
+  const k = rhs === 'c' ? pick([1, 2, 3, 4, 5, 6]) : pick([2, 4, 6, 8]);
+  const rhsTex = rhs === 'c' ? String(k) : (k === 1 ? '' : k) + rhs;
+  const C = edpCase(op, rhs, k);
+  const good = 'f(x,y)=' + edpTex(C.t, C.h, 'xy');
+  const other = C.h === 'u' ? 'v' : 'u';
+  const dbl = C.t.map((t) => ({ c: fmul(t.c, Fr(2)), pu: t.pu, pv: t.pv }));
+  const swapUV = C.t.map((t) => ({ c: t.c, pu: t.pv, pv: t.pu }));
+  const wrongs = [
+    'f(x,y)=' + edpTex(C.t, other, 'xy'),
+    'f(x,y)=' + edpTex(dbl, C.h, 'xy'),
+    'f(x,y)=' + edpTex(swapUV, other, 'xy'),
+    'f(x,y)=' + sumTex(C.t.map((t) => ({ c: t.c, b: pw(UT, t.pu) + pw(VT, t.pv) }))) + ' + C',
+  ];
+  if (rhs !== 'c') {
+    const alt = edpCase(op, rhs === 'x' ? 'y' : 'x', k);
+    wrongs.push('f(x,y)=' + edpTex(alt.t, alt.h, 'xy'));
+  }
+  const lhs = op === '-' ? R`\dfrac{\partial f}{\partial x}-\dfrac{\partial f}{\partial y}` : R`\dfrac{\partial f}{\partial x}+\dfrac{\partial f}{\partial y}`;
+  const statement = R`Déterminer les fonctions $f$ de classe $C^1$ telles que $${lhs}=${rhsTex}$, en posant $u=x+y$ et $v=x-y$.`;
+  const comb = op === '-' ? R`f_x-f_y=(g_u+g_v)-(g_u-g_v)=2g_v` : R`f_x+f_y=(g_u+g_v)+(g_u-g_v)=2g_u`;
+  const rhsUV = rhs === 'c' ? String(k) : rhs === 'x' ? R`${k}x=${cf(Fr(k, 2))}(u+v)` : R`${k}y=${cf(Fr(k, 2))}(u-v)`;
+  const sol = R`<p>On pose $f(x,y)=g(u,v)$. Avec $u_x=u_y=v_x=1$ et $v_y=-1$ : $f_x=g_u+g_v$, $f_y=g_u-g_v$.</p>` +
+    R`<p>$${comb}$. Second membre : ${rhs === 'c' ? 'il ne dépend ni de $x$ ni de $y$' : R`$u+v=2x$ et $u-v=2y$, donc $${rhsUV}$`}.</p>` +
+    R`<p>L'équation devient $${C.red}$. On primitive en $${other}$ (la « constante » est une fonction de $${C.h}$) : $g(u,v)=${edpTex(C.t, C.h, 'uv')}$.</p>` +
+    R`<p>Retour en $(x,y)$ : <b>$${good}$</b>, avec $h$ de classe $C^1$ quelconque.</p>`;
+  const q = build('edp', statement, R`Pose $f(x,y)=g(u,v)$, écris $f_x=g_u u_x+g_v v_x$ et $f_y=g_u u_y+g_v v_y$ (attention : $v_y=-1$), puis traduis le second membre avec $u+v=2x$, $u-v=2y$.`,
+    opt(good, tx(good)), wrongs.map((w) => opt(w, tx(w))), sol);
+  q.chk = { op, rhs, k, terms: C.t, h: C.h };
+  return q;
+}
+// plan tangent
+function qTangent() {
+  const a = pick([1, 2, -1]), b = pick([-2, -1, 1, 2]), c = pick([-1, 1, 2]);
+  const ts = [{ c: a, p: 2, q: 0 }, { c: b, p: 1, q: 1 }, { c: c, p: 0, q: 2 }];
+  const x0 = pick([-1, 1, 2]), y0 = pick([-1, 1, 2]);
+  const f0 = pev(ts, x0, y0), fx = pev(pdx(ts), x0, y0), fy = pev(pdy(ts), x0, y0);
+  const plane = (p, q, r) => 'z=' + sumTex([{ c: Fr(p), b: 'x' }, { c: Fr(q), b: 'y' }, { c: Fr(r), b: '' }])
+  const good = plane(fx, fy, f0 - fx * x0 - fy * y0);
+  const wr = [plane(fy, fx, f0 - fy * x0 - fx * y0), plane(fx, fy, f0), plane(fx, fy, f0 + fx * x0 + fy * y0), plane(fx, fy, -fx * x0 - fy * y0), plane(-fx, -fy, f0 + fx * x0 + fy * y0), plane(fx + 1, fy, f0 - (fx + 1) * x0 - fy * y0), plane(fx, fy - 1, f0 - fx * x0 - (fy - 1) * y0)];
+  const statement = R`Équation du plan tangent à la surface $z=${polyTex(ts)}$ au-dessus du point $(a,b)=(${x0},${y0})$ ?`;
+  const sol = R`<p>$z=f(a,b)+f_x(a,b)(x-a)+f_y(a,b)(y-b)$ avec $(a,b)=(${x0},${y0})$.</p><p>$f(${x0},${y0})=${f0}$, $f_x=${polyTex(pdx(ts))}$ donne $${fx}$, $f_y=${polyTex(pdy(ts))}$ donne $${fy}$.</p><p>$z=${f0}+${fx < 0 ? '(' + fx + ')' : fx}(x-${x0 < 0 ? '(' + x0 + ')' : x0})+${fy < 0 ? '(' + fy + ')' : fy}(y-${y0 < 0 ? '(' + y0 + ')' : y0})$, soit <b>$${good}$</b>.</p>`;
+  const q = build('der', statement, R`Trois nombres à calculer : $f(a,b)$, $f_x(a,b)$, $f_y(a,b)$, puis $z=f(a,b)+f_x(a,b)(x-a)+f_y(a,b)(y-b)$.`, opt(good, tx(good)), wr.map((w) => opt(w, tx(w))), sol);
+  q.chk = { ts, x0, y0, p: fx, q: fy, r: f0 - fx * x0 - fy * y0 };
+  return q;
+}
+// dérivée avec ln ou racine : u reste entier
+function qChainSym() {
+  if (Math.random() < 0.5) {
+    const k = pick([2, 3, 4, 5]); const u = R`x^2+${k}y^2`;
+    const wantX = Math.random() < 0.5;
+    const good = wantX ? R`\dfrac{2x}{${u}}` : R`\dfrac{${2 * k}y}{${u}}`;
+    const wr = wantX ? [R`\dfrac{2}{x}`, R`\dfrac{1}{${u}}`, R`\dfrac{2x+${2 * k}y}{${u}}`, R`2x\ln(${u})`] : [R`\dfrac{2}{y}`, R`\dfrac{1}{${u}}`, R`\dfrac{2x+${2 * k}y}{${u}}`, R`\dfrac{${2 * k}y}{${k}y^2}`];
+    const v = wantX ? 'x' : 'y';
+    return build('der', R`Soit $f(x,y)=\ln(${u})$. Que vaut $\dfrac{\partial f}{\partial ${v}}$ ?`, R`$(\ln u)'=\dfrac{u'}{u}$ : seul le numérateur change, $u$ reste <b>entier</b>.`,
+      opt(good, tx(good)), wr.map((w) => opt(w, tx(w))),
+      R`<p>$u=${u}$, $u_${v}=${wantX ? '2x' : 2 * k + 'y'}$ (l'autre terme est une constante : sa dérivée est nulle, mais il <b>reste</b> dans $u$).</p><p>$\dfrac{\partial f}{\partial ${v}}=\dfrac{u_${v}}{u}=${good}$.</p>`);
+  }
+  const k = pick([1, 2, 3]); const kk = k === 1 ? '' : k; const u = R`1+${kk}x^2y^2`;
+  const good = R`\dfrac{${kk}xy^2}{\sqrt{${u}}}`;
+  const wr = [R`\dfrac{1}{2\sqrt{${u}}}`, R`\dfrac{${2 * k}xy^2}{\sqrt{${u}}}`, R`\dfrac{${kk}xy^2}{\sqrt{${kk}x^2y^2}}`, R`\dfrac{${kk}xy^2}{${u}}`];
+  return build('der', R`Soit $f(x,y)=\sqrt{${u}}$. Que vaut $\dfrac{\partial f}{\partial x}$ ?`, R`$(\sqrt u)'=\dfrac{u'}{2\sqrt u}$, avec $u$ entier sous la racine.`,
+    opt(good, tx(good)), wr.map((w) => opt(w, tx(w))),
+    R`<p>$u=${u}$, $u_x=${2 * k}xy^2$, donc $f_x=\dfrac{${2 * k}xy^2}{2\sqrt{${u}}}=${good}$.</p>`);
+}
+const qEdp = () => { const r = Math.random(); return r < 0.5 ? qEdpCE() : r < 0.8 ? qEdpPrim() : qEdpChain(); };
 
 // ---------- intégrales doubles ----------
 const BT = (a, p) => a === 0 ? '0' : (p === 0 ? String(a) : (a === 1 ? '' : String(a)) + (p === 1 ? 'x' : 'x^{' + p + '}'));
@@ -727,13 +828,13 @@ function qJacobian() {
     R`<p>$\dfrac{\partial(u,v)}{\partial(x,y)}=y\cdot\dfrac1x-x\cdot\Big(-\dfrac{y}{x^2}\Big)=\dfrac{2y}{x}=2v$.</p><p>Donc $du\,dv=2v\,dx\,dy$, soit <b>$dx\,dy=\dfrac{1}{2v}\,du\,dv$</b>.</p>`);
 }
 const qInt = () => { const r = Math.random(); return r < 0.2 ? qFubini() : r < 0.4 ? qPolar() : r < 0.52 ? qTheta() : r < 0.7 ? qOrder() : r < 0.8 ? qOrderCalc() : qJacobian(); };
-const qDer = () => { const r = Math.random(); return r < 0.4 ? qPartial() : r < 0.65 ? qDefinition() : qDirectional(); };
+const qDer = () => { const r = Math.random(); return r < 0.25 ? qPartial() : r < 0.45 ? qDefinition() : r < 0.65 ? qTangent() : r < 0.82 ? qChainSym() : qDirectional(); };
 
 const TOPICS = [
   { id: 'lim', name: 'Limites', sub: 'chemins, majoration, polaires', gen: qLimit },
   { id: 'cont', name: 'Continuité', sub: 'comparer à la valeur imposée', gen: qCont },
-  { id: 'der', name: 'Dérivées partielles', sub: 'calcul, définition, directionnelle', gen: qDer },
-  { id: 'edp', name: 'EDP', sub: 'primitiver, changement de variables', gen: qEdp },
+  { id: 'der', name: 'Dérivées partielles', sub: 'calcul, définition, plan tangent', gen: qDer },
+  { id: 'edp', name: 'EDP', sub: 'u = x + y, v = x − y ; primitiver', gen: qEdp },
   { id: 'int', name: 'Intégrales doubles', sub: 'Fubini, polaires, inversion, jacobien', gen: qInt },
 ];
 const TOPIC_NAME = Object.fromEntries(TOPICS.map((t) => [t.id, t.name]));
