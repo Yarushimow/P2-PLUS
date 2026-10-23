@@ -86,6 +86,20 @@ title: "Ch. 3 — Dérivées partielles et différentiabilité"
 
     Moyen mnémotechnique : on passe par **chaque** variable intermédiaire et on additionne.
 
+    !!! piege "Dans quel sens l'écrire pour une EDP ?"
+        La formule ci-dessus sert quand on connaît $x$ et $y$ **en fonction de** $u$ et $v$.
+        Dans les EDP du CE, c'est l'inverse : on donne $u = x + y$ et $v = x - y$. On pose alors
+        $f(x, y) = g(u, v)$ et on dérive par rapport à $x$ et $y$, en passant par $u$ et $v$ :
+
+        $$
+        \frac{\partial f}{\partial x} = \frac{\partial g}{\partial u}\frac{\partial u}{\partial x} + \frac{\partial g}{\partial v}\frac{\partial v}{\partial x},
+        \qquad
+        \frac{\partial f}{\partial y} = \frac{\partial g}{\partial u}\frac{\partial u}{\partial y} + \frac{\partial g}{\partial v}\frac{\partial v}{\partial y}
+        $$
+
+        C'est la même règle : on dérive toujours par rapport aux variables qu'on a **au départ**,
+        et on passe par celles qu'on **connaît en fonction d'elles**.
+
     **$d$ ou $\partial$ ?** La température $T(x, y, z, t)$ mesurée par un ballon qui se
     déplace selon $x(t), y(t), z(t)$ ne dépend plus que de $t$ : on écrit $\dfrac{dT}{dt}$, qui
     vaut $T_x x' + T_y y' + T_z z' + T_t$.
