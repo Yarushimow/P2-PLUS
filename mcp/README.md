@@ -17,14 +17,13 @@ Lecture seule ; les TP protégés par mot de passe restent inaccessibles.
 
 ## Ajouter le serveur à son assistant
 
-Adresse : `https://p2-plus-mcp.<sous-domaine>.workers.dev/mcp`
-(remplacer par l'adresse affichée au déploiement).
+Adresse : **`https://p2-plus-mcp.firewall-code.workers.dev/mcp`**
 
 - **Claude (claude.ai ou application)** : Paramètres → Connecteurs →
   « Ajouter un connecteur personnalisé » → coller l'adresse.
 - **Claude Code** :
   ```bash
-  claude mcp add --transport http p2-plus https://p2-plus-mcp.<sous-domaine>.workers.dev/mcp
+  claude mcp add --transport http p2-plus https://p2-plus-mcp.firewall-code.workers.dev/mcp
   ```
 - **Autres clients** (Cursor, VS Code, ChatGPT en mode développeur…) : ajouter un
   serveur MCP de type « HTTP » / « Streamable HTTP » avec la même adresse.
@@ -41,7 +40,7 @@ Hébergement gratuit sur Cloudflare Workers.
 cd mcp
 npm install
 npx wrangler login     # ouvre le navigateur : se connecter à Cloudflare
-npm run deploy         # affiche l'adresse https://p2-plus-mcp.<…>.workers.dev
+npm run deploy         # https://p2-plus-mcp.firewall-code.workers.dev
 ```
 
 Il n'y a à redéployer que si on modifie `src/index.js`.
