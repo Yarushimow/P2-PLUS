@@ -19,3 +19,7 @@ venv/
 # Divers
 .DS_Store
 .cache/
+
+# Serveur MCP (dossier mcp/)
+node_modules/
+.wrangler/

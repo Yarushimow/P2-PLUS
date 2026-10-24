@@ -1,0 +1,15 @@
+{
+  "name": "p2-plus-mcp",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Serveur MCP du site Révisions EFREI — P2-PLUS (Cloudflare Worker)",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "test": "node test/essai.js"
+  },
+  "devDependencies": {
+    "wrangler": "^4"
+  }
+}

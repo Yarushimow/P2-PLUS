@@ -1,0 +1,9 @@
+# Serveur MCP du site (voir README.md). Déploiement : npm run deploy
+name = "p2-plus-mcp"
+main = "src/index.js"
+compatibility_date = "2026-10-01"
+
+[vars]
+# Site publié et source Markdown sur GitHub
+SITE_URL = "https://yarushimow.github.io/P2-PLUS/"
+SOURCE_URL = "https://raw.githubusercontent.com/Yarushimow/P2-PLUS/main/docs/"
