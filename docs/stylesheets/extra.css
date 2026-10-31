@@ -321,3 +321,87 @@ a.agenda-carte:focus-visible {
 .etats .lb { font-size: 13px; fill: currentColor; paint-order: stroke; stroke: var(--md-default-bg-color); stroke-width: 4px; }
 .simu-tableau { display: block; }
 .simu-enonce > table, .simu-enonce > .simu-tableau { margin-top: 0.4rem; }
+
+/* ==================================================================== */
+/* Schémas SVG des cours (outils/schemas_champs_em.py) : couleurs en     */
+/* currentColor, pilotées ici pour suivre le thème clair / sombre.       */
+/* ==================================================================== */
+.md-typeset figure.schema {
+  margin: 1.2em auto 1.6em;
+  max-width: 100%;
+  display: block;
+  text-align: center;
+}
+.md-typeset figure.schema svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+  font-family: var(--md-text-font-family, system-ui), sans-serif;
+  color: var(--md-default-fg-color);
+  background: var(--site-surface, transparent);
+  border: 1px solid var(--site-border, rgba(0, 0, 0, 0.08));
+  border-radius: 10px;
+}
+.md-typeset figure.schema figcaption {
+  max-width: 46rem;
+  margin: 0.6em auto 0;
+  font-size: 0.68rem;
+  line-height: 1.5;
+  color: var(--md-default-fg-color--light);
+  text-align: left;
+}
+.schema {
+  --sch-pos: #d9480f;
+  --sch-neg: #1c64c8;
+  --sch-acc: #4f46e5;
+  --sch-ok: #2b8a3e;
+  --sch-warn: #c2255c;
+  --sch-mut: #6b7280;
+}
+[data-md-color-scheme="slate"] .schema {
+  --sch-pos: #ff922b;
+  --sch-neg: #5ea8ff;
+  --sch-acc: #a5b4fc;
+  --sch-ok: #69db7c;
+  --sch-warn: #f783ac;
+  --sch-mut: #9aa3b5;
+}
+.schema .c-pos { color: var(--sch-pos); }
+.schema .c-neg { color: var(--sch-neg); }
+.schema .c-acc { color: var(--sch-acc); }
+.schema .c-ok { color: var(--sch-ok); }
+.schema .c-warn { color: var(--sch-warn); }
+.schema .c-mut { color: var(--sch-mut); }
+.schema .on-charge { fill: #fff; }
+.schema .fond { fill: var(--site-surface, #fff); }
+.schema text.halo {
+  fill: none;
+  stroke: var(--site-surface, #fff);
+  stroke-width: 5px;
+  stroke-linejoin: round;
+}
+
+/* Admonition « analogie » : !!! analogie "Titre" */
+:root {
+  --md-admonition-icon--analogie: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7M9 21a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1H9z"/></svg>');
+}
+.md-typeset .admonition.analogie,
+.md-typeset details.analogie {
+  border-color: rgb(245, 159, 0);
+}
+.md-typeset .analogie > .admonition-title,
+.md-typeset .analogie > summary {
+  background-color: rgba(245, 159, 0, 0.1);
+}
+.md-typeset .analogie > .admonition-title::before,
+.md-typeset .analogie > summary::before {
+  background-color: rgb(245, 159, 0);
+  -webkit-mask-image: var(--md-admonition-icon--analogie);
+          mask-image: var(--md-admonition-icon--analogie);
+}
+/* Sur téléphone : schéma à taille lisible, défilement horizontal si besoin */
+@media screen and (max-width: 600px) {
+  .md-typeset figure.schema { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .md-typeset figure.schema svg { min-width: 540px; }
+}
