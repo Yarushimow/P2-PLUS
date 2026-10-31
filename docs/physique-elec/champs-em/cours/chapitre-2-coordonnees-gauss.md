@@ -95,6 +95,9 @@ title: "Ch. 2 — Coordonnées et théorème de Gauss"
 
     ## 3. Le théorème de Gauss
 
+    !!! tip "Simulation animée"
+        Gonfle une surface de Gauss autour d'une boule, d'une sphère creuse ou d'un cylindre et regarde $E(r)$ se tracer. [:material-play-circle: Ouvrir la simulation](../simulations/simulations-champs.html#gauss){ target="_blank" }
+
     !!! theoreme "Théorème de Gauss"
         Le flux de $\vec E$ à travers une surface **fermée** $S_g$ (la « surface de Gauss »)
         est égal à la charge **intérieure** divisée par $\varepsilon_0$ :
@@ -175,6 +178,9 @@ title: "Ch. 2 — Coordonnées et théorème de Gauss"
         La capacité ne dépend que de la **géométrie** et du milieu, pas de la charge.
 
     ## 5. Capacité d'un condensateur
+
+    !!! tip "Simulation animée"
+        Champ uniforme $E = U/d$, équipotentielles planes, électron accéléré ou dévié. [:material-play-circle: Ouvrir la simulation](../simulations/simulations-champs.html#condo){ target="_blank" }
 
     !!! definition "Capacité"
         Deux conducteurs portant $+Q$ et $-Q$, aux potentiels $V_1$ et $V_2$ :

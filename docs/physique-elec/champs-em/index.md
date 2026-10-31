@@ -36,6 +36,14 @@ charges ou de courants pour choisir la bonne méthode**, intégration directe ou
 
     [:octicons-arrow-right-24: Fiches](fiches/index.md)
 
+-   :material-play-circle:{ .lg .middle } **Labo interactif**
+
+    ---
+
+    Six simulations animées : lignes de champ, relief du potentiel, condensateur, Gauss, boussoles et théorème d'Ampère.
+
+    [:octicons-arrow-right-24: Expérimenter](simulations/index.md)
+
 -   :material-magnet-on:{ .lg .middle } **Entraînement**
 
     ---
@@ -48,14 +56,14 @@ charges ou de courants pour choisir la bonne méthode**, intégration directe ou
 
 ## Plan du cours
 
-| Chapitre | Cours | TD | Fiche |
-|----------|:-----:|:--:|:-----:|
-| Outils mathématiques | | [TD 0](td/td-0-outils-maths.md) | |
-| 1. Force, champ, potentiel, énergie | [:material-book-open-variant:](cours/chapitre-1-electrostatique.md) | [TD 1](td/td-1-charges-champ-potentiel.md) | [:material-card-text:](fiches/fiche-electrostatique.md) |
-| 2. Coordonnées et théorème de Gauss | [:material-book-open-variant:](cours/chapitre-2-coordonnees-gauss.md) | [TD 2](td/td-2-theoreme-gauss.md) | [:material-card-text:](fiches/fiche-gauss.md) |
-| 3. Champ magnétique | [:material-book-open-variant:](cours/chapitre-3-champ-magnetique.md) | [TD 3](td/td-3-champ-magnetique.md) | [:material-card-text:](fiches/fiche-magnetostatique.md) |
-| 4. Force magnétique | *à venir* | | |
-| Annales | | [DE 2022](td/annale-de-2022.md) · [DE 2023](td/annale-de-2023.md) | [Formulaire](fiches/formulaire.md) |
+| Chapitre | Cours | TD | Fiche | Simulation |
+|----------|:-----:|:--:|:-----:|:----------:|
+| Outils mathématiques | | [TD 0](td/td-0-outils-maths.md) | | |
+| 1. Force, champ, potentiel, énergie | [:material-book-open-variant:](cours/chapitre-1-electrostatique.md) | [TD 1](td/td-1-charges-champ-potentiel.md) | [:material-card-text:](fiches/fiche-electrostatique.md) | [:material-play-circle:](simulations/simulations-champs.html#champ) |
+| 2. Coordonnées et théorème de Gauss | [:material-book-open-variant:](cours/chapitre-2-coordonnees-gauss.md) | [TD 2](td/td-2-theoreme-gauss.md) | [:material-card-text:](fiches/fiche-gauss.md) | [:material-play-circle:](simulations/simulations-champs.html#gauss) |
+| 3. Champ magnétique | [:material-book-open-variant:](cours/chapitre-3-champ-magnetique.md) | [TD 3](td/td-3-champ-magnetique.md) | [:material-card-text:](fiches/fiche-magnetostatique.md) | [:material-play-circle:](simulations/simulations-champs.html#ampere) |
+| 4. Force magnétique | *à venir* | | | |
+| Annales | | [DE 2022](td/annale-de-2022.md) · [DE 2023](td/annale-de-2023.md) | [Formulaire](fiches/formulaire.md) | |
 
 ## Infos pratiques
 
