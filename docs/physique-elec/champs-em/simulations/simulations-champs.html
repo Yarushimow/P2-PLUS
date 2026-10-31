@@ -116,6 +116,7 @@ footer{margin-top:14px;font-size:13px;color:var(--muted)}
   <div class="controls">
     <span class="grp"><span class="lbl">Situation</span>
       <select id="c-preset">
+        <option value="vide">Plan vide</option>
         <option value="seule">Charge seule</option>
         <option value="dipole" selected>Dipôle (−q, +q)</option>
         <option value="deuxplus">Deux charges +q</option>
@@ -134,7 +135,7 @@ footer{margin-top:14px;font-size:13px;color:var(--muted)}
     </span>
     <span class="grp"><button class="btn" id="c-launch">Lancer une charge test</button>
       <select id="c-testq" aria-label="Signe de la charge test"><option value="1">Q = +1</option><option value="-1">Q = −1</option></select>
-      <button class="btn small" id="c-clear">Effacer</button></span>
+      <button class="btn small" id="c-clear">Tout effacer</button></span>
     <span class="selbox" id="c-selbox" hidden><span class="lbl">Charge choisie :</span>
       <button class="btn small neg" data-q="-3">−3</button><button class="btn small neg" data-q="-2">−2</button><button class="btn small neg" data-q="-1">−1</button>
       <button class="btn small pos" data-q="1">+1</button><button class="btn small pos" data-q="2">+2</button><button class="btn small pos" data-q="3">+3</button>
@@ -144,7 +145,7 @@ footer{margin-top:14px;font-size:13px;color:var(--muted)}
   <div class="below">
     <div class="readout" id="c-read"></div>
     <div class="voir"><h3>Ce qu'il faut voir</h3><ul>
-      <li>Les lignes de champ <b>partent des +</b> et <b>arrivent sur les −</b> (les tirets avancent dans le sens de <span class="k">E</span>).</li>
+      <li>Les lignes de champ <b>partent des +</b> et <b>arrivent sur les −</b> (les points glissent dans le sens de <span class="k">E</span>).</li>
       <li>Les équipotentielles (pointillés) sont <b>perpendiculaires</b> aux lignes de champ.</li>
       <li>Sur la médiatrice du dipôle, <span class="k">V = 0</span> mais <span class="k">E ≠ 0</span> : un potentiel nul ne veut pas dire un champ nul.</li>
       <li>Une charge test <b>+</b> part dans le sens de <span class="k">E</span>, une <b>−</b> en sens inverse (<span class="k">F = QE</span>). Son énergie mécanique <span class="k">Ec + QV</span> reste constante.</li>
@@ -410,7 +411,7 @@ function traceLines(ch,X,Y){
       const pts=[c.x,c.y,x,y];
       for(let step=0;step<900;step++){
         let dmin=1e9; for(const o of ch){ const d=Math.hypot(x-o.x,y-o.y); if(o!==c||step>20) dmin=Math.min(dmin,d); }
-        const ds=clamp(0.02+0.05*dmin,0.02,0.2);
+        const ds=clamp(0.015+0.03*dmin,0.015,0.07);
         let e=fieldAt(ch,x,y); let m=Math.hypot(e[0],e[1])||1;
         const mx=x+src*e[0]/m*ds*0.5, my=y+src*e[1]/m*ds*0.5;
         e=fieldAt(ch,mx,my); m=Math.hypot(e[0],e[1])||1;
@@ -419,12 +420,14 @@ function traceLines(ch,X,Y){
         if(hit){ pts.push(hit.x,hit.y); break; }
         if(Math.abs(x)>X+1.5||Math.abs(y)>Y+1.5) break;
       }
-      lines.push({pts:pts,dir:src});
+      const len=new Float32Array(pts.length/2); for(let i=1;i<len.length;i++) len[i]=len[i-1]+Math.hypot(pts[2*i]-pts[2*i-2],pts[2*i+1]-pts[2*i-1]);
+      lines.push({pts:pts,dir:src,len:len});
     }
   });
   return lines;
 }
 const PRESETS={
+  vide:[],
   seule:[{x:0,y:0,q:1}],
   dipole:[{x:-1,y:0,q:-1},{x:1,y:0,q:1}],
   deuxplus:[{x:-1.5,y:0,q:1},{x:1.5,y:0,q:1}],
@@ -490,7 +493,7 @@ MODES.champ=(function(){
   document.querySelectorAll("#c-selbox [data-q]").forEach(b=>b.addEventListener("click",()=>{ if(S.sel>=0){ S.charges[S.sel].q=+b.dataset.q; S.dirty=true; } }));
   $("c-del").addEventListener("click",()=>{ if(S.sel>=0){ S.charges.splice(S.sel,1); S.sel=-1; S.dirty=true; updSel(); } });
   $("c-launch").addEventListener("click",()=>{ S.place=!S.place; $("c-launch").classList.toggle("on",S.place); $("c-launch").textContent=S.place?"Touche le plan pour lancer…":"Lancer une charge test"; $("c-hint").textContent=S.place?"Touche un point vide : une charge test y est lâchée sans vitesse":"Glisse une charge · touche un point vide pour le sonder"; });
-  $("c-clear").addEventListener("click",()=>{S.tests=[];});
+  $("c-clear").addEventListener("click",()=>{ S.charges=[]; S.tests=[]; S.sel=-1; S.dirty=true; updSel(); $("c-preset").value="vide"; $("c-read").innerHTML="<span class='t'>Plan vide : ajoute des charges avec « + charge + » et « + charge − ».</span>"; });
 
   function stepTests(dt){
     const v=View(st); const n=Math.ceil(dt/0.002), h=dt/n;
@@ -523,13 +526,20 @@ MODES.champ=(function(){
       ctx.setLineDash([]);
     }
     if(sh.lines){
+      ctx.lineJoin="round"; ctx.lineCap="round";
       S.lines.forEach(L=>{ const p=L.pts; ctx.beginPath(); for(let k=0;k<p.length;k+=2){ const q=v.P(p[k],p[k+1]); if(k===0) ctx.moveTo(q[0],q[1]); else ctx.lineTo(q[0],q[1]); }
-        ctx.strokeStyle=rgba(C.ink,0.28); ctx.lineWidth=1.2; ctx.setLineDash([]); ctx.stroke();
-        ctx.strokeStyle=rgba(C.accent,0.9); ctx.lineWidth=2; ctx.setLineDash([5,13]); ctx.lineDashOffset=RM?0:-(t*28)*L.dir; ctx.stroke();
+        ctx.strokeStyle=rgba(C.accent,0.6); ctx.lineWidth=1.6; ctx.stroke(); });
+      ctx.lineCap="butt";
+      // point de la ligne à l'abscisse curviligne d (depuis le début du tracé)
+      const at=(L,d)=>{ const n=L.len; let lo=0,hi=n.length-1; while(hi-lo>1){ const m=(lo+hi)>>1; if(n[m]<d) lo=m; else hi=m; } const f=(d-n[lo])/((n[hi]-n[lo])||1); const p=L.pts; return [p[2*lo]+(p[2*hi]-p[2*lo])*f, p[2*lo+1]+(p[2*hi+1]-p[2*lo+1])*f]; };
+      const ARR=2.2, DOT=0.7, ph=RM?0.35:(t*0.55)%DOT;
+      S.lines.forEach(L=>{ const tot=L.len[L.len.length-1]; if(tot<0.4) return;
+        // flèches fixes, dans le sens de E
+        for(let d=Math.min(1,tot/2);d<tot-0.2;d+=ARR){ const s1=L.dir>0?d:tot-d, s2=L.dir>0?d+0.12:tot-d-0.12; const a=v.P(...at(L,s1)),b=v.P(...at(L,s2)); const dx=b[0]-a[0],dy=b[1]-a[1],m=Math.hypot(dx,dy)||1; arrow(ctx,a[0]-dx/m*5,a[1]-dy/m*5,a[0]+dx/m*5,a[1]+dy/m*5,C.accent,1.6,8); }
+        // points qui glissent le long de la ligne
+        ctx.fillStyle=rgba(C.accent,0.9);
+        for(let d=ph;d<tot;d+=DOT){ const q=v.P(...at(L,L.dir>0?d:tot-d)); ctx.beginPath(); ctx.arc(q[0],q[1],1.9,0,TAU); ctx.fill(); }
       });
-      ctx.setLineDash([]); ctx.lineDashOffset=0;
-      // flèches au milieu des lignes
-      S.lines.forEach(L=>{ const p=L.pts,n=p.length/2; if(n<8) return; let k=Math.floor(n*0.35)*2; const a=v.P(p[k],p[k+1]),b=v.P(p[k+2],p[k+3]); let dx=(b[0]-a[0])*L.dir,dy=(b[1]-a[1])*L.dir; const m=Math.hypot(dx,dy)||1; arrow(ctx,a[0]-dx/m*6,a[1]-dy/m*6,a[0]+dx/m*4,a[1]+dy/m*4,rgba(C.ink,0.55),1.2,7); });
     }
     if(sh.vec){ const step=0.5;
       for(let x=Math.ceil(-v.X/step)*step;x<=v.X;x+=step) for(let y=-3.75;y<=3.75;y+=step){
@@ -606,8 +616,8 @@ MODES.relief=(function(){
     for(let i=0;i<=N;i++) for(let j=0;j<M;j++){ const x=-XR+2*XR*i/N,y1=-YR+2*YR*j/M,y2=-YR+2*YR*(j+1)/M; seg(x,y1,zs[j*(N+1)+i],x,y2,zs[(j+1)*(N+1)+i]); }
     // lignes de champ au sol (plan z = −2.4)
     if($("r-lines").checked){ const lk=JSON.stringify(ch); if(lk!==S.lkey){ S.lines=traceLines(ch,XR,YR); S.lkey=lk; }
-      ctx.strokeStyle=rgba(C.accent,0.35); ctx.lineWidth=1.2; ctx.setLineDash([4,8]); ctx.lineDashOffset=RM?0:-t*20;
-      S.lines.forEach(L=>{ ctx.lineDashOffset=RM?0:-t*20*L.dir; ctx.beginPath(); const p=L.pts; let started=false; for(let k=0;k<p.length;k+=2){ if(Math.abs(p[k])>XR||Math.abs(p[k+1])>YR){started=false; continue;} const q=proj(p[k],p[k+1],-2.4); if(!started){ctx.moveTo(q[0],q[1]); started=true;} else ctx.lineTo(q[0],q[1]); } ctx.stroke(); });
+      ctx.strokeStyle=rgba(C.accent,0.35); ctx.lineWidth=1.2;
+      S.lines.forEach(L=>{ ctx.beginPath(); const p=L.pts; let started=false; for(let k=0;k<p.length;k+=2){ if(Math.abs(p[k])>XR||Math.abs(p[k+1])>YR){started=false; continue;} const q=proj(p[k],p[k+1],-2.4); if(!started){ctx.moveTo(q[0],q[1]); started=true;} else ctx.lineTo(q[0],q[1]); } ctx.stroke(); });
       ctx.setLineDash([]);
       // cadre du sol
       ctx.strokeStyle=rgba(C.muted,0.35); ctx.beginPath(); [[-XR,-YR],[XR,-YR],[XR,YR],[-XR,YR],[-XR,-YR]].forEach((c,i)=>{const q=proj(c[0],c[1],-2.4); if(i) ctx.lineTo(q[0],q[1]); else ctx.moveTo(q[0],q[1]);}); ctx.stroke();
