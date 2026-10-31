@@ -29,6 +29,9 @@ title: "Ch. 3 — Champ magnétique"
 
     ## 2. Lignes de champ
 
+    !!! tip "Simulation animée"
+        Boussoles qui s'alignent sur $\vec B$ (expérience d'Oersted), lignes de champ circulaires, bobine en coupe. [:material-play-circle: Ouvrir la simulation](../simulations/simulations-champs.html#ampere){ target="_blank" }
+
     !!! definition "Ligne de champ magnétique"
         Courbe tangente à $\vec B$ en chaque point, orientée dans le sens de $\vec B$.
 
@@ -97,6 +100,9 @@ title: "Ch. 3 — Champ magnétique"
         Au centre : $B = \dfrac{\mu_0 I}{2R}$. Pour une **demi-spire** : $\dfrac{\mu_0 I}{4R}$.
 
     ## 4. Propriétés du champ magnétique
+
+    !!! tip "Simulation animée"
+        Déplace un contour d'Ampère autour de plusieurs fils : seuls les courants enlacés comptent dans $\oint \vec B\cdot\mathrm d\vec l$. [:material-play-circle: Ouvrir la simulation](../simulations/simulations-champs.html#ampere){ target="_blank" }
 
     ### Flux conservatif
 

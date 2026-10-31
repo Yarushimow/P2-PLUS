@@ -77,6 +77,9 @@ title: "Ch. 1 — Force, champ, potentiel, énergie"
 
     ## 2. Champ électrique
 
+    !!! tip "Simulation animée"
+        Déplace des charges et regarde les lignes de champ, les équipotentielles et la superposition se mettre à jour en direct. [:material-play-circle: Ouvrir la simulation](../simulations/simulations-champs.html#champ){ target="_blank" }
+
     !!! definition "Champ d'une charge ponctuelle"
         Une charge $q$ placée en $O$ crée en tout point $M$ (sans charge) le champ
 
@@ -142,6 +145,9 @@ title: "Ch. 1 — Force, champ, potentiel, énergie"
         $E_c = \vec F\cdot\overrightarrow{OP} = \dfrac{eU}{2}$. Sous 2 V : **1 eV** $= 1{,}6 \times 10^{-19}$ J.
 
     ## 3. Potentiel électrique
+
+    !!! tip "Simulation animée"
+        Le potentiel vu comme une altitude : relief 3D et lien pente / champ sur un axe ($\vec E = -\overrightarrow{\mathrm{grad}}\,V$). [:material-play-circle: Ouvrir la simulation](../simulations/simulations-champs.html#gradient){ target="_blank" }
 
     ### Travail et circulation
 
@@ -215,6 +221,9 @@ title: "Ch. 1 — Force, champ, potentiel, énergie"
         $\vec E = -\dfrac{2k_e aq}{y^3}\vec e_x$. Le champ du dipôle décroît en $1/r^3$.
 
     ## 4. Énergie potentielle électrique
+
+    !!! tip "Simulation animée"
+        Dans l'onglet 1, lance une charge test : les barres $E_c$, $E_p = QV$ et $E_m$ montrent la conservation de l'énergie. [:material-play-circle: Ouvrir la simulation](../simulations/simulations-champs.html#champ){ target="_blank" }
 
     Amener $Q$ de l'infini jusqu'en $M$ contre la force électrique demande un travail, stocké sous
     forme d'énergie potentielle (comme un ressort qu'on comprime) :
