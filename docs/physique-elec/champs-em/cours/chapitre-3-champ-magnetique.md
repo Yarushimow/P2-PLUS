@@ -25,6 +25,8 @@ title: "Ch. 3 — Champ magnétique"
         courant, la déviation s'inverse. Conclusion : **un courant crée un champ magnétique**.
         Biot et Savart mesurent ensuite que ce champ décroît comme $1/r$ autour d'un fil.
 
+    --8<-- "docs/physique-elec/champs-em/cours/_schemas/oersted.svg"
+
     Unités : le **tesla** (T). On rencontre aussi le gauss : $1\ \text{G} = 10^{-4}$ T.
 
     ## 2. Lignes de champ
@@ -42,6 +44,15 @@ title: "Ch. 3 — Champ magnétique"
     - **Champ uniforme** (même direction, sens, norme) → lignes parallèles : à l'intérieur d'un
       solénoïde, entre les branches d'un aimant en U, au centre des bobines de Helmholtz (deux
       bobines identiques séparées d'une distance égale à leur rayon).
+
+    --8<-- "docs/physique-elec/champs-em/cours/_schemas/aimant-solenoide.svg"
+
+    !!! analogie "E jaillit, B tourne"
+        Le champ électrique ressemble à l'eau d'une **source** : ses lignes partent des charges $+$ et
+        finissent dans les charges $-$. Le champ magnétique ressemble plutôt à un **tourbillon** autour
+        d'une bonde : ses lignes tournent en boucle autour des courants, sans début ni fin. C'est pour
+        ça qu'il n'existe pas de « charge magnétique » isolée : couper un aimant en deux donne deux
+        aimants, chacun avec un nord et un sud.
 
     ## 3. Calcul du champ
 
@@ -70,6 +81,13 @@ title: "Ch. 3 — Champ magnétique"
         Direction et sens : **règle de la main droite** (pouce = sens de $I$, index vers $M$,
         majeur = sens de $\mathrm d\vec B$), ou règle du tire-bouchon.
 
+    --8<-- "docs/physique-elec/champs-em/cours/_schemas/biot-savart.svg"
+
+    !!! analogie "Le tire-bouchon"
+        Visse un tire-bouchon (ou une vis) en le faisant avancer dans le sens du courant : le sens dans
+        lequel tu le tournes est le sens de $\vec B$. Avec la main droite : pouce dans le sens de $I$, les
+        doigts qui se referment donnent le sens de rotation des lignes de champ.
+
     Conséquence immédiate : si $M$ est **sur le prolongement** d'une portion rectiligne, alors
     $\mathrm d\vec l \parallel \overrightarrow{PM}$ et cette portion ne crée **aucun** champ en $M$.
 
@@ -83,6 +101,8 @@ title: "Ch. 3 — Champ magnétique"
         $$
 
         Le champ est **orthoradial** : les lignes de champ sont des cercles autour du fil.
+
+    --8<-- "docs/physique-elec/champs-em/cours/_schemas/fil-lignes.svg"
 
     !!! example "Spire circulaire, sur son axe"
         Spire de rayon $R$, courant $I$, point $M$ sur l'axe à la cote $z$ ; $\alpha$ est l'angle
@@ -119,6 +139,11 @@ title: "Ch. 3 — Champ magnétique"
     l'autre : $\Phi_{S_2} = -\Phi_{S_1}$ (en orientant vers l'extérieur). Unité du flux : le
     **weber**, $1\ \text{Wb} = 1\ \text{T}\cdot\text{m}^2$.
 
+    !!! analogie "Le tuyau d'arrosage"
+        Un tube de flux, c'est un tuyau : l'eau qui entre d'un côté ressort forcément de l'autre, rien
+        ne se crée ni ne disparaît en chemin. Comme les lignes de $\vec B$ sont fermées, le flux qui entre
+        dans une surface fermée en ressort toujours : $\Phi = 0$.
+
     ### Circulation et théorème d'Ampère
 
     Pour un fil infini, avec $\mathrm d\vec l = \mathrm dr\,\vec e_r + r\,\mathrm d\theta\,\vec e_\theta + \mathrm dz\,\vec e_z$ :
@@ -135,6 +160,14 @@ title: "Ch. 3 — Champ magnétique"
 
         Un courant compte $+$ s'il traverse dans le sens donné par l'orientation du contour
         (règle de la main droite), $-$ sinon. Valable en **régime permanent** (courants continus).
+
+    !!! analogie "La ceinture autour des câbles"
+        Passe une ceinture autour d'un paquet de câbles électriques. Pour Ampère, seuls comptent les
+        câbles qui **traversent** la ceinture, avec un signe selon leur sens. Les câbles à côté créent
+        bien du champ sur la ceinture, mais leur contribution totale au tour complet est nulle. Un câble
+        aller-retour (le coaxial) traverse dans les deux sens : il compte pour $I - I = 0$.
+
+    --8<-- "docs/physique-elec/champs-em/cours/_schemas/ampere.svg"
 
     !!! methode "Appliquer le théorème d'Ampère"
         1. **Symétries et invariances** → direction de $\vec B$ (souvent $\vec e_\theta$) et variable

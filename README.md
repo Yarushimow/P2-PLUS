@@ -22,7 +22,12 @@ docs/<catégorie>/<matière>/
 
 La navigation est générée depuis l'arborescence ; les fichiers `.pages` fixent
 les titres et l'ordre. Les formules LaTeX s'écrivent `$...$` et `$$...$$`.
-Admonitions disponibles : `!!! definition`, `!!! theoreme`, `!!! methode`, `!!! piege`.
+Admonitions disponibles : `!!! definition`, `!!! theoreme`, `!!! methode`, `!!! piege`,
+`!!! analogie`.
+
+Schémas SVG des cours de Champs EM : générés par `python outils/schemas_champs_em.py`
+(numpy + matplotlib) dans `docs/physique-elec/champs-em/cours/_schemas/`, puis inclus avec
+`--8<-- "docs/physique-elec/champs-em/cours/_schemas/<nom>.svg"`. Leurs couleurs suivent le thème.
 
 ## Ajouter une matière
 

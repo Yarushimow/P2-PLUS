@@ -11,6 +11,7 @@ edit_uri: edit/main/docs/
 # Fichiers présents dans docs/ mais jamais publiés
 exclude_docs: |
   _*.md
+  _schemas/
   pdf/
   *.pdf
   !informatique/linux/fiches/fiche-prof-ti307.pdf

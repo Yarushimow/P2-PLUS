@@ -22,6 +22,19 @@ title: "Ch. 2 — Coordonnées et théorème de Gauss"
     | Cylindrique (un axe) | cylindriques $(r, \theta, z)$ | fil infini, câble coaxial, cylindre |
     | Sphérique (un centre) | sphériques $(r, \theta, \varphi)$ | charge ponctuelle, boule, coque sphérique |
 
+    !!! analogie "Donner une adresse"
+        Un système de coordonnées, c'est une façon de donner l'adresse d'un point :
+
+        - **cartésiennes** : un plan de ville en damier (« 3 rues vers l'est, 2 vers le nord, 5ᵉ étage ») ;
+        - **cylindriques** : un escalier en colimaçon autour d'un poteau (distance au poteau $r$, angle
+          $\theta$ autour, hauteur $z$) ;
+        - **sphériques** : le GPS sur la Terre (distance au centre $r$, et deux angles : $\theta$ comme
+          la latitude mais compté depuis le pôle nord, $\varphi$ comme la longitude).
+
+        On choisit celui qui colle à la forme de l'objet : les calculs deviennent beaucoup plus simples.
+
+    --8<-- "docs/physique-elec/champs-em/cours/_schemas/coordonnees.svg"
+
     === "Cartésiennes"
 
         Trois **translations** selon $Ox$, $Oy$, $Oz$.
@@ -87,6 +100,14 @@ title: "Ch. 2 — Coordonnées et théorème de Gauss"
 
         Pour une surface **fermée**, $\vec n$ est orienté **vers l'extérieur**.
 
+    --8<-- "docs/physique-elec/champs-em/cours/_schemas/flux.svg"
+
+    !!! analogie "La pluie à travers une fenêtre"
+        Le flux, c'est la quantité de pluie qui passe par une fenêtre ouverte. Fenêtre bien en face de la
+        pluie : il en passe un maximum ($\Phi = E\,S$). Pluie qui tombe parallèlement à la vitre : il n'en
+        passe pas une goutte ($\Phi = 0$). Entre les deux, on garde la composante de $\vec E$ selon
+        $\vec n$ : c'est le rôle du produit scalaire $\vec E\cdot\mathrm d\vec S$.
+
     Deux cas qui simplifient tout :
 
     - $\vec E \parallel \mathrm d\vec S$ et $\|\vec E\|$ constant sur la surface : $\Phi = E \times S$ ;
@@ -111,6 +132,18 @@ title: "Ch. 2 — Coordonnées et théorème de Gauss"
     Les charges **extérieures** à la surface créent du champ sur la surface, mais leur flux total
     est nul : elles n'apparaissent pas dans $Q_{int}$.
 
+    --8<-- "docs/physique-elec/champs-em/cours/_schemas/gauss-principe.svg"
+
+    !!! analogie "Des robinets dans une bulle"
+        Imagine que les charges $+$ sont des **robinets** qui crachent de l'eau, et les charges $-$ des
+        **siphons** qui l'aspirent. Entoure une région d'une bulle fermée et mesure le débit d'eau qui en
+        sort :
+
+        - il ne dépend **que des robinets et siphons à l'intérieur** ($Q_{int}$) ;
+        - un robinet placé dehors fait entrer de l'eau d'un côté… qui ressort de l'autre : débit net nul.
+
+        Le flux de $\vec E$ est ce débit, et le théorème de Gauss dit : débit sortant $= Q_{int}/\varepsilon_0$.
+
     ### Symétries et invariances
 
     Avant d'appliquer Gauss il faut connaître **la direction** de $\vec E$ et **les variables** dont
@@ -128,6 +161,8 @@ title: "Ch. 2 — Coordonnées et théorème de Gauss"
     | Sphère, boule (centre $O$) | $\vec e_r$ | $r$ | sphère de rayon $r$ |
     | Fil / cylindre infini (axe $Oz$) | $\vec e_r$ (cylindrique) | $r$ | cylindre de rayon $r$, hauteur $H$ |
     | Plan infini ($xOy$) | $\vec e_z$ | $z$ | cylindre (ou pavé) de section $S$ traversant le plan |
+
+    --8<-- "docs/physique-elec/champs-em/cours/_schemas/surfaces-gauss.svg"
 
     !!! methode "Appliquer le théorème de Gauss"
         1. **Symétries** → direction de $\vec E$ ; **invariances** → variable dont il dépend.
@@ -147,6 +182,8 @@ title: "Ch. 2 — Coordonnées et théorème de Gauss"
         - $r < R$ : $Q_{int} = \rho\dfrac43\pi r^3$, donc $\vec E = \dfrac{\rho\,r}{3\varepsilon_0}\vec e_r$ (croît linéairement) ;
         - $r > R$ : $Q_{int} = Q$, donc $\vec E = \dfrac{Q}{4\pi\varepsilon_0 r^2}\vec e_r$ : comme une charge
           ponctuelle placée au centre.
+
+    --8<-- "docs/physique-elec/champs-em/cours/_schemas/courbe-boule.svg"
 
     !!! example "Fil infini (densité $\lambda$)"
         Cylindre de rayon $r$ et hauteur $H$ : flux nul sur les deux bases,
@@ -176,6 +213,8 @@ title: "Ch. 2 — Coordonnées et théorème de Gauss"
         $$
 
         La capacité ne dépend que de la **géométrie** et du milieu, pas de la charge.
+
+    --8<-- "docs/physique-elec/champs-em/cours/_schemas/condensateur-superposition.svg"
 
     ## 5. Capacité d'un condensateur
 

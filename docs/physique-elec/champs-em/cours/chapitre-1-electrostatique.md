@@ -12,6 +12,8 @@ title: "Ch. 1 — Force, champ, potentiel, énergie"
         et possède une **énergie potentielle** $E_p = QV$. Tout le chapitre tient dans ces quatre
         grandeurs et dans les liens entre elles.
 
+    --8<-- "docs/physique-elec/champs-em/cours/_schemas/carte-chapitre-1.svg"
+
     ## Cadre : l'électrostatique
 
     L'électrostatique étudie les interactions entre **charges immobiles**. On se place en régime
@@ -47,6 +49,16 @@ title: "Ch. 1 — Force, champ, potentiel, énergie"
 
     $\varepsilon_0 \simeq 8{,}85 \times 10^{-12}$ F/m est la **permittivité du vide**.
 
+    --8<-- "docs/physique-elec/champs-em/cours/_schemas/coulomb.svg"
+
+    !!! analogie "Coulomb, cousin de la gravitation"
+        La loi de Coulomb a exactement la même forme que la gravitation de Newton,
+        $F = G\dfrac{m_1 m_2}{r^2}$ : le produit des deux « sources », divisé par $r^2$. Deux différences :
+
+        - une masse est toujours positive, donc la gravitation **attire toujours** ; une charge a un
+          **signe**, donc deux charges peuvent aussi se **repousser** ;
+        - à l'échelle de l'atome, la force électrique est environ $10^{39}$ fois plus forte.
+
     !!! example "Atome d'hydrogène : Coulomb contre gravitation"
         Proton et électron à $r = 53$ pm :
         $F_e = k_e \dfrac{e^2}{r^2} \simeq 8{,}2 \times 10^{-8}$ N, alors que
@@ -62,6 +74,14 @@ title: "Ch. 1 — Force, champ, potentiel, énergie"
     \vec F(M) = \sum_{k=1}^{N} k_e\,\frac{q_k\,q}{r_k^2}\,\vec u_k
     \qquad r_k = P_kM,\quad \vec u_k = \frac{\overrightarrow{P_kM}}{r_k}
     $$
+
+    !!! analogie "Le tir à la corde à plusieurs"
+        Plusieurs personnes tirent sur un même anneau avec des cordes. Chacune tire **comme si elle était
+        seule**, et l'anneau part dans la direction de la **somme vectorielle** des tractions. Deux
+        personnes qui tirent aussi fort en sens opposés s'annulent : c'est exactement ce qui arrive aux
+        composantes qui se compensent par symétrie.
+
+    --8<-- "docs/physique-elec/champs-em/cours/_schemas/superposition.svg"
 
     !!! example "Triangle de charges (diapo 13)"
         $q_1 = q_2 = -e$ en $A$ et $B$ ($AB = d$), $q = 2e$ en $C$, triangle équilatéral, $O$
@@ -91,6 +111,8 @@ title: "Ch. 1 — Force, champ, potentiel, énergie"
         - **centrifuge** (de $O$ vers $M$) si $q > 0$, **centripète** (vers $O$) si $q < 0$ ;
         - norme $E = k_e\dfrac{|q|}{r^2}$, en **N/C** ou **V/m**.
 
+    --8<-- "docs/physique-elec/champs-em/cours/_schemas/champ-ponctuel.svg"
+
     Le champ vérifie aussi le **principe de superposition** :
     $\vec E(M) = \sum_k k_e \dfrac{q_k}{r_k^2}\,\vec u_k$.
 
@@ -107,6 +129,14 @@ title: "Ch. 1 — Force, champ, potentiel, énergie"
 
     Le champ est donc « la force par unité de charge » : il ne dépend que des charges **sources**,
     pas de la charge qu'on place pour le tester.
+
+    !!! analogie "Le champ, une « météo des forces »"
+        Une carte des vents indique en chaque point la direction et la force du vent, même s'il n'y a
+        aucune feuille pour être emportée. Le champ $\vec E$, c'est pareil : il décrit en chaque point
+        la force **que subirait** une charge de 1 C, que cette charge soit là ou non.
+
+        Même idée avec la pesanteur : $\vec g$ est le champ de gravitation, et le poids d'une masse $m$
+        vaut $\vec P = m\vec g$. Ici, $\vec F = Q\vec E$ : la charge joue le rôle de la masse.
 
     !!! example "Le dipôle électrostatique (diapos 17 et 19)"
         $-q$ en $A$, $+q$ en $B$, $AB = 2a$, $O$ milieu, axe $(Ox)$ de $A$ vers $B$.
@@ -128,6 +158,8 @@ title: "Ch. 1 — Force, champ, potentiel, énergie"
     - dipôle : lignes qui partent de $+q$ et se referment sur $-q$ ;
     - elles **ne se croisent jamais** et sont **resserrées** là où le champ est intense.
 
+    --8<-- "docs/physique-elec/champs-em/cours/_schemas/dipole-lignes.svg"
+
     ### Le condensateur plan
 
     Deux armatures planes de surface $S$, distantes de $d$ (petit devant leurs dimensions),
@@ -137,6 +169,8 @@ title: "Ch. 1 — Force, champ, potentiel, énergie"
     $$
     E = \frac{U}{d}
     $$
+
+    --8<-- "docs/physique-elec/champs-em/cours/_schemas/condensateur.svg"
 
     !!! example "Électron dans un condensateur (diapos 23-24)"
         Armatures en $x = \pm a$ ($-Q$ à gauche, $+Q$ à droite) : $\vec E = -\dfrac{U}{2a}\vec e_x$.
@@ -148,6 +182,20 @@ title: "Ch. 1 — Force, champ, potentiel, énergie"
 
     !!! tip "Simulation animée"
         Le potentiel vu comme une altitude : relief 3D et lien pente / champ sur un axe ($\vec E = -\overrightarrow{\mathrm{grad}}\,V$). [:material-play-circle: Ouvrir la simulation](../simulations/simulations-champs.html#gradient){ target="_blank" }
+
+    !!! analogie "Le potentiel, c'est une altitude"
+        C'est l'image la plus utile de tout le chapitre :
+
+        | Électrostatique | Randonnée en montagne |
+        |-----------------|-----------------------|
+        | potentiel $V$ | altitude |
+        | tension $U_{AB} = V(A) - V(B)$ | dénivelé entre $A$ et $B$ |
+        | équipotentielle | courbe de niveau sur la carte |
+        | champ $\vec E$ | pente, orientée vers la **descente** |
+        | charge $+$ lâchée sans vitesse | bille qui dévale la pente |
+        | référence $V = 0$ (la « masse ») | niveau de la mer, choisi arbitrairement |
+
+        Une charge positive est un **sommet**, une charge négative un **puits**.
 
     ### Travail et circulation
 
@@ -163,12 +211,19 @@ title: "Ch. 1 — Force, champ, potentiel, énergie"
     $\mathcal C_{AB} = \dfrac{k_e q}{r_A} - \dfrac{k_e q}{r_B}$ : la circulation ne dépend **que des
     extrémités**, pas du chemin suivi. C'est ce qui permet de définir le potentiel.
 
+    !!! analogie "Le dénivelé ne dépend pas du sentier"
+        Pour monter du parking au sommet, on peut prendre le sentier raide ou les lacets : le dénivelé
+        est le même. La circulation de $\vec E$ entre $A$ et $B$ ne dépend pas non plus du chemin, seulement
+        du départ et de l'arrivée. C'est pour ça qu'on peut parler d'une « altitude électrique » $V$.
+
     !!! definition "Potentiel d'une charge ponctuelle"
         $$
         V(M) = k_e\,\frac{q}{r} \qquad (r = OM), \quad \text{en volts}
         $$
 
         Pour $N$ charges : $V(M) = \sum_k k_e\dfrac{q_k}{r_k}$ (somme de **scalaires**, pas de vecteurs).
+
+    --8<-- "docs/physique-elec/champs-em/cours/_schemas/potentiel-profil.svg"
 
     !!! theoreme "Les cinq remarques à retenir (diapo 28)"
         1. $\mathcal C_{AB}(\vec E) = V(A) - V(B) = -\Delta V = U_{AB}$ (la **tension**).
@@ -203,6 +258,8 @@ title: "Ch. 1 — Force, champ, potentiel, énergie"
     Conséquences : $\vec E$ est **perpendiculaire aux équipotentielles** et pointe vers les
     **potentiels décroissants**.
 
+    --8<-- "docs/physique-elec/champs-em/cours/_schemas/potentiel-altitude.svg"
+
     !!! example "Potentiel dans le condensateur plan (diapo 32)"
         On ne peut pas utiliser $V = k_e q/r$ : la distribution n'est pas ponctuelle. Avec
         $E_x = U/d = -\mathrm dV/\mathrm dx$ : $V(x) = -\dfrac{U}{d}x + V_0$. En prenant $V = 0$ sur
@@ -236,6 +293,14 @@ title: "Ch. 1 — Force, champ, potentiel, énergie"
         E_p = Q\,V \qquad \text{(en joules)}
         $$
 
+    !!! analogie "La bille et le bol"
+        $E_p = QV$, c'est l'énergie d'une bille posée à une certaine hauteur. Lâchée, elle descend et
+        transforme son énergie potentielle en énergie cinétique ; l'énergie mécanique reste constante.
+
+        L'électron de l'atome d'hydrogène est une bille au **fond d'un bol** (le puits de potentiel du
+        proton) : son énergie mécanique est négative. Pour la sortir du bol, il faut lui donner au moins
+        l'énergie qui lui manque pour remonter jusqu'au bord ($E = 0$) : c'est l'énergie d'ionisation.
+
     !!! example "Énergie de l'électron de l'atome d'hydrogène (diapos 37-38)"
         1. $V_+ = k_e\dfrac{e}{r}$ donc $E_p = -eV_+ = -k_e\dfrac{e^2}{r}$.
         2. PFD (mouvement circulaire) : $k_e\dfrac{e^2}{r^2} = m_e\dfrac{v^2}{r}$, d'où
@@ -243,6 +308,8 @@ title: "Ch. 1 — Force, champ, potentiel, énergie"
            justifiée) et $E_c = \dfrac{k_e e^2}{2r}$.
         3. $E_m = E_p + E_c = -\dfrac{k_e e^2}{2r} < 0$ : l'électron est **lié**. Pour l'arracher il faut
            fournir au moins $|E_m|$ (énergie d'ionisation).
+
+    --8<-- "docs/physique-elec/champs-em/cours/_schemas/puits-hydrogene.svg"
 
     ## 5. Distributions continues de charges
 
@@ -277,6 +344,8 @@ title: "Ch. 1 — Force, champ, potentiel, énergie"
         $$
 
         Vérification : $E_z = -\mathrm dV/\mathrm dz$ ✓, et loin de l'anneau on retrouve $k_eQ/z^2$.
+
+    --8<-- "docs/physique-elec/champs-em/cours/_schemas/anneau.svg"
 
     ## Pièges classiques
 
