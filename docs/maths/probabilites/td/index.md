@@ -1,6 +1,6 @@
 # Travaux dirigés
 
-Les TD 1 à 3 ont deux onglets : **Version simplifiée** (indices et corrections) et
+Les TD 1 à 4 ont deux onglets : **Version simplifiée** (indices et corrections) et
 **Version papier** (les vraies pages d'énoncés du poly, à agrandir d'un clic).
 
 Les exercices sont ceux des sections « Exercices » du poly 2026-2027. Chaque correction
