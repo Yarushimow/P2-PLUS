@@ -25,7 +25,7 @@ chronogramme.
 
     ---
 
-    Méthodes et corrections des exercices types, annale du DE 2023.
+    Méthodes et corrections des exercices types.
 
     [:octicons-arrow-right-24: Travaux dirigés](td/index.md)
 
@@ -36,6 +36,14 @@ chronogramme.
     Sujets Multisim : fichiers circuits à télécharger et PDF des TP.
 
     [:octicons-arrow-right-24: Travaux pratiques](tp/index.md)
+
+-   :material-file-document-multiple:{ .lg .middle } **Annales**
+
+    ---
+
+    Sujets et corrigés officiels des CE et DE (SharePoint EFREI), dont le DE 2023 corrigé en détail.
+
+    [:octicons-arrow-right-24: Annales](annales/index.md)
 
 -   :material-card-text:{ .lg .middle } **Fiches**
 
@@ -67,7 +75,7 @@ dans les supports 2024 c'était l'inverse).
 | 2. Les registres | [:material-book-open-variant:](cours/chapitre-2-registres.md) | [TD 3](td/td-3-registres.md) | [TP 2](tp/tp-2-registres.md) | [:material-card-text:](fiches/fiche-registres.md) |
 | 3. Les compteurs | [:material-book-open-variant:](cours/chapitre-3-compteurs.md) | [TD 2](td/td-2-compteurs.md) | | [:material-card-text:](fiches/fiche-compteurs.md) |
 | 4. Les machines à états | [:material-book-open-variant:](cours/chapitre-4-machines-etats.md) | [TD 4](td/td-4-machines-etats.md) | | [:material-card-text:](fiches/fiche-machines-etats.md) |
-| Annale | | [DE 2023](td/annale-de-2023.md) | | |
+| Annales | | [Sujets CE/DE](annales/index.md) · [DE 2023](annales/annale-de-2023.md) | | |
 
 ## Infos pratiques
 

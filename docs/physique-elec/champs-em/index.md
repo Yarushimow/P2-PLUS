@@ -24,9 +24,17 @@ charges ou de courants pour choisir la bonne méthode**, intégration directe ou
 
     ---
 
-    Corrections rédigées des TD 0 à 3, exercices supplémentaires, annales des DE 2022 et 2023.
+    Corrections rédigées des TD 0 à 3 et exercices supplémentaires.
 
     [:octicons-arrow-right-24: Travaux dirigés](td/index.md)
+
+-   :material-file-document-multiple:{ .lg .middle } **Annales**
+
+    ---
+
+    Sujets et corrigés officiels des CE et DE (SharePoint EFREI), dont deux DE corrigés en détail.
+
+    [:octicons-arrow-right-24: Annales](annales/index.md)
 
 -   :material-card-text:{ .lg .middle } **Fiches**
 
@@ -63,7 +71,7 @@ charges ou de courants pour choisir la bonne méthode**, intégration directe ou
 | 2. Coordonnées et théorème de Gauss | [:material-book-open-variant:](cours/chapitre-2-coordonnees-gauss.md) | [TD 2](td/td-2-theoreme-gauss.md) | [:material-card-text:](fiches/fiche-gauss.md) | [:material-play-circle:](simulations/simulations-champs.html#gauss) |
 | 3. Champ magnétique | [:material-book-open-variant:](cours/chapitre-3-champ-magnetique.md) | [TD 3](td/td-3-champ-magnetique.md) | [:material-card-text:](fiches/fiche-magnetostatique.md) | [:material-play-circle:](simulations/simulations-champs.html#ampere) |
 | 4. Force magnétique | *à venir* | | | |
-| Annales | | [DE 2022](td/annale-de-2022.md) · [DE 2023](td/annale-de-2023.md) | [Formulaire](fiches/formulaire.md) | |
+| Annales | | [Sujets CE/DE](annales/index.md) · [DE 2022](annales/annale-de-2022.md) · [DE 2023](annales/annale-de-2023.md) | [Formulaire](fiches/formulaire.md) | |
 
 ## Infos pratiques
 

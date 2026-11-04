@@ -11,7 +11,7 @@ title: "Fiche CE — Relativité (ch. 1 à 3)"
     - $E = \gamma m_0 c^2 = T + m_0 c^2$ et $E^2 = p^2c^2 + m_0^2c^4$.
 
 Format du CE (sujet 2022) : **55 min, calculatrice autorisée, pas de documents**,
-5 questions courtes. [Annale corrigée](../td/annale-ce-2022.md).
+5 questions courtes. [Annale corrigée](../annales/annale-ce-2022.md).
 
 ## Chapitre 1 — Galilée
 
