@@ -26,6 +26,14 @@ Relativité, dualité onde-corpuscule, introduction à la mécanique quantique.
 
     [:octicons-arrow-right-24: Travaux dirigés](td/index.md)
 
+-   :material-file-document-multiple:{ .lg .middle } **Annales**
+
+    ---
+
+    Sujets et corrigés officiels des DE (SharePoint EFREI), et le CE 2022 corrigé en détail.
+
+    [:octicons-arrow-right-24: Annales](annales/index.md)
+
 -   :material-card-text:{ .lg .middle } **Fiches**
 
     ---
@@ -38,7 +46,7 @@ Relativité, dualité onde-corpuscule, introduction à la mécanique quantique.
 
 !!! tip "CE du samedi 3 octobre (15 h 10, calculatrice autorisée)"
     Au CE 2022, tout portait sur les **chapitres 1 à 3**. Pour réviser : la
-    [fiche relativité](fiches/fiche-relativite.md), puis l'[annale corrigée](td/annale-ce-2022.md),
+    [fiche relativité](fiches/fiche-relativite.md), puis l'[annale corrigée](annales/annale-ce-2022.md),
     puis les TD [1](td/td-1-galilee.md), [2](td/td-2-lorentz.md) et [3](td/td-3-dynamique.md).
 
 ## Plan du cours
@@ -51,7 +59,7 @@ Relativité, dualité onde-corpuscule, introduction à la mécanique quantique.
 | 3. Dynamique relativiste | [:material-book-open-variant:](cours/chapitre-3-dynamique-relativiste.md) | [TD 3](td/td-3-dynamique.md) | [:material-card-text:](fiches/fiche-relativite.md) |
 | 4. Onde et matière | [:material-book-open-variant:](cours/chapitre-4-onde-matiere.md) | [TD 4](td/td-4-onde-matiere.md) | [:material-card-text:](fiches/fiche-quantique.md) |
 | 5. Mécanique quantique | [:material-book-open-variant:](cours/chapitre-5-mecanique-quantique.md) | [TD 5](td/td-5-quantique.md) | [:material-card-text:](fiches/fiche-quantique.md) |
-| Annale | | [CE 2022](td/annale-ce-2022.md) | |
+| Annales | | [Sujets DE](annales/index.md) · [CE 2022](annales/annale-ce-2022.md) | |
 
 ## Infos pratiques
 

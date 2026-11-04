@@ -121,7 +121,7 @@ title: "TD 2 — Théorème de Gauss"
 
     ### Exercice 2 — Sphère creuse chargée en volume (DE 2022-2023)
 
-    Corrigé détaillé dans l'[annale du DE 2022](annale-de-2022.md#exercice-2-sphere-creuse-chargee-en-volume).
+    Corrigé détaillé dans l'[annale du DE 2022](../annales/annale-de-2022.md#exercice-2-sphere-creuse-chargee-en-volume).
 
 === "Version papier"
 
