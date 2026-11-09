@@ -1,16 +1,21 @@
 ---
-title: "Ch. 3 — Champ magnétique"
+title: "Champ magnétique (support 2024-2025)"
 ---
 
-# Chapitre 3 — Champ magnétique
+# Champ magnétique (support 2024-2025)
+
+!!! info "Page provisoire"
+    En 2024-2025, le champ magnétique était le chapitre 3. Cette année, le chapitre 3 est le
+    [théorème de Gauss](chapitre-3-gauss.md) : cette page garde les notes de magnétostatique en
+    attendant le support 2026-2027 de la partie B.
 
 === "Version simplifiée"
 
     !!! abstract "Le fil du chapitre"
         Les **courants** (charges en mouvement) créent un champ magnétique $\vec B$. On le calcule
         soit par la **loi de Biot et Savart** (intégrale, marche toujours), soit par le **théorème
-        d'Ampère** (trois lignes, si la symétrie est suffisante). C'est le pendant exact du
-        chapitre 1 (Coulomb) et du chapitre 2 (Gauss).
+        d'Ampère** (trois lignes, si la symétrie est suffisante). C'est le pendant exact de la loi de
+        Coulomb ([chapitre 1](chapitre-1-electrostatique.md)) et du théorème de Gauss ([chapitre 3](chapitre-3-gauss.md)).
 
     ## 1. Sources et mise en évidence
 
@@ -218,55 +223,55 @@ title: "Ch. 3 — Champ magnétique"
 
 === "Version papier"
 
-    Les diapos du chapitre 3 (support 2024-2025, le dernier disponible pour la magnétostatique).
+    Les diapos du chapitre 3 de l'an dernier (support 2024-2025, le dernier disponible pour la magnétostatique).
 
-    [![Chapitre 3 — support 2024-2025, diapo 1 : Partie B — Chapitre 3 : champ magnétique](papier/ch3/p01.jpg){ loading=lazy .papier }](papier/ch3/p01.jpg)
+    [![Chapitre 3 — support 2024-2025, diapo 1 : Partie B — Chapitre 3 : champ magnétique](papier/magnetisme-2024/p01.jpg){ loading=lazy .papier }](papier/magnetisme-2024/p01.jpg)
     <p class="papier-legende">Partie B — Chapitre 3 : champ magnétique · Chapitre 3 — support 2024-2025, diapo 1</p>
 
-    [![Chapitre 3 — support 2024-2025, diapo 2 : Plan](papier/ch3/p02.jpg){ loading=lazy .papier }](papier/ch3/p02.jpg)
+    [![Chapitre 3 — support 2024-2025, diapo 2 : Plan](papier/magnetisme-2024/p02.jpg){ loading=lazy .papier }](papier/magnetisme-2024/p02.jpg)
     <p class="papier-legende">Plan · Chapitre 3 — support 2024-2025, diapo 2</p>
 
-    [![Chapitre 3 — support 2024-2025, diapo 3 : Sources de champ magnétique](papier/ch3/p03.jpg){ loading=lazy .papier }](papier/ch3/p03.jpg)
+    [![Chapitre 3 — support 2024-2025, diapo 3 : Sources de champ magnétique](papier/magnetisme-2024/p03.jpg){ loading=lazy .papier }](papier/magnetisme-2024/p03.jpg)
     <p class="papier-legende">Sources de champ magnétique · Chapitre 3 — support 2024-2025, diapo 3</p>
 
-    [![Chapitre 3 — support 2024-2025, diapo 4 : Bref aperçu historique](papier/ch3/p04.jpg){ loading=lazy .papier }](papier/ch3/p04.jpg)
+    [![Chapitre 3 — support 2024-2025, diapo 4 : Bref aperçu historique](papier/magnetisme-2024/p04.jpg){ loading=lazy .papier }](papier/magnetisme-2024/p04.jpg)
     <p class="papier-legende">Bref aperçu historique · Chapitre 3 — support 2024-2025, diapo 4</p>
 
-    [![Chapitre 3 — support 2024-2025, diapo 5 : Expérience d'Oersted](papier/ch3/p05.jpg){ loading=lazy .papier }](papier/ch3/p05.jpg)
+    [![Chapitre 3 — support 2024-2025, diapo 5 : Expérience d'Oersted](papier/magnetisme-2024/p05.jpg){ loading=lazy .papier }](papier/magnetisme-2024/p05.jpg)
     <p class="papier-legende">Expérience d'Oersted · Chapitre 3 — support 2024-2025, diapo 5</p>
 
-    [![Chapitre 3 — support 2024-2025, diapo 6 : Lignes de champ magnétique](papier/ch3/p06.jpg){ loading=lazy .papier }](papier/ch3/p06.jpg)
+    [![Chapitre 3 — support 2024-2025, diapo 6 : Lignes de champ magnétique](papier/magnetisme-2024/p06.jpg){ loading=lazy .papier }](papier/magnetisme-2024/p06.jpg)
     <p class="papier-legende">Lignes de champ magnétique · Chapitre 3 — support 2024-2025, diapo 6</p>
 
-    [![Chapitre 3 — support 2024-2025, diapo 7 : Lignes de champ d'un aimant droit](papier/ch3/p07.jpg){ loading=lazy .papier }](papier/ch3/p07.jpg)
+    [![Chapitre 3 — support 2024-2025, diapo 7 : Lignes de champ d'un aimant droit](papier/magnetisme-2024/p07.jpg){ loading=lazy .papier }](papier/magnetisme-2024/p07.jpg)
     <p class="papier-legende">Lignes de champ d'un aimant droit · Chapitre 3 — support 2024-2025, diapo 7</p>
 
-    [![Chapitre 3 — support 2024-2025, diapo 8 : Champ uniforme : lignes parallèles](papier/ch3/p08.jpg){ loading=lazy .papier }](papier/ch3/p08.jpg)
+    [![Chapitre 3 — support 2024-2025, diapo 8 : Champ uniforme : lignes parallèles](papier/magnetisme-2024/p08.jpg){ loading=lazy .papier }](papier/magnetisme-2024/p08.jpg)
     <p class="papier-legende">Champ uniforme : lignes parallèles · Chapitre 3 — support 2024-2025, diapo 8</p>
 
-    [![Chapitre 3 — support 2024-2025, diapo 9 : Champ créé par une charge mobile](papier/ch3/p09.jpg){ loading=lazy .papier }](papier/ch3/p09.jpg)
+    [![Chapitre 3 — support 2024-2025, diapo 9 : Champ créé par une charge mobile](papier/magnetisme-2024/p09.jpg){ loading=lazy .papier }](papier/magnetisme-2024/p09.jpg)
     <p class="papier-legende">Champ créé par une charge mobile · Chapitre 3 — support 2024-2025, diapo 9</p>
 
-    [![Chapitre 3 — support 2024-2025, diapo 10 : Loi de Biot et Savart](papier/ch3/p10.jpg){ loading=lazy .papier }](papier/ch3/p10.jpg)
+    [![Chapitre 3 — support 2024-2025, diapo 10 : Loi de Biot et Savart](papier/magnetisme-2024/p10.jpg){ loading=lazy .papier }](papier/magnetisme-2024/p10.jpg)
     <p class="papier-legende">Loi de Biot et Savart · Chapitre 3 — support 2024-2025, diapo 10</p>
 
-    [![Chapitre 3 — support 2024-2025, diapo 11 : Fil infini : calcul par Biot et Savart](papier/ch3/p11.jpg){ loading=lazy .papier }](papier/ch3/p11.jpg)
+    [![Chapitre 3 — support 2024-2025, diapo 11 : Fil infini : calcul par Biot et Savart](papier/magnetisme-2024/p11.jpg){ loading=lazy .papier }](papier/magnetisme-2024/p11.jpg)
     <p class="papier-legende">Fil infini : calcul par Biot et Savart · Chapitre 3 — support 2024-2025, diapo 11</p>
 
-    [![Chapitre 3 — support 2024-2025, diapo 12 : Fil infini : lignes de champ circulaires](papier/ch3/p12.jpg){ loading=lazy .papier }](papier/ch3/p12.jpg)
+    [![Chapitre 3 — support 2024-2025, diapo 12 : Fil infini : lignes de champ circulaires](papier/magnetisme-2024/p12.jpg){ loading=lazy .papier }](papier/magnetisme-2024/p12.jpg)
     <p class="papier-legende">Fil infini : lignes de champ circulaires · Chapitre 3 — support 2024-2025, diapo 12</p>
 
-    [![Chapitre 3 — support 2024-2025, diapo 13 : Spire circulaire sur son axe](papier/ch3/p13.jpg){ loading=lazy .papier }](papier/ch3/p13.jpg)
+    [![Chapitre 3 — support 2024-2025, diapo 13 : Spire circulaire sur son axe](papier/magnetisme-2024/p13.jpg){ loading=lazy .papier }](papier/magnetisme-2024/p13.jpg)
     <p class="papier-legende">Spire circulaire sur son axe · Chapitre 3 — support 2024-2025, diapo 13</p>
 
-    [![Chapitre 3 — support 2024-2025, diapo 14 : Flux du champ magnétique](papier/ch3/p14.jpg){ loading=lazy .papier }](papier/ch3/p14.jpg)
+    [![Chapitre 3 — support 2024-2025, diapo 14 : Flux du champ magnétique](papier/magnetisme-2024/p14.jpg){ loading=lazy .papier }](papier/magnetisme-2024/p14.jpg)
     <p class="papier-legende">Flux du champ magnétique · Chapitre 3 — support 2024-2025, diapo 14</p>
 
-    [![Chapitre 3 — support 2024-2025, diapo 15 : Tube de flux](papier/ch3/p15.jpg){ loading=lazy .papier }](papier/ch3/p15.jpg)
+    [![Chapitre 3 — support 2024-2025, diapo 15 : Tube de flux](papier/magnetisme-2024/p15.jpg){ loading=lazy .papier }](papier/magnetisme-2024/p15.jpg)
     <p class="papier-legende">Tube de flux · Chapitre 3 — support 2024-2025, diapo 15</p>
 
-    [![Chapitre 3 — support 2024-2025, diapo 16 : Circulation du champ magnétique](papier/ch3/p16.jpg){ loading=lazy .papier }](papier/ch3/p16.jpg)
+    [![Chapitre 3 — support 2024-2025, diapo 16 : Circulation du champ magnétique](papier/magnetisme-2024/p16.jpg){ loading=lazy .papier }](papier/magnetisme-2024/p16.jpg)
     <p class="papier-legende">Circulation du champ magnétique · Chapitre 3 — support 2024-2025, diapo 16</p>
 
-    [![Chapitre 3 — support 2024-2025, diapo 17 : Théorème d'Ampère](papier/ch3/p17.jpg){ loading=lazy .papier }](papier/ch3/p17.jpg)
+    [![Chapitre 3 — support 2024-2025, diapo 17 : Théorème d'Ampère](papier/magnetisme-2024/p17.jpg){ loading=lazy .papier }](papier/magnetisme-2024/p17.jpg)
     <p class="papier-legende">Théorème d'Ampère · Chapitre 3 — support 2024-2025, diapo 17</p>

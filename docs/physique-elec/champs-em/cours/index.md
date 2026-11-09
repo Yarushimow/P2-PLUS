@@ -6,11 +6,11 @@ Chaque chapitre a deux onglets : **Version simplifiée** (mes notes) et
 | Chapitre | Contenu |
 |----------|---------|
 | [1. Force, champ, potentiel, énergie](chapitre-1-electrostatique.md) | Coulomb, superposition, $\vec E$, $V$, $\vec E = -\overrightarrow{\mathrm{grad}}\,V$, $E_p = qV$, distributions continues |
-| [2. Coordonnées et théorème de Gauss](chapitre-2-coordonnees-gauss.md) | $\mathrm dl$, $\mathrm dS$, $\mathrm d\tau$, flux, symétries, Gauss, condensateurs |
-| [3. Champ magnétique](chapitre-3-champ-magnetique.md) | Oersted, Biot-Savart, fil, spire, flux conservatif, Ampère |
+| [2. Coordonnées et charges distribuées](chapitre-2-coordonnees-distributions.md) | Bases cartésienne, cylindrique, sphérique ; $\mathrm d\vec l$, $\mathrm dS$, $\mathrm dV$ ; aires, volumes ; $\lambda$, $\sigma$, $\rho$ et charge totale |
+| [3. Symétries, flux et théorème de Gauss](chapitre-3-gauss.md) | Invariances, symétries, flux, théorème de Gauss, boule chargée, fil, plan, condensateur |
+| [Champ magnétique (2024-2025)](champ-magnetique.md) | Oersted, Biot-Savart, fil, spire, flux conservatif, Ampère |
 
 !!! info "Supports"
-    Le chapitre 1 suit le support 2026-2027 (complété par les distributions continues du
-    support 2024-2025). Pour les chapitres 2 et 3, seuls les supports 2024-2025 sont disponibles :
-    le théorème de Gauss y est rédigé à partir du TD 2 et des feuilles de formules du prof.
-    Le chapitre 4 (force magnétique) sera ajouté quand son support sera distribué.
+    Les chapitres 1, 2 et 3 suivent le support 2026-2027 (le chapitre 1 est complété par les
+    distributions continues du support 2024-2025). Le champ magnétique n'a pas encore de support
+    cette année : sa page reprend celui de 2024-2025 en attendant.

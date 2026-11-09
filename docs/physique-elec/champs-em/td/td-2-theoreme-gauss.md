@@ -6,7 +6,7 @@ title: "TD 2 — Théorème de Gauss"
 
 === "Version simplifiée"
 
-    Corrections rédigées. Rappels : [chapitre 2](../cours/chapitre-2-coordonnees-gauss.md)
+    Corrections rédigées. Rappels : [chapitre 3](../cours/chapitre-3-gauss.md)
     (méthode en six étapes et résultats classiques).
 
     ## Vrai ou faux

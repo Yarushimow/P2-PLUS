@@ -7,7 +7,7 @@ title: "TD 3 — Champ magnétique"
 === "Version simplifiée"
 
     Corrections rédigées ; les schémas (demi-spires, câble coaxial, circuits) sont dans l'onglet
-    **Version papier**. Rappels : [chapitre 3](../cours/chapitre-3-champ-magnetique.md).
+    **Version papier**. Rappels : [cours sur le champ magnétique](../cours/champ-magnetique.md).
 
     ## Exercice 1 — Champ au centre de l'atome d'hydrogène
 

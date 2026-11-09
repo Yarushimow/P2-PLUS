@@ -2,5 +2,6 @@ title: Cours
 nav:
   - index.md
   - chapitre-1-electrostatique.md
-  - chapitre-2-coordonnees-gauss.md
-  - chapitre-3-champ-magnetique.md
+  - chapitre-2-coordonnees-distributions.md
+  - chapitre-3-gauss.md
+  - champ-magnetique.md

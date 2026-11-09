@@ -68,8 +68,9 @@ charges ou de courants pour choisir la bonne méthode**, intégration directe ou
 |----------|:-----:|:--:|:-----:|:----------:|
 | Outils mathématiques | | [TD 0](td/td-0-outils-maths.md) | | |
 | 1. Force, champ, potentiel, énergie | [:material-book-open-variant:](cours/chapitre-1-electrostatique.md) | [TD 1](td/td-1-charges-champ-potentiel.md) | [:material-card-text:](fiches/fiche-electrostatique.md) | [:material-play-circle:](simulations/simulations-champs.html#champ) |
-| 2. Coordonnées et théorème de Gauss | [:material-book-open-variant:](cours/chapitre-2-coordonnees-gauss.md) | [TD 2](td/td-2-theoreme-gauss.md) | [:material-card-text:](fiches/fiche-gauss.md) | [:material-play-circle:](simulations/simulations-champs.html#gauss) |
-| 3. Champ magnétique | [:material-book-open-variant:](cours/chapitre-3-champ-magnetique.md) | [TD 3](td/td-3-champ-magnetique.md) | [:material-card-text:](fiches/fiche-magnetostatique.md) | [:material-play-circle:](simulations/simulations-champs.html#ampere) |
+| 2. Coordonnées et charges distribuées | [:material-book-open-variant:](cours/chapitre-2-coordonnees-distributions.md) | [TD 0](td/td-0-outils-maths.md) | | |
+| 3. Symétries, flux et théorème de Gauss | [:material-book-open-variant:](cours/chapitre-3-gauss.md) | [TD 2](td/td-2-theoreme-gauss.md) | [:material-card-text:](fiches/fiche-gauss.md) | [:material-play-circle:](simulations/simulations-champs.html#gauss) |
+| Champ magnétique (2024-2025) | [:material-book-open-variant:](cours/champ-magnetique.md) | [TD 3](td/td-3-champ-magnetique.md) | [:material-card-text:](fiches/fiche-magnetostatique.md) | [:material-play-circle:](simulations/simulations-champs.html#ampere) |
 | 4. Force magnétique | *à venir* | | | |
 | Annales | | [Sujets CE/DE](annales/index.md) · [DE 2022](annales/annale-de-2022.md) · [DE 2023](annales/annale-de-2023.md) | [Formulaire](fiches/formulaire.md) | |
 

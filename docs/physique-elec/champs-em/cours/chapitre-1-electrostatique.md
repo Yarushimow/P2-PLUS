@@ -326,7 +326,7 @@ title: "Ch. 1 — Force, champ, potentiel, énergie"
     $\mathrm d\vec E = k_e\dfrac{\mathrm dQ}{r^2}\vec u$ et $\mathrm dV = k_e\dfrac{\mathrm dQ}{r}$, puis on intègre.
 
     !!! methode "Calculer une charge totale"
-        1. Choisir le système de coordonnées adapté à la forme (voir [chapitre 2](chapitre-2-coordonnees-gauss.md)).
+        1. Choisir le système de coordonnées adapté à la forme (voir [chapitre 2](chapitre-2-coordonnees-distributions.md)).
         2. Écrire l'élément $\mathrm dl$, $\mathrm dS$ ou $\mathrm d\tau$ correspondant.
         3. Remplacer la densité par son expression (elle peut dépendre de $r$, $\theta$…).
         4. Séparer les intégrales et poser les bornes (demi-sphère : $\theta \in [0, \pi/2]$).
