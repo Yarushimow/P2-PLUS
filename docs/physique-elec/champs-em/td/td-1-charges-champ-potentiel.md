@@ -63,7 +63,7 @@ title: "TD 1 — Charges, champ et potentiel"
 
     !!! methode "Rappel"
         $Q = \iint \sigma\,\mathrm dS$ ou $Q = \iiint \rho\,\mathrm d\tau$, avec l'élément adapté à la
-        géométrie (voir [chapitre 2](../cours/chapitre-2-coordonnees-gauss.md)).
+        géométrie (voir [chapitre 2](../cours/chapitre-2-coordonnees-distributions.md)).
 
     1. **Disque** de rayon $R$, $\sigma_0$ uniforme :
        $Q = \sigma_0\int_0^R\!\int_0^{2\pi} r\,\mathrm dr\,\mathrm d\theta = \sigma_0\pi R^2$.
