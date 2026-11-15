@@ -117,6 +117,9 @@ extra_javascript:
   - javascripts/fond-accueil.js
   - javascripts/export.js
   - javascripts/statistiques.js
+  # Assistant de révision IA : marked (Markdown → HTML), puis le composant
+  - https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js
+  - javascripts/assistant.js
 
 extra_css:
   - stylesheets/theme.css
@@ -125,7 +128,8 @@ extra_css:
   - stylesheets/mobile.css
   - stylesheets/versions.css
   - stylesheets/coffre.css
-
+  - stylesheets/assistant.css
+  
 extra:
   # Mesure d'audience GoatCounter (sans cookies, sans identifier les visiteurs) :
   # code du site créé sur goatcounter.com → https://<code>.goatcounter.com

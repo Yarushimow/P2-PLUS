@@ -1,6 +1,7 @@
 nav:
   - Accueil: index.md
   - agenda.md
+  - assistant.md
   - maths
   - physique-elec
   - informatique
