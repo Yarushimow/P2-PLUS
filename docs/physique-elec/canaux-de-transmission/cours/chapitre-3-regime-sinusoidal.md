@@ -32,11 +32,13 @@ title: "Ch. 3 — Régime sinusoïdal"
     (abscisse $\ell$ comptée **depuis la charge** vers le générateur.)
 
     !!! theoreme "Constantes secondaires"
+
         $$
         \gamma = \sqrt{(R + jL\omega)(G + jC\omega)} = \alpha + j\beta,
         \qquad
         Z_c = \sqrt{\frac{R + jL\omega}{G + jC\omega}}
         $$
+
         - $\alpha$ : **affaiblissement** (Np/m ; 1 Np = 8,686 dB)
         - $\beta = \dfrac{2\pi}{\lambda}$ : **constante de phase** (rad/m)
 
@@ -49,11 +51,13 @@ title: "Ch. 3 — Régime sinusoïdal"
     $$
 
     !!! definition "Coefficient de réflexion et impédance ramenée"
+
         $$
         \Gamma(\ell) = \frac{U^-(\ell)}{U^+(\ell)} = \Gamma_t\,e^{-2\gamma\ell},
         \qquad
         \Gamma_t = \frac{Z_t - Z_c}{Z_t + Z_c}
         $$
+
         $$
         Z(\ell) = \frac{U(\ell)}{I(\ell)} = Z_c\,\frac{1 + \Gamma(\ell)}{1 - \Gamma(\ell)}
         $$
@@ -61,12 +65,15 @@ title: "Ch. 3 — Régime sinusoïdal"
     ## 4. Ligne sans pertes ($R = G = 0$)
 
     !!! theoreme "Cas sans pertes"
+
         $$
         \alpha = 0,\quad \beta = \omega\sqrt{LC},\quad R_c = \sqrt{\frac{L}{C}},\quad v = \frac{1}{\sqrt{LC}}
         $$
+
         $$
         Z(\ell) = R_c\,\frac{Z_t + jR_c\tan\beta\ell}{R_c + jZ_t\tan\beta\ell}
         $$
+
         - $|\Gamma|$ est **constant** le long de la ligne ; $\Gamma$ et $|U|$ sont
           périodiques de période $\lambda/2$.
         - **TOS** (taux d'ondes stationnaires) : $\rho = \dfrac{|U|_{max}}{|U|_{min}} = \dfrac{1 + |\Gamma|}{1 - |\Gamma|}$.

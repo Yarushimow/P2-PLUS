@@ -20,10 +20,13 @@ title: "Ch. 2 — Graphe des réflexions"
 
     !!! theoreme "Première onde et coefficients de réflexion"
         Onde envoyée dans la ligne à $t = 0$ (pont diviseur entre $R_g$ et $R_c$) :
+
         $$
         \Delta U_e(0) = U^+ = \Delta E_g\,\frac{R_c}{R_c + R_g}
         $$
+
         Réflexion sur la charge et sur le générateur :
+
         $$
         \Gamma_t = \frac{R_t - R_c}{R_t + R_c}
         \qquad

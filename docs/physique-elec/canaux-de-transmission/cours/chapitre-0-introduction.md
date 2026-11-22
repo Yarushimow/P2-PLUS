@@ -34,11 +34,13 @@ title: "Ch. 0 — Introduction"
     le blindage.
 
     !!! theoreme "Impédance d'onde et vitesse dans un isolant $(\varepsilon, \mu)$"
+
         $$
         Z_{onde} = \frac{E}{H} = \sqrt{\frac{\mu}{\varepsilon}}
         \qquad
         v = \frac{1}{\sqrt{\varepsilon\mu}} = \frac{c}{\sqrt{\varepsilon_r\,\mu_r}}
         $$
+
         avec $\varepsilon = \varepsilon_r\varepsilon_0$, $\mu = \mu_r\mu_0$,
         $\mu_0 = 4\pi\cdot10^{-7}$ H/m, $c = 1/\sqrt{\varepsilon_0\mu_0} \approx 3\cdot10^8$ m/s.
         Dans le vide : $Z_0 = \sqrt{\mu_0/\varepsilon_0} \approx 377\ \Omega$.

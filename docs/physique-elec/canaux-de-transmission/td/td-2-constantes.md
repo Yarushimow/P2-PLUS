@@ -13,6 +13,7 @@ title: "TD 2 — Constantes de ligne"
     $$
     v = \frac{c}{\sqrt{\varepsilon_r}} = \frac{3\cdot10^8}{1{,}5} = 2\cdot10^8\ \text{m/s}
     $$
+
     ($R_c$ ne sert pas ici.)
 
     ## Exercice 2 — Constantes primaires à 800 MHz

@@ -13,6 +13,7 @@ title: "TD 1 — Échelon sur une ligne"
     Méthode : [chapitre 2](../cours/chapitre-2-reflexions-multiples.md).
 
     **1. Temps de propagation**
+
     $$
     \tau = \frac{L_0\sqrt{\varepsilon_r\mu_r}}{c} = \frac{20\times 2}{3\cdot10^8} \approx 133\ \text{ns}
     $$
@@ -20,6 +21,7 @@ title: "TD 1 — Échelon sur une ligne"
     **2. Tensions initiales** (régime continu établi pour $t < 0$, d'où l'hypothèse :
     le générateur est à $E_{g0}$ depuis assez longtemps pour que toutes les
     réflexions se soient éteintes) :
+
     $$
     U_e = U_s = E_{g0}\,\frac{R_t}{R_g + R_t} = \frac{1000}{1200}\,E_{g0} = 0{,}83\,E_{g0}
     $$
@@ -27,6 +29,7 @@ title: "TD 1 — Échelon sur une ligne"
     **3. Tensions finales** : même formule avec $E_{g\infty}$ : $U_e = U_s = 0{,}83\,E_{g\infty}$.
 
     **4. Coefficients de réflexion**
+
     $$
     \Gamma_t = \frac{1000 - 600}{1000 + 600} = +0{,}25
     \qquad
@@ -35,6 +38,7 @@ title: "TD 1 — Échelon sur une ligne"
 
     **5. Première onde** : à $t = 0$ le générateur voit $R_c$ (la charge n'est pas
     encore « au courant ») :
+
     $$
     \Delta U_e = \Delta E_g\,\frac{R_c}{R_c + R_g} = 0{,}75\,\Delta E_g
     $$
