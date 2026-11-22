@@ -1,1 +1,10 @@
 title: Cours
+nav:
+  - index.md
+  - chapitre-0-introduction.md
+  - chapitre-1-phenomenes-physiques.md
+  - chapitre-2-reflexions-multiples.md
+  - chapitre-3-regime-sinusoidal.md
+  - chapitre-4-abaque-de-smith.md
+  - chapitre-5-adaptation.md
+  - chapitre-6-fibres-optiques.md

@@ -1,3 +1,3 @@
 # Fiches de révision
 
-Pour créer une fiche, copie `_modele.md` (non publié) sous un nouveau nom.
+- [Fiche — Canaux de transmission](fiche-canaux.md) : toutes les formules du module sur une page.
