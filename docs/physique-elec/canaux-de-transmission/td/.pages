@@ -1,1 +1,8 @@
 title: TD
+nav:
+  - index.md
+  - td-1-echelon.md
+  - td-2-constantes.md
+  - td-3-abaque.md
+  - td-4-adaptation.md
+  - td-5-fibres.md
