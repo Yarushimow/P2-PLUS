@@ -6,6 +6,8 @@ title: Physique et électronique
 
 Choisis une matière :
 
+## Semestre 3
+
 <div class="grid cards" markdown>
 
 -   :material-magnet:{ .lg .middle } **Champs électromagnétiques** · `SP301P`
@@ -33,5 +35,37 @@ Choisis une matière :
     [:octicons-arrow-right-24: Réviser](systemes-numeriques/index.md)
 
 <!-- cartes -->
+
+</div>
+
+## Semestre 4
+
+<div class="grid cards" markdown>
+
+-   :material-sine-wave:{ .lg .middle } **Propagation électromagnétique** · `SP401P`
+
+    ---
+
+    Ondes électromagnétiques et leur propagation.
+
+    [:octicons-arrow-right-24: Réviser](propagation-em/index.md)
+
+-   :material-thermometer:{ .lg .middle } **Thermodynamique** · `SP402P`
+
+    ---
+
+    Énergie, chaleur, travail et principes de la thermodynamique.
+
+    [:octicons-arrow-right-24: Réviser](thermodynamique/index.md)
+
+-   :material-access-point:{ .lg .middle } **Canaux de transmission** · `TE403P`
+
+    ---
+
+    Supports de transmission et transport du signal.
+
+    [:octicons-arrow-right-24: Réviser](canaux-de-transmission/index.md)
+
+<!-- cartes-s4 -->
 
 </div>

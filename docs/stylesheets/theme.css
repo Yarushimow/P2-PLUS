@@ -274,6 +274,8 @@
   letter-spacing: 0.04em;
 }
 .agenda-carte .agenda-type.agenda-DE { background: #7c3aed; }
+.agenda-carte .agenda-type.agenda-S4 { background: #0d9488; }
+.agenda-compte { margin: 0.6rem 0 1rem; }
 .agenda-infos strong { font-weight: 650; }
 .agenda-carte.bientot .agenda-reste { color: #f59e0b; }
 .agenda-carte.urgent .agenda-reste { color: #ef4444; }

@@ -2,6 +2,20 @@
 // et affiche la réponse. Emplacement reconnu : la page assistant.md (#assistant-question).
 (() => {
   const API = "http://127.0.0.1:8000";   // locale pour l'instant ; l'adresse en ligne viendra à la mise en ligne
+  const MARKED = "https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js";
+
+  // marked (Markdown → HTML) n'est téléchargé qu'à la première question, pas sur chaque page du site
+  let markedPret = null;
+  function chargerMarked() {
+    markedPret ??= window.marked ? Promise.resolve() : new Promise((ok, ko) => {
+      const s = document.createElement("script");
+      s.src = MARKED;
+      s.onload = ok;
+      s.onerror = () => { markedPret = null; ko(new Error("marked")); };
+      document.head.appendChild(s);
+    });
+    return markedPret;
+  }
 
   async function poser() {
     const champ = document.getElementById("assistant-question");
@@ -13,7 +27,10 @@
 
     try {
       // 1. Appeler l'API
-      const reponse = await fetch(`${API}/question?q=${encodeURIComponent(q)}`);
+      const [reponse] = await Promise.all([
+        fetch(`${API}/question?q=${encodeURIComponent(q)}`),
+        chargerMarked(),
+      ]);
       const data = await reponse.json();
 
       // 2. Erreur renvoyée par l'API (400, 503…)

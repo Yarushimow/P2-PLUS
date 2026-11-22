@@ -116,6 +116,102 @@ Appuie sur ++slash++ pour chercher une notion.
 
 ## :material-numeric-4-circle: Semestre 4 { .semestre }
 
-<div class="semestre-vide" markdown>
-:material-calendar-clock: Les matières du semestre 4 arriveront ici.
+<div class="agenda-compte" data-debut="2027-02-01T00:00:00+01:00" data-titre="Premier cours du semestre 4" data-type="S4"></div>
+
+### :material-sigma: Maths
+
+<div class="grid cards" markdown>
+
+-   :material-math-compass:{ .lg .middle } **Modélisation mathématique** · `SM401P`
+
+    ---
+
+    Mettre un problème réel en équations et l'étudier.
+
+    [:octicons-arrow-right-24: Réviser](maths/modelisation-mathematique/index.md)
+
+-   :material-state-machine:{ .lg .middle } **Automates finis et expressions rationnelles** · `SM402P`
+
+    ---
+
+    Automates finis, langages et expressions rationnelles.
+
+    [:octicons-arrow-right-24: Réviser](maths/automates-finis/index.md)
+
+-   :material-chart-scatter-plot:{ .lg .middle } **Analyse de données** · `SM403P`
+
+    ---
+
+    Statistique descriptive et exploration de données.
+
+    [:octicons-arrow-right-24: Réviser](maths/analyse-de-donnees/index.md)
+
+<!-- cartes-s4:maths -->
+
 </div>
+
+### :material-atom: Physique et électronique
+
+<div class="grid cards" markdown>
+
+-   :material-sine-wave:{ .lg .middle } **Propagation électromagnétique** · `SP401P`
+
+    ---
+
+    Ondes électromagnétiques et leur propagation.
+
+    [:octicons-arrow-right-24: Réviser](physique-elec/propagation-em/index.md)
+
+-   :material-thermometer:{ .lg .middle } **Thermodynamique** · `SP402P`
+
+    ---
+
+    Énergie, chaleur, travail et principes de la thermodynamique.
+
+    [:octicons-arrow-right-24: Réviser](physique-elec/thermodynamique/index.md)
+
+-   :material-access-point:{ .lg .middle } **Canaux de transmission** · `TE403P`
+
+    ---
+
+    Supports de transmission et transport du signal.
+
+    [:octicons-arrow-right-24: Réviser](physique-elec/canaux-de-transmission/index.md)
+
+<!-- cartes-s4:physique-elec -->
+
+</div>
+
+### :material-laptop: Informatique générale
+
+<div class="grid cards" markdown>
+
+-   :material-web:{ .lg .middle } **Programmation Web 1** · `TI402P`
+
+    ---
+
+    HTML, CSS et JavaScript.
+
+    [:octicons-arrow-right-24: Réviser](informatique/programmation-web-1/index.md)
+
+-   :material-language-java:{ .lg .middle } **Java 1** · `TI403P`
+
+    ---
+
+    Fondamentaux de la programmation orientée objet.
+
+    [:octicons-arrow-right-24: Réviser](informatique/java-1/index.md)
+
+-   :material-database:{ .lg .middle } **Bases de données 1** · `TI404P`
+
+    ---
+
+    Concepts de base des bases de données.
+
+    [:octicons-arrow-right-24: Réviser](informatique/bdd-1/index.md)
+
+<!-- cartes-s4:informatique -->
+
+</div>
+
+<!-- categories-s4:fin -->

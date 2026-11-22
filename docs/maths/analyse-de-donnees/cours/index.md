@@ -1,0 +1,3 @@
+# Notes de cours
+
+Une page par chapitre : `chapitre-1.md`, `chapitre-2.md`…

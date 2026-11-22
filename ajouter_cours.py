@@ -5,11 +5,13 @@ Exemples :
     python ajouter_cours.py maths algebre-lineaire --titre "Algèbre linéaire" --code SM302P
     python ajouter_cours.py informatique bdd --titre "Bases de données" --code TI306P \\
         --description "SQL, modèle relationnel, normalisation" --icone material-database
+    python ajouter_cours.py maths automates --titre "Automates finis" --code SM402P --semestre 4
 
 Ce que le script fait :
   - crée docs/<categorie>/<slug>/ avec index.md, cours/, td/, fiches/ (+ fiches/_modele.md) ;
   - crée la catégorie si elle n'existe pas encore (index.md + .pages) ;
-  - ajoute une carte vers la matière sur la page d'accueil et sur celle de sa catégorie.
+  - ajoute une carte vers la matière sur la page d'accueil et sur celle de sa catégorie,
+    dans la section du semestre choisi (--semestre, 3 par défaut).
 
 Il n'écrase jamais un fichier existant : on peut le relancer sans risque.
 """
@@ -32,15 +34,27 @@ CATEGORIES_CONNUES = {
     "informatique": ("Informatique générale", "material-laptop"),
 }
 
-MARQUEUR_FIN_CATEGORIES = "<!-- categories:fin -->"
+SEMESTRES = (3, 4)
 
 
-# Emplacement des cartes dans la page d'une catégorie (docs/<categorie>/index.md)
-MARQUEUR_CARTES_CATEGORIE = "<!-- cartes -->"
+# Marqueurs : le semestre 3 garde les noms d'origine, les suivants sont suffixés
+def suffixe(semestre: int) -> str:
+    return "" if semestre == 3 else f"-s{semestre}"
 
 
-def marqueur_cartes(categorie: str) -> str:
-    return f"<!-- cartes:{categorie} -->"
+def marqueur_fin_categories(semestre: int) -> str:
+    """Fin des blocs de catégories d'un semestre sur la page d'accueil."""
+    return f"<!-- categories{suffixe(semestre)}:fin -->"
+
+
+def marqueur_cartes_categorie(semestre: int) -> str:
+    """Emplacement des cartes d'un semestre dans docs/<categorie>/index.md."""
+    return f"<!-- cartes{suffixe(semestre)} -->"
+
+
+def marqueur_cartes(categorie: str, semestre: int) -> str:
+    """Emplacement des cartes d'une catégorie sur la page d'accueil."""
+    return f"<!-- cartes{suffixe(semestre)}:{categorie} -->"
 
 
 def ecrire(chemin: Path, contenu: str) -> None:
@@ -73,13 +87,15 @@ title: {titre}
 # :{icone}: {titre}
 
 Choisis une matière :
+""" + "".join(f"""
+## Semestre {s}
 
 <div class="grid cards" markdown>
 
-{MARQUEUR_CARTES_CATEGORIE}
+{marqueur_cartes_categorie(s)}
 
 </div>
-"""
+""" for s in SEMESTRES)
 
 
 def page_matiere(titre: str, code: str, description: str) -> str:
@@ -168,12 +184,12 @@ def carte_matiere(dossier: str, titre: str, code: str,
 """
 
 
-def bloc_categorie(categorie: str, titre: str, icone: str) -> str:
+def bloc_categorie(categorie: str, titre: str, icone: str, semestre: int) -> str:
     return f"""### :{icone}: {titre}
 
 <div class="grid cards" markdown>
 
-{marqueur_cartes(categorie)}
+{marqueur_cartes(categorie, semestre)}
 
 </div>
 
@@ -229,22 +245,21 @@ def creer_matiere(categorie: str, slug: str, titre: str, code: str,
 
 def ajouter_carte_accueil(categorie: str, slug: str, titre: str, code: str,
                           description: str, icone: str,
-                          titre_categorie: str, icone_categorie: str) -> None:
+                          titre_categorie: str, icone_categorie: str,
+                          semestre: int) -> None:
     texte = ACCUEIL.read_text(encoding="utf-8")
     lien = f"({categorie}/{slug}/index.md)"
     if lien in texte:
         print(f"  = {ACCUEIL.relative_to(RACINE)} (carte déjà présente)")
         return
 
-    marqueur = marqueur_cartes(categorie)
+    marqueur = marqueur_cartes(categorie, semestre)
+    fin = marqueur_fin_categories(semestre)
     if marqueur not in texte:
-        if MARQUEUR_FIN_CATEGORIES not in texte:
-            sys.exit(f"Marqueur {MARQUEUR_FIN_CATEGORIES} introuvable dans docs/index.md")
+        if fin not in texte:
+            sys.exit(f"Marqueur {fin} introuvable dans docs/index.md")
         texte = texte.replace(
-            MARQUEUR_FIN_CATEGORIES,
-            bloc_categorie(categorie, titre_categorie, icone_categorie)
-            + MARQUEUR_FIN_CATEGORIES,
-        )
+            fin, bloc_categorie(categorie, titre_categorie, icone_categorie, semestre) + fin)
 
     carte = carte_matiere(f"{categorie}/{slug}", titre, code, description, icone)
     texte = texte.replace(marqueur, carte + marqueur)
@@ -253,19 +268,19 @@ def ajouter_carte_accueil(categorie: str, slug: str, titre: str, code: str,
 
 
 def ajouter_carte_categorie(categorie: str, slug: str, titre: str, code: str,
-                            description: str, icone: str) -> None:
+                            description: str, icone: str, semestre: int) -> None:
     fichier = DOCS / categorie / "index.md"
     nom = fichier.relative_to(RACINE)
     texte = fichier.read_text(encoding="utf-8")
     if f"({slug}/index.md)" in texte:
         print(f"  = {nom} (carte déjà présente)")
         return
-    if MARQUEUR_CARTES_CATEGORIE not in texte:
-        print(f"  ! {nom} : marqueur {MARQUEUR_CARTES_CATEGORIE} absent, carte non ajoutée")
+    marqueur = marqueur_cartes_categorie(semestre)
+    if marqueur not in texte:
+        print(f"  ! {nom} : marqueur {marqueur} absent, carte non ajoutée")
         return
     carte = carte_matiere(slug, titre, code, description, icone)
-    fichier.write_text(texte.replace(MARQUEUR_CARTES_CATEGORIE, carte + MARQUEUR_CARTES_CATEGORIE),
-                       encoding="utf-8")
+    fichier.write_text(texte.replace(marqueur, carte + marqueur), encoding="utf-8")
     print(f"  ~ {nom} (carte ajoutée)")
 
 
@@ -283,6 +298,8 @@ def main() -> None:
                         help="une phrase affichée sur la carte d'accueil")
     parser.add_argument("--icone", default="material-book-open-variant",
                         help="icône Material de la carte, ex. material-lan")
+    parser.add_argument("--semestre", type=int, choices=SEMESTRES, default=3,
+                        help="semestre de la matière (section de l'accueil et de la catégorie)")
     parser.add_argument("--titre-categorie",
                         help="titre lisible si la catégorie est nouvelle")
     parser.add_argument("--icone-categorie", default="material-folder",
@@ -300,9 +317,9 @@ def main() -> None:
     creer_categorie(args.categorie, titre_cat, icone_cat)
     creer_matiere(args.categorie, args.slug, args.titre, args.code, description)
     ajouter_carte_accueil(args.categorie, args.slug, args.titre, args.code,
-                          description, args.icone, titre_cat, icone_cat)
+                          description, args.icone, titre_cat, icone_cat, args.semestre)
     ajouter_carte_categorie(args.categorie, args.slug, args.titre, args.code,
-                            description, args.icone)
+                            description, args.icone, args.semestre)
     print("Terminé. Lance `mkdocs serve` pour voir le résultat.")
 
 

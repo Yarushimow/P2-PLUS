@@ -6,6 +6,8 @@ title: Informatique générale
 
 Choisis une matière :
 
+## Semestre 3
+
 <div class="grid cards" markdown>
 
 -   :material-file-tree:{ .lg .middle } **Structures de données et programmation 2** · `TI301P`
@@ -33,5 +35,37 @@ Choisis une matière :
     [:octicons-arrow-right-24: Réviser](linux/index.md)
 
 <!-- cartes -->
+
+</div>
+
+## Semestre 4
+
+<div class="grid cards" markdown>
+
+-   :material-web:{ .lg .middle } **Programmation Web 1** · `TI402P`
+
+    ---
+
+    HTML, CSS et JavaScript.
+
+    [:octicons-arrow-right-24: Réviser](programmation-web-1/index.md)
+
+-   :material-language-java:{ .lg .middle } **Java 1** · `TI403P`
+
+    ---
+
+    Fondamentaux de la programmation orientée objet.
+
+    [:octicons-arrow-right-24: Réviser](java-1/index.md)
+
+-   :material-database:{ .lg .middle } **Bases de données 1** · `TI404P`
+
+    ---
+
+    Concepts de base des bases de données.
+
+    [:octicons-arrow-right-24: Réviser](bdd-1/index.md)
+
+<!-- cartes-s4 -->
 
 </div>
