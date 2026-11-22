@@ -46,7 +46,7 @@ Choisis une matière :
 
     ---
 
-    HTML, CSS et JavaScript.
+    HTML5, CSS3 responsive, JavaScript, DOM et JSON.
 
     [:octicons-arrow-right-24: Réviser](programmation-web-1/index.md)
 
@@ -54,7 +54,7 @@ Choisis une matière :
 
     ---
 
-    Fondamentaux de la programmation orientée objet.
+    Classes, encapsulation, héritage, polymorphisme, interfaces.
 
     [:octicons-arrow-right-24: Réviser](java-1/index.md)
 
@@ -62,7 +62,7 @@ Choisis une matière :
 
     ---
 
-    Concepts de base des bases de données.
+    MCD, MLD, formes normales, SQL et algèbre relationnelle.
 
     [:octicons-arrow-right-24: Réviser](bdd-1/index.md)
 

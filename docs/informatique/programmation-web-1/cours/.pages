@@ -1,1 +1,8 @@
 title: Cours
+nav:
+  - index.md
+  - chapitre-1-introduction-web.md
+  - chapitre-2-html.md
+  - chapitre-3-css.md
+  - chapitre-4-javascript-bases.md
+  - chapitre-5-javascript-avance.md

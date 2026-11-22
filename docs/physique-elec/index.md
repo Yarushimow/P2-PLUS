@@ -54,7 +54,7 @@ Choisis une matière :
 
     ---
 
-    Énergie, chaleur, travail et principes de la thermodynamique.
+    Gaz parfaits, premier et second principes, entropie, machines thermiques.
 
     [:octicons-arrow-right-24: Réviser](thermodynamique/index.md)
 
@@ -62,7 +62,7 @@ Choisis une matière :
 
     ---
 
-    Supports de transmission et transport du signal.
+    Lignes de transmission, réflexions, abaque de Smith, adaptation, fibres optiques.
 
     [:octicons-arrow-right-24: Réviser](canaux-de-transmission/index.md)
 
