@@ -1,1 +1,7 @@
 title: TD
+nav:
+  - index.md
+  - td-1-classes-objets.md
+  - td-2-encapsulation.md
+  - td-3-heritage.md
+  - td-4-abstraction.md
