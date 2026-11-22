@@ -1,1 +1,7 @@
 title: TD
+nav:
+  - index.md
+  - td-1-bases.md
+  - td-2-premier-principe.md
+  - td-3-second-principe.md
+  - td-4-machines.md

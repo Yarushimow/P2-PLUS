@@ -10,6 +10,7 @@ title: "TD 4 — Adaptation"
     utilisent $Z_t = 15 - 42{,}5j\ \Omega$, $R_c = 50\ \Omega$, $f = 1$ GHz, $\varepsilon_r = 2{,}25$.
 
     Longueur d'onde dans la ligne :
+
     $$
     \lambda = \frac{c}{f\sqrt{\varepsilon_r}} = \frac{3\cdot10^8}{10^9\times1{,}5} = 20\ \text{cm}
     $$

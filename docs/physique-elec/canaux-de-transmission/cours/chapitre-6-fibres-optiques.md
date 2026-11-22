@@ -29,22 +29,26 @@ title: "Ch. 6 — Fibres optiques"
     $$
 
     !!! definition "Ouverture numérique et cône d'acceptance"
+
         $$
         ON = n_0\sin\theta_{0,lim} = \sqrt{n_c^2 - n_g^2}
         \qquad
         \Delta = \frac{n_c - n_g}{n_c}\ \ (0{,}1\,\% \text{ à quelques } \%)
         $$
+
         Tout rayon entrant dans le cône de demi-angle $\theta_{0,lim}$ est guidé.
         « Fibre 50/125 » = cœur de 50 µm, gaine de 125 µm de diamètre.
 
     ## Multimode ou monomode
 
     !!! theoreme "Fréquence normalisée et nombre de modes"
+
         $$
         V = \frac{2\pi a}{\lambda_0}\,ON
         \qquad
         M \approx \frac{\alpha}{\alpha + 2}\cdot\frac{V^2}{2}
         $$
+
         ($a$ : rayon du cœur.) Saut d'indice ($\alpha \to \infty$) : $M = V^2/2$ ;
         gradient parabolique ($\alpha = 2$) : $M = V^2/4$.
         **Monomode** si $V < V_c = 2{,}405$.
@@ -70,11 +74,13 @@ title: "Ch. 6 — Fibres optiques"
     ## Atténuation et bilan de liaison
 
     !!! methode "Bilan de liaison en dB"
+
         $$
         P_r\,(\text{dBm}) = P_e\,(\text{dBm}) - a\,(\text{dB/km}) \times L
         \qquad
         P\,(\text{dBm}) = 10\log\frac{P}{1\ \text{mW}}
         $$
+
         Portée maximale : $L_{max} = \dfrac{P_e - P_{r,min}}{a}$. Les fenêtres de
         transmission sont à 850, 1310 et 1550 nm (minimum d'atténuation vers 1550 nm).
 

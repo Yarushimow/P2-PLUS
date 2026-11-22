@@ -32,6 +32,7 @@ title: "Ch. 5 — Adaptation d'impédance"
     !!! definition "Stub"
         Tronçon de ligne terminé par un **court-circuit** ou un **circuit ouvert**.
         Son impédance est purement imaginaire (on se déplace sur le bord de l'abaque, $r = 0$) :
+
         $$
         Z_{cc}(d) = jR_{c0}\tan\beta d \qquad Z_{co}(d) = -jR_{c0}\cot\beta d
         $$

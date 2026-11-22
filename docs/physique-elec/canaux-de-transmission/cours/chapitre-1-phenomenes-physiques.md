@@ -37,13 +37,16 @@ title: "Ch. 1 — Phénomènes physiques"
     !!! definition "Impédance caractéristique $R_c$"
         Pour une ligne donnée, le rapport onde de tension / onde de courant est une
         constante, qui ne dépend que de la géométrie et de l'isolant :
+
         $$
         R_c = \frac{U^+}{I^+} = -\frac{U^-}{I^-}
         $$
+
         (signe moins pour l'onde qui revient : le courant change de sens).
         Valeurs courantes : 50 Ω (coaxial RF), 75 Ω (TV), 100–120 Ω (paire torsadée).
 
     !!! definition "Temps de propagation"
+
         $$
         \tau = \frac{L_0}{v} = \frac{L_0\sqrt{\varepsilon_r\mu_r}}{c}
         $$

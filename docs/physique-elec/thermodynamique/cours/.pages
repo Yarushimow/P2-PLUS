@@ -1,1 +1,7 @@
 title: Cours
+nav:
+  - index.md
+  - chapitre-1-bases.md
+  - chapitre-2-premier-principe.md
+  - chapitre-3-second-principe.md
+  - chapitre-4-machines-thermiques.md
