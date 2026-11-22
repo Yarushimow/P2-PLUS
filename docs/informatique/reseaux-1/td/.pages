@@ -1,1 +1,8 @@
-title: TD
+title: TP
+nav:
+  - index.md
+  - tp-1-capture-trames.md
+  - tp-2-packet-tracer.md
+  - devoir-maison-calcul-ip.md
+  - tp-3-1-plan-adressage.md
+  - tp-3-2-construire-plan.md

@@ -1,1 +1,7 @@
 title: Cours
+nav:
+  - index.md
+  - chapitre-1-fondamentaux-modeles.md
+  - chapitre-2-adressage-ip.md
+  - chapitre-3-routage.md
+  - chapitre-4-services.md

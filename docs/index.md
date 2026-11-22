@@ -94,7 +94,7 @@ Appuie sur ++slash++ pour chercher une notion.
 
     ---
 
-    Modèle OSI, adressage IP, routage, VLAN.
+    Modèles OSI et TCP/IP, adressage IP et VLSM, routage, services.
 
     [:octicons-arrow-right-24: Réviser](informatique/reseaux-1/index.md)
 

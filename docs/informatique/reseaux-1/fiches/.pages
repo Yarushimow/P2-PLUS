@@ -1,1 +1,8 @@
 title: Fiches
+nav:
+  - index.md
+  - fiche-de.md
+  - fiche-modeles.md
+  - fiche-adressage.md
+  - fiche-routage.md
+  - fiche-services.md
