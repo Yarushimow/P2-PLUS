@@ -3,4 +3,7 @@ nav:
   - index.md
   - probabilites
   - fonctions-plusieurs-variables
+  - modelisation-mathematique
+  - automates-finis
+  - analyse-de-donnees
   - ...

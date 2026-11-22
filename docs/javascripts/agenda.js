@@ -11,6 +11,9 @@
     CE: "Contrôle (CE)", DE: "Devoir écrit (DE)", CTD: "Cours-TD", CTP: "Cours-TP",
     TP: "TP", PRJ: "Projet", TD: "TD", CM: "Cours",
   };
+  const formatJourComplet = new Intl.DateTimeFormat("fr-FR", {
+    timeZone: "Europe/Paris", weekday: "long", day: "numeric", month: "long", year: "numeric",
+  });
   const formatDate = new Intl.DateTimeFormat("fr-FR", {
     timeZone: "Europe/Paris", weekday: "long", day: "numeric", month: "long",
     hour: "2-digit", minute: "2-digit",
@@ -164,8 +167,34 @@
       <th>Séances restantes</th><th>Dernier cours</th></tr></thead><tbody>${lignes}</tbody></table>`;
   }
 
+  // Compte à rebours vers une date fixe, sans l'agenda Efrei (ex. rentrée du S4) :
+  // <div class="agenda-compte" data-debut="2027-02-01T00:00:00+01:00"
+  //      data-titre="Début du semestre 4" data-type="S4"></div>
+  // Date affichée sans heure (heure exacte inconnue) ; la carte disparaît le lendemain.
+  function rendreComptes(maintenant) {
+    document.querySelectorAll(".agenda-compte").forEach((el) => {
+      const t0 = Date.parse(el.dataset.debut);
+      const t1 = t0 + 86400000;
+      if (Number.isNaN(t0) || maintenant >= t1) { el.hidden = true; return; }
+      el.innerHTML = `<div class="agenda-carte">
+        <div class="agenda-type agenda-${echapper(el.dataset.type || "")}">${echapper(el.dataset.type || "")}</div>
+        <div class="agenda-infos">
+          <strong>${echapper(el.dataset.titre || "")}</strong>
+          <span>${formatJourComplet.format(t0)}</span>
+        </div>
+        <div class="agenda-reste">${horloge({ t0, t1 })}</div>
+      </div>`;
+    });
+  }
+
   async function initialiser() {
     clearInterval(minuterie);
+    const maintenantComptes = Date.now();
+    rendreComptes(maintenantComptes);
+    if (document.querySelector(".agenda-compte:not([hidden])")) {
+      actualiserHorloges();
+      minuterie = setInterval(actualiserHorloges, 1000);
+    }
     const emplacements = document.querySelectorAll(".agenda-evaluations, .agenda-matiere, .agenda-tableau");
     if (!emplacements.length) return;
     try {
@@ -182,6 +211,7 @@
       el.textContent = formatDate.format(Date.parse(donnees.maj));
     });
     actualiserHorloges();
+    clearInterval(minuterie);
     minuterie = setInterval(actualiserHorloges, 1000);
   }
 
