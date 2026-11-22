@@ -1,3 +1,3 @@
 # Fiches de révision
 
-Pour créer une fiche, copie `_modele.md` (non publié) sous un nouveau nom.
+- [Fiche — Programmation Web](fiche-web.md) : HTML, CSS et JavaScript sur une page.

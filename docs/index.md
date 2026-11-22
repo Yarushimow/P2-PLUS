@@ -166,7 +166,7 @@ Appuie sur ++slash++ pour chercher une notion.
 
     ---
 
-    Énergie, chaleur, travail et principes de la thermodynamique.
+    Gaz parfaits, premier et second principes, entropie, machines thermiques.
 
     [:octicons-arrow-right-24: Réviser](physique-elec/thermodynamique/index.md)
 
@@ -174,7 +174,7 @@ Appuie sur ++slash++ pour chercher une notion.
 
     ---
 
-    Supports de transmission et transport du signal.
+    Lignes de transmission, réflexions, abaque de Smith, adaptation, fibres optiques.
 
     [:octicons-arrow-right-24: Réviser](physique-elec/canaux-de-transmission/index.md)
 
@@ -190,7 +190,7 @@ Appuie sur ++slash++ pour chercher une notion.
 
     ---
 
-    HTML, CSS et JavaScript.
+    HTML5, CSS3 responsive, JavaScript, DOM et JSON.
 
     [:octicons-arrow-right-24: Réviser](informatique/programmation-web-1/index.md)
 
@@ -198,7 +198,7 @@ Appuie sur ++slash++ pour chercher une notion.
 
     ---
 
-    Fondamentaux de la programmation orientée objet.
+    Classes, encapsulation, héritage, polymorphisme, interfaces.
 
     [:octicons-arrow-right-24: Réviser](informatique/java-1/index.md)
 
@@ -206,7 +206,7 @@ Appuie sur ++slash++ pour chercher une notion.
 
     ---
 
-    Concepts de base des bases de données.
+    MCD, MLD, formes normales, SQL et algèbre relationnelle.
 
     [:octicons-arrow-right-24: Réviser](informatique/bdd-1/index.md)
 
