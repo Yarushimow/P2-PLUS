@@ -1,1 +1,8 @@
 title: Cours
+nav:
+  - index.md
+  - chapitre-0-bases.md
+  - chapitre-1-classes-objets.md
+  - chapitre-2-encapsulation.md
+  - chapitre-3-heritage.md
+  - chapitre-4-abstraites-interfaces.md

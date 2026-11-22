@@ -1,3 +1,3 @@
 # Fiches de révision
 
-Pour créer une fiche, copie `_modele.md` (non publié) sous un nouveau nom.
+- [Fiche — Java et POO](fiche-java.md) : squelette de classe et règles à connaître.
