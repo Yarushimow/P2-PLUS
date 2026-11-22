@@ -22,7 +22,9 @@ Appuie sur ++slash++ pour chercher une notion.
 
 [:octicons-arrow-right-24: Tout l'agenda](agenda.md)
 
-## :material-sigma: Maths
+## :material-numeric-3-circle: Semestre 3 { .semestre }
+
+### :material-sigma: Maths
 
 <div class="grid cards" markdown>
 
@@ -46,7 +48,7 @@ Appuie sur ++slash++ pour chercher une notion.
 
 </div>
 
-## :material-atom: Physique et électronique
+### :material-atom: Physique et électronique
 
 <div class="grid cards" markdown>
 
@@ -78,7 +80,7 @@ Appuie sur ++slash++ pour chercher une notion.
 
 </div>
 
-## :material-laptop: Informatique générale
+### :material-laptop: Informatique générale
 
 <div class="grid cards" markdown>
 
@@ -111,3 +113,9 @@ Appuie sur ++slash++ pour chercher une notion.
 </div>
 
 <!-- categories:fin -->
+
+## :material-numeric-4-circle: Semestre 4 { .semestre }
+
+<div class="semestre-vide" markdown>
+:material-calendar-clock: Les matières du semestre 4 arriveront ici.
+</div>

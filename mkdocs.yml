@@ -111,6 +111,7 @@ extra_javascript:
   - javascripts/agenda.js
   - javascripts/titre-accueil.js
   - javascripts/menu.js
+  - javascripts/matieres-terminees.js
   - javascripts/animations.js
   - javascripts/versions.js
   - javascripts/coffre.js

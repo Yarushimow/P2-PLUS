@@ -169,7 +169,7 @@ def carte_matiere(dossier: str, titre: str, code: str,
 
 
 def bloc_categorie(categorie: str, titre: str, icone: str) -> str:
-    return f"""## :{icone}: {titre}
+    return f"""### :{icone}: {titre}
 
 <div class="grid cards" markdown>
 
