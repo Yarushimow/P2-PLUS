@@ -1,1 +1,7 @@
 title: TD
+nav:
+  - index.md
+  - td-1-mcd.md
+  - td-2-mld.md
+  - td-3-algebre-sql.md
+  - td-4-requetes-avancees.md

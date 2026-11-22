@@ -1,3 +1,3 @@
 # Fiches de révision
 
-Pour créer une fiche, copie `_modele.md` (non publié) sous un nouveau nom.
+- [Fiche — Bases de données](fiche-sql.md) : règles de transformation, formes normales et syntaxe SQL.

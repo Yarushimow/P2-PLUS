@@ -1,1 +1,8 @@
 title: Cours
+nav:
+  - index.md
+  - chapitre-0-introduction.md
+  - chapitre-1-mcd.md
+  - chapitre-2-mld.md
+  - chapitre-3-sql-ldd-lmd.md
+  - chapitre-4-algebre-sql.md
