@@ -126,7 +126,7 @@ Appuie sur ++slash++ pour chercher une notion.
 
     ---
 
-    Mettre un problème réel en équations et l'étudier.
+    Analyse numérique : Newton, point fixe, Euler et RK4, interpolation, intégration, MATLAB.
 
     [:octicons-arrow-right-24: Réviser](maths/modelisation-mathematique/index.md)
 

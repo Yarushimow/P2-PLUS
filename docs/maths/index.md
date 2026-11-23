@@ -38,7 +38,7 @@ Choisis une matière :
 
     ---
 
-    Mettre un problème réel en équations et l'étudier.
+    Analyse numérique : Newton, point fixe, Euler et RK4, interpolation, intégration, MATLAB.
 
     [:octicons-arrow-right-24: Réviser](modelisation-mathematique/index.md)
 

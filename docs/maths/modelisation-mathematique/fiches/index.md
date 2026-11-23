@@ -1,3 +1,3 @@
 # Fiches de révision
 
-Pour créer une fiche, copie `_modele.md` (non publié) sous un nouveau nom.
+- [Fiche — Modélisation mathématique](fiche-modelisation.md) : toutes les méthodes du module, leurs conditions, leur ordre et leur erreur, sur une page.

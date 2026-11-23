@@ -1,1 +1,7 @@
 title: TD
+nav:
+  - index.md
+  - td-1-equations-non-lineaires.md
+  - td-2-edo.md
+  - td-3-interpolation.md
+  - td-4-integration.md
