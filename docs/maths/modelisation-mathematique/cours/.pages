@@ -1,1 +1,7 @@
 title: Cours
+nav:
+  - index.md
+  - chapitre-1-equations-non-lineaires.md
+  - chapitre-2-edo.md
+  - chapitre-3-interpolation.md
+  - chapitre-4-integration.md
