@@ -1,1 +1,9 @@
 title: TD
+nav:
+  - index.md
+  - td-1-construction.md
+  - td-2-determinisation.md
+  - td-3-er-vers-automate.md
+  - td-4-minimisation.md
+  - td-5-automate-vers-er.md
+  - td-6-standardisation.md

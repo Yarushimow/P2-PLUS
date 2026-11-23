@@ -1,1 +1,11 @@
 title: Cours
+nav:
+  - index.md
+  - chapitre-1-automates-finis.md
+  - chapitre-2-determinisation.md
+  - chapitre-3-complementaire.md
+  - chapitre-4-asynchrones.md
+  - chapitre-5-er-vers-automate.md
+  - chapitre-6-minimisation.md
+  - chapitre-7-automate-vers-er.md
+  - chapitre-8-standardisation.md

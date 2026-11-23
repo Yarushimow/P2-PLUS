@@ -1,3 +1,3 @@
 # Fiches de révision
 
-Pour créer une fiche, copie `_modele.md` (non publié) sous un nouveau nom.
+- [Fiche — Automates finis](fiche-automates.md) : définitions et algorithmes (déterminisation, complétion, complémentaire, ε-clôtures, Thompson, Moore, Arden, standardisation) sur une page.

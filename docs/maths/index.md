@@ -46,7 +46,7 @@ Choisis une matière :
 
     ---
 
-    Automates finis, langages et expressions rationnelles.
+    Déterminisation, minimisation, complémentaire, expressions rationnelles, Kleene, projet.
 
     [:octicons-arrow-right-24: Réviser](automates-finis/index.md)
 
