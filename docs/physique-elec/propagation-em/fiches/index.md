@@ -1,3 +1,3 @@
 # Fiches de révision
 
-Pour créer une fiche, copie `_modele.md` (non publié) sous un nouveau nom.
+- [Fiche — Propagation électromagnétique](fiche-propagation.md) : toutes les formules du module sur une page, avec le formulaire officiel des opérateurs en cylindriques et sphériques.

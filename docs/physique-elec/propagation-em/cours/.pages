@@ -1,1 +1,7 @@
 title: Cours
+nav:
+  - index.md
+  - chapitre-1-analyse-vectorielle.md
+  - chapitre-2-maxwell.md
+  - chapitre-3-ondes-vide.md
+  - chapitre-4-energie.md
