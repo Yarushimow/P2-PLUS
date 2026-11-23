@@ -134,7 +134,7 @@ Appuie sur ++slash++ pour chercher une notion.
 
     ---
 
-    Automates finis, langages et expressions rationnelles.
+    Déterminisation, minimisation, complémentaire, expressions rationnelles, Kleene, projet.
 
     [:octicons-arrow-right-24: Réviser](maths/automates-finis/index.md)
 
