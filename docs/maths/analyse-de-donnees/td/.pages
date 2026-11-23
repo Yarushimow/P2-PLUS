@@ -1,1 +1,7 @@
 title: TD
+nav:
+  - index.md
+  - td-1-statistique-descriptive.md
+  - td-2-estimation.md
+  - td-3-tests.md
+  - td-4-acp.md

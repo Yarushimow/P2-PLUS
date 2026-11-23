@@ -54,7 +54,7 @@ Choisis une matière :
 
     ---
 
-    Statistique descriptive et exploration de données.
+    Statistique descriptive, intervalles de confiance, tests (χ²), ACP.
 
     [:octicons-arrow-right-24: Réviser](analyse-de-donnees/index.md)
 

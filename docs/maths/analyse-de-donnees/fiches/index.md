@@ -1,3 +1,3 @@
 # Fiches de révision
 
-Pour créer une fiche, copie `_modele.md` (non publié) sous un nouveau nom.
+- [Fiche — Analyse de données](fiche-analyse-donnees.md) : formules, méthode des tests et étapes de l'ACP sur une page, avec les tables statistiques du poly.

@@ -1,1 +1,7 @@
 title: Cours
+nav:
+  - index.md
+  - chapitre-1-statistique-descriptive.md
+  - chapitre-2-estimation.md
+  - chapitre-3-tests.md
+  - chapitre-4-acp.md
