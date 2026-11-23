@@ -142,7 +142,7 @@ Appuie sur ++slash++ pour chercher une notion.
 
     ---
 
-    Statistique descriptive et exploration de données.
+    Statistique descriptive, intervalles de confiance, tests (χ²), ACP.
 
     [:octicons-arrow-right-24: Réviser](maths/analyse-de-donnees/index.md)
 
