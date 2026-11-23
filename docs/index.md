@@ -158,7 +158,7 @@ Appuie sur ++slash++ pour chercher une notion.
 
     ---
 
-    Ondes électromagnétiques et leur propagation.
+    Maxwell, induction, ondes planes dans le vide, vecteur de Poynting, photons.
 
     [:octicons-arrow-right-24: Réviser](physique-elec/propagation-em/index.md)
 

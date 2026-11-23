@@ -1,1 +1,7 @@
 title: TD
+nav:
+  - index.md
+  - td-1-operateurs.md
+  - td-2-maxwell.md
+  - td-3-propagation.md
+  - td-4-energie.md

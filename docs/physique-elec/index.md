@@ -46,7 +46,7 @@ Choisis une matière :
 
     ---
 
-    Ondes électromagnétiques et leur propagation.
+    Maxwell, induction, ondes planes dans le vide, vecteur de Poynting, photons.
 
     [:octicons-arrow-right-24: Réviser](propagation-em/index.md)
 
