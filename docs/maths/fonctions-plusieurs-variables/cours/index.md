@@ -12,4 +12,5 @@ et les corrigés des exemples quand ils existent.
 | [4. Intégrales multiples](chapitre-4-integrales-multiples.md) | Fubini, bornes, polaires, cylindriques, sphériques |
 | [5. Convexité](chapitre-5-convexite.md) | Jensen, matrices SDP, hessienne |
 | [6. Extrema](chapitre-6-extrema.md) | Points critiques, test de la hessienne, convexité, contraintes |
+| [7. Optimisation](chapitre-7-optimisation.md) | Multiplicateurs de Lagrange, compacts, polytopes |
 

@@ -11,6 +11,7 @@ et **Version papier** (l'énoncé officiel).
 | [TD 4 — Intégrales multiples](td-4-integrales-multiples.md) | Fubini, polaires, changements de variables, triples |
 | [TD 5 — Convexité](td-5-convexite.md) | Jensen, hessiennes, formes quadratiques |
 | [TD 6 — Extrema](td-6-extrema.md) | Points critiques, domaine borné, optimisation |
+| [TD 7 — Optimisation](td-7-optimisation.md) | Lagrange, sphère, disque, triangle, polytope |
 
 !!! tip "Exercices marqués ▶"
     Dans les feuilles de TD, les exercices marqués ▶ sont à faire en autonomie.
