@@ -8,6 +8,7 @@ title: "Fiche — Champ magnétique"
     - Sources : courants (et aimants). $\mu_0 = 4\pi\times10^{-7}$ H/m, $B$ en tesla.
     - Biot-Savart : $\mathrm d\vec B = \dfrac{\mu_0}{4\pi}\dfrac{I\,\mathrm d\vec l\wedge\overrightarrow{PM}}{PM^3}$.
     - Lignes de champ **fermées**, flux à travers une surface fermée **nul**.
+    - Plan de **symétrie** des courants → $\vec B$ **perpendiculaire** au plan (l'inverse de $\vec E$).
     - Ampère : $\oint\vec B\cdot\mathrm d\vec l = \mu_0\sum I_{enl}$ (somme **algébrique**).
 
 ## Lois

@@ -4,4 +4,5 @@ nav:
   - chapitre-1-electrostatique.md
   - chapitre-2-coordonnees-distributions.md
   - chapitre-3-gauss.md
-  - champ-magnetique.md
+  - chapitre-4-biot-savart.md
+  - chapitre-5-ampere.md
