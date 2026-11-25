@@ -31,7 +31,7 @@ sommets et cols).
 
     ---
 
-    Corrections des TD 1 à 6.
+    Corrections des TD 1 à 7.
 
     [:octicons-arrow-right-24: Travaux dirigés](td/index.md)
 
@@ -71,6 +71,7 @@ sommets et cols).
 | 4. Intégrales multiples | [:material-book-open-variant:](cours/chapitre-4-integrales-multiples.md) | [TD 4](td/td-4-integrales-multiples.md) | [:material-card-text:](fiches/fiche-integrales.md) |
 | 5. Convexité | [:material-book-open-variant:](cours/chapitre-5-convexite.md) | [TD 5](td/td-5-convexite.md) | [:material-card-text:](fiches/fiche-convexite.md) |
 | 6. Extrema | [:material-book-open-variant:](cours/chapitre-6-extrema.md) | [TD 6](td/td-6-extrema.md) | [:material-card-text:](fiches/fiche-extrema.md) |
+| 7. Optimisation | [:material-book-open-variant:](cours/chapitre-7-optimisation.md) | [TD 7](td/td-7-optimisation.md) | |
 | Annales | | [Sujets CE/DE](annales/index.md) · [CE 2025](annales/annale-ce-2025.md) · [CE 2024](annales/annale-ce-2024.md) · [DE blanc](annales/annale-de-blanc.md) · [DE 2023](annales/annale-de-2023.md) · [DE 2024](annales/annale-de-2024.md) | |
 
 ## Infos pratiques
