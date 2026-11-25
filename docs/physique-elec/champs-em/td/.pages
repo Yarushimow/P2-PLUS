@@ -3,5 +3,7 @@ nav:
   - index.md
   - td-0-outils-maths.md
   - td-1-charges-champ-potentiel.md
-  - td-2-theoreme-gauss.md
-  - td-3-champ-magnetique.md
+  - td-2-charges-distribuees.md
+  - td-3-theoreme-gauss.md
+  - td-4-champ-magnetique.md
+  - td-5-theoreme-ampere.md
